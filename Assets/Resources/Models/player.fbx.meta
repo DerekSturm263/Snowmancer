@@ -1,0 +1,1584 @@
+fileFormatVersion: 2
+guid: 69fa59dd9f923e64c90e1767f0b2e68d
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -7361427651036151181
+    second: rig|Idle
+  - first:
+      74: -4967682732965423662
+    second: rig|RunCycle
+  - first:
+      74: -4701664323599742320
+    second: rig|WalkCycle
+  - first:
+      74: 2874523155495014100
+    second: rig|RunCycleLeft
+  - first:
+      74: -1919716412707972199
+    second: rig|RunCycleLeft.001
+  - first:
+      74: -3005445109471089235
+    second: rig|RunCycleRight
+  - first:
+      74: 2429809578873822188
+    second: rig|WalkCycleLeft
+  - first:
+      74: -3027613526833573604
+    second: rig|WalkCycleRight
+  - first:
+      74: -8794539402398158822
+    second: rig|PivotLeft
+  - first:
+      74: -5728297124047928499
+    second: rig|PivotRight
+  - first:
+      74: -512320013847864616
+    second: rig|Jump
+  - first:
+      74: -6307865569117542267
+    second: rig|Fall
+  - first:
+      74: -8511428811945831710
+    second: rig|WalkCycleBack
+  - first:
+      74: -8881887746698345870
+    second: rig|RunCycleBack
+  - first:
+      74: 3316527366036876738
+    second: rig|Fall (1)
+  - first:
+      74: -6464178533435968529
+    second: rig|Attack
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clothes
+    second: {fileID: 2100000, guid: 51974c88e121517419ee1d1a899d7197, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 4eee8d200a98d4d4cb19cf295360110c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: 93cf2db4d6cb1db4aa678f4172d0a6b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: e47e3a0bca319d04dbc672fc16866a3e, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'PivotLeft.001' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF-upper_arm.L' has scale animation that
+      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-shin.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n\nClip 'PivotRight.001' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF-upper_arm.L' has scale animation that
+      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-shin.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n\nClip 'PivotLeft.002' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF-upper_arm.L' has scale animation that
+      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-shin.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n\nClip 'Attack' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF-upper_arm.L' has scale animation that
+      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-foot.R'
+      has scale animation that will be discarded.\n\nClip 'rig|Attack' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L' has scale
+      animation that will be discarded.\n\t'DEF-hand.L' has scale animation that
+      will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will be discarded.\n\t'DEF-forearm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-foot.L'
+      has scale animation that will be discarded.\n\t'DEF-thigh.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated.001' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated.002' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated.003' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated.004' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated.005' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|deprecated.006' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|Idle' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will
+      be discarded.\n\t'DEF-forearm.R' has scale animation that will be discarded.\n\t'DEF-hand.R'
+      has scale animation that will be discarded.\n\t'DEF-thigh.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n\nClip 'rig|Jump' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF-upper_arm.L' has scale animation that
+      will be discarded.\n\t'DEF-forearm.L' has scale animation that will be discarded.\n\t'DEF-hand.L'
+      has scale animation that will be discarded.\n\t'DEF-upper_arm.R' has scale
+      animation that will be discarded.\n\t'DEF-forearm.R' has scale animation that
+      will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|PivotLeft' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will
+      be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|PivotLeft.001' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|PivotLeftect' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|PivotRight' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will
+      be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|RunCycle' has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|RunCycleBack' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|RunCycleLeft' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|RunCycleRight' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|TipToeCycle' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkCycle' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkCycleBack' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkCycleLeft' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkCycleRight' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-upper_arm.L'
+      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n"
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'PivotLeft.001':\n\tLeftLowerLeg
+      average position error 10.3 mm and maximum position error 18.8 mm at time 0:17
+      (70.8%) Frame 17\n\tLeftFoot average position error 24.3 mm and maximum position
+      error 50.7 mm at time 0:18 (75.0%) Frame 18\n\tRightLowerLeg average position
+      error 8.0 mm and maximum position error 18.2 mm at time 0: 7 (29.2%) Frame
+      7\n\tRightFoot average position error 17.0 mm and maximum position error 48.8
+      mm at time 0: 6 (25.0%) Frame 6\n\tLeftLowerArm average position error 8.0
+      mm and maximum position error 8.5 mm at time 1: 0 (100.0%) Frame 24\n\tLeftHand
+      average position error 0.7 mm and maximum position error 1.3 mm at time 0:16
+      (66.7%) Frame 16\n\tRightLowerArm average position error 7.5 mm and maximum
+      position error 8.2 mm at time 1: 0 (100.0%) Frame 24\n\tRightHand average position
+      error 0.7 mm and maximum position error 1.3 mm at time 0:18 (75.0%) Frame 18\n\nRetargeting
+      quality report for clip 'PivotRight.001':\n\tLeftLowerLeg average position
+      error 8.0 mm and maximum position error 17.9 mm at time 0: 7 (29.2%) Frame
+      7\n\tLeftFoot average position error 16.8 mm and maximum position error 48.1
+      mm at time 0: 6 (25.0%) Frame 6\n\tRightLowerLeg average position error 10.4
+      mm and maximum position error 19.1 mm at time 0:17 (70.8%) Frame 17\n\tRightFoot
+      average position error 24.6 mm and maximum position error 51.4 mm at time 0:18
+      (75.0%) Frame 18\n\tLeftLowerArm average position error 7.7 mm and maximum
+      position error 8.5 mm at time 1: 0 (100.0%) Frame 24\n\tLeftHand average position
+      error 0.7 mm and maximum position error 1.3 mm at time 0: 9 (37.5%) Frame 9\n\tRightLowerArm
+      average position error 7.6 mm and maximum position error 8.2 mm at time 1:
+      0 (100.0%) Frame 24\n\tRightHand average position error 0.7 mm and maximum
+      position error 1.3 mm at time 0:16 (66.7%) Frame 16\n\nRetargeting quality
+      report for clip 'PivotLeft.002':\n\tLeftLowerLeg average position error 10.3
+      mm and maximum position error 18.8 mm at time 0:17 (70.8%) Frame 17\n\tLeftFoot
+      average position error 24.3 mm and maximum position error 50.7 mm at time 0:18
+      (75.0%) Frame 18\n\tRightLowerLeg average position error 8.0 mm and maximum
+      position error 18.2 mm at time 0: 7 (29.2%) Frame 7\n\tRightFoot average position
+      error 17.0 mm and maximum position error 48.8 mm at time 0: 6 (25.0%) Frame
+      6\n\tLeftLowerArm average position error 8.0 mm and maximum position error
+      8.5 mm at time 1: 0 (100.0%) Frame 24\n\tLeftHand average position error 0.7
+      mm and maximum position error 1.3 mm at time 0:16 (66.7%) Frame 16\n\tRightLowerArm
+      average position error 7.5 mm and maximum position error 8.2 mm at time 1:
+      0 (100.0%) Frame 24\n\tRightHand average position error 0.7 mm and maximum
+      position error 1.3 mm at time 0:18 (75.0%) Frame 18\n\nRetargeting quality
+      report for clip 'Attack':\n\tLeftLowerLeg average position error 4.3 mm and
+      maximum position error 5.3 mm at time 0:10 (41.7%) Frame 10\n\tLeftFoot average
+      position error 4.4 mm and maximum position error 9.1 mm at time 0:10 (41.7%)
+      Frame 10\n\tRightLowerLeg average position error 4.0 mm and maximum position
+      error 5.2 mm at time 0:10 (41.7%) Frame 10\n\tRightFoot average position error
+      4.4 mm and maximum position error 9.1 mm at time 0:10 (41.7%) Frame 10\n\tLeftLowerArm
+      average position error 6.8 mm and maximum position error 8.5 mm at time 0:
+      0 (0.0%) Frame 0\n\tLeftHand average position error 1.4 mm and maximum position
+      error 2.5 mm at time 0: 8 (33.3%) Frame 8\n\tRightLowerArm average position
+      error 6.6 mm and maximum position error 7.8 mm at time 0: 4 (16.7%) Frame 4\n\tRightHand
+      average position error 14.0 mm and maximum position error 17.0 mm at time 0:
+      7 (29.2%) Frame 7\n\nRetargeting quality report for clip 'rig|Attack':\n\tLeftLowerLeg
+      average position error 4.3 mm and maximum position error 5.3 mm at time 0:10
+      (41.7%) Frame 10\n\tLeftFoot average position error 4.4 mm and maximum position
+      error 9.1 mm at time 0:10 (41.7%) Frame 10\n\tRightLowerLeg average position
+      error 4.0 mm and maximum position error 5.2 mm at time 0:10 (41.7%) Frame 10\n\tRightFoot
+      average position error 4.4 mm and maximum position error 9.1 mm at time 0:10
+      (41.7%) Frame 10\n\tLeftLowerArm average position error 6.8 mm and maximum
+      position error 8.5 mm at time 0: 0 (0.0%) Frame 0\n\tLeftHand average position
+      error 1.4 mm and maximum position error 2.5 mm at time 0: 8 (33.3%) Frame 8\n\tRightLowerArm
+      average position error 6.6 mm and maximum position error 7.8 mm at time 0:
+      4 (16.7%) Frame 4\n\tRightHand average position error 14.0 mm and maximum position
+      error 17.0 mm at time 0: 7 (29.2%) Frame 7\n\nRetargeting quality report for
+      clip 'rig|deprecated':\n\tLeftLowerLeg average position error 14.5 mm and maximum
+      position error 20.4 mm at time 0:20 (83.3%) Frame 20\n\tLeftFoot average position
+      error 34.5 mm and maximum position error 52.3 mm at time 0:20 (83.3%) Frame
+      20\n\tRightLowerLeg average position error 12.3 mm and maximum position error
+      20.0 mm at time 0: 8 (33.3%) Frame 8\n\tRightFoot average position error 30.4
+      mm and maximum position error 53.1 mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm
+      average position error 3.8 mm and maximum position error 5.7 mm at time 0:
+      2 (8.3%) Frame 2\n\tLeftHand average position error 4.8 mm and maximum position
+      error 6.4 mm at time 0: 5 (20.8%) Frame 5\n\tRightLowerArm average position
+      error 4.4 mm and maximum position error 8.3 mm at time 0: 6 (25.0%) Frame 6\n\tRightHand
+      average position error 3.4 mm and maximum position error 5.8 mm at time 0:12
+      (50.0%) Frame 12\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:20 (83.3%) Frame 20\n\nRetargeting quality report for
+      clip 'rig|deprecated.001':\n\tLeftLowerLeg average position error 13.7 mm and
+      maximum position error 20.1 mm at time 0:20 (83.3%) Frame 20\n\tLeftFoot average
+      position error 33.5 mm and maximum position error 53.2 mm at time 0:20 (83.3%)
+      Frame 20\n\tRightLowerLeg average position error 12.3 mm and maximum position
+      error 20.2 mm at time 0: 6 (25.0%) Frame 6\n\tRightFoot average position error
+      29.8 mm and maximum position error 53.1 mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm
+      average position error 4.9 mm and maximum position error 8.9 mm at time 0:21
+      (87.5%) Frame 21\n\tLeftHand average position error 6.5 mm and maximum position
+      error 10.5 mm at time 0:17 (70.8%) Frame 17\n\tRightLowerArm average position
+      error 3.9 mm and maximum position error 6.6 mm at time 0:18 (75.0%) Frame 18\n\tRightHand
+      average position error 7.0 mm and maximum position error 13.1 mm at time 0:15
+      (62.5%) Frame 15\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:23 (95.8%) Frame 23\n\nRetargeting quality report for
+      clip 'rig|deprecated.002':\n\tLeftLowerLeg average position error 14.9 mm and
+      maximum position error 20.6 mm at time 0:22 (88.0%) Frame 22\n\tLeftFoot average
+      position error 36.4 mm and maximum position error 53.1 mm at time 0:22 (88.0%)
+      Frame 22\n\tRightLowerLeg average position error 12.9 mm and maximum position
+      error 19.7 mm at time 0:10 (40.0%) Frame 10\n\tRightFoot average position error
+      31.8 mm and maximum position error 52.2 mm at time 0:10 (40.0%) Frame 10\n\tLeftLowerArm
+      average position error 5.0 mm and maximum position error 8.5 mm at time 0:21
+      (84.0%) Frame 21\n\tLeftHand average position error 8.6 mm and maximum position
+      error 13.9 mm at time 1: 1 (100.0%) Frame 25\n\tRightLowerArm average position
+      error 4.8 mm and maximum position error 7.6 mm at time 0:10 (40.0%) Frame 10\n\tRightHand
+      average position error 11.5 mm and maximum position error 19.1 mm at time 0:10
+      (40.0%) Frame 10\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:16 (64.0%) Frame 16\n\nRetargeting quality report for
+      clip 'rig|deprecated.003':\n\tLeftLowerLeg average position error 12.3 mm and
+      maximum position error 19.4 mm at time 0:21 (84.0%) Frame 21\n\tLeftFoot average
+      position error 29.7 mm and maximum position error 51.1 mm at time 0:22 (88.0%)
+      Frame 22\n\tRightLowerLeg average position error 14.4 mm and maximum position
+      error 20.5 mm at time 0: 9 (36.0%) Frame 9\n\tRightFoot average position error
+      35.7 mm and maximum position error 53.4 mm at time 0:11 (44.0%) Frame 11\n\tLeftLowerArm
+      average position error 5.0 mm and maximum position error 8.5 mm at time 0:11
+      (44.0%) Frame 11\n\tLeftHand average position error 8.6 mm and maximum position
+      error 13.9 mm at time 1: 1 (100.0%) Frame 25\n\tRightLowerArm average position
+      error 4.8 mm and maximum position error 7.6 mm at time 0:10 (40.0%) Frame 10\n\tRightHand
+      average position error 11.5 mm and maximum position error 19.1 mm at time 0:10
+      (40.0%) Frame 10\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:16 (64.0%) Frame 16\n\nRetargeting quality report for
+      clip 'rig|deprecated.004':\n\tLeftLowerLeg average position error 14.9 mm and
+      maximum position error 20.6 mm at time 0:22 (88.0%) Frame 22\n\tLeftFoot average
+      position error 36.4 mm and maximum position error 53.1 mm at time 0:22 (88.0%)
+      Frame 22\n\tRightLowerLeg average position error 12.9 mm and maximum position
+      error 19.7 mm at time 0:10 (40.0%) Frame 10\n\tRightFoot average position error
+      31.8 mm and maximum position error 52.2 mm at time 0:10 (40.0%) Frame 10\n\tLeftLowerArm
+      average position error 5.0 mm and maximum position error 8.5 mm at time 0:21
+      (84.0%) Frame 21\n\tLeftHand average position error 8.6 mm and maximum position
+      error 13.9 mm at time 1: 1 (100.0%) Frame 25\n\tRightLowerArm average position
+      error 4.8 mm and maximum position error 7.6 mm at time 0:10 (40.0%) Frame 10\n\tRightHand
+      average position error 11.5 mm and maximum position error 19.1 mm at time 0:10
+      (40.0%) Frame 10\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:16 (64.0%) Frame 16\n\nRetargeting quality report for
+      clip 'rig|deprecated.005':\n\tLeftLowerLeg average position error 12.2 mm and
+      maximum position error 19.4 mm at time 0:20 (83.3%) Frame 20\n\tLeftFoot average
+      position error 29.7 mm and maximum position error 51.7 mm at time 0:20 (83.3%)
+      Frame 20\n\tRightLowerLeg average position error 13.5 mm and maximum position
+      error 20.5 mm at time 0: 8 (33.3%) Frame 8\n\tRightFoot average position error
+      32.7 mm and maximum position error 54.0 mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm
+      average position error 4.1 mm and maximum position error 6.9 mm at time 0:
+      6 (25.0%) Frame 6\n\tLeftHand average position error 7.4 mm and maximum position
+      error 14.2 mm at time 0: 3 (12.5%) Frame 3\n\tRightLowerArm average position
+      error 3.8 mm and maximum position error 7.2 mm at time 0:10 (41.7%) Frame 10\n\tRightHand
+      average position error 6.3 mm and maximum position error 9.6 mm at time 0:17
+      (70.8%) Frame 17\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:16 (66.7%) Frame 16\n\nRetargeting quality report for
+      clip 'rig|deprecated.006':\n\tLeftLowerLeg average position error 12.4 mm and
+      maximum position error 20.2 mm at time 0:18 (75.0%) Frame 18\n\tLeftFoot average
+      position error 30.1 mm and maximum position error 52.8 mm at time 0:20 (83.3%)
+      Frame 20\n\tRightLowerLeg average position error 12.3 mm and maximum position
+      error 20.4 mm at time 0: 8 (33.3%) Frame 8\n\tRightFoot average position error
+      29.9 mm and maximum position error 53.6 mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm
+      average position error 4.2 mm and maximum position error 6.8 mm at time 0:
+      7 (29.2%) Frame 7\n\tLeftHand average position error 4.3 mm and maximum position
+      error 5.7 mm at time 0:16 (66.7%) Frame 16\n\tRightLowerArm average position
+      error 3.9 mm and maximum position error 6.7 mm at time 0:19 (79.2%) Frame 19\n\tRightHand
+      average position error 3.9 mm and maximum position error 5.9 mm at time 0:12
+      (50.0%) Frame 12\n\tHead average position error 7.2 mm and maximum position
+      error 7.2 mm at time 0:15 (62.5%) Frame 15\n\nRetargeting quality report for
+      clip 'rig|Fall':\n\tLeftLowerLeg average position error 20.1 mm and maximum
+      position error 20.1 mm at time 0: 0 (0.0%) Frame 0\n\tLeftFoot average position
+      error 27.8 mm and maximum position error 27.8 mm at time 0:14 (58.3%) Frame
+      14\n\tRightLowerLeg average position error 20.3 mm and maximum position error
+      20.3 mm at time 0: 5 (20.8%) Frame 5\n\tRightFoot average position error 28.1
+      mm and maximum position error 28.1 mm at time 0:15 (62.5%) Frame 15\n\tLeftLowerArm
+      average position error 6.0 mm and maximum position error 6.0 mm at time 0:14
+      (58.3%) Frame 14\n\tLeftHand average position error 15.2 mm and maximum position
+      error 15.2 mm at time 0:13 (54.2%) Frame 13\n\tRightLowerArm average position
+      error 5.9 mm and maximum position error 5.9 mm at time 0:14 (58.3%) Frame 14\n\tRightHand
+      average position error 14.8 mm and maximum position error 14.8 mm at time 0:14
+      (58.3%) Frame 14\n\nRetargeting quality report for clip 'rig|Idle':\n\tLeftLowerLeg
+      average position error 4.3 mm and maximum position error 5.3 mm at time 0:10
+      (41.7%) Frame 10\n\tLeftFoot average position error 4.4 mm and maximum position
+      error 9.1 mm at time 0:10 (41.7%) Frame 10\n\tRightLowerLeg average position
+      error 4.0 mm and maximum position error 5.2 mm at time 0:10 (41.7%) Frame 10\n\tRightFoot
+      average position error 4.4 mm and maximum position error 9.1 mm at time 0:10
+      (41.7%) Frame 10\n\tLeftLowerArm average position error 6.8 mm and maximum
+      position error 8.5 mm at time 0: 0 (0.0%) Frame 0\n\tLeftHand average position
+      error 1.4 mm and maximum position error 2.5 mm at time 0: 8 (33.3%) Frame 8\n\tRightLowerArm
+      average position error 6.4 mm and maximum position error 8.2 mm at time 0:
+      0 (0.0%) Frame 0\n\tRightHand average position error 1.6 mm and maximum position
+      error 2.9 mm at time 0: 9 (37.5%) Frame 9\n\nRetargeting quality report for
+      clip 'rig|Jump':\n\tLeftLowerLeg average position error 19.6 mm and maximum
+      position error 20.8 mm at time 0: 6 (25.0%) Frame 6\n\tLeftFoot average position
+      error 34.7 mm and maximum position error 52.5 mm at time 0: 7 (29.2%) Frame
+      7\n\tRightLowerLeg average position error 19.9 mm and maximum position error
+      21.0 mm at time 0: 6 (25.0%) Frame 6\n\tRightFoot average position error 35.2
+      mm and maximum position error 53.3 mm at time 0: 7 (29.2%) Frame 7\n\tLeftLowerArm
+      average position error 6.5 mm and maximum position error 8.7 mm at time 0:
+      2 (8.3%) Frame 2\n\tLeftHand average position error 16.7 mm and maximum position
+      error 22.5 mm at time 0: 2 (8.3%) Frame 2\n\tRightLowerArm average position
+      error 6.3 mm and maximum position error 8.0 mm at time 0: 4 (16.7%) Frame 4\n\tRightHand
+      average position error 15.6 mm and maximum position error 20.4 mm at time 0:
+      2 (8.3%) Frame 2\n\nRetargeting quality report for clip 'rig|PivotLeft':\n\tLeftLowerLeg
+      average position error 9.8 mm and maximum position error 18.8 mm at time 0:18
+      (72.0%) Frame 18\n\tLeftFoot average position error 22.6 mm and maximum position
+      error 50.7 mm at time 0:19 (76.0%) Frame 19\n\tRightLowerLeg average position
+      error 7.6 mm and maximum position error 18.2 mm at time 0: 8 (32.0%) Frame
+      8\n\tRightFoot average position error 15.7 mm and maximum position error 48.8
+      mm at time 0: 7 (28.0%) Frame 7\n\tLeftLowerArm average position error 8.0
+      mm and maximum position error 8.5 mm at time 1: 1 (100.0%) Frame 25\n\tLeftHand
+      average position error 0.7 mm and maximum position error 1.3 mm at time 0:17
+      (68.0%) Frame 17\n\tRightLowerArm average position error 7.6 mm and maximum
+      position error 8.2 mm at time 1: 1 (100.0%) Frame 25\n\tRightHand average position
+      error 0.7 mm and maximum position error 1.3 mm at time 0:19 (76.0%) Frame 19\n\nRetargeting
+      quality report for clip 'rig|PivotLeft.001':\n\tLeftLowerLeg average position
+      error 7.1 mm and maximum position error 11.9 mm at time 0:19 (79.2%) Frame
+      19\n\tLeftFoot average position error 13.3 mm and maximum position error 28.8
+      mm at time 0:18 (75.0%) Frame 18\n\tRightLowerLeg average position error 6.4
+      mm and maximum position error 11.8 mm at time 0: 5 (20.8%) Frame 5\n\tRightFoot
+      average position error 12.7 mm and maximum position error 28.5 mm at time 0:
+      6 (25.0%) Frame 6\n\tLeftLowerArm average position error 5.4 mm and maximum
+      position error 8.8 mm at time 0:22 (91.7%) Frame 22\n\tLeftHand average position
+      error 3.3 mm and maximum position error 6.1 mm at time 0:10 (41.7%) Frame 10\n\tRightLowerArm
+      average position error 4.6 mm and maximum position error 8.2 mm at time 0:
+      0 (0.0%) Frame 0\n\tRightHand average position error 3.5 mm and maximum position
+      error 6.0 mm at time 0:10 (41.7%) Frame 10\n\nRetargeting quality report for
+      clip 'rig|PivotLeftect':\n\tLeftLowerLeg average position error 7.1 mm and
+      maximum position error 11.9 mm at time 0:19 (79.2%) Frame 19\n\tLeftFoot average
+      position error 13.3 mm and maximum position error 28.8 mm at time 0:18 (75.0%)
+      Frame 18\n\tRightLowerLeg average position error 6.4 mm and maximum position
+      error 11.8 mm at time 0: 5 (20.8%) Frame 5\n\tRightFoot average position error
+      12.7 mm and maximum position error 28.5 mm at time 0: 6 (25.0%) Frame 6\n\tLeftLowerArm
+      average position error 5.4 mm and maximum position error 8.8 mm at time 0:22
+      (91.7%) Frame 22\n\tLeftHand average position error 3.3 mm and maximum position
+      error 6.1 mm at time 0:10 (41.7%) Frame 10\n\tRightLowerArm average position
+      error 4.6 mm and maximum position error 8.2 mm at time 0: 0 (0.0%) Frame 0\n\tRightHand
+      average position error 3.5 mm and maximum position error 6.0 mm at time 0:10
+      (41.7%) Frame 10\n\nRetargeting quality report for clip 'rig|PivotRight':\n\tLeftLowerLeg
+      average position error 8.0 mm and maximum position error 17.9 mm at time 0:
+      7 (29.2%) Frame 7\n\tLeftFoot average position error 16.8 mm and maximum position
+      error 48.1 mm at time 0: 6 (25.0%) Frame 6\n\tRightLowerLeg average position
+      error 10.4 mm and maximum position error 19.1 mm at time 0:17 (70.8%) Frame
+      17\n\tRightFoot average position error 24.6 mm and maximum position error 51.4
+      mm at time 0:18 (75.0%) Frame 18\n\tLeftLowerArm average position error 7.7
+      mm and maximum position error 8.5 mm at time 1: 0 (100.0%) Frame 24\n\tLeftHand
+      average position error 0.7 mm and maximum position error 1.3 mm at time 0:
+      9 (37.5%) Frame 9\n\tRightLowerArm average position error 7.6 mm and maximum
+      position error 8.2 mm at time 1: 0 (100.0%) Frame 24\n\tRightHand average position
+      error 0.7 mm and maximum position error 1.3 mm at time 0:16 (66.7%) Frame 16\n\nRetargeting
+      quality report for clip 'rig|RunCycle':\n\tLeftLowerLeg average position error
+      12.7 mm and maximum position error 20.7 mm at time 0:20 (83.3%) Frame 20\n\tLeftFoot
+      average position error 27.7 mm and maximum position error 52.4 mm at time 0:22
+      (91.7%) Frame 22\n\tRightLowerLeg average position error 12.7 mm and maximum
+      position error 20.9 mm at time 0: 8 (33.3%) Frame 8\n\tRightFoot average position
+      error 28.0 mm and maximum position error 53.3 mm at time 0:10 (41.7%) Frame
+      10\n\tLeftLowerArm average position error 4.5 mm and maximum position error
+      8.4 mm at time 0:14 (58.3%) Frame 14\n\tLeftHand average position error 6.9
+      mm and maximum position error 12.1 mm at time 0:17 (70.8%) Frame 17\n\tRightLowerArm
+      average position error 3.3 mm and maximum position error 5.4 mm at time 0:
+      9 (37.5%) Frame 9\n\tRightHand average position error 5.9 mm and maximum position
+      error 10.5 mm at time 0: 5 (20.8%) Frame 5\n\tHead average position error 7.2
+      mm and maximum position error 7.2 mm at time 0:19 (79.2%) Frame 19\n\nRetargeting
+      quality report for clip 'rig|RunCycleBack':\n\tLeftLowerLeg average position
+      error 12.7 mm and maximum position error 20.6 mm at time 0:20 (83.3%) Frame
+      20\n\tLeftFoot average position error 27.7 mm and maximum position error 52.4
+      mm at time 0:22 (91.7%) Frame 22\n\tRightLowerLeg average position error 12.7
+      mm and maximum position error 20.9 mm at time 0: 8 (33.3%) Frame 8\n\tRightFoot
+      average position error 28.0 mm and maximum position error 53.3 mm at time 0:10
+      (41.7%) Frame 10\n\tLeftLowerArm average position error 4.5 mm and maximum
+      position error 8.4 mm at time 0:14 (58.3%) Frame 14\n\tLeftHand average position
+      error 6.9 mm and maximum position error 12.1 mm at time 0:17 (70.8%) Frame
+      17\n\tRightLowerArm average position error 3.3 mm and maximum position error
+      5.4 mm at time 0: 9 (37.5%) Frame 9\n\tRightHand average position error 5.9
+      mm and maximum position error 10.5 mm at time 0: 5 (20.8%) Frame 5\n\tHead
+      average position error 7.2 mm and maximum position error 7.2 mm at time 0:
+      8 (33.3%) Frame 8\n\nRetargeting quality report for clip 'rig|RunCycleLeft':\n\tLeftLowerLeg
+      average position error 13.0 mm and maximum position error 20.7 mm at time 0:21
+      (84.0%) Frame 21\n\tLeftFoot average position error 28.1 mm and maximum position
+      error 52.4 mm at time 0:23 (92.0%) Frame 23\n\tRightLowerLeg average position
+      error 12.4 mm and maximum position error 20.9 mm at time 0: 9 (36.0%) Frame
+      9\n\tRightFoot average position error 27.6 mm and maximum position error 53.3
+      mm at time 0:11 (44.0%) Frame 11\n\tLeftLowerArm average position error 4.5
+      mm and maximum position error 8.4 mm at time 0:15 (60.0%) Frame 15\n\tLeftHand
+      average position error 7.0 mm and maximum position error 12.1 mm at time 0:18
+      (72.0%) Frame 18\n\tRightLowerArm average position error 3.3 mm and maximum
+      position error 5.4 mm at time 0:10 (40.0%) Frame 10\n\tRightHand average position
+      error 5.9 mm and maximum position error 10.5 mm at time 0: 6 (24.0%) Frame
+      6\n\tHead average position error 7.2 mm and maximum position error 7.2 mm at
+      time 0:16 (64.0%) Frame 16\n\nRetargeting quality report for clip 'rig|RunCycleRight':\n\tLeftLowerLeg
+      average position error 12.7 mm and maximum position error 20.7 mm at time 0:20
+      (83.3%) Frame 20\n\tLeftFoot average position error 27.7 mm and maximum position
+      error 52.4 mm at time 0:22 (91.7%) Frame 22\n\tRightLowerLeg average position
+      error 12.7 mm and maximum position error 20.9 mm at time 0: 8 (33.3%) Frame
+      8\n\tRightFoot average position error 28.0 mm and maximum position error 53.3
+      mm at time 0:10 (41.7%) Frame 10\n\tLeftLowerArm average position error 4.5
+      mm and maximum position error 8.4 mm at time 0:14 (58.3%) Frame 14\n\tLeftHand
+      average position error 6.9 mm and maximum position error 12.1 mm at time 0:17
+      (70.8%) Frame 17\n\tRightLowerArm average position error 3.3 mm and maximum
+      position error 5.4 mm at time 0: 9 (37.5%) Frame 9\n\tRightHand average position
+      error 5.9 mm and maximum position error 10.5 mm at time 0: 5 (20.8%) Frame
+      5\n\tHead average position error 7.2 mm and maximum position error 7.2 mm at
+      time 0:17 (70.8%) Frame 17\n\nRetargeting quality report for clip 'rig|TipToeCycle':\n\tLeftLowerLeg
+      average position error 14.6 mm and maximum position error 20.2 mm at time 0:18
+      (75.0%) Frame 18\n\tLeftFoot average position error 36.6 mm and maximum position
+      error 52.9 mm at time 0:20 (83.3%) Frame 20\n\tRightLowerLeg average position
+      error 14.0 mm and maximum position error 21.0 mm at time 0: 7 (29.2%) Frame
+      7\n\tRightFoot average position error 35.5 mm and maximum position error 52.3
+      mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm average position error 4.6
+      mm and maximum position error 10.0 mm at time 0: 6 (25.0%) Frame 6\n\tLeftHand
+      average position error 6.2 mm and maximum position error 19.7 mm at time 0:
+      6 (25.0%) Frame 6\n\tRightLowerArm average position error 4.7 mm and maximum
+      position error 8.4 mm at time 0: 8 (33.3%) Frame 8\n\tRightHand average position
+      error 4.6 mm and maximum position error 14.4 mm at time 0: 6 (25.0%) Frame
+      6\n\tHead average position error 7.2 mm and maximum position error 7.2 mm at
+      time 0:20 (83.3%) Frame 20\n\nRetargeting quality report for clip 'rig|WalkCycle':\n\tLeftLowerLeg
+      average position error 12.4 mm and maximum position error 20.2 mm at time 0:18
+      (75.0%) Frame 18\n\tLeftFoot average position error 30.1 mm and maximum position
+      error 52.8 mm at time 0:20 (83.3%) Frame 20\n\tRightLowerLeg average position
+      error 12.3 mm and maximum position error 20.4 mm at time 0: 8 (33.3%) Frame
+      8\n\tRightFoot average position error 29.9 mm and maximum position error 53.6
+      mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm average position error 4.2
+      mm and maximum position error 6.8 mm at time 0: 7 (29.2%) Frame 7\n\tLeftHand
+      average position error 4.3 mm and maximum position error 5.7 mm at time 0:16
+      (66.7%) Frame 16\n\tRightLowerArm average position error 3.9 mm and maximum
+      position error 6.7 mm at time 0:19 (79.2%) Frame 19\n\tRightHand average position
+      error 3.9 mm and maximum position error 5.9 mm at time 0:12 (50.0%) Frame 12\n\tHead
+      average position error 7.2 mm and maximum position error 7.2 mm at time 0:
+      1 (4.2%) Frame 1\n\nRetargeting quality report for clip 'rig|WalkCycleBack':\n\tLeftLowerLeg
+      average position error 12.4 mm and maximum position error 20.2 mm at time 0:18
+      (75.0%) Frame 18\n\tLeftFoot average position error 30.1 mm and maximum position
+      error 52.8 mm at time 0:20 (83.3%) Frame 20\n\tRightLowerLeg average position
+      error 12.3 mm and maximum position error 20.4 mm at time 0: 6 (25.0%) Frame
+      6\n\tRightFoot average position error 29.9 mm and maximum position error 53.6
+      mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm average position error 4.2
+      mm and maximum position error 6.8 mm at time 0: 7 (29.2%) Frame 7\n\tLeftHand
+      average position error 4.3 mm and maximum position error 5.7 mm at time 0:16
+      (66.7%) Frame 16\n\tRightLowerArm average position error 3.9 mm and maximum
+      position error 6.7 mm at time 0:19 (79.2%) Frame 19\n\tRightHand average position
+      error 3.9 mm and maximum position error 5.9 mm at time 0:12 (50.0%) Frame 12\n\tHead
+      average position error 7.2 mm and maximum position error 7.2 mm at time 0:14
+      (58.3%) Frame 14\n\nRetargeting quality report for clip 'rig|WalkCycleLeft':\n\tLeftLowerLeg
+      average position error 12.4 mm and maximum position error 20.2 mm at time 0:18
+      (75.0%) Frame 18\n\tLeftFoot average position error 30.1 mm and maximum position
+      error 52.8 mm at time 0:20 (83.3%) Frame 20\n\tRightLowerLeg average position
+      error 12.3 mm and maximum position error 20.4 mm at time 0: 6 (25.0%) Frame
+      6\n\tRightFoot average position error 29.9 mm and maximum position error 53.6
+      mm at time 0: 8 (33.3%) Frame 8\n\tLeftLowerArm average position error 4.2
+      mm and maximum position error 6.8 mm at time 0: 7 (29.2%) Frame 7\n\tLeftHand
+      average position error 4.3 mm and maximum position error 5.7 mm at time 0:16
+      (66.7%) Frame 16\n\tRightLowerArm average position error 3.9 mm and maximum
+      position error 6.7 mm at time 0:19 (79.2%) Frame 19\n\tRightHand average position
+      error 3.9 mm and maximum position error 5.9 mm at time 0:12 (50.0%) Frame 12\n\tHead
+      average position error 7.2 mm and maximum position error 7.2 mm at time 0:22
+      (91.7%) Frame 22\n\nRetargeting quality report for clip 'rig|WalkCycleRight':\n\tLeftLowerLeg
+      average position error 12.6 mm and maximum position error 20.2 mm at time 0:19
+      (76.0%) Frame 19\n\tLeftFoot average position error 30.0 mm and maximum position
+      error 52.8 mm at time 0:21 (84.0%) Frame 21\n\tRightLowerLeg average position
+      error 11.8 mm and maximum position error 20.4 mm at time 0: 7 (28.0%) Frame
+      7\n\tRightFoot average position error 28.6 mm and maximum position error 53.6
+      mm at time 0: 9 (36.0%) Frame 9\n\tLeftLowerArm average position error 4.3
+      mm and maximum position error 6.8 mm at time 0: 8 (32.0%) Frame 8\n\tLeftHand
+      average position error 4.3 mm and maximum position error 5.7 mm at time 0:17
+      (68.0%) Frame 17\n\tRightLowerArm average position error 3.8 mm and maximum
+      position error 6.7 mm at time 0:20 (80.0%) Frame 20\n\tRightHand average position
+      error 3.9 mm and maximum position error 5.9 mm at time 0:13 (52.0%) Frame 13\n\tHead
+      average position error 7.2 mm and maximum position error 7.2 mm at time 0:
+      7 (28.0%) Frame 7\n"
+    animationDoRetargetingWarnings: 1
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: rig|Idle
+      takeName: rig|Idle
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|RunCycle
+      takeName: rig|RunCycle
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|WalkCycle
+      takeName: rig|WalkCycle
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: LFootLerp
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.4
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.6
+            value: 0.1
+            inSlope: 0.90135735
+            outSlope: 0.90135735
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.5416667
+            outWeight: 0.3076922
+          - serializedVersion: 3
+            time: 0.875
+            value: 1
+            inSlope: 0
+            outSlope: Infinity
+            tangentMode: 97
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.9
+            value: 0
+            inSlope: Infinity
+            outSlope: Infinity
+            tangentMode: 103
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0.0040686056
+            outSlope: 0.0040686056
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: RFootLerp
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0.008847124
+            outSlope: 0.008847124
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.52641594
+          - serializedVersion: 3
+            time: 0.1
+            value: 0.1
+            inSlope: 2.278992
+            outSlope: 2.278992
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.4791667
+            outWeight: 0.21212119
+          - serializedVersion: 3
+            time: 0.375
+            value: 1
+            inSlope: 0
+            outSlope: Infinity
+            tangentMode: 97
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.4
+            value: 0
+            inSlope: 0.007633278
+            outSlope: Infinity
+            tangentMode: 97
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
+      - name: GravityWeight
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          preInfinity: 2
+          postInfinity: 2
+          rotationOrder: 4
+      - name: RKneeLerp
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2.9858823
+            outSlope: 2.9858823
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 1
+          - serializedVersion: 3
+            time: 0.333
+            value: 1
+            inSlope: 2.5840333
+            outSlope: -3.4944665
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.22422425
+            outWeight: 0.050474767
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: LKneeLerp
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.4564314
+            inSlope: -2.8981962
+            outSlope: -2.8981962
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.125
+          - serializedVersion: 3
+            time: 0.5
+            value: 0
+            inSlope: -0.0006701179
+            outSlope: 3.0522714
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.8945734
+            outWeight: 0.98848844
+          - serializedVersion: 3
+            time: 0.833
+            value: 1
+            inSlope: 3.0052779
+            outSlope: -4.133481
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.9874875
+            outWeight: 0.041822802
+          - serializedVersion: 3
+            time: 0.9994324
+            value: 0.45665264
+            inSlope: -2.466188
+            outSlope: -2.466188
+            tangentMode: 1
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|Jump
+      takeName: rig|Jump
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|Fall
+      takeName: rig|Fall
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves:
+      - name: GravityWeight
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1.0023537
+            inSlope: -0.17048053
+            outSlope: -0.17048053
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.22083333
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: -3.1171765
+            outSlope: -3.1171765
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.20833331
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 55
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: DEF-spine
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-thigh.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-thigh.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-shin.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-shin.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-spine.001
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-spine.002
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-neck_end
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-shoulder.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-shoulder.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-upper_arm.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-upper_arm.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-forearm.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-forearm.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-hand.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-hand.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-toe.L
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-toe.R
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: DEF-spine.003
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: settler(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: rig
+      parentName: settler(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 2.8, y: 2.8, z: 2.8}
+    - name: root
+      parentName: rig
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-spine
+      parentName: root
+      position: {x: -0, y: 0.055199955, z: 1.0098999}
+      rotation: {x: 0.7904554, y: 0, z: 0, w: 0.6125196}
+      scale: {x: 0.99999976, y: 1.0000005, z: 0.99999994}
+    - name: DEF-spine.001
+      parentName: DEF-spine
+      position: {x: -0, y: 0.15221955, z: -0.0000000037252903}
+      rotation: {x: -0.064476356, y: 0, z: -0, w: 0.99791926}
+      scale: {x: 1.0000001, y: 0.9999997, z: 0.9999999}
+    - name: DEF-spine.002
+      parentName: DEF-spine.001
+      position: {x: -0, y: 0.13663667, z: 0.000000009778887}
+      rotation: {x: -0.07746413, y: 0, z: -0, w: 0.99699515}
+      scale: {x: 1.0000001, y: 0.9999996, z: 0.99999994}
+    - name: DEF-spine.003
+      parentName: DEF-spine.002
+      position: {x: -0, y: 0.1728875, z: 4.656613e-10}
+      rotation: {x: -0.13124812, y: 0, z: -0, w: 0.9913496}
+      scale: {x: 0.9999998, y: 1.0000005, z: 1}
+    - name: DEF-spine.004
+      parentName: DEF-spine.003
+      position: {x: -0, y: 0.18782532, z: 0.000000029802322}
+      rotation: {x: 0.14606538, y: -0.00000011793076, z: -0.000000017412335, w: 0.989275}
+      scale: {x: 1.0000006, y: 0.99999887, z: 1.0000004}
+    - name: DEF-neck
+      parentName: DEF-spine.004
+      position: {x: -0, y: 0.08490231, z: 2.3283064e-10}
+      rotation: {x: 0.0634783, y: -2.1421553e-14, z: -0.000000015134395, w: 0.9979832}
+      scale: {x: 0.99999964, y: 1.0000007, z: 0.99999964}
+    - name: DEF-neck_end
+      parentName: DEF-neck
+      position: {x: -0, y: 0.29870084, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-shoulder.L
+      parentName: DEF-spine.003
+      position: {x: -0.018299999, y: 0.11176771, z: 0.11162778}
+      rotation: {x: -0.44535515, y: 0.40275097, z: 0.49345335, w: 0.62924904}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: DEF-upper_arm.L
+      parentName: DEF-shoulder.L
+      position: {x: 0.027218647, y: 0.22139366, z: -0.027449358}
+      rotation: {x: -0.09319231, y: 0.9921847, z: -0.052159738, w: -0.064529724}
+      scale: {x: 1.0000005, y: 0.99999917, z: 1.0000005}
+    - name: DEF-forearm.L
+      parentName: DEF-upper_arm.L
+      position: {x: 0.000000007450581, y: 0.33949536, z: -0.000000014901161}
+      rotation: {x: 0.027257364, y: -0.0000025071197, z: 0.000031217925, w: 0.99962854}
+      scale: {x: 0.9999994, y: 1.0000006, z: 0.9999996}
+    - name: DEF-hand.L
+      parentName: DEF-forearm.L
+      position: {x: -0.000000035390258, y: 0.2829874, z: 0.0000000037252903}
+      rotation: {x: 0.073403165, y: -0.0055508865, z: 0.052150674, w: 0.9959225}
+      scale: {x: 1, y: 0.9999998, z: 1}
+    - name: DEF-hand.L_end
+      parentName: DEF-hand.L
+      position: {x: -0, y: 0.16893898, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-shoulder.R
+      parentName: DEF-spine.003
+      position: {x: 0.018299999, y: 0.11176771, z: 0.11162778}
+      rotation: {x: -0.44535515, y: -0.40275097, z: -0.49345335, w: 0.62924904}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: DEF-upper_arm.R
+      parentName: DEF-shoulder.R
+      position: {x: -0.027218647, y: 0.22139366, z: -0.027449358}
+      rotation: {x: 0.092797965, y: 0.99169564, z: -0.052841675, w: 0.071666874}
+      scale: {x: 1, y: 0.99999964, z: 1.0000001}
+    - name: DEF-forearm.R
+      parentName: DEF-upper_arm.R
+      position: {x: -0.0000000037252903, y: 0.35021293, z: -0.000000007450581}
+      rotation: {x: 0.027066788, y: -0.000005364416, z: 0.00007326153, w: 0.9996336}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1.0000002}
+    - name: DEF-hand.R
+      parentName: DEF-forearm.R
+      position: {x: -0.000000011175871, y: 0.2738557, z: 0.0000000121071935}
+      rotation: {x: 0.07326256, y: 0.005211331, z: -0.05395131, w: 0.9958387}
+      scale: {x: 0.99999994, y: 1, z: 0.99999976}
+    - name: DEF-hand.R_end
+      parentName: DEF-hand.R
+      position: {x: -0, y: 0.17732616, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-thigh.L
+      parentName: DEF-spine
+      position: {x: -0.098000005, y: 0.03750991, z: 0.00954685}
+      rotation: {x: 0.95992035, y: 0.037166554, z: 0.2446751, w: 0.13155095}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1.0000001}
+    - name: DEF-shin.L
+      parentName: DEF-thigh.L
+      position: {x: 9.313226e-10, y: 0.50677234, z: -0.000000006519258}
+      rotation: {x: 0.04259394, y: 0.00000007991889, z: 0.0000000095547295, w: 0.99909246}
+      scale: {x: 1, y: 0.9999997, z: 0.9999999}
+    - name: DEF-foot.L
+      parentName: DEF-shin.L
+      position: {x: -0.0000000013969839, y: 0.46586457, z: -9.313226e-10}
+      rotation: {x: -0.5503642, y: -0.12033963, z: -0.05950997, w: 0.8240608}
+      scale: {x: 0.9999997, y: 0.99999976, z: 0.99999934}
+    - name: DEF-toe.L
+      parentName: DEF-foot.L
+      position: {x: -0.000000006357075, y: 0.1256699, z: 0.0000000018626451}
+      rotation: {x: 0.11228828, y: 0.9671499, z: -0.22656049, w: 0.026128568}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000006}
+    - name: DEF-toe.L_end
+      parentName: DEF-toe.L
+      position: {x: -0, y: 0.10115289, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: DEF-thigh.R
+      parentName: DEF-spine
+      position: {x: 0.098000005, y: 0.03750991, z: 0.00954685}
+      rotation: {x: 0.96639013, y: -0.033471506, z: -0.21772298, w: 0.13253902}
+      scale: {x: 1.0000004, y: 0.9999995, z: 1}
+    - name: DEF-shin.R
+      parentName: DEF-thigh.R
+      position: {x: -0.000000007450581, y: 0.5067724, z: 0.0000000018626451}
+      rotation: {x: 0.04140111, y: 0.00000016680615, z: -0.000000001980758, w: 0.99914265}
+      scale: {x: 0.9999998, y: 1.0000002, z: 0.99999994}
+    - name: DEF-foot.R
+      parentName: DEF-shin.R
+      position: {x: -0.000000007683411, y: 0.4657537, z: -0.0000000018626451}
+      rotation: {x: -0.5495892, y: 0.10519137, z: 0.05141524, w: 0.8271898}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.9999994}
+    - name: DEF-toe.R
+      parentName: DEF-foot.R
+      position: {x: -0.0000000043899036, y: 0.12518896, z: -0.0000000037252903}
+      rotation: {x: -0.10190132, y: 0.9680713, z: -0.22777086, w: -0.02397028}
+      scale: {x: 1, y: 1.0000001, z: 1.0000002}
+    - name: DEF-toe.R_end
+      parentName: DEF-toe.R
+      position: {x: -0, y: 0.10115289, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: MCH-torso.parent
+      parentName: rig
+      position: {x: -0, y: 0.036199994, z: 1.0835998}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: torso
+      parentName: MCH-torso.parent
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: MCH-spine.002
+      parentName: torso
+      position: {x: -0, y: -0.03580004, z: 0.20930004}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: spine_fk.002
+      parentName: MCH-spine.002
+      position: {x: -0, y: 0.000000007479684, z: 0}
+      rotation: {x: 0.69576854, y: -0, z: -0, w: 0.71826607}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: MCH-spine.003
+      parentName: spine_fk.002
+      position: {x: -0, y: 0.1728875, z: -0.0000000013969839}
+      rotation: {x: -0.69576854, y: 0, z: -0, w: 0.71826607}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: spine_fk.003
+      parentName: MCH-spine.003
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.5954786, y: -0, z: -0, w: 0.8033712}
+      scale: {x: 1, y: 1, z: 1}
+    - name: tweak_spine.003
+      parentName: spine_fk.003
+      position: {x: -0, y: -0.0000000060535967, z: 0.0000000013969839}
+      rotation: {x: 0.000000007450581, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ORG-spine.003
+      parentName: tweak_spine.003
+      position: {x: -0, y: -0.000000006170012, z: 0.0000000013969839}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ORG-shoulder.L
+      parentName: ORG-spine.003
+      position: {x: -0.018299999, y: 0.111768164, z: 0.11162787}
+      rotation: {x: -0.5171019, y: 0.29547974, z: 0.39892888, w: 0.6972468}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: MCH-upper_arm_parent.L
+      parentName: ORG-shoulder.L
+      position: {x: 0.027218683, y: 0.22139362, z: -0.027449569}
+      rotation: {x: 0.00022925739, y: 0.00017369857, z: -0.49643984, w: 0.86807114}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: upper_arm_fk.L
+      parentName: MCH-upper_arm_parent.L
+      position: {x: 0.0000000018355168, y: -0.000000008061777, z: 0.0000000019830004}
+      rotation: {x: -0.4877233, y: 0.6189292, z: -0.5339531, w: 0.30650738}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: forearm_fk.L
+      parentName: upper_arm_fk.L
+      position: {x: -0.000000011175871, y: 0.3394954, z: -0.000000044703484}
+      rotation: {x: 0.070454225, y: -0.00000009266404, z: 0.000000012137355, w: 0.997515}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: forearm_fk.L.001
+      parentName: forearm_fk.L
+      position: {x: -0.000000016763806, y: 0.28298777, z: 0.000000023283064}
+      rotation: {x: 0.1048389, y: -0.0000000026393814, z: 0.08989461, w: 0.990418}
+      scale: {x: 0.99999994, y: 1, z: 1.0000001}
+    - name: forearm_fk.L.001_end
+      parentName: forearm_fk.L.001
+      position: {x: -0, y: 0.17425407, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: ORG-shoulder.R
+      parentName: ORG-spine.003
+      position: {x: 0.018299999, y: 0.111768164, z: 0.11162787}
+      rotation: {x: -0.5171019, y: -0.29547974, z: -0.39892888, w: 0.6972468}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: MCH-upper_arm_parent.R
+      parentName: ORG-shoulder.R
+      position: {x: -0.027218683, y: 0.22139362, z: -0.027449569}
+      rotation: {x: 0.000229252, y: -0.0001737016, z: 0.49643984, w: 0.86807114}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: upper_arm_fk.R
+      parentName: MCH-upper_arm_parent.R
+      position: {x: -0.0000000039332253, y: -0.000000014304733, z: 0.0000000028270681}
+      rotation: {x: 0.48326635, y: 0.62171304, z: -0.53733623, w: -0.30198732}
+      scale: {x: 0.99999994, y: 1.0000002, z: 1.0000001}
+    - name: forearm_fk.R
+      parentName: upper_arm_fk.R
+      position: {x: 0.000000007450581, y: 0.350213, z: 0.000000067055225}
+      rotation: {x: 0.07399665, y: 0.000000019611537, z: -0.000000015876008, w: 0.9972585}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: forearm_fk.R.001
+      parentName: forearm_fk.R
+      position: {x: -0.000000018626451, y: 0.2738557, z: 0.000000038184226}
+      rotation: {x: 0.09548698, y: 0.000000057300664, z: -0.09012683, w: 0.99134225}
+      scale: {x: 0.9999999, y: 0.99999994, z: 0.9999998}
+    - name: forearm_fk.R.001_end
+      parentName: forearm_fk.R.001
+      position: {x: -0, y: 0.17406583, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
