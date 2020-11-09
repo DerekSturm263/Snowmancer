@@ -11,31 +11,35 @@ public class Collecting : MonoBehaviour
     public Camera cam;
     public LayerMask layer;
     public float range = 6f;
-
+    public float wait;
     public LineRenderer line1;
     public int linesegment;
-void Start()
+    void Start()
     {
         cam = Camera.main;
-        newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
+        newSnowball.transform.localScale = new Vector3(.1f, .1f, .1f);
         newSnowball.GetComponent<Rigidbody>().useGravity = false;
         line1.positionCount = linesegment;
     }
     public void Update()
     {
         RaycastHit hit;
+        Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(hand.transform.position, hand.transform.forward, out hit, range))
+        if (Physics.Raycast(camRay, out hit, 100f, layer))
         {
+            
+            Vector3 vo = CalculateV(hit.point, hand.position, 1f);
+            visuize(vo);
             if (Input.GetButtonDown("Fire1"))
             {
-                Vector3 vo = CalculateV(hit.point, hand.position, 1f);
-                visuize(vo);
                 newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
                 ChargeSnowball();
             }
         }
-        
+       
+
+
 
         if (Input.GetButtonUp("Fire1"))
         {
@@ -54,17 +58,18 @@ void Start()
     {
         
 
-            newSnowball = GameObject.Instantiate(newSnowball);
-            newSnowball.transform.position = hand.transform.position;// get the player's hand position.
-            newSnowball.GetComponent<Rigidbody>().useGravity = false;
+        newSnowball = GameObject.Instantiate(newSnowball);
+        newSnowball.transform.position = hand.transform.position;// get the player's hand position
+        newSnowball.GetComponent<Rigidbody>().useGravity = false;
         
         
    
         
     }
 
-    private void ThrowSnowball()
+     void ThrowSnowball()
     {
+
         newSnowball.GetComponent<Rigidbody>().useGravity = true;
         newSnowball.GetComponent<Rigidbody>().AddForce(ballforce * -transform.forward);
         
@@ -111,15 +116,15 @@ void Start()
         return result;
 
     }
-    Vector3 Calculatepositionline(Vector3 vo, float time) 
+    Vector3 Calculatepositionline(Vector3 vo, float time)
     {
         Vector3 VSX = vo;
         VSX.y = 0f;
-        Vector3 result = hand.position + vo* time;
+        Vector3 result = hand.position + vo * time;
         float sy = (-0.5f * Mathf.Abs(Physics.gravity.y) * (time * time)) + (vo.y * time) + hand.position.y;
         result.y = sy;
         return result;
     }
-   
+
 }
    
