@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
@@ -40,10 +41,11 @@ public class Movement : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
-    public void Attack()
+    void Attack()
     {
         anim.SetTrigger("Attack");
     }
+    
 
     private void Update()
     {
