@@ -14,6 +14,7 @@ public class Collecting : MonoBehaviour
     public float wait;
     public LineRenderer line1;
     public int linesegment;
+    public bool collectsnow = false;
     void Start()
     {
         cam = Camera.main;
@@ -23,20 +24,24 @@ public class Collecting : MonoBehaviour
     }
     public void Update()
     {
-        RaycastHit hit;
-        Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(camRay, out hit, 100f, layer))
+        if (collectsnow == true)
         {
-            
-            Vector3 vo = CalculateV(hit.point, hand.position, 1f);
-            visuize(vo);
-            if (Input.GetButtonDown("Fire1"))
+            RaycastHit hit;
+            Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(camRay, out hit, 100f, layer))
             {
-                newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
-                ChargeSnowball();
+
+                Vector3 vo = CalculateV(hit.point, hand.position, 1f);
+                visuize(vo);
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
+                    ChargeSnowball();
+                }
             }
         }
+        
        
 
 
@@ -61,13 +66,15 @@ public class Collecting : MonoBehaviour
         newSnowball = GameObject.Instantiate(newSnowball);
         newSnowball.transform.position = hand.transform.position;// get the player's hand position
         newSnowball.GetComponent<Rigidbody>().useGravity = false;
-        
-        
-   
-        
     }
-
-     void ThrowSnowball()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "SnowPile")
+        {
+            collectsnow = true;
+        }
+    }
+    void ThrowSnowball()
     {
 
         newSnowball.GetComponent<Rigidbody>().useGravity = true;
