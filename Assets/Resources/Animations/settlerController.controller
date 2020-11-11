@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToGround: 0.1
-  raycastLength: 0.5
+  raycastLength: 1
   ground:
     serializedVersion: 2
     m_Bits: 256
