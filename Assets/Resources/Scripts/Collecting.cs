@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Collecting : MonoBehaviour
 {
-    public float ballforce;
+    public float ballforce = 500000f;
     public GameObject newSnowball;
     public Transform hand;
     public Camera cam;
@@ -26,19 +26,29 @@ public class Collecting : MonoBehaviour
     {
         if (collectsnow == true)
         {
-            RaycastHit hit;
-            Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(camRay, out hit, 100f, layer))
+            if (Input.GetButtonDown("Fire1"))
             {
+                RaycastHit hit;
+                Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
 
-                Vector3 vo = CalculateV(hit.point, hand.position, 1f);
-                visuize(vo);
-                if (Input.GetButtonDown("Fire1"))
+                if (Physics.Raycast(camRay, out hit, 100f, layer))
                 {
+
+                    Vector3 vo = CalculateV(hit.point, hand.position, 1f);
+                    visuize(vo);
+
                     newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
                     ChargeSnowball();
                 }
+             
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                ThrowSnowball();
+            }
+            if (Input.GetButton("Fire1"))
+            {
+                UpdateSnowball();
             }
         }
         
@@ -46,14 +56,7 @@ public class Collecting : MonoBehaviour
 
 
 
-        if (Input.GetButtonUp("Fire1"))
-        {
-            ThrowSnowball();
-        }
-        if (Input.GetButton("Fire1"))
-        {
-            UpdateSnowball();
-        }
+
     }
 
 
@@ -76,9 +79,9 @@ public class Collecting : MonoBehaviour
     }
     void ThrowSnowball()
     {
-
+        newSnowball.GetComponent<Rigidbody>().AddForce(transform.forward * ballforce);
         newSnowball.GetComponent<Rigidbody>().useGravity = true;
-        newSnowball.GetComponent<Rigidbody>().AddForce(ballforce * -transform.forward);
+
         
         StopAllCoroutines();
     }
