@@ -7,6 +7,7 @@ public class IKController : StateMachineBehaviour
     public LayerMask ground;
 
     private Transform lFootGoal, rFootGoal;
+    private Transform bodyGoal;
 
     public float offset;
 
@@ -14,6 +15,7 @@ public class IKController : StateMachineBehaviour
     {
         lFootGoal = new GameObject("Left Foot Goal").transform;
         rFootGoal = new GameObject("Right Foot Goal").transform;
+        bodyGoal = new GameObject("Body Goal").transform;
     }
 
     public override void OnStateIK(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
@@ -30,8 +32,6 @@ public class IKController : StateMachineBehaviour
 
             anim.SetIKPosition(AvatarIKGoal.LeftFoot, lFootGoal.position);
             anim.SetIKRotation(AvatarIKGoal.LeftFoot, lFootGoal.rotation * anim.transform.rotation);
-
-            Debug.Log(anim.GetFloat("LeftFootWeight"));
         }
 
         if (Physics.Raycast(anim.GetIKPosition(AvatarIKGoal.RightFoot), Vector3.down, out RaycastHit rHit, raycastLength, ground))
@@ -41,15 +41,13 @@ public class IKController : StateMachineBehaviour
 
             anim.SetIKPosition(AvatarIKGoal.RightFoot, rFootGoal.position);
             anim.SetIKRotation(AvatarIKGoal.RightFoot, rFootGoal.rotation * anim.transform.rotation);
-
-            Debug.Log(anim.GetFloat("RightFootWeight"));
         }
 
-
-
-        if (Physics.Raycast(anim.transform.position, Vector3.down, out RaycastHit hit, ground))
+        if (anim.velocity.magnitude < 0.2f)
         {
-            anim.bodyPosition = new Vector3(anim.bodyPosition.x, (lFootGoal.position.y + rFootGoal.position.y) / 2f + offset - hit.distance, anim.bodyPosition.z);
+            Vector3 targetPos = new Vector3(anim.bodyPosition.x, (lFootGoal.position.y + rFootGoal.position.y) / 2f + offset, anim.bodyPosition.z);
+            bodyGoal.position = Vector3.Lerp(targetPos, anim.bodyPosition, anim.velocity.magnitude * 5f);
+            anim.bodyPosition = bodyGoal.position;
         }
     }
 }
