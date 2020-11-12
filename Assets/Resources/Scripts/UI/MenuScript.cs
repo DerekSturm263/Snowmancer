@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class MenuScript : MonoBehaviour
 
     private MenuItemScript menuItemSc;
     private MenuItemScript prevMenuItemSc;
+
+    public Image mouseBar;
 
     public int spellID;
 
@@ -28,6 +31,8 @@ public class MenuScript : MonoBehaviour
         currentAngle = Mathf.Atan2(normalizedMousePosistion.y, normalizedMousePosistion.x) * Mathf.Rad2Deg;
         currentAngle = (currentAngle + 360) % 360;
 
+        mouseBar.transform.rotation = Quaternion.Euler(0, 0, currentAngle + 180);
+
         selection = (int)currentAngle / 72;
 
         if (selection != prevSelect)
@@ -40,7 +45,8 @@ public class MenuScript : MonoBehaviour
             menuItemSc.Select();
 
             spellID = selection;
-            Debug.Log(spellID);
+            
+            //Debug.Log(spellID);
         }
 
         //Debug.Log(currentAngle);

@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6fa76d8a89e694ba5a95b2d78c3e69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
-  hoverColor: {r: 0, g: 0, b: 0, a: 1}
+  baseColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+  hoverColor: {r: 1, g: 1, b: 1, a: 1}
   background: {fileID: 6032409269068391837}
 --- !u!1 &7823258439283584311
 GameObject:
