@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    protected void Move(Vector2 move)
+    protected void Move(Vector2 move, bool useCamera = true)
     {
         if (move == Vector2.zero)
         {
@@ -32,8 +32,16 @@ public class Movement : MonoBehaviour
         targetVector = Vector3.zero;
         float multiplier = isRunning ? 2f : 1f;
 
-        targetVector += move.x * cam.transform.right * multiplier;
-        targetVector += move.y * cam.transform.forward * multiplier;
+        if (useCamera)
+        {
+            targetVector += move.x * cam.transform.right * multiplier;
+            targetVector += move.y * cam.transform.forward * multiplier;
+        }
+        else
+        {
+            targetVector += move.x * new Vector3(1f, 0f, 0f) * multiplier;
+            targetVector += move.y * new Vector3(0f, 0f, 1f) * multiplier;
+        }
     }
 
     protected void Run(bool run)
