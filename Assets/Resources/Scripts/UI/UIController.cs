@@ -8,15 +8,23 @@ public class UIController : MonoBehaviour
     //public Slider healthSlider;
     //public Slider manaSlider;
     public GameObject spellSelector;
+    private int spellID;
+    private GameObject[] menuItems;
+    private MenuItemScript menuItemSc;
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.E))
         {
             spellSelector.SetActive(true);
+            menuItems = spellSelector.GetComponent<MenuScript>().menuItems;
+            spellID = spellSelector.GetComponent<MenuScript>().spellID;
+            menuItemSc = menuItems[spellID].GetComponent<MenuItemScript>();
+
         }
-        else
+        else if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.E))
         {
+            menuItemSc.SetCurrentSpell();
             spellSelector.SetActive(false);
         }
 
