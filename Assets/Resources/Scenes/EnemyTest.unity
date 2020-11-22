@@ -513,7 +513,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1294616594}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -788,6 +788,42 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
+--- !u!1 &999614694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4851325027805117255, guid: 16b8903b9aa853d498d944b7a91e0f24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1904537840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &999614695 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4650362532674932138, guid: 16b8903b9aa853d498d944b7a91e0f24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1904537840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &999614696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999614694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112a4ec98cfd4624db6a99f5548da6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballforce: 500000
+  newSnowball: {fileID: 1643540819}
+  hand: {fileID: 999614695}
+  cam: {fileID: 1294616594}
+  layer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  range: 50
+  wait: 10
+  line1: {fileID: 1536757958}
+  linesegment: 100
+  collectsnow: 1
 --- !u!1 &1091959184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,36 +1293,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1904537840}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1536757956 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5124756129594994896, guid: 16b8903b9aa853d498d944b7a91e0f24,
-    type: 3}
-  m_PrefabInstance: {fileID: 1904537840}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1536757957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536757955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112a4ec98cfd4624db6a99f5548da6c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballforce: 500000
-  newSnowball: {fileID: 1643540819}
-  hand: {fileID: 1536757956}
-  cam: {fileID: 0}
-  layer:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  range: 50
-  wait: 10
-  line1: {fileID: 1536757958}
-  linesegment: 100
-  collectsnow: 1
 --- !u!120 &1536757958
 LineRenderer:
   m_ObjectHideFlags: 0
