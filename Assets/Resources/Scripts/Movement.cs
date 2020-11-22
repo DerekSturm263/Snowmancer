@@ -2,8 +2,15 @@
 
 public class Movement : MonoBehaviour
 {
+    public enum MoveState
+    {
+        Idle, Walking, Running, Jumping, Falling, Landing
+    }
+    public static MoveState moveState;
+
     protected Animator anim;
     protected ParticleSystem ps;
+    protected Rigidbody rb;
 
     public Camera cam;
     public LayerMask ground;
@@ -12,10 +19,13 @@ public class Movement : MonoBehaviour
     protected Vector3 targetVector;
     protected bool isRunning;
 
+    protected float timeFalling;
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
         ps = GetComponent<ParticleSystem>();
+        rb = GetComponent<Rigidbody>();
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -24,11 +34,15 @@ public class Movement : MonoBehaviour
     {
         if (move == Vector2.zero)
         {
-            if (ps.isPlaying) ps.Stop();
+            if (ps)
+                if (ps.isPlaying)
+                    ps.Stop();
+
             return;
         }
-        ps.Play();
+        if (ps) ps.Play();
 
+        moveState = MoveState.Idle;
         targetVector = Vector3.zero;
         float multiplier = isRunning ? 2f : 1f;
 
