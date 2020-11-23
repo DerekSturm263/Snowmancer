@@ -15,10 +15,10 @@ public class Collecting : MonoBehaviour
     public LineRenderer line1;
     public int linesegment;
     public bool collectsnow = false;
+    private GameObject currentsnowball;
     void Start()
     {
         cam = Camera.main;
-        newSnowball.transform.localScale = new Vector3(.1f, .1f, .1f);
         newSnowball.GetComponent<Rigidbody>().useGravity = false;
         line1.positionCount = linesegment;
     }
@@ -26,21 +26,24 @@ public class Collecting : MonoBehaviour
     {
         if (collectsnow == true)
         {
+            RaycastHit hit;
+            Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(camRay, out hit, 100f, layer))
+            {
+
+                Vector3 vo = CalculateV(hit.point, hand.position, 1f);
+                visuize(vo);
+
+                newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
+
+                
+            }
             if (Input.GetButtonDown("Fire1"))
             {
-                RaycastHit hit;
-                Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(camRay, out hit, 100f, layer))
-                {
 
-                    Vector3 vo = CalculateV(hit.point, hand.position, 1f);
-                    visuize(vo);
+                ChargeSnowball();
 
-                    newSnowball.transform.localScale = new Vector3(.5f, .5f, .5f);
-                    ChargeSnowball();
-                }
-             
             }
             if (Input.GetButtonUp("Fire1"))
             {
@@ -51,24 +54,16 @@ public class Collecting : MonoBehaviour
                 UpdateSnowball();
             }
         }
-        
-       
-
-
-
-
     }
-
-
-            // Somewhere else in the script...
-
     private void ChargeSnowball()
     {
-        
 
-        newSnowball = GameObject.Instantiate(newSnowball);
-        newSnowball.transform.position = hand.transform.position;// get the player's hand position
-        newSnowball.GetComponent<Rigidbody>().useGravity = false;
+        
+        currentsnowball = GameObject.Instantiate(newSnowball);
+        currentsnowball.transform.position = new Vector3(1f, 1f, 1f);
+        currentsnowball.GetComponent<projectileScript>().size = 1f;
+        currentsnowball.transform.position = hand.transform.position;// get the player's hand position
+        currentsnowball.GetComponent<Rigidbody>().useGravity = false;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -79,17 +74,18 @@ public class Collecting : MonoBehaviour
     }
     void ThrowSnowball()
     {
-        newSnowball.GetComponent<Rigidbody>().AddForce(transform.forward * ballforce);
-        newSnowball.GetComponent<Rigidbody>().useGravity = true;
+        currentsnowball.GetComponent<Rigidbody>().AddForce(transform.forward * ballforce);
+        currentsnowball.GetComponent<Rigidbody>().useGravity = true;
 
         
         StopAllCoroutines();
     }
     void UpdateSnowball()
     {
+
         newSnowball.transform.position = hand.transform.position;
 
-        StartCoroutine(scaling());
+        newSnowball.transform.localScale += new Vector3(1f, 1f, 1f) * Time.deltaTime;
 
 
     }
@@ -104,7 +100,7 @@ public class Collecting : MonoBehaviour
     IEnumerator scaling()
     {
         yield return new WaitForSeconds(1f);
-        newSnowball.transform.localScale += new Vector3(.001f, .001f, .001f);
+
     }
     Vector3 CalculateV(Vector3 target, Vector3 origin, float time)
     {
