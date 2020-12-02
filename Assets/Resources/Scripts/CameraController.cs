@@ -34,6 +34,7 @@ public class CameraController : MonoBehaviour
     private Camera CameraComponent;
     private float tempSens;
     private float savedCamDist;
+    private Player playerScript;
     void Start()
     {
         Vector3 rot = transform.localRotation.eulerAngles;
@@ -43,6 +44,7 @@ public class CameraController : MonoBehaviour
         OffsetCenter.transform.localPosition = CamOffset;
         CameraComponent = CameraObj.GetComponent<Camera>();
         tempSens = inputSensitivity;
+        playerScript = PlayerObj.GetComponent<Player>();
         if (aimSens == 0)
         {
             aimSens = inputSensitivity * 0.5f;
@@ -53,18 +55,20 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         //rotation
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
+        if (!playerScript.selectingSpell) //if selecting spell, don't rotate
+        {
+            mouseX = Input.GetAxis("Mouse X");
+            mouseY = Input.GetAxis("Mouse Y");
 
-        rotY += mouseX * inputSensitivity * Time.deltaTime;
-        rotX += -mouseY * inputSensitivity * Time.deltaTime;
+            rotY += mouseX * inputSensitivity * Time.deltaTime;
+            rotX += -mouseY * inputSensitivity * Time.deltaTime;
+            rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
-        rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
-        Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
-        transform.rotation = localRotation;
+            Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+            transform.rotation = localRotation;
+        }
 
         //Collision & Cam distance scrolling
-
         camDistance = Mathf.Clamp(camDistance, 4f, maxDist);
         savedCamDist += scrollSensitivity * Input.mouseScrollDelta.y;
         savedCamDist = Mathf.Clamp(savedCamDist, minDist, maxDist);
@@ -82,7 +86,7 @@ public class CameraController : MonoBehaviour
         }
 
         //Aim
-        if (Input.GetMouseButton(1))
+        if (playerScript.aiming)
         {
             CameraComponent.fieldOfView = Mathf.Lerp(CameraComponent.fieldOfView, aimFOV, 10 * Time.deltaTime);
             inputSensitivity = aimSens;
