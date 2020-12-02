@@ -29,18 +29,17 @@ public class PlayerMovement : Movement
         
 
 
-        float runMultiplier = isRunning ? 1f : 0.5f;
+        float runMultiplier = 0.5f;
 
-        float lFoot = anim.GetFloat("LeftFootWeight");
-        float rFoot = anim.GetFloat("RightFootWeight");
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") && targetVector != Vector3.zero)
+        {
+            float lFoot = anim.GetFloat("LeftFootWeight");
+            float rFoot = anim.GetFloat("RightFootWeight");
 
-        float foot;
+            footNum = lFoot > rFoot ? 1 : -1;
+            runMultiplier = isRunning ? 1f : 0.5f;
+        }
 
-        if (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude != 0f)
-            foot = lFoot > rFoot ? -1f : 1f;
-        else
-            foot = 0f;
-
-        anim.SetFloat("LastFoot", foot * runMultiplier);
+        anim.SetFloat("LastFoot", footNum * runMultiplier);
     }
 }

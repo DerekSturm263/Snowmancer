@@ -21,6 +21,8 @@ public class Movement : MonoBehaviour
 
     protected float timeFalling;
 
+    protected int footNum;
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
@@ -53,8 +55,8 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            targetVector += move.x * new Vector3(1f, 0f, 0f) * multiplier;
-            targetVector += move.y * new Vector3(0f, 0f, 1f) * multiplier;
+            targetVector += move.x * Vector3.right * multiplier;
+            targetVector += move.y * Vector3.forward * multiplier;
         }
     }
 
@@ -74,5 +76,10 @@ public class Movement : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), Time.deltaTime * 20f);
         }
+    }
+
+    protected bool IsGrounded()
+    {
+        return true; // Will do this later.
     }
 }

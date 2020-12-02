@@ -63,7 +63,45 @@ ModelImporter:
   - first:
       74: -7912392907173105083
     second: rig|Throwing Snowball Big
+  - first:
+      74: -4189493331303920844
+    second: rig|WalkingBackward
+  - first:
+      74: 2405046758785766721
+    second: rig|WalkingLeft
+  - first:
+      74: -4697554107106925006
+    second: rig|WalkingRight
+  - first:
+      74: -8337536362898382270
+    second: rig|WalkingForward
+  - first:
+      74: -8177247392883514034
+    second: rig|TransitionToSnow
+  - first:
+      74: -194466871139469475
+    second: rig|TransitionToSnow (1)
+  - first:
+      74: 7053526054759631554
+    second: rig|IdleAction1
+  - first:
+      74: -8286226695474303260
+    second: rig|IdleAction2
+  - first:
+      74: -1207534883178370564
+    second: rig|IdleAction2 (1)
+  - first:
+      74: 8641084047881775707
+    second: rig|CollectingSnow
+  - first:
+      74: 2916676701159363719
+    second: rig|IdleAction3
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Backpack
+    second: {fileID: 2100000, guid: 0faade2a618cb874db8d59613f457660, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -98,7 +136,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Coat Fluff.002
-    second: {fileID: 2100000, guid: 90c55424e4d59fd4c84a13b68dd535b7, type: 2}
+    second: {fileID: 2100000, guid: b5f2452113d335347a10a6f92cc56b6c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -178,8 +216,8 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
       does not match position in animation file:\n\t'DEF-shin.L' : position error
-      = 13.805268 mm\n\t'DEF-foot.L' : position error = 15.563209 mm\n\t'DEF-toe.L'
-      : position error = 18.346170 mm\n\t'DEF-shin.R' : position error = 14.407268
+      = 13.805226 mm\n\t'DEF-foot.L' : position error = 15.563167 mm\n\t'DEF-toe.L'
+      : position error = 18.346148 mm\n\t'DEF-shin.R' : position error = 14.407268
       mm\n\t'DEF-foot.R' : position error = 15.205023 mm\n\t'DEF-toe.R' : position
       error = 18.366756 mm\n"
     animationImportErrors: 
@@ -214,7 +252,7 @@ ModelImporter:
       that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
       has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
       that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
-      'rig|Collecting Snow' has import animation warnings that might lower retargeting
+      'rig|CollectingSnow' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
       has translation animation that will be discarded.\n\t'DEF-spine.001' has scale
       animation that will be discarded.\n\t'DEF-spine.002' has scale animation that
@@ -280,10 +318,11 @@ ModelImporter:
       has scale animation that will be discarded.\n\nClip 'rig|Holding Snowball Big'
       has import animation warnings that might lower retargeting quality:\nNote:
       Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
-      has translation animation that will be discarded.\n\t'DEF-spine.002' has scale
-      animation that will be discarded.\n\t'DEF-spine.003' has scale animation that
-      will be discarded.\n\t'DEF-upper_arm.L' has translation animation that will
-      be discarded.\n\t'DEF-upper_arm.L' has scale animation that will be discarded.\n\t'DEF-forearm.L'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.002'
+      has scale animation that will be discarded.\n\t'DEF-spine.003' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.L' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.L' has scale animation that will be discarded.\n\t'DEF-forearm.L'
       has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
       that will be discarded.\n\t'DEF-upper_arm.R' has translation animation that
       will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will be discarded.\n\t'DEF-forearm.R'
@@ -308,14 +347,58 @@ ModelImporter:
       has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
       that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
       has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
-      that will be discarded.\n\nClip 'rig|IdleAction2' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'DEF-spine' has translation animation that
-      will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms and has
-      rotation animation that will be discarded.\n\t'DEF-upper_arm.L' has translation
-      animation that will be discarded.\n\t'DEF-upper_arm.L' has scale animation
-      that will be discarded.\n\t'DEF-forearm.L' has scale animation that will be
-      discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      that will be discarded.\n\nClip 'rig|Holding Snowball Small.002' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'DEF-spine' has translation
+      animation that will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      translation animation that will be discarded.\n\t'DEF-upper_arm.L' has scale
+      animation that will be discarded.\n\t'DEF-forearm.L' has scale animation that
+      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
+      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|IdleAction1' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.002'
+      has scale animation that will be discarded.\n\t'DEF-spine.003' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.L' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.L' has scale animation that will be discarded.\n\t'DEF-forearm.L'
+      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.R' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will be discarded.\n\t'DEF-forearm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-shin.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n\nClip 'rig|IdleAction1.001' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'DEF-spine' has translation
+      animation that will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      translation animation that will be discarded.\n\t'DEF-upper_arm.L' has scale
+      animation that will be discarded.\n\t'DEF-forearm.L' has scale animation that
+      will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
+      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|IdleAction3' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-upper_arm.L'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
       has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
       scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
       that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
@@ -366,40 +449,22 @@ ModelImporter:
       that will be discarded.\n\t'DEF-shin.L' has scale animation that will be discarded.\n\t'DEF-foot.L'
       has scale animation that will be discarded.\n\t'DEF-thigh.R' has scale animation
       that will be discarded.\n\t'DEF-shin.R' has scale animation that will be discarded.\n\t'DEF-foot.R'
-      has scale animation that will be discarded.\n\nClip 'rig|IdleAction1.001' has
+      has scale animation that will be discarded.\n\nClip 'rig|IdleAction2' has import
+      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'DEF-spine' has translation
+      animation that will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      translation animation that will be discarded.\n\t'DEF-upper_arm.L' has scale
+      animation that will be discarded.\n\t'DEF-forearm.L' has scale animation that
+      will be discarded.\n\t'DEF-upper_arm.R' has translation animation that will
+      be discarded.\n\t'DEF-upper_arm.R' has scale animation that will be discarded.\n\t'DEF-forearm.R'
+      has scale animation that will be discarded.\n\t'DEF-thigh.L' has scale animation
+      that will be discarded.\n\t'DEF-shin.L' has scale animation that will be discarded.\n\t'DEF-foot.L'
+      has scale animation that will be discarded.\n\nClip 'rig|IdleAction2.001' has
       import animation warnings that might lower retargeting quality:\nNote: Activate
       translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine' has
       translation animation that will be discarded.\n\t'DEF-spine' is inbetween humanoid
       transforms and has rotation animation that will be discarded.\n\t'DEF-upper_arm.L'
-      has translation animation that will be discarded.\n\t'DEF-upper_arm.L' has
-      scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
-      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
-      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
-      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
-      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
-      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
-      'rig|Holding Snowball Small.001' has import animation warnings that might lower
-      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
-      quality.\n\t'DEF-spine' has translation animation that will be discarded.\n\t'DEF-spine'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.002'
-      has scale animation that will be discarded.\n\t'DEF-upper_arm.L' has translation
-      animation that will be discarded.\n\t'DEF-upper_arm.L' has scale animation
-      that will be discarded.\n\t'DEF-forearm.L' has scale animation that will be
-      discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
-      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
-      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
-      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
-      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
-      'rig|Holding Snowball Small.002' has import animation warnings that might lower
-      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
-      quality.\n\t'DEF-spine' has translation animation that will be discarded.\n\t'DEF-spine'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-upper_arm.L'
       has translation animation that will be discarded.\n\t'DEF-upper_arm.L' has
       scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
       that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
@@ -480,22 +545,6 @@ ModelImporter:
       'rig|Throwing Snowball Big' has import animation warnings that might lower
       retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
       quality.\n\t'DEF-spine' has translation animation that will be discarded.\n\t'DEF-spine'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.001'
-      has scale animation that will be discarded.\n\t'DEF-spine.002' has scale animation
-      that will be discarded.\n\t'DEF-spine.003' has scale animation that will be
-      discarded.\n\t'DEF-upper_arm.L' has translation animation that will be discarded.\n\t'DEF-upper_arm.L'
-      has scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
-      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
-      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
-      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
-      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
-      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
-      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
-      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
-      'rig|Throwing Snowball Small' has import animation warnings that might lower
-      retargeting quality:\nNote: Activate translation DOF on avatar to improve retargeting
-      quality.\n\t'DEF-spine' has translation animation that will be discarded.\n\t'DEF-spine'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.002'
       has scale animation that will be discarded.\n\t'DEF-spine.003' has scale animation
       that will be discarded.\n\t'DEF-upper_arm.L' has translation animation that
@@ -508,17 +557,51 @@ ModelImporter:
       has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
       that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
       has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
-      that will be discarded.\n\nClip 'rig|WalkCyclePlayer' has import animation
+      that will be discarded.\n\nClip 'rig|Throwing Snowball Small' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
       DOF on avatar to improve retargeting quality.\n\t'DEF-spine' has translation
       animation that will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'DEF-spine' has scale
-      animation that will be discarded.\n\t'DEF-spine.001' has scale animation that
-      will be discarded.\n\t'DEF-spine.002' has scale animation that will be discarded.\n\t'DEF-spine.004'
+      and has rotation animation that will be discarded.\n\t'DEF-spine.001' has scale
+      animation that will be discarded.\n\t'DEF-spine.002' has scale animation that
+      will be discarded.\n\t'DEF-spine.003' has scale animation that will be discarded.\n\t'DEF-spine.004'
       has scale animation that will be discarded.\n\t'DEF-upper_arm.L' has translation
       animation that will be discarded.\n\t'DEF-upper_arm.L' has scale animation
       that will be discarded.\n\t'DEF-forearm.L' has scale animation that will be
       discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
+      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|TransitionToSnow' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.001'
+      has scale animation that will be discarded.\n\t'DEF-spine.002' has scale animation
+      that will be discarded.\n\t'DEF-spine.003' has scale animation that will be
+      discarded.\n\t'DEF-spine.004' has scale animation that will be discarded.\n\t'DEF-upper_arm.L'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
+      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkCyclePlayer' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine'
+      has scale animation that will be discarded.\n\t'DEF-spine.001' has scale animation
+      that will be discarded.\n\t'DEF-spine.002' has scale animation that will be
+      discarded.\n\t'DEF-spine.004' has scale animation that will be discarded.\n\t'DEF-upper_arm.L'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
       has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
       scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
       that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
@@ -529,7 +612,7 @@ ModelImporter:
       animation that will be discarded.\n\t'DEF-thigh.R' has scale animation that
       will be discarded.\n\t'DEF-shin.R' has scale animation that will be discarded.\n\t'DEF-foot.R'
       has scale animation that will be discarded.\n\t'DEF-toe.R' has scale animation
-      that will be discarded.\n\nClip 'rig|WalkCyclePlayer.003' has import animation
+      that will be discarded.\n\nClip 'rig|WalkingBackward' has import animation
       warnings that might lower retargeting quality:\nNote: Activate translation
       DOF on avatar to improve retargeting quality.\n\t'DEF-spine' has translation
       animation that will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms
@@ -544,7 +627,54 @@ ModelImporter:
       has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
       that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
       has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n"
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkingForward' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.004'
+      has scale animation that will be discarded.\n\t'DEF-head' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.L' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.L' has scale animation that will be discarded.\n\t'DEF-forearm.L'
+      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.R' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will be discarded.\n\t'DEF-forearm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-shin.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n\nClip 'rig|WalkingLeft' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'DEF-spine' has translation animation that
+      will be discarded.\n\t'DEF-spine' is inbetween humanoid transforms and has
+      rotation animation that will be discarded.\n\t'DEF-spine.004' has scale animation
+      that will be discarded.\n\t'DEF-head' has scale animation that will be discarded.\n\t'DEF-upper_arm.L'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.L' has
+      scale animation that will be discarded.\n\t'DEF-forearm.L' has scale animation
+      that will be discarded.\n\t'DEF-hand.L' has scale animation that will be discarded.\n\t'DEF-upper_arm.R'
+      has translation animation that will be discarded.\n\t'DEF-upper_arm.R' has
+      scale animation that will be discarded.\n\t'DEF-forearm.R' has scale animation
+      that will be discarded.\n\t'DEF-hand.R' has scale animation that will be discarded.\n\t'DEF-thigh.L'
+      has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
+      that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
+      has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n\nClip
+      'rig|WalkingRight' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'DEF-spine'
+      has translation animation that will be discarded.\n\t'DEF-spine' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'DEF-spine.004'
+      has scale animation that will be discarded.\n\t'DEF-head' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.L' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.L' has scale animation that will be discarded.\n\t'DEF-forearm.L'
+      has scale animation that will be discarded.\n\t'DEF-hand.L' has scale animation
+      that will be discarded.\n\t'DEF-upper_arm.R' has translation animation that
+      will be discarded.\n\t'DEF-upper_arm.R' has scale animation that will be discarded.\n\t'DEF-forearm.R'
+      has scale animation that will be discarded.\n\t'DEF-hand.R' has scale animation
+      that will be discarded.\n\t'DEF-thigh.L' has scale animation that will be discarded.\n\t'DEF-shin.L'
+      has scale animation that will be discarded.\n\t'DEF-foot.L' has scale animation
+      that will be discarded.\n\t'DEF-thigh.R' has scale animation that will be discarded.\n\t'DEF-shin.R'
+      has scale animation that will be discarded.\n\t'DEF-foot.R' has scale animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -576,7 +706,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -662,8 +792,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: rig|WalkCyclePlayer
-      takeName: rig|WalkCyclePlayer.003
+      name: rig|WalkingForward
+      takeName: rig|WalkingForward
       internalID: 0
       firstFrame: 0
       lastFrame: 24
@@ -724,7 +854,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.2826087
+            time: 0.4
             value: 1
             inSlope: 0
             outSlope: 0
@@ -733,7 +863,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.675
+            time: 0.7833374
             value: 0
             inSlope: 0
             outSlope: 0
@@ -767,7 +897,7 @@ ModelImporter:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.175
+            time: 0.2833374
             value: 0
             inSlope: 0
             outSlope: 0
@@ -785,7 +915,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.7757422
+            time: 0.9
             value: 1
             inSlope: 0
             outSlope: 0
@@ -922,7 +1052,7 @@ ModelImporter:
       lastFrame: 12
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: 0.35
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
@@ -933,7 +1063,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -952,7 +1082,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.39130434
+            time: 0.1
             value: 0
             inSlope: 0
             outSlope: 0
@@ -986,7 +1116,7 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.39130434
+            time: 0.1
             value: 0
             inSlope: 0
             outSlope: 0
@@ -1697,8 +1827,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: rig|Collecting Snow
-      takeName: rig|Collecting Snow
+      name: rig|CollectingSnow
+      takeName: rig|CollectingSnow
       internalID: 0
       firstFrame: 0
       lastFrame: 24
@@ -1837,7 +1967,7 @@ ModelImporter:
       lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: 0.35
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
@@ -1930,10 +2060,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -1974,6 +2104,209 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|WalkingBackward
+      takeName: rig|WalkingBackward
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|WalkingLeft
+      takeName: rig|WalkingLeft
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|WalkingRight
+      takeName: rig|WalkingRight
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|TransitionToSnow
+      takeName: rig|TransitionToSnow
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|IdleAction1
+      takeName: rig|IdleAction1
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|IdleAction2
+      takeName: rig|IdleAction2
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 45
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: rig|IdleAction3
+      takeName: rig|IdleAction3
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -1992,7 +2325,7 @@ ModelImporter:
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
@@ -2220,7 +2553,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: root
       parentName: rig
-      position: {x: 2.1095867, y: 1.599723, z: 0.017680645}
+      position: {x: 2.109587, y: 1.5997229, z: 0.017680647}
       rotation: {x: -0.50000006, y: -0.49999997, z: -0.49999994, w: 0.50000006}
       scale: {x: 1, y: 1, z: 0.9999999}
     - name: DEF-spine
@@ -2230,7 +2563,7 @@ ModelImporter:
       scale: {x: 1, y: 0.9999995, z: 0.99999964}
     - name: DEF-spine.001
       parentName: DEF-spine
-      position: {x: 0.00000001554002, y: 0.19027427, z: 0.0000000108957465}
+      position: {x: 0.000000015540023, y: 0.19027427, z: 0.0000000108957465}
       rotation: {x: -0.064476304, y: 0.00000008633074, z: -0.000000010860709, w: 0.9979192}
       scale: {x: 1, y: 1, z: 0.99999994}
     - name: DEF-spine.002
@@ -2245,7 +2578,7 @@ ModelImporter:
       scale: {x: 1.0000511, y: 0.99999964, z: 1.0000817}
     - name: DEF-spine.004
       parentName: DEF-spine.003
-      position: {x: -0.0000000019736035, y: 0.21581696, z: 0.0000000029785951}
+      position: {x: -0.0000000019736035, y: 0.21581697, z: 0.0000000029785954}
       rotation: {x: 0.07102405, y: -0.00000025517232, z: -0.000000046111147, w: 0.9974746}
       scale: {x: 1.0000005, y: 0.9999998, z: 1.0000004}
     - name: DEF-head
@@ -2260,7 +2593,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: DEF-shoulder.L
       parentName: DEF-spine.003
-      position: {x: -0.022874996, y: 0.17120284, z: 0.09837872}
+      position: {x: -0.022874996, y: 0.17120285, z: 0.098378725}
       rotation: {x: -0.56496, y: 0.40692985, z: 0.41225505, w: 0.58760023}
       scale: {x: 1.0000011, y: 1.0000007, z: 1.0000006}
     - name: DEF-upper_arm.L
@@ -2285,12 +2618,12 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: DEF-shoulder.R
       parentName: DEF-spine.003
-      position: {x: 0.022875005, y: 0.17120284, z: 0.09837872}
+      position: {x: 0.022875005, y: 0.17120285, z: 0.098378725}
       rotation: {x: -0.5649599, y: -0.40692997, z: -0.4122553, w: 0.58760023}
       scale: {x: 1.0000005, y: 1.0000005, z: 1.0000005}
     - name: DEF-upper_arm.R
       parentName: DEF-shoulder.R
-      position: {x: 0.003140606, y: 0.2548605, z: -0.008256141}
+      position: {x: 0.0031406062, y: 0.2548605, z: -0.008256141}
       rotation: {x: -0.16527529, y: -0.9658851, z: 0.06790719, w: -0.1874533}
       scale: {x: 1.0119328, y: 0.9765588, z: 1.0119315}
     - name: DEF-forearm.R
@@ -2340,7 +2673,7 @@ ModelImporter:
       scale: {x: 1.006064, y: 0.98798305, z: 1.0060648}
     - name: DEF-shin.R
       parentName: DEF-thigh.R
-      position: {x: 0.000000018626451, y: 0.64589494, z: 0}
+      position: {x: 0.000000018626451, y: 0.6458949, z: 0}
       rotation: {x: 0.07301856, y: -0.000000054387787, z: -0.000000018626453, w: 0.9973306}
       scale: {x: 1.0004038, y: 0.99892884, z: 1.0009087}
     - name: DEF-foot.R
@@ -2350,7 +2683,7 @@ ModelImporter:
       scale: {x: 0.9936479, y: 0.99885595, z: 1.0074687}
     - name: DEF-toe.R
       parentName: DEF-foot.R
-      position: {x: -0.000000010212215, y: 0.21506071, z: -0.000000043363606}
+      position: {x: -0.000000010212216, y: 0.21506071, z: -0.000000043363606}
       rotation: {x: 0.000034987926, y: 0.9791126, z: -0.2033185, w: -0.0001693666}
       scale: {x: 0.9999966, y: 0.98414314, z: 1.0162275}
     - name: DEF-toe.R_end

@@ -5,11 +5,10 @@ using UnityEngine;
 public class EnemyMovement : Movement
 {
     public GameObject player;
-    public float speed;
 
     private void Update()
     {
-        Move(new Vector2(transform.position.x - player.transform.position.x, transform.position.z - player.transform.position.z).normalized * speed);
+        Move(new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized, false);
         Run(false);
 
         movementVector = Vector3.Lerp(movementVector, targetVector, Time.deltaTime * 10f);
