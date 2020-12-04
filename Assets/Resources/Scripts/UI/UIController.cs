@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    //public Slider healthSlider;
-    //public Slider manaSlider;
+    public Slider healthSlider;
+    public Slider manaSlider;
 
     public GameObject spellSelector;
     private int spellID;
@@ -49,29 +49,29 @@ public class UIController : MonoBehaviour
 
     }
 
-    ////Health
-    //public void SetMaxHealth(int maxHealth)
-    //{
-    //    healthSlider.maxValue = maxHealth;
-    //    healthSlider.value = maxHealth;
-    //}
+    //Health
+    public void SetMaxHealth(int maxHealth)
+    {
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = maxHealth;
+    }
 
-    //public void SetHealth(int health)
-    //{
-    //    healthSlider.value = health;
-    //}
+    public void SetHealth(int health)
+    {
+        healthSlider.value = health;
+    }
 
-    ////Mana
-    //public void SetMaxMana(int maxMana)
-    //{
-    //    manaSlider.maxValue = maxMana;
-    //    manaSlider.value = maxMana;
-    //}
+    //Mana
+    public void SetMaxMana(int maxMana)
+    {
+        manaSlider.maxValue = maxMana;
+        manaSlider.value = maxMana;
+    }
 
-    //public void SetMana(int mana)
-    //{
-    //    manaSlider.value = mana;
-    //}
+    public void SetMana(int mana)
+    {
+        manaSlider.value = mana;
+    }
 
     public void Resume()
     {
