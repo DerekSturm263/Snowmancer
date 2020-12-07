@@ -98,19 +98,9 @@ public class Movement : MonoBehaviour
     protected bool IsGrounded()
     {
         Vector3 boxOffset = new Vector3(0f, 0.75f, 0f);
-        Vector3 boxSize = new Vector3(1.125f, 1.5f, 1.125f);
+        Vector3 boxSize = new Vector3(1f, 1f, 1f);
         float distance = 0.5f;
 
         return Physics.BoxCast(transform.position + boxOffset, boxSize / 2f, Vector3.down, Quaternion.identity, distance, ground, QueryTriggerInteraction.UseGlobal);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 boxOffset = new Vector3(0f, 0.75f, 0f);
-        Vector3 boxSize = new Vector3(1.25f, 1.5f, 1.25f);
-        float distance = 0.5f;
-
-        Gizmos.DrawWireCube(transform.position + boxOffset, boxSize);
-        Gizmos.DrawWireCube(transform.position + boxOffset + new Vector3(0f, distance, 0f), boxSize);
     }
 }
