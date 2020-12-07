@@ -14,8 +14,6 @@ public class Movement : MonoBehaviour
 
     protected float timeFalling;
 
-    protected int footNum;
-
     protected bool mouseAim;
 
     public GameObject cameraTarget;
@@ -85,30 +83,14 @@ public class Movement : MonoBehaviour
         if (!IsGrounded())
             return;
 
-        #region Last Foot Setting
-
-        float lFoot = anim.GetFloat("LeftFootWeight");
-        float rFoot = anim.GetFloat("RightFootWeight");
-        float runMultiplier = isRunning ? 2f : 1f;
-
-        if (lFoot > rFoot)
-            footNum = -1;
-        else if (rFoot > lFoot)
-            footNum = 1;
-        else
-            footNum = 0;
-
-        anim.SetFloat("Last Foot", footNum * runMultiplier);
-
-        #endregion
-
         anim.SetTrigger("Jump");
     }
 
     // Stick the player to the ground to avoid "floating".
     protected void LateUpdate()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground) && anim.velocity.magnitude > 0.1f && IsGrounded())
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground) && anim.velocity.magnitude > 0.1f &&
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), Time.deltaTime * 20f);
         }
@@ -119,7 +101,7 @@ public class Movement : MonoBehaviour
     protected bool IsGrounded()
     {
         Vector3 boxOffset = new Vector3(0f, 0.75f, 0f);
-        Vector3 boxSize = new Vector3(0.9f, 0.9f, 0.9f);
+        Vector3 boxSize = new Vector3(1f, 1f, 1f);
         float distance = 0.5f;
 
         return Physics.BoxCast(transform.position + boxOffset, boxSize / 2f, Vector3.down, Quaternion.identity, distance, ground, QueryTriggerInteraction.UseGlobal);
