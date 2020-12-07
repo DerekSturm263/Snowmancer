@@ -105,4 +105,9 @@ public class UIController : MonoBehaviour
     {
         Debug.Log("Settings open");
     }
+
+    public bool CheckPaused()
+    {
+        return isPaused;
+    }
 }

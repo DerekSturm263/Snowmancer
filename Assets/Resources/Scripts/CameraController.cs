@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     public float mouseX;
     public float mouseY;
     public float aimFOV;
-    public float aimSens;  //Leave as zero if you want it to be automatically set 
+    public float aimSens;  //Leave as zero if you want it to be automatically set to half of normal
     private float rotY = 0.0f;
     private float rotX = 0.0f;
     private Camera CameraComponent;
