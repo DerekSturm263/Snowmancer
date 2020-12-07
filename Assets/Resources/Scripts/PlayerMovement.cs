@@ -30,15 +30,6 @@ public class PlayerMovement : Movement
 
         #endregion
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Aerial") && rb.velocity.y < 0f)
-            timeFalling += Time.deltaTime;
-        else
-            timeFalling = 0f;
-
-
-
-        anim.SetFloat("Falling Time", timeFalling);
         anim.SetBool("Grounded", IsGrounded());
-
     }
 }

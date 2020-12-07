@@ -6,16 +6,19 @@ public class IKController : StateMachineBehaviour
     public float raycastLength;
     public LayerMask ground;
 
-    private Transform lFootGoal, rFootGoal;
-    private Transform bodyGoal;
+    public static Transform lFootGoal, rFootGoal;
+    public static Transform bodyGoal;
 
     public float offset;
 
     private void Awake()
     {
-        lFootGoal = new GameObject("Left Foot Goal").transform;
-        rFootGoal = new GameObject("Right Foot Goal").transform;
-        bodyGoal = new GameObject("Body Goal").transform;
+        if (GameObject.Find("Left Foot Goal") == null)
+        {
+            lFootGoal = new GameObject("Left Foot Goal").transform;
+            rFootGoal = new GameObject("Right Foot Goal").transform;
+            bodyGoal = new GameObject("Body Goal").transform;
+        }
     }
 
     public override void OnStateIK(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
