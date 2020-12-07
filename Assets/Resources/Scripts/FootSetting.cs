@@ -2,7 +2,7 @@
 
 public class FootSetting : StateMachineBehaviour
 {
-    private int footNum;
+    private float footNum;
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -10,14 +10,12 @@ public class FootSetting : StateMachineBehaviour
         float rFoot = animator.GetFloat("RightFootWeight");
         float runMultiplier = animator.GetFloat("Speed");
 
-        Debug.Log(lFoot + ", " + rFoot);
-
         if (lFoot > rFoot)
-            footNum = -1;
+            footNum = -1f;
         else if (rFoot > lFoot)
-            footNum = 1;
+            footNum = 1f;
         else
-            footNum = 0;
+            footNum = 0f;
 
         animator.SetFloat("Last Foot", footNum * runMultiplier);
     }

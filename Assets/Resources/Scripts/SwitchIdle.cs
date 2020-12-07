@@ -7,11 +7,27 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
     public Mesh footprintMesh;
     public Material footprintMaterial;
 
-    public List<GameObject> footprints;
+    private int footprintNum;
+    private GameObject[] footprints = new GameObject[8];
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+
+        // Create footprints.
+        for (int i = 0; i < 8; i++)
+        {
+            GameObject footprint = new GameObject("Footprint " + i);
+            MeshFilter filter = footprint.AddComponent<MeshFilter>();
+            MeshRenderer renderer = footprint.AddComponent<MeshRenderer>();
+
+            filter.mesh = footprintMesh;
+            renderer.material = footprintMaterial;
+            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+
+            footprint.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            footprints[i] = footprint;
+        }
     }
 
     public void SwitchIdlePose(string s)
@@ -21,39 +37,26 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
 
     public void SetFootPrint(int footNum)
     {
-        GameObject footPrint = new GameObject("Footprint " + footNum);
-        MeshFilter filter = footPrint.AddComponent<MeshFilter>();
-        MeshRenderer renderer = footPrint.AddComponent<MeshRenderer>();
-        footprints.Add(footPrint);
+        if (++footprintNum > 7)
+            footprintNum = 0;
 
-        filter.mesh = footprintMesh;
-        renderer.material = footprintMaterial;
-        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        Transform referenceTransform = footNum == 0 ? IKController.lFootGoal : IKController.rFootGoal;
 
-        switch (footNum)
-        {
-            case 0:
-                footPrint.transform.position = IKController.lFootGoal.position;
-                footPrint.transform.forward = -IKController.lFootGoal.up;
-                break;
-            case 1:
-                footPrint.transform.position = IKController.rFootGoal.position;
-                footPrint.transform.forward = -IKController.rFootGoal.up;
-                break;
-        }
+        footprints[footprintNum].transform.position = referenceTransform.position;
+        footprints[footprintNum].transform.rotation = Quaternion.LookRotation(-referenceTransform.up, transform.forward);
     }
 
     private void Update()
     {
-        foreach (GameObject footprint in footprints)
+        for (int i = 0; i < 8; i++)
         {
-            footprint.transform.localScale = footprint.transform.localScale * (-Time.deltaTime + 1f);
-
-            if (footprint.transform.localScale.magnitude < 0.1f)
-            {
-                footprints.Remove(footprint);
-                Destroy(footprint); // Is it really that bad to use Destroy and Instantiate?
-            }
+            footprints[i].GetComponent<MeshRenderer>().material.SetFloat("_Alpha", GetAlpha(i));
         }
+    }
+
+    private float GetAlpha(int posInArray)
+    {
+        return 1f;
+        //return 1f - posInArray * 0.125f;
     }
 }

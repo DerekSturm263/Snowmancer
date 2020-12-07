@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour
 
     protected void Jump()
     {
-        if (!IsGrounded())
+        if (!IsGrounded() || anim.GetLayerWeight(1) == 1f)
             return;
 
         anim.SetTrigger("Jump");
@@ -89,11 +89,8 @@ public class Movement : MonoBehaviour
     // Stick the player to the ground to avoid "floating".
     protected void LateUpdate()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground) && anim.velocity.magnitude > 0.1f &&
-            anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-        {
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground) && IsGrounded())
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), Time.deltaTime * 20f);
-        }
 
         cameraTarget.transform.position = hit.point;
     }
@@ -101,9 +98,19 @@ public class Movement : MonoBehaviour
     protected bool IsGrounded()
     {
         Vector3 boxOffset = new Vector3(0f, 0.75f, 0f);
-        Vector3 boxSize = new Vector3(1f, 1f, 1f);
+        Vector3 boxSize = new Vector3(1.25f, 1.25f, 1.25f);
         float distance = 0.5f;
 
         return Physics.BoxCast(transform.position + boxOffset, boxSize / 2f, Vector3.down, Quaternion.identity, distance, ground, QueryTriggerInteraction.UseGlobal);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 boxOffset = new Vector3(0f, 0.75f, 0f);
+        Vector3 boxSize = new Vector3(1.25f, 1.5f, 1.25f);
+        float distance = 0.5f;
+
+        Gizmos.DrawWireCube(transform.position + boxOffset, boxSize);
+        Gizmos.DrawWireCube(transform.position + boxOffset + new Vector3(0f, distance, 0f), boxSize);
     }
 }

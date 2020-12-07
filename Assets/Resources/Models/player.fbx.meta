@@ -219,9 +219,9 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
       does not match position in animation file:\n\t'DEF-shin.L' : position error
-      = 13.805142 mm\n\t'DEF-foot.L' : position error = 15.563293 mm\n\t'DEF-toe.L'
-      : position error = 18.346127 mm\n\t'DEF-shin.R' : position error = 14.407310
-      mm\n\t'DEF-foot.R' : position error = 15.205149 mm\n\t'DEF-toe.R' : position
+      = 13.805184 mm\n\t'DEF-foot.L' : position error = 15.563209 mm\n\t'DEF-toe.L'
+      : position error = 18.346138 mm\n\t'DEF-shin.R' : position error = 14.407268
+      mm\n\t'DEF-foot.R' : position error = 15.205107 mm\n\t'DEF-toe.R' : position
       error = 18.366777 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'rig|Building Snowball Big' has import animation
@@ -1203,7 +1203,7 @@ ModelImporter:
       takeName: rig|Falling
       internalID: 0
       firstFrame: 0
-      lastFrame: 45
+      lastFrame: 47
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1769,7 +1769,7 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 0
