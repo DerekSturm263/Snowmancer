@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    ThrowSnowball(new Vector3(1,1,1),currentSpell);
+                    ThrowSnowball(new Vector3(1, 1, 1), currentSpell);
                 }
             }
             switch (currentState)
@@ -96,16 +96,20 @@ public class Player : MonoBehaviour
                 case State.selectSpell:
                     break;
             }
-
-
-
         }
+
+        // When the player releases the throw button, it will set a bool in the animator to play the throw animation.
+        if (Input.GetMouseButtonUp(1))
+            playerAnimator.SetBool("Release Snowball", true);
     }
 
 
     //Throw
     void ThrowSnowball(Vector3 size, CurrentSpell element)
     {
+        if (!(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Snowball")))
+            return;
+
         RaycastHit hit;
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
         Vector3 target;
@@ -129,6 +133,10 @@ public class Player : MonoBehaviour
         SetSnowballElement(snowball, element);
         rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
 
+        // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.
+        // A quick click will immediately play the throw animation, while a long press will begin to play the building animation.
+
+        playerAnimator.SetFloat("Snowball Size", 1f);
     }
     Vector3 CalculateV(Vector3 target, Vector3 origin, float time)
     {

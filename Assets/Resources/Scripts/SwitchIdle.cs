@@ -30,8 +30,11 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
         }
     }
 
-    public void SwitchIdlePose(string s)
+    public void SwitchIdlePose()
     {
+        if (anim.GetLayerWeight(1) == 1f)
+            return;
+
         anim.SetFloat("Idle Animation", Random.Range(-5, 4));
     }
 
@@ -48,6 +51,9 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
 
     private void Update()
     {
+        if (anim.GetLayerWeight(1) == 1f)
+            anim.SetFloat("Idle Animation", 0f);
+
         for (int i = 0; i < 8; i++)
         {
             footprints[i].GetComponent<MeshRenderer>().material.SetFloat("_Alpha", GetAlpha(i));
