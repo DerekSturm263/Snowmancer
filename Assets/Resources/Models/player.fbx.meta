@@ -219,10 +219,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Avatar Rig Configuration mis-match. Bone length in configuration
       does not match position in animation file:\n\t'DEF-shin.L' : position error
-      = 13.805184 mm\n\t'DEF-foot.L' : position error = 15.563209 mm\n\t'DEF-toe.L'
-      : position error = 18.346138 mm\n\t'DEF-shin.R' : position error = 14.407268
-      mm\n\t'DEF-foot.R' : position error = 15.205107 mm\n\t'DEF-toe.R' : position
-      error = 18.366777 mm\n"
+      = 13.805226 mm\n\t'DEF-foot.L' : position error = 15.563167 mm\n\t'DEF-toe.L'
+      : position error = 18.346148 mm\n\t'DEF-shin.R' : position error = 14.407268
+      mm\n\t'DEF-foot.R' : position error = 15.205023 mm\n\t'DEF-toe.R' : position
+      error = 18.366756 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'rig|Building Snowball Big' has import animation
       warnings that might lower retargeting quality:\n\t'DEF-spine.002' has scale
@@ -637,13 +637,13 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves:

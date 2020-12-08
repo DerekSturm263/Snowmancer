@@ -30,6 +30,6 @@ public class PlayerMovement : Movement
 
         #endregion
 
-        anim.SetBool("Grounded", IsGrounded());
+        anim.SetBool("Grounded", isGrounded);
     }
 }

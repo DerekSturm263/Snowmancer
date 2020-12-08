@@ -8174,6 +8174,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   cameraTarget: {fileID: 1683158446}
+  groundedDistance: 0.75
+  groundedVelocity: 0.25
 --- !u!4 &1904537844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 16b8903b9aa853d498d944b7a91e0f24,
@@ -8295,7 +8297,7 @@ MonoBehaviour:
   collideDistance: 1
   camCollideWith:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   CameraObj: {fileID: 1294616590}
   PlayerObj: {fileID: 1904537841}
   OffsetCenter: {fileID: 1258728802}

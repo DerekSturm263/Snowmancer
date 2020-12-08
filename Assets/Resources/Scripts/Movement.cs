@@ -18,11 +18,20 @@ public class Movement : MonoBehaviour
 
     public GameObject cameraTarget;
 
+    protected bool isGrounded;
+
+    private Vector3 targetPos;
+
+    public float groundedDistance;
+    public float groundedVelocity;
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
         ps = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
+
+        targetPos = transform.position;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -80,7 +89,7 @@ public class Movement : MonoBehaviour
 
     protected void Jump()
     {
-        if (!IsGrounded() || anim.GetLayerWeight(1) == 1f)
+        if (!isGrounded || anim.GetLayerWeight(1) == 1f)
             return;
 
         anim.SetTrigger("Jump");
@@ -89,18 +98,21 @@ public class Movement : MonoBehaviour
     // Stick the player to the ground to avoid "floating".
     protected void LateUpdate()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground) && anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), Time.deltaTime * 20f);
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground))
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+                isGrounded = ((hit.distance < groundedDistance || Mathf.Abs(rb.velocity.normalized.y) < groundedVelocity) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump")) ? true : false;
+            else
+                isGrounded = hit.distance < 0.2f;
 
-        cameraTarget.transform.position = hit.point;
-    }
+            cameraTarget.transform.position = hit.point;
+        }
 
-    protected bool IsGrounded()
-    {
-        Vector3 boxOffset = new Vector3(0f, 0.75f, 0f);
-        Vector3 boxSize = new Vector3(1f, 1f, 1f);
-        float distance = 0.5f;
 
-        return Physics.BoxCast(transform.position + boxOffset, boxSize / 2f, Vector3.down, Quaternion.identity, distance, ground, QueryTriggerInteraction.UseGlobal);
+
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
+            targetPos = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+
+        if (rb.velocity.magnitude > 0.25f && isGrounded) transform.position = targetPos;
     }
 }
