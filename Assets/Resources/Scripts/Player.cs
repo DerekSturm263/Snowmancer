@@ -107,8 +107,8 @@ public class Player : MonoBehaviour
     //Throw
     void ThrowSnowball(Vector3 size, CurrentSpell element)
     {
-        if (!(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Snowball")))
-            return;
+        if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Strafing") || !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
+            return; // Right now I'm making it so that you can't throw another snowball if you're still in the animation but that's more for testing purposes and we can tweak the cooldown time later.
 
         RaycastHit hit;
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -136,7 +136,9 @@ public class Player : MonoBehaviour
         // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.
         // A quick click will immediately play the throw animation, while a long press will begin to play the building animation.
 
+        playerAnimator.SetLayerWeight(1, 1f); // Later on I'm gonna make this set layer 2 if the player isn't moving.
         playerAnimator.SetFloat("Snowball Size", 1f);
+        playerAnimator.speed = 1.1f - playerAnimator.GetFloat("Snowball Size") / 10f; // Slow down the animations based on the size of the snowball.
     }
     Vector3 CalculateV(Vector3 target, Vector3 origin, float time)
     {

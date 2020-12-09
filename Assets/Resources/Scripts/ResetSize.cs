@@ -6,5 +6,8 @@ public class ResetSize : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetFloat("Snowball Size", 0f);
+
+        animator.SetLayerWeight(1, 0f);
+        animator.SetLayerWeight(2, 0f);
     }
 }

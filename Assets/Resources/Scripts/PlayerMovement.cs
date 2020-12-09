@@ -15,17 +15,12 @@ public class PlayerMovement : Movement
         #region Aiming
 
         mouseAim = Input.GetMouseButton(1);
+        anim.SetBool("Strafing", mouseAim);
 
         if (mouseAim)
         {
-            anim.SetLayerWeight(1, 1f);
-
             transform.forward = cam.transform.forward;
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        }
-        else
-        {
-            anim.SetLayerWeight(1, 0f);
         }
 
         #endregion

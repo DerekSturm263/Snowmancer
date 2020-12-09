@@ -89,7 +89,7 @@ public class Movement : MonoBehaviour
 
     protected void Jump()
     {
-        if (!isGrounded || anim.GetLayerWeight(1) == 1f)
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             return;
 
         anim.SetTrigger("Jump");
@@ -111,8 +111,8 @@ public class Movement : MonoBehaviour
 
 
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
-            targetPos = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            targetPos = new Vector3(transform.position.x, hit2.point.y, transform.position.z);
 
-        if (rb.velocity.magnitude > 0.25f && isGrounded) transform.position = targetPos;
+        if (rb.velocity.magnitude > 0.25f && isGrounded) transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 20f);
     }
 }
