@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    public Player player;
+
     public Slider healthSlider;
     public Slider manaSlider;
 
@@ -16,6 +18,16 @@ public class UIController : MonoBehaviour
 
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
+
+    public Image snowMeter;
+
+    public Image expBar;
+
+    void Start()
+    {
+        SetMaxHealth();
+        SetMaxMana();
+    }
 
     void Update()
     {
@@ -47,32 +59,58 @@ public class UIController : MonoBehaviour
             }
         }
 
+        SetSnowFill();
+        SetHealth();
+        SetMana();
+        FillExp();
+
     }
 
     //Health
-    public void SetMaxHealth(int maxHealth)
+    public void SetMaxHealth()
     {
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = maxHealth;
+        healthSlider.maxValue = player.maxHealth;
+        healthSlider.value = player.maxHealth;
     }
 
-    public void SetHealth(int health)
+    public void SetHealth()
     {
-        healthSlider.value = health;
+        healthSlider.value = player.health;
     }
 
     //Mana
-    public void SetMaxMana(int maxMana)
+    public void SetMaxMana()
     {
-        manaSlider.maxValue = maxMana;
-        manaSlider.value = maxMana;
+        manaSlider.maxValue = player.maxMana;
+        manaSlider.value = player.maxMana;
     }
 
-    public void SetMana(int mana)
+    public void SetMana()
     {
-        manaSlider.value = mana;
+        manaSlider.value = player.mana;
     }
 
+    //Snow
+    public void SetSnowFill()
+    {
+        float fillAmount = (float)player.snowAmount / (float)player.maxSnow;
+        snowMeter.fillAmount = fillAmount;
+    }
+
+    //EXP
+    public void FillExp()
+    {
+        float fillAmount = (float)player.vCurrExp / (float)player.vExpLeft;
+        expBar.fillAmount = fillAmount;
+    }
+
+    public void SetMaxExp(int maxExp)
+    {
+        player.vExpLeft = maxExp;
+        player.vCurrExp = 0;
+    }
+
+    //Pause Menu
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
