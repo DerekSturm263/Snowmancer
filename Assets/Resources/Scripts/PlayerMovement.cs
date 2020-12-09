@@ -4,42 +4,27 @@ public class PlayerMovement : Movement
 {
     private void Update()
     {
+        #region Player Input
+
         Move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
         Run(Input.GetButton("Run"));
         if (Input.GetButtonDown("Jump")) Jump();
 
-        movementVector = targetVector;
+        #endregion
 
-        if (targetVector != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(movementVector, Vector3.up);
+        #region Aiming
 
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+        mouseAim = Input.GetMouseButton(1);
+        anim.SetBool("Strafing", mouseAim);
 
-        anim.SetFloat("Vertical", movementVector.magnitude);
-
-        if (Input.GetButton("Run")) moveState = MoveState.Running;
-
-
-        if (rb.velocity.y < -1f)
-            timeFalling += Time.deltaTime;
-        else
-            timeFalling = 0f;
-
-        anim.SetFloat("TimeFalling", timeFalling);
-        
-
-
-        float runMultiplier = 0.5f;
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") && targetVector != Vector3.zero)
+        if (mouseAim)
         {
-            float lFoot = anim.GetFloat("LeftFootWeight");
-            float rFoot = anim.GetFloat("RightFootWeight");
-
-            footNum = lFoot > rFoot ? 1 : -1;
-            runMultiplier = isRunning ? 1f : 0.5f;
+            transform.forward = cam.transform.forward;
+            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
-        anim.SetFloat("LastFoot", footNum * runMultiplier);
+        #endregion
+
+        anim.SetBool("Grounded", isGrounded);
     }
 }

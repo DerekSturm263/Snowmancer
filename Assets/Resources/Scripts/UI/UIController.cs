@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    //public Slider healthSlider;
-    //public Slider manaSlider;
+    public Player player;
+
+    public Slider healthSlider;
+    public Slider manaSlider;
 
     public GameObject spellSelector;
     private int spellID;
@@ -16,6 +18,16 @@ public class UIController : MonoBehaviour
 
     public static bool isPaused = false;
     public GameObject pauseMenuUI;
+
+    public Image snowMeter;
+
+    public Image expBar;
+
+    void Start()
+    {
+        SetMaxHealth();
+        SetMaxMana();
+    }
 
     void Update()
     {
@@ -47,32 +59,58 @@ public class UIController : MonoBehaviour
             }
         }
 
+        SetSnowFill();
+        SetHealth();
+        SetMana();
+        FillExp();
+
     }
 
-    ////Health
-    //public void SetMaxHealth(int maxHealth)
-    //{
-    //    healthSlider.maxValue = maxHealth;
-    //    healthSlider.value = maxHealth;
-    //}
+    //Health
+    public void SetMaxHealth()
+    {
+        healthSlider.maxValue = player.maxHealth;
+        healthSlider.value = player.maxHealth;
+    }
 
-    //public void SetHealth(int health)
-    //{
-    //    healthSlider.value = health;
-    //}
+    public void SetHealth()
+    {
+        healthSlider.value = player.health;
+    }
 
-    ////Mana
-    //public void SetMaxMana(int maxMana)
-    //{
-    //    manaSlider.maxValue = maxMana;
-    //    manaSlider.value = maxMana;
-    //}
+    //Mana
+    public void SetMaxMana()
+    {
+        manaSlider.maxValue = player.maxMana;
+        manaSlider.value = player.maxMana;
+    }
 
-    //public void SetMana(int mana)
-    //{
-    //    manaSlider.value = mana;
-    //}
+    public void SetMana()
+    {
+        manaSlider.value = player.mana;
+    }
 
+    //Snow
+    public void SetSnowFill()
+    {
+        float fillAmount = (float)player.snowAmount / (float)player.maxSnow;
+        snowMeter.fillAmount = fillAmount;
+    }
+
+    //EXP
+    public void FillExp()
+    {
+        float fillAmount = (float)player.vCurrExp / (float)player.vExpLeft;
+        expBar.fillAmount = fillAmount;
+    }
+
+    public void SetMaxExp(int maxExp)
+    {
+        player.vExpLeft = maxExp;
+        player.vCurrExp = 0;
+    }
+
+    //Pause Menu
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
@@ -104,5 +142,10 @@ public class UIController : MonoBehaviour
     public void OpenSettings()
     {
         Debug.Log("Settings open");
+    }
+
+    public bool CheckPaused()
+    {
+        return isPaused;
     }
 }

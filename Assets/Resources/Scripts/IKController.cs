@@ -2,20 +2,22 @@
 
 public class IKController : StateMachineBehaviour
 {
-    public float distanceToGround;
-    public float raycastLength;
     public LayerMask ground;
 
-    private Transform lFootGoal, rFootGoal;
-    private Transform bodyGoal;
-
+    public float distanceToGround;
+    public float raycastLength;
     public float offset;
+
+    public static Transform lFootGoal, rFootGoal, bodyGoal;
 
     private void Awake()
     {
-        lFootGoal = new GameObject("Left Foot Goal").transform;
-        rFootGoal = new GameObject("Right Foot Goal").transform;
-        bodyGoal = new GameObject("Body Goal").transform;
+        if (GameObject.Find("Left Foot Goal") == null)
+        {
+            lFootGoal = new GameObject("Left Foot Goal").transform;
+            rFootGoal = new GameObject("Right Foot Goal").transform;
+            bodyGoal = new GameObject("Body Goal").transform;
+        }
     }
 
     public override void OnStateIK(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,6 +27,10 @@ public class IKController : StateMachineBehaviour
         anim.SetIKPositionWeight(AvatarIKGoal.RightFoot, anim.GetFloat("RightFootWeight"));
         anim.SetIKRotationWeight(AvatarIKGoal.RightFoot, anim.GetFloat("RightFootWeight"));
 
+        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, anim.GetFloat("LeftHandWeight"));
+        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, anim.GetFloat("RightHandWeight"));
+
+        // Left Foot.
         if (Physics.Raycast(anim.GetIKPosition(AvatarIKGoal.LeftFoot), Vector3.down, out RaycastHit lHit, raycastLength, ground))
         {
             lFootGoal.position = lHit.point + new Vector3(0f, distanceToGround, 0f);
@@ -34,6 +40,7 @@ public class IKController : StateMachineBehaviour
             anim.SetIKRotation(AvatarIKGoal.LeftFoot, lFootGoal.rotation * anim.transform.rotation);
         }
 
+        // Right Foot.
         if (Physics.Raycast(anim.GetIKPosition(AvatarIKGoal.RightFoot), Vector3.down, out RaycastHit rHit, raycastLength, ground))
         {
             rFootGoal.position = rHit.point + new Vector3(0f, distanceToGround, 0f);
@@ -42,6 +49,10 @@ public class IKController : StateMachineBehaviour
             anim.SetIKPosition(AvatarIKGoal.RightFoot, rFootGoal.position);
             anim.SetIKRotation(AvatarIKGoal.RightFoot, rFootGoal.rotation * anim.transform.rotation);
         }
+
+        // Left Hand.
+
+        // Right Hand.
 
         if (anim.velocity.magnitude < 0.2f)
         {

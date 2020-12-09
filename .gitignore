@@ -58,3 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/Resources/Scenes/EnemyTest.unity.meta
+Assets/ResetSize.cs.meta
