@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyMovement : Movement
 {
@@ -9,9 +10,19 @@ public class EnemyMovement : Movement
     public Mesh debugMesh;
     public Material debugMaterial;
 
+    private List<Material> materials = new List<Material>();
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
+
+        foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            foreach (Material m in mr.materials)
+            {
+                materials.Add(m);
+            }
+        }
 
         if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("Charge");
     }
@@ -28,10 +39,30 @@ public class EnemyMovement : Movement
         anim.SetBool("Grounded", true);
     }
 
+    // Will be changed to be on the snowball script instead once I can make changes to that file.
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Snowball"))
+        {
+            TakeDamage(5f);
+        }
+    }
+
     public void DealDamage()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < 2f)
             player.GetComponent<Player>().TakeDamage(enemy.damage);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        enemy.health -= damage;
+        StartCoroutine(DamageFlash());
+
+        if (enemy.health <= 0)
+        {
+            anim.SetTrigger("Death");
+        }
     }
 
     public void  ShootSpell()
@@ -57,5 +88,28 @@ public class EnemyMovement : Movement
         yield return new WaitForSeconds(enemy.chargeTime);
         anim.SetBool("Charging", false);
         StartCoroutine(ChargeAttack());
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        for (float i = 0f; i < 0.25f; i += Time.deltaTime)
+        {
+            foreach (Material m in materials)
+            {
+                m.SetFloat("_DamageWeight", i * 4f);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        for (float i = 0.25f; i > 0f; i -= Time.deltaTime)
+        {
+            foreach (Material m in materials)
+            {
+                m.SetFloat("_DamageWeight", i * 4f);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

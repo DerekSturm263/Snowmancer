@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mana
   - Health
+  - Snowball
   layers:
   - Default
   - TransparentFX
