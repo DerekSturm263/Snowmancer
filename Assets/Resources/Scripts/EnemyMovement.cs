@@ -92,21 +92,21 @@ public class EnemyMovement : Movement
 
     private IEnumerator DamageFlash()
     {
-        for (float i = 0f; i < 0.25f; i += Time.deltaTime)
+        for (float i = 0f; i < 0.15f; i += Time.deltaTime)
         {
             foreach (Material m in materials)
             {
-                m.SetFloat("_DamageWeight", i * 4f);
+                m.SetFloat("_DamageWeight", i * 6.666666666666667f);
             }
 
             yield return new WaitForEndOfFrame();
         }
 
-        for (float i = 0.25f; i > 0f; i -= Time.deltaTime)
+        for (float i = 0.35f; i > 0f; i -= Time.deltaTime)
         {
             foreach (Material m in materials)
             {
-                m.SetFloat("_DamageWeight", i * 4f);
+                m.SetFloat("_DamageWeight", i * 2.85714286f);
             }
 
             yield return new WaitForEndOfFrame();
