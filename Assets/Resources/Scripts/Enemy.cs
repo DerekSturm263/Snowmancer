@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     public float chargeTime;
     public float intervalBetweenLongRangeAttacks;
     public float magicAttackSpeed;
+    public List<GameObject> drops;
 
     private void Awake()
     {
@@ -57,6 +59,14 @@ public class Enemy : MonoBehaviour
                         x.SetColor("_Tint", elementMaterials[(int)enemyType].GetColor("_Tint"));
                 });
             } catch { }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        foreach (GameObject item in drops)
+        {
+            Instantiate(item, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
         }
     }
 }

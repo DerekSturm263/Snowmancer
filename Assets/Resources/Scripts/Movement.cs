@@ -16,8 +16,6 @@ public class Movement : MonoBehaviour
 
     protected bool mouseAim;
 
-    public GameObject cameraTarget;
-
     protected bool isGrounded;
 
     private Vector3 targetPos;
@@ -104,8 +102,6 @@ public class Movement : MonoBehaviour
                 isGrounded = ((hit.distance < groundedDistance || Mathf.Abs(rb.velocity.normalized.y) < groundedVelocity) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump")) ? true : false;
             else
                 isGrounded = hit.distance < 0.2f;
-
-            cameraTarget.transform.position = hit.point;
         }
 
 
