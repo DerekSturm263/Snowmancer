@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 
-public class EnemyType : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private readonly string filePath = "Materials/Enemy ";
 
@@ -9,11 +9,25 @@ public class EnemyType : MonoBehaviour
     {
         Fire, Ice, Electric, Wind
     }
-    public ElementType enemyType;
+
+    public enum AttackType
+    {
+        Melee, Magic
+    }
 
     private Material[] elementMaterials = new Material[8];
 
     public bool randomize = false;
+
+    [Header("Enemy Stats")]
+    public float maxHealth;
+    public float health;
+    public ElementType enemyType;
+    public AttackType enemyAttackType;
+    public float damage;
+    public float chargeTime;
+    public float intervalBetweenLongRangeAttacks;
+    public float magicAttackSpeed;
 
     private void Awake()
     {

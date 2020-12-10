@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -49,12 +50,20 @@ public class Player : MonoBehaviour
     public MenuScript menuScript;
     private CameraController camScript;
 
+    private List<Material> materials = new List<Material>();
 
     // Start is called before the first frame update
     void Start()
     {
         playerAnimator = this.GetComponent<Animator>();
         //menuScript = FindObjectOfType<MenuScript>().GetComponent<MenuScript>();
+        foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            foreach (Material m in mr.materials)
+            {
+                materials.Add(m);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -211,6 +220,35 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        StartCoroutine(DamageFlash());
+
+        if (health <= 0)
+        {
+            playerAnimator.SetTrigger("Death");
+        }
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        for (float i = 0f; i < 0.25f; i += Time.deltaTime)
+        {
+            foreach (Material m in materials)
+            {
+                m.SetFloat("_DamageWeight", i * 4f);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        for (float i = 0.25f; i > 0f; i -= Time.deltaTime)
+        {
+            foreach (Material m in materials)
+            {
+                m.SetFloat("_DamageWeight", i * 4f);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void AddHealth(float health)
