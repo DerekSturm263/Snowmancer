@@ -15,6 +15,8 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Player
     m_Weight: 1
+  - m_Path: Player.001
+    m_Weight: 1
   - m_Path: rig
     m_Weight: 1
   - m_Path: rig/root
@@ -35,8 +37,6 @@ AvatarMask:
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-shoulder.L/DEF-upper_arm.L/DEF-forearm.L/DEF-hand.L
     m_Weight: 1
-  - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-shoulder.L/DEF-upper_arm.L/DEF-forearm.L/DEF-hand.L/DEF-hand.L_end
-    m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-shoulder.R
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-shoulder.R/DEF-upper_arm.R
@@ -45,13 +45,11 @@ AvatarMask:
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-shoulder.R/DEF-upper_arm.R/DEF-forearm.R/DEF-hand.R
     m_Weight: 1
-  - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-shoulder.R/DEF-upper_arm.R/DEF-forearm.R/DEF-hand.R/DEF-hand.R_end
-    m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-spine.004
     m_Weight: 1
-  - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-spine.004/DEF-head
+  - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-spine.004/DEF-neck
     m_Weight: 1
-  - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-spine.004/DEF-head/DEF-head_end
+  - m_Path: rig/root/DEF-spine/DEF-spine.001/DEF-spine.002/DEF-spine.003/DEF-spine.004/DEF-neck/DEF-head
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-thigh.L
     m_Weight: 1
@@ -61,8 +59,6 @@ AvatarMask:
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-thigh.L/DEF-shin.L/DEF-foot.L/DEF-toe.L
     m_Weight: 1
-  - m_Path: rig/root/DEF-spine/DEF-thigh.L/DEF-shin.L/DEF-foot.L/DEF-toe.L/DEF-toe.L_end
-    m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-thigh.R
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-thigh.R/DEF-shin.R
@@ -70,6 +66,4 @@ AvatarMask:
   - m_Path: rig/root/DEF-spine/DEF-thigh.R/DEF-shin.R/DEF-foot.R
     m_Weight: 1
   - m_Path: rig/root/DEF-spine/DEF-thigh.R/DEF-shin.R/DEF-foot.R/DEF-toe.R
-    m_Weight: 1
-  - m_Path: rig/root/DEF-spine/DEF-thigh.R/DEF-shin.R/DEF-foot.R/DEF-toe.R/DEF-toe.R_end
     m_Weight: 1

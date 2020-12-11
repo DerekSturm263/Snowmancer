@@ -23,6 +23,9 @@ public class Movement : MonoBehaviour
     public float groundedDistance;
     public float groundedVelocity;
 
+    private float runMultiplier;
+    private float slopeMultiplier;
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
@@ -49,19 +52,17 @@ public class Movement : MonoBehaviour
         }
         if (ps) ps.Play();
 
-        float multiplier = isRunning ? 2f : 1f;
-
         #region Camera Direction Setting
 
         if (useCamera)
         {
-            movementVector += move.x * cam.transform.right * multiplier;
-            movementVector += move.y * cam.transform.forward * multiplier;
+            movementVector += move.x * cam.transform.right;
+            movementVector += move.y * cam.transform.forward;
         }
         else
         {
-            movementVector += move.x * Vector3.right * multiplier;
-            movementVector += move.y * Vector3.forward * multiplier;
+            movementVector += move.x * Vector3.right;
+            movementVector += move.y * Vector3.forward;
         }
 
         #endregion
@@ -73,16 +74,22 @@ public class Movement : MonoBehaviour
         }
 
         if (!mouseAim)
-            anim.SetFloat("Speed", movementVector.magnitude);
+        {
+            // Add some code to lerp it so it's not immediate.
+            anim.SetFloat("Speed", movementVector.normalized.magnitude * runMultiplier * slopeMultiplier);
+        }
         else
+        {
+            // Add some code to lerp it so it's not immediate.
             anim.SetFloat("Speed", Input.GetAxis("Vertical"));
+        }
 
         anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
     }
 
     protected void Run(bool run)
     {
-        isRunning = run;
+        runMultiplier = run ? 2f : 1f;
     }
 
     protected void Jump()
@@ -102,9 +109,10 @@ public class Movement : MonoBehaviour
                 isGrounded = ((hit.distance < groundedDistance || Mathf.Abs(rb.velocity.normalized.y) < groundedVelocity) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump")) ? true : false;
             else
                 isGrounded = hit.distance < 0.2f;
+
+            float targetSlopeMultiplier = Mathf.Abs(Vector3.Angle(hit.normal, transform.forward) - 90f) / 35f + 1f;
+            slopeMultiplier = Mathf.Lerp(slopeMultiplier, targetSlopeMultiplier, Time.deltaTime);
         }
-
-
 
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
             targetPos = new Vector3(transform.position.x, hit2.point.y, transform.position.z);

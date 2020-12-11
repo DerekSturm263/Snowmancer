@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class EnemyMovement : Movement
 {
-    public GameObject player;
+    private GameObject player;
     private Enemy enemy;
 
     public Mesh debugMesh;
@@ -15,6 +15,7 @@ public class EnemyMovement : Movement
     private void Start()
     {
         enemy = GetComponent<Enemy>();
+        player = FindObjectOfType<Player>().gameObject;
 
         foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
@@ -33,7 +34,7 @@ public class EnemyMovement : Movement
         Move(targetVector, false);
         mouseAim = false;
 
-        if (Vector3.Distance(transform.position, player.transform.position) < 2f && enemy.enemyAttackType == Enemy.AttackType.Melee)
+        if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x && enemy.enemyAttackType == Enemy.AttackType.Melee)
             anim.SetTrigger("Short Range Attack");
 
         anim.SetBool("Grounded", true);
@@ -50,7 +51,7 @@ public class EnemyMovement : Movement
 
     public void DealDamage()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 2f)
+        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x)
             player.GetComponent<Player>().TakeDamage(enemy.damage);
     }
 
