@@ -54,6 +54,10 @@ public class IKController : StateMachineBehaviour
 
         // Right Hand.
 
+        // Head.
+        anim.SetLookAtPosition(anim.transform.position + new Vector3(0f, 2.5f, 0f) + Camera.main.transform.forward * 5f);
+        anim.SetLookAtWeight(PlayerMovement.useHeadIK ? 1f : 0f);
+
         if (anim.velocity.magnitude < 0.2f)
         {
             Vector3 targetPos = new Vector3(anim.bodyPosition.x, (lFootGoal.position.y + rFootGoal.position.y) / 2f + offset, anim.bodyPosition.z);

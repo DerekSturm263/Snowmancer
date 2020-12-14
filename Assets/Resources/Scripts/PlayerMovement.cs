@@ -2,6 +2,8 @@
 
 public class PlayerMovement : Movement
 {
+    public static bool useHeadIK;
+
     private void Update()
     {
         #region Player Input
@@ -25,6 +27,8 @@ public class PlayerMovement : Movement
             transform.forward = cam.transform.forward;
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
+
+        useHeadIK = mouseAim;
 
         #endregion
 

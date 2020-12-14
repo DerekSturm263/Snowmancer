@@ -99,8 +99,8 @@ public class Movement : MonoBehaviour
             float targetSlopeMultiplier = Mathf.Abs(Vector3.Angle(hit.normal, transform.forward) - 90f) / 35f + 1f;
             slopeMultiplier = Mathf.Lerp(slopeMultiplier, targetSlopeMultiplier, Time.deltaTime);
 
-            if (IsGrounded())
-                rb.AddForce(new Vector3(0f, hit.distance * 10f * -(Mathf.Abs(rb.velocity.y) / rb.velocity.y), 0f));
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing") && rb.velocity.magnitude > 1f && hit.distance > 0.1f)
+                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
         }
     }
 
