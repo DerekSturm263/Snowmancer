@@ -6,9 +6,12 @@ public class PlayerMovement : Movement
     {
         #region Player Input
 
-        Move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+        Move(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
         Run(Input.GetButton("Run"));
         if (Input.GetButtonDown("Jump")) Jump();
+
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), targetSpeed, Time.deltaTime * 10f));
+        anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 
         #endregion
 
@@ -25,6 +28,6 @@ public class PlayerMovement : Movement
 
         #endregion
 
-        anim.SetBool("Grounded", isGrounded);
+        anim.SetBool("Grounded", IsGrounded());
     }
 }
