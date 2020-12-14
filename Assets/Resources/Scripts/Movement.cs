@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
 
     protected bool isGrounded;
 
-    private Vector3 targetPos;
+    [SerializeField] private Vector3 targetPos;
 
     public float groundedDistance;
     public float groundedVelocity;
@@ -88,6 +88,7 @@ public class Movement : MonoBehaviour
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             return;
 
+        anim.ResetTrigger("Hit Wall");
         anim.SetTrigger("Jump");
     }
 
@@ -98,14 +99,23 @@ public class Movement : MonoBehaviour
         {
             float targetSlopeMultiplier = Mathf.Abs(Vector3.Angle(hit.normal, transform.forward) - 90f) / 35f + 1f;
             slopeMultiplier = Mathf.Lerp(slopeMultiplier, targetSlopeMultiplier, Time.deltaTime);
-
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing") && rb.velocity.magnitude > 1f && hit.distance > 0.1f)
-                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
         }
+
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
+            targetPos = hit2.point;
+
+        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing")) && Mathf.Abs(rb.velocity.y) > 0.1f)
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, targetPos.y, transform.position.z), Time.deltaTime * hit.distance * 50f);
     }
 
     protected bool IsGrounded()
     {
         return Physics.BoxCast(transform.position + new Vector3(0f, 0.5f, 0f), new Vector3(0.1f, 0.1f, 0.1f), Vector3.down, Quaternion.identity, 0.7f, ground);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+            anim.SetTrigger("Hit Wall");
     }
 }
