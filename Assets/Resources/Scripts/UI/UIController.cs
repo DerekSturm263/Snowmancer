@@ -39,12 +39,14 @@ public class UIController : MonoBehaviour
                 menuItems = spellSelector.GetComponent<MenuScript>().menuItems;
                 spellID = spellSelector.GetComponent<MenuScript>().spellID;
                 menuItemSc = menuItems[spellID].GetComponent<MenuItemScript>();
+                Cursor.lockState = CursorLockMode.Confined;
 
             }
             else if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.E))
             {
                 menuItemSc.SetCurrentSpell();
                 spellSelector.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
 
@@ -59,6 +61,7 @@ public class UIController : MonoBehaviour
             }
         }
 
+        // Update HUD meters
         SetSnowFill();
         SetHealth();
         SetMana();
@@ -116,6 +119,7 @@ public class UIController : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Pause()
@@ -124,13 +128,14 @@ public class UIController : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
         spellSelector.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    public void LoadMenu()
+    public void LoadScene(string sceneToLoad)
     {
-        Debug.Log("Load menu");
+        //Debug.Log("Load menu");
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     public void QuitGame()
