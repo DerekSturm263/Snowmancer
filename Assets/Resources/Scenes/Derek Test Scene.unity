@@ -3397,6 +3397,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 768
+  targetPos: {x: 0, y: 0, z: 0}
   groundedDistance: 0.75
   groundedVelocity: 0.25
 --- !u!136 &728167327
@@ -8983,7 +8984,7 @@ MonoBehaviour:
   collideDistance: 1
   camCollideWith:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 0
   CameraObj: {fileID: 1294616590}
   PlayerObj: {fileID: 728167322}
   OffsetCenter: {fileID: 1258728802}
