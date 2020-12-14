@@ -4770,7 +4770,7 @@ GameObject:
   - component: {fileID: 3167667624473003163}
   m_Layer: 10
   m_Name: Snowball2
-  m_TagString: Untagged
+  m_TagString: Snowball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

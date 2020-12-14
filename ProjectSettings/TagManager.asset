@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Mana
   - Health
+  - Snowball
+  - Rune
   layers:
   - Default
   - TransparentFX

@@ -16,14 +16,17 @@ public class Movement : MonoBehaviour
 
     protected bool mouseAim;
 
-    public GameObject cameraTarget;
-
     protected bool isGrounded;
 
     private Vector3 targetPos;
 
     public float groundedDistance;
     public float groundedVelocity;
+
+    private float runMultiplier;
+    private float slopeMultiplier;
+
+    protected float targetSpeed;
 
     protected void Awake()
     {
@@ -42,49 +45,42 @@ public class Movement : MonoBehaviour
 
         if (move == Vector2.zero)
         {
-            if (ps)
-                if (ps.isPlaying)
-                    ps.Stop();
-
-            anim.SetFloat("Speed", 0f);
+            targetSpeed = 0f;
             return;
         }
-        if (ps) ps.Play();
-
-        float multiplier = isRunning ? 2f : 1f;
 
         #region Camera Direction Setting
 
         if (useCamera)
         {
-            movementVector += move.x * cam.transform.right * multiplier;
-            movementVector += move.y * cam.transform.forward * multiplier;
+            movementVector += move.x * cam.transform.right;
+            movementVector += move.y * cam.transform.forward;
         }
         else
         {
-            movementVector += move.x * Vector3.right * multiplier;
-            movementVector += move.y * Vector3.forward * multiplier;
+            movementVector += move.x * Vector3.right;
+            movementVector += move.y * Vector3.forward;
         }
 
         #endregion
 
+        float speed = movementVector.normalized.magnitude * runMultiplier * slopeMultiplier;
+
         if (!mouseAim && anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
-            transform.rotation = Quaternion.LookRotation(movementVector, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movementVector, Vector3.up), 15f * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
         if (!mouseAim)
-            anim.SetFloat("Speed", movementVector.magnitude);
+            targetSpeed = speed;
         else
-            anim.SetFloat("Speed", Input.GetAxis("Vertical"));
-
-        anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+            targetSpeed = Input.GetAxis("Vertical");
     }
 
     protected void Run(bool run)
     {
-        isRunning = run;
+        runMultiplier = run ? 2f : 1f;
     }
 
     protected void Jump()
@@ -100,19 +96,16 @@ public class Movement : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground))
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
-                isGrounded = ((hit.distance < groundedDistance || Mathf.Abs(rb.velocity.normalized.y) < groundedVelocity) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump")) ? true : false;
-            else
-                isGrounded = hit.distance < 0.2f;
+            float targetSlopeMultiplier = Mathf.Abs(Vector3.Angle(hit.normal, transform.forward) - 90f) / 35f + 1f;
+            slopeMultiplier = Mathf.Lerp(slopeMultiplier, targetSlopeMultiplier, Time.deltaTime);
 
-            cameraTarget.transform.position = hit.point;
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing") && rb.velocity.magnitude > 1f && hit.distance > 0.1f)
+                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
         }
+    }
 
-
-
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
-            targetPos = new Vector3(transform.position.x, hit2.point.y, transform.position.z);
-
-        if (rb.velocity.magnitude > 0.25f && isGrounded) transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 20f);
+    protected bool IsGrounded()
+    {
+        return Physics.BoxCast(transform.position + new Vector3(0f, 0.5f, 0f), new Vector3(0.1f, 0.1f, 0.1f), Vector3.down, Quaternion.identity, 0.7f, ground);
     }
 }
