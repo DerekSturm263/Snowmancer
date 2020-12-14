@@ -26,6 +26,8 @@ public class Movement : MonoBehaviour
     private float runMultiplier;
     private float slopeMultiplier;
 
+    protected float targetSpeed;
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
@@ -43,14 +45,9 @@ public class Movement : MonoBehaviour
 
         if (move == Vector2.zero)
         {
-            if (ps)
-                if (ps.isPlaying)
-                    ps.Stop();
-
-            anim.SetFloat("Speed", 0f);
+            targetSpeed = 0f;
             return;
         }
-        if (ps) ps.Play();
 
         #region Camera Direction Setting
 
@@ -67,24 +64,18 @@ public class Movement : MonoBehaviour
 
         #endregion
 
+        float speed = movementVector.normalized.magnitude * runMultiplier * slopeMultiplier;
+
         if (!mouseAim && anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
         {
-            transform.rotation = Quaternion.LookRotation(movementVector, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movementVector, Vector3.up), 15f * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
         if (!mouseAim)
-        {
-            // Add some code to lerp it so it's not immediate.
-            anim.SetFloat("Speed", movementVector.normalized.magnitude * runMultiplier * slopeMultiplier);
-        }
+            targetSpeed = speed;
         else
-        {
-            // Add some code to lerp it so it's not immediate.
-            anim.SetFloat("Speed", Input.GetAxis("Vertical"));
-        }
-
-        anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+            targetSpeed = Input.GetAxis("Vertical");
     }
 
     protected void Run(bool run)
@@ -105,18 +96,16 @@ public class Movement : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground))
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
-                isGrounded = ((hit.distance < groundedDistance || Mathf.Abs(rb.velocity.normalized.y) < groundedVelocity) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Jump")) ? true : false;
-            else
-                isGrounded = hit.distance < 0.2f;
-
             float targetSlopeMultiplier = Mathf.Abs(Vector3.Angle(hit.normal, transform.forward) - 90f) / 35f + 1f;
             slopeMultiplier = Mathf.Lerp(slopeMultiplier, targetSlopeMultiplier, Time.deltaTime);
+
+            if (IsGrounded())
+                rb.AddForce(new Vector3(0f, hit.distance * 10f * -(Mathf.Abs(rb.velocity.y) / rb.velocity.y), 0f));
         }
+    }
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
-            targetPos = new Vector3(transform.position.x, hit2.point.y, transform.position.z);
-
-        if (rb.velocity.magnitude > 0.25f && isGrounded) transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * 20f);
+    protected bool IsGrounded()
+    {
+        return Physics.BoxCast(transform.position + new Vector3(0f, 0.5f, 0f), new Vector3(0.1f, 0.1f, 0.1f), Vector3.down, Quaternion.identity, 0.7f, ground);
     }
 }
