@@ -16,8 +16,6 @@ public class Movement : MonoBehaviour
 
     protected bool mouseAim;
 
-    protected bool isGrounded;
-
     [SerializeField] private Vector3 targetPos;
 
     public float groundedDistance;
@@ -88,7 +86,6 @@ public class Movement : MonoBehaviour
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             return;
 
-        anim.ResetTrigger("Hit Wall");
         anim.SetTrigger("Jump");
     }
 
@@ -102,20 +99,33 @@ public class Movement : MonoBehaviour
         }
 
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
-            targetPos = hit2.point;
+            targetPos = new Vector3(transform.position.x, hit2.point.y, transform.position.z);
 
-        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing")) && Mathf.Abs(rb.velocity.y) > 0.1f)
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, targetPos.y, transform.position.z), Time.deltaTime * hit.distance * 50f);
+        if (hit.distance > 1f)
+        {
+            if (!IsGrounded() && Mathf.Abs(rb.velocity.y) > 0.1f && anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+                anim.SetTrigger("Fall");
+        }
+        else
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing") && rb.velocity.y > 0.1f)
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * (hit.distance * 10f) * (hit.distance * 10f));
+        }
     }
 
     protected bool IsGrounded()
     {
-        return Physics.BoxCast(transform.position + new Vector3(0f, 0.5f, 0f), new Vector3(0.1f, 0.1f, 0.1f), Vector3.down, Quaternion.identity, 0.7f, ground);
+        bool grounded = Physics.BoxCast(transform.position + new Vector3(0f, 0.5f, 0f), new Vector3(0.1f, 0.1f, 0.1f), Vector3.down, Quaternion.identity, 0.7f, ground);
+        
+        if (grounded)
+            anim.ResetTrigger("Hit Wall");
+
+        return grounded;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Falling") || anim.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !IsGrounded())
             anim.SetTrigger("Hit Wall");
     }
 }
