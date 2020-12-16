@@ -25,17 +25,23 @@ public class EnemyMovement : Movement
             }
         }
 
-        if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("Charge");
+        if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("ChargeAttack");
+        anim.SetBool("Move While Charging", enemy.moveWhileLongRangeAttacking);
     }
 
     private void Update()
     {
         Vector3 targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
-        Move(targetVector, false);
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+            Move(targetVector, false);
+        else
+            Move(-targetVector, false);
+
         mouseAim = false;
 
-        if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x && enemy.enemyAttackType == Enemy.AttackType.Melee)
-            anim.SetTrigger("Short Range Attack");
+        if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x * 1.5f && enemy.enemyAttackType == Enemy.AttackType.Melee)
+            ShortRangeAttack();
 
         anim.SetBool("Grounded", true);
     }
@@ -47,6 +53,18 @@ public class EnemyMovement : Movement
         {
             TakeDamage(5f);
         }
+    }
+
+    private void ShortRangeAttack()
+    {
+        anim.SetLayerWeight(0, 1f);
+        anim.SetTrigger("Short Range Attack");
+    }
+
+    private void LongRangeAttack()
+    {
+        anim.SetLayerWeight(1, 1f);
+        ChargeAttack();
     }
 
     public void DealDamage()
@@ -77,14 +95,10 @@ public class EnemyMovement : Movement
         spellRB.velocity = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized * enemy.magicAttackSpeed;
     }
 
-    private void Charge()
-    {
-        StartCoroutine(ChargeAttack());
-    }
-
     private IEnumerator ChargeAttack()
     {
         yield return new WaitForSeconds(enemy.intervalBetweenLongRangeAttacks);
+        anim.SetLayerWeight(1, 1f);
         anim.SetBool("Charging", true);
         yield return new WaitForSeconds(enemy.chargeTime);
         anim.SetBool("Charging", false);

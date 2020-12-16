@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     public float chargeTime;
     public float intervalBetweenLongRangeAttacks;
     public float magicAttackSpeed;
+    public bool moveWhileLongRangeAttacking;
     public List<GameObject> drops;
 
     private void Awake()
