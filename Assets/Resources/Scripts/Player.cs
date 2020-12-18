@@ -7,7 +7,7 @@ using System.Linq;
 
 public class Player : MonoBehaviour
 {
-    private enum State { idle, aiming, charging, selectSpell }
+    private enum State { IDLE, AIMING, CHARGING, SELECTSPELL, COLLECTINGSNOW }
     private State currentState;
 
     [Header("Player Stats")]
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public float minSnowballSize;
     public float maxSnowballSize;
     public float chargeTime;
+    private GameObject currentSnowball;
 
     public LayerMask snowballCollision;
     [SerializeField]
@@ -64,6 +65,7 @@ public class Player : MonoBehaviour
                 materials.Add(m);
             }
         }
+        currentState = State.IDLE;
     }
 
     // Update is called once per frame
@@ -71,40 +73,69 @@ public class Player : MonoBehaviour
     {
         if (!uiCont.CheckPaused())
         {
-            if (Input.GetMouseButton(1)) { aiming = true; } else { aiming = false; }
-            if (Input.GetKey(KeyCode.Tab))
-            {
-                selectingSpell = true;
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = Mathf.Lerp(Time.timeScale, 0.1f, slomoSmooth * Time.deltaTime);
-            }
-            else
-            {
-                SetCurrentSpell();
-                selectingSpell = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                if (Time.timeScale != 1)
-                    Time.timeScale = Mathf.Lerp(Time.timeScale, 1, slomoSmooth * Time.deltaTime);
-            }
-            if (aiming == true && snowAmount > 0)
-            {
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    ThrowSnowball(new Vector3(1, 1, 1), currentSpell);
-                }
-            }
             switch (currentState)
             {
-                case State.aiming:
+                case State.IDLE:
+                    if (Input.GetMouseButton(1)) { currentState = State.AIMING; }
+                    if (Input.GetKey(KeyCode.Tab)) { currentState = State.SELECTSPELL; }
+                        break;
+
+                case State.AIMING:
+                    aiming = true;
+                    if(Input.GetMouseButtonDown(0) && snowAmount > 0 && currentSnowball == null) //Left Down
+                    {
+                        GameObject ball = Instantiate(snowballPrefab, snowballThrowPoint.transform.position, Quaternion.identity);
+                        currentSnowball = ball;
+                        currentSnowball.transform.parent = snowballThrowPoint.transform;
+                        currentSnowball.GetComponent<Rigidbody>().isKinematic = true;
+                        currentState = State.CHARGING;
+                    }
+                    if (!Input.GetMouseButton(1)) { aiming = false; currentState = State.IDLE; }
                     break;
-                case State.charging:
+
+                case State.CHARGING:
+                    if (!Input.GetMouseButton(0) && currentSnowball != null)
+                    {
+                        currentSnowball.GetComponent<Rigidbody>().isKinematic = false;
+                        currentSnowball.transform.parent = null;
+                        ThrowSnowball(new Vector3(1, 1, 1), currentSpell);
+                        currentSnowball = null;
+                        currentState = State.AIMING;
+                    }
+                    if (currentSnowball == null)
+                    {
+                        currentState = State.AIMING;
+                    }
+                    if (snowAmount > 0 && currentSnowball != null)
+                    {
+                        currentSnowball.transform.localScale += new Vector3(0.3f, 0.3f, 0.3f) * (Time.deltaTime);
+                    }
                     break;
-                case State.idle:
+
+                case State.SELECTSPELL:
+                    selectingSpell = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, 0.1f, slomoSmooth * Time.deltaTime);
+                    if (Input.GetKeyUp(KeyCode.Tab))
+                    {
+                        SetCurrentSpell();
+                        selectingSpell = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                        currentState = State.IDLE;
+                    }
                     break;
-                case State.selectSpell:
+
+                case State.COLLECTINGSNOW:
                     break;
             }
+            if (!selectingSpell)
+            {
+                if (Time.timeScale != 1)
+                {
+                    Time.timeScale = Mathf.Lerp(Time.timeScale, 1, slomoSmooth * Time.deltaTime);
+                }
+            }
+            //Debug.Log(currentState);
         }
 
         // When the player releases the throw button, it will set a bool in the animator to play the throw animation.
@@ -116,8 +147,8 @@ public class Player : MonoBehaviour
     //Throw
     void ThrowSnowball(Vector3 size, CurrentSpell element)
     {
-        if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Strafing") || !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
-            return; // Right now I'm making it so that you can't throw another snowball if you're still in the animation but that's more for testing purposes and we can tweak the cooldown time later.
+        //if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Strafing") || !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
+        //    return; // Right now I'm making it so that you can't throw another snowball if you're still in the animation but that's more for testing purposes and we can tweak the cooldown time later.
 
         RaycastHit hit;
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
@@ -133,15 +164,14 @@ public class Player : MonoBehaviour
             target = (cam.transform.position) + (cam.transform.forward * maxThrowRange);
             hitDistance = maxThrowRange;
         }
-        GameObject ball = Instantiate(snowballPrefab, snowballThrowPoint.transform.position, Quaternion.identity);
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
-        Snowball snowball = ball.GetComponent<Snowball>();
+        Rigidbody rb = currentSnowball.GetComponent<Rigidbody>();
+        Snowball snowball = currentSnowball.GetComponent<Snowball>();
         Debug.Log(target);
 
         float time = (hitDistance / 100) * throwStrength;
         SetSnowballElement(snowball, element);
         rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
-
+        Debug.Log(rb.velocity);
         // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.
         // A quick click will immediately play the throw animation, while a long press will begin to play the building animation.
 

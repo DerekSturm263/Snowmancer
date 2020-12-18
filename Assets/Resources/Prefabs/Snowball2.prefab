@@ -4865,7 +4865,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!114 &3167667624473003163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4882,3 +4882,4 @@ MonoBehaviour:
   breakParticles: {fileID: 8830227294019990931, guid: 49eac5150dc3aa143a1dbd42ad4e282c,
     type: 3}
   trailParticles: {fileID: 6119401335526793316}
+  breakable: 0

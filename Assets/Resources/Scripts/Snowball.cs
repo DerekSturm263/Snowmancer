@@ -8,19 +8,27 @@ public class Snowball : MonoBehaviour
     public CurrentSpell currentSpell;
     public GameObject breakParticles;
     public ParticleSystem trailParticles;
+    public bool breakable = false;
+    private Rigidbody rb;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     private void OnCollisionEnter(Collision col)
     {
-        trailParticles.transform.parent = null;
-        trailParticles.Stop();
-        
-        Instantiate(breakParticles, col.contacts[0].point, Quaternion.identity);
-        Destroy(this.gameObject);
+        if (rb.isKinematic == false)
+        {
+            trailParticles.transform.parent = null;
+            trailParticles.Stop();
+
+            Instantiate(breakParticles, col.contacts[0].point, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
