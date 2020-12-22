@@ -92,24 +92,26 @@ public class Movement : MonoBehaviour
     // Stick the player to the ground to avoid "floating".
     protected void LateUpdate()
     {
+        AnimatorStateInfo animState = anim.GetCurrentAnimatorStateInfo(0);
+
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, ground))
         {
             float targetSlopeMultiplier = Mathf.Abs(Vector3.Angle(hit.normal, transform.forward) - 90f) / 35f + 1f;
             slopeMultiplier = Mathf.Lerp(slopeMultiplier, targetSlopeMultiplier, Time.deltaTime);
         }
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero)
+        if ((Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit2, ground) && movementVector != Vector3.zero) || animState.IsName("Landing"))
             targetPos = new Vector3(transform.position.x, hit2.point.y, transform.position.z);
 
         if (hit.distance > 1f)
         {
-            if (!IsGrounded() && Mathf.Abs(rb.velocity.y) > 0.1f && anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+            if (!IsGrounded() && Mathf.Abs(rb.velocity.y) > 0.1f && animState.IsName("Grounded"))
                 anim.SetTrigger("Fall");
         }
         else
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded") || anim.GetCurrentAnimatorStateInfo(0).IsName("Strafing") && rb.velocity.y > 0.1f)
-                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * (hit.distance * 10f) * (hit.distance * 10f));
+            if (animState.IsName("Grounded") || animState.IsName("Strafing") && rb.velocity.y > 0.1f && !animState.IsName("Landing"))
+                transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * (hit.distance * 20f) * (hit.distance * 20f));
         }
     }
 

@@ -57,7 +57,7 @@ public class EnemyMovement : Movement
 
     private void ShortRangeAttack()
     {
-        anim.SetLayerWeight(0, 1f);
+        anim.SetLayerWeight(1, 1f);
         anim.SetTrigger("Short Range Attack");
     }
 
@@ -69,7 +69,7 @@ public class EnemyMovement : Movement
 
     public void DealDamage()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x)
+        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 1.25f)
             player.GetComponent<Player>().TakeDamage(enemy.damage);
     }
 

@@ -45,7 +45,7 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
 
         Transform referenceTransform = footNum == 0 ? IKController.lFootGoal : IKController.rFootGoal;
 
-        footprints[footprintNum].transform.position = referenceTransform.position;
+        footprints[footprintNum].transform.position = referenceTransform.position - new Vector3(0f, 0.1f, 0f);
         footprints[footprintNum].transform.rotation = Quaternion.LookRotation(-referenceTransform.up, transform.forward);
     }
 

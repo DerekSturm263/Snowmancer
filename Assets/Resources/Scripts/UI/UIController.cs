@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     public Image snowMeter;
 
     public Image expBar;
+    public float scaler = 1f;
 
     void Start()
     {
@@ -78,7 +79,7 @@ public class UIController : MonoBehaviour
 
     public void SetHealth()
     {
-        healthSlider.value = player.health;
+        healthSlider.value = Mathf.Lerp(healthSlider.value, player.health, Time.deltaTime * scaler);
     }
 
     //Mana
@@ -90,7 +91,7 @@ public class UIController : MonoBehaviour
 
     public void SetMana()
     {
-        manaSlider.value = player.mana;
+        manaSlider.value = Mathf.Lerp(manaSlider.value, player.mana, Time.deltaTime * scaler);
     }
 
     //Snow

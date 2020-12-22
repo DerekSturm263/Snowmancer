@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Backpack.001
-    second: {fileID: 2100000, guid: f17ca053ada522b4787796b2da915adf, type: 2}
+    second: {fileID: 2100000, guid: 0faade2a618cb874db8d59613f457660, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

@@ -600,7 +600,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Attacking Top Half
     m_StateMachine: {fileID: -2426970147417249485}
-    m_Mask: {fileID: 31900000, guid: fad7f8a4196b30f459249103b6b08277, type: 2}
+    m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
