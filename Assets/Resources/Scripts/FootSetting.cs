@@ -15,7 +15,7 @@ public class FootSetting : StateMachineBehaviour
         else if (rFoot > lFoot)
             footNum = 1f;
         else
-            footNum = 0f;
+            footNum = 0.1f;
 
         animator.SetFloat("Last Foot", footNum * runMultiplier);
     }

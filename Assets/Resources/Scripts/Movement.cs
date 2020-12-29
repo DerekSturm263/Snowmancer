@@ -3,7 +3,6 @@
 public class Movement : MonoBehaviour
 {
     protected Animator anim;
-    protected ParticleSystem ps;
     protected Rigidbody rb;
 
     public Camera cam;
@@ -29,7 +28,6 @@ public class Movement : MonoBehaviour
     protected void Awake()
     {
         anim = GetComponent<Animator>();
-        ps = GetComponent<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
 
         targetPos = transform.position;
