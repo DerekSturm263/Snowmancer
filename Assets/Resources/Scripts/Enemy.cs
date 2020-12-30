@@ -76,9 +76,8 @@ public class Enemy : MonoBehaviour
         if (randomize) enemyType = (ElementType) Random.Range(0, 4);
 
         // Go through each object in the enemy GameObject and assign it the correct material if necessary.
-        foreach (Transform t in GetComponentsInChildren<Transform>())
+        foreach (SkinnedMeshRenderer renderer in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
-            SkinnedMeshRenderer renderer = t.gameObject.GetComponent<SkinnedMeshRenderer>();
             try
             {
                 renderer.materials.ToList().ForEach(x =>

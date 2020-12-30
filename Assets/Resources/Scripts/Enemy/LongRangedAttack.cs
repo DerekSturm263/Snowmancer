@@ -112,14 +112,11 @@ public class LongRangedAttack : MonoBehaviour
         ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
         newParticles.transform.localPosition += targetOffset;
 
-        foreach (SkinnedMeshRenderer r in hit.GetComponentsInChildren<SkinnedMeshRenderer>())
+        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
         {
-            r.materials.ToList().ForEach(x =>
-            {
-                x.SetColor("_Tint", Color.cyan);
-                x.SetFloat("_Smoothness", 0.1f);
-            });
-        }
+            x.SetColor("_Tint", Color.cyan);
+            x.SetFloat("_Smoothness", 0.1f);
+        });
     }
 
     public void Shock(GameObject hit)
@@ -128,24 +125,23 @@ public class LongRangedAttack : MonoBehaviour
         hit.GetComponent<Player>().health -= 10f;
         hit.GetComponent<Animator>().SetTrigger("Shocked");
 
-        Instantiate(shockedParticles, hit.transform.position + targetOffset, Quaternion.Euler(-90, 0, 0));
+        ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
+        newParticles.transform.localPosition += targetOffset;
     }
 
     public void Burn(GameObject hit)
     {
         hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Burnt;
+        hit.GetComponent<PlayerMovement>().timeBurnt = 7.5f;
         hit.GetComponent<Player>().health -= 5f;
 
         ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
         newParticles.transform.localPosition += targetOffset;
 
-        foreach (SkinnedMeshRenderer r in hit.GetComponentsInChildren<SkinnedMeshRenderer>())
+        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
         {
-            r.materials.ToList().ForEach(x =>
-            {
-                x.SetFloat("_DamageWeight", 0.75f);
-            });
-        }
+            x.SetFloat("_DamageWeight", 0.75f);
+        });
     }
 
     public void Push(GameObject hit)

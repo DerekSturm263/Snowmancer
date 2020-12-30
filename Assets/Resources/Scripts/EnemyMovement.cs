@@ -9,22 +9,14 @@ public class EnemyMovement : Movement
 
     public GameObject spell;
 
-    private List<Material> materials = new List<Material>();
-
     public static Vector3 playerHeadPosition;
+
+    private Vector2 moveDir;
 
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         player = FindObjectOfType<Player>().gameObject;
-
-        foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
-        {
-            foreach (Material m in mr.materials)
-            {
-                materials.Add(m);
-            }
-        }
 
         if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("ChargeAttack");
         anim.SetBool("Move While Charging", enemy.moveWhileAttacking);
@@ -32,33 +24,47 @@ public class EnemyMovement : Movement
 
     private void Update()
     {
-        Vector3 targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+        Vector3 targetVector;
         mouseAim = false;
 
-        switch (enemy.enemyAttackType)
+        if (Vector3.Distance(player.transform.position, transform.position) < 20f)
         {
-            case Enemy.AttackType.Melee:
+            targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
 
-                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+            switch (enemy.enemyAttackType)
+            {
+                case Enemy.AttackType.Melee:
 
-                Move(targetVector, false);
-                anim.SetFloat("Speed", 1f);
+                    targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
 
-                if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x * 1.5f)
-                    ShortRangeAttack();
+                    Move(targetVector, false);
+                    anim.SetFloat("Speed", 1f);
 
-                break;
-            case Enemy.AttackType.Magic:
+                    if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x * 1.5f)
+                        ShortRangeAttack();
 
-                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+                    break;
+                case Enemy.AttackType.Magic:
 
-                transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
-                transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+                    targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
 
-                anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), -Mathf.Abs(targetVector.x), Time.deltaTime * 10f));
-                anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), -Mathf.Abs(targetVector.y), Time.deltaTime * 10f));
+                    transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
+                    transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-                break;
+                    anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), -Mathf.Abs(targetVector.x), Time.deltaTime * 10f));
+                    anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), -Mathf.Abs(targetVector.y), Time.deltaTime * 10f));
+
+                    break;
+            }
+        }
+        else
+        {
+            moveDir = moveDir.normalized;
+            moveDir.x += Time.deltaTime * Random.Range(-0.1f, 0.1f);
+            moveDir.y += Time.deltaTime * Random.Range(-0.1f, 0.1f);
+
+            targetVector = moveDir;
+            Move(targetVector, false);
         }
 
         anim.SetBool("Grounded", true);

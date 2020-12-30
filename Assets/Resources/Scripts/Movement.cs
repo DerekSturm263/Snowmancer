@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Movement : MonoBehaviour
 {
@@ -34,12 +36,26 @@ public class Movement : MonoBehaviour
     protected Vector3 minLoc, maxLoc;
     [HideInInspector] public float iceLeft = 0f;
 
+    public List<Material> materials = new List<Material>();
+    public List<Color> materialColors = new List<Color>();
+    public List<float> materialFloats = new List<float>();
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 
         targetPos = transform.position;
+
+        foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            foreach (Material m in mr.materials)
+            {
+                materials.Add(m);
+                materialColors.Add(m.GetColor("_Tint"));
+                materialFloats.Add(m.GetFloat("_Smoothness"));
+            }
+        }
 
         Cursor.lockState = CursorLockMode.Locked;
     }

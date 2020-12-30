@@ -13,6 +13,8 @@ public class PlayerMovement : Movement
     public ParticleSystem landParticles;
     public ParticleSystem moveParticles;
 
+    [HideInInspector] public float timeBurnt;
+
     private void Update()
     {
         playerHeadPos = transform.position + new Vector3(0f, 2.5f, 0f);
@@ -66,7 +68,7 @@ public class PlayerMovement : Movement
 
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)
             || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
-            && iceLeft > 0f)
+            && statusEffect == StatusEffect.Frozen)
         {
             iceLeft -= 0.1f;
         }
@@ -75,15 +77,12 @@ public class PlayerMovement : Movement
         {
             anim.speed = 1f;
             iceLeft = 0f;
+            statusEffect = StatusEffect.None;
 
-            foreach (SkinnedMeshRenderer r in GetComponentsInChildren<SkinnedMeshRenderer>())
+            for (int i = 0; i < materials.Count; i++)
             {
-                r.materials.ToList().ForEach(x =>
-                {
-                    // Change to be back to the original.
-                    x.SetColor("_Tint", Color.yellow);
-                    x.SetFloat("_Smoothness", 1000f);
-                });
+                materials[i].SetColor("_Tint", materialColors[i]);
+                materials[i].SetFloat("_Smoothness", materialFloats[i]);
             }
         }
 
@@ -94,6 +93,18 @@ public class PlayerMovement : Movement
         if (statusEffect == StatusEffect.Burnt)
         {
             player.health -= Time.deltaTime * 2.5f;
+            timeBurnt -= Time.deltaTime;
+        }
+
+        if (timeBurnt < 0f)
+        {
+            timeBurnt = 0f;
+            statusEffect = StatusEffect.None;
+
+            materials.ToList().ForEach(x =>
+            {
+                x.SetFloat("_DamageWeight", 0f);
+            });
         }
 
         #endregion
