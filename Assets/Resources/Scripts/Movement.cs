@@ -2,6 +2,12 @@
 
 public class Movement : MonoBehaviour
 {
+    public enum StatusEffect
+    {
+        None, Burnt, Frozen, Shocked
+    }
+    public StatusEffect statusEffect = StatusEffect.None;
+
     protected Animator anim;
     protected Rigidbody rb;
 
@@ -25,6 +31,9 @@ public class Movement : MonoBehaviour
 
     protected float targetSpeed;
 
+    protected Vector3 minLoc, maxLoc;
+    [HideInInspector] public float iceLeft = 0f;
+
     protected void Awake()
     {
         anim = GetComponent<Animator>();
@@ -37,7 +46,12 @@ public class Movement : MonoBehaviour
 
     protected void Move(Vector2 move, bool useCamera = true)
     {
+        if (anim.speed == 0f)
+            return;
+
         movementVector = Vector3.zero;
+        minLoc = transform.position - new Vector3(0.5f, 0f, 0.5f);
+        maxLoc = transform.position + new Vector3(0.5f, 0f, 0.5f);
 
         if (move == Vector2.zero)
         {
@@ -74,6 +88,17 @@ public class Movement : MonoBehaviour
             targetSpeed = Input.GetAxis("Vertical");
     }
 
+    protected void Shake(Vector2 move)
+    {
+        if (anim.speed != 0f)
+            return;
+
+        float x = Mathf.Lerp(minLoc.x, maxLoc.x, ((move.x + 1f) / 2f) * Time.deltaTime * 10f);
+        float z = Mathf.Lerp(minLoc.z, maxLoc.z, ((move.y + 1f) / 2f) * Time.deltaTime * 10f);
+
+        transform.position = new Vector3(x, transform.position.y, z);
+    }
+
     protected void Run(bool run)
     {
         runMultiplier = run ? 2f : 1f;
@@ -81,6 +106,9 @@ public class Movement : MonoBehaviour
 
     protected void Jump()
     {
+        if (anim.speed == 0f)
+            return;
+
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             return;
 

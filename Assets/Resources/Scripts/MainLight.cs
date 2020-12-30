@@ -4,6 +4,6 @@ public class MainLight : MonoBehaviour
 {
     private void Awake()
     {
-        Shader.SetGlobalVector("_MainLightDirection", transform.position);
+        Shader.SetGlobalVector("_SunDirection", transform.forward);
     }
 }

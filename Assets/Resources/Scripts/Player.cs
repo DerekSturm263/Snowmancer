@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     public MenuScript menuScript;
     private CameraController camScript;
 
-    private List<Material> materials = new List<Material>();
+    [HideInInspector] public List<Material> materials = new List<Material>();
 
     // Start is called before the first frame update
     void Start()

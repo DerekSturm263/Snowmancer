@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    private readonly string filePath = "Materials/Enemy ";
+    private readonly string filePath = "Materials/Enemy/";
+    private readonly string filePath2 = "Prefabs/Enemy Weapons/";
+    public Transform hand;
 
     public enum ElementType
     {
@@ -17,6 +19,7 @@ public class Enemy : MonoBehaviour
     }
 
     private Material[] elementMaterials = new Material[8];
+    private GameObject[] weapons = new GameObject[8];
 
     public bool randomize = false;
 
@@ -27,22 +30,48 @@ public class Enemy : MonoBehaviour
     public AttackType enemyAttackType;
     public float damage;
     public float chargeTime;
+    public float attackSize;
     public float intervalBetweenLongRangeAttacks;
     public float magicAttackSpeed;
-    public bool moveWhileLongRangeAttacking;
+    public float magicAttackLifeTime;
+    public bool moveWhileAttacking;
     public List<GameObject> drops;
 
     private void Awake()
     {
         // Get the materials from the Materials folder and assign them spots in the array.
-        elementMaterials[0] = Resources.Load<Material>(filePath + "Red Coat");
-        elementMaterials[1] = Resources.Load<Material>(filePath + "Blue Coat");
-        elementMaterials[2] = Resources.Load<Material>(filePath + "Yellow Coat");
-        elementMaterials[3] = Resources.Load<Material>(filePath + "White Coat");
-        elementMaterials[4] = Resources.Load<Material>(filePath + "Red Fluff");
-        elementMaterials[5] = Resources.Load<Material>(filePath + "Blue Fluff");
-        elementMaterials[6] = Resources.Load<Material>(filePath + "Yellow Fluff");
-        elementMaterials[7] = Resources.Load<Material>(filePath + "White Fluff");
+        try
+        {
+            elementMaterials[0] = Resources.Load<Material>(filePath + "Enemy Red Coat");
+            elementMaterials[1] = Resources.Load<Material>(filePath + "Enemy Blue Coat");
+            elementMaterials[2] = Resources.Load<Material>(filePath + "Enemy Yellow Coat");
+            elementMaterials[3] = Resources.Load<Material>(filePath + "Enemy White Coat");
+            elementMaterials[4] = Resources.Load<Material>(filePath + "Enemy Red Fluff");
+            elementMaterials[5] = Resources.Load<Material>(filePath + "Enemy Blue Fluff");
+            elementMaterials[6] = Resources.Load<Material>(filePath + "Enemy Yellow Fluff");
+            elementMaterials[7] = Resources.Load<Material>(filePath + "Enemy White Fluff");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e);
+        }
+
+        // Get the materials from the Materials folder and assign them spots in the array.
+        try
+        {
+            weapons[0] = Resources.Load<GameObject>(filePath2 + "Enemy Red Wand");
+            weapons[1] = Resources.Load<GameObject>(filePath2 + "Enemy Blue Wand");
+            weapons[2] = Resources.Load<GameObject>(filePath2 + "Enemy Yellow Wand");
+            weapons[3] = Resources.Load<GameObject>(filePath2 + "Enemy White Wand");
+            weapons[4] = Resources.Load<GameObject>(filePath2 + "Enemy Red Sword");
+            weapons[5] = Resources.Load<GameObject>(filePath2 + "Enemy Blue Sword");
+            weapons[6] = Resources.Load<GameObject>(filePath2 + "Enemy Yellow Sword");
+            weapons[7] = Resources.Load<GameObject>(filePath2 + "Enemy White Sword");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e);
+        }
 
         if (randomize) enemyType = (ElementType) Random.Range(0, 4);
 
@@ -61,6 +90,10 @@ public class Enemy : MonoBehaviour
                 });
             } catch { }
         }
+
+        // Instantiate the weapon in the hand of the enemy based on the enemy element type and attack type.
+        int weaponNum = (int) enemyType * (int) enemyAttackType;
+        Instantiate(weapons[weaponNum], hand);
     }
 
     private void OnDestroy()

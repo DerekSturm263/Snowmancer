@@ -7,10 +7,11 @@ public class EnemyMovement : Movement
     private GameObject player;
     private Enemy enemy;
 
-    public Mesh debugMesh;
-    public Material debugMaterial;
+    public GameObject spell;
 
     private List<Material> materials = new List<Material>();
+
+    public static Vector3 playerHeadPosition;
 
     private void Start()
     {
@@ -26,22 +27,39 @@ public class EnemyMovement : Movement
         }
 
         if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("ChargeAttack");
-        anim.SetBool("Move While Charging", enemy.moveWhileLongRangeAttacking);
+        anim.SetBool("Move While Charging", enemy.moveWhileAttacking);
     }
 
     private void Update()
     {
         Vector3 targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-            Move(targetVector, false);
-        else
-            Move(-targetVector, false);
-
         mouseAim = false;
 
-        if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x * 1.5f && enemy.enemyAttackType == Enemy.AttackType.Melee)
-            ShortRangeAttack();
+        switch (enemy.enemyAttackType)
+        {
+            case Enemy.AttackType.Melee:
+
+                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+
+                Move(targetVector, false);
+                anim.SetFloat("Speed", 1f);
+
+                if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x * 1.5f)
+                    ShortRangeAttack();
+
+                break;
+            case Enemy.AttackType.Magic:
+
+                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+
+                transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
+                transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+                anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), -Mathf.Abs(targetVector.x), Time.deltaTime * 10f));
+                anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), -Mathf.Abs(targetVector.y), Time.deltaTime * 10f));
+
+                break;
+        }
 
         anim.SetBool("Grounded", true);
     }
@@ -57,19 +75,14 @@ public class EnemyMovement : Movement
 
     private void ShortRangeAttack()
     {
-        anim.SetLayerWeight(1, 1f);
-        anim.SetTrigger("Short Range Attack");
-    }
+        anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
 
-    private void LongRangeAttack()
-    {
-        anim.SetLayerWeight(1, 1f);
-        ChargeAttack();
+        anim.SetTrigger("Short Range Attack");
     }
 
     public void DealDamage()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 1.25f)
+        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 1.5f)
             player.GetComponent<Player>().TakeDamage(enemy.damage);
     }
 
@@ -81,27 +94,39 @@ public class EnemyMovement : Movement
         if (enemy.health <= 0)
         {
             anim.SetTrigger("Death");
+
+            anim.SetLayerWeight(1, 0f);
+            anim.SetLayerWeight(2, 0f);
         }
     }
 
-    public void  ShootSpell()
+    public void ShootSpell()
     {
-        GameObject spell = new GameObject("Spell");
-        spell.transform.position = transform.position;
-        Rigidbody spellRB = spell.AddComponent<Rigidbody>();
-        spell.AddComponent<MeshFilter>().mesh = debugMesh;
-        spell.AddComponent<MeshRenderer>().material = debugMaterial;
-        spellRB.useGravity = false;
-        spellRB.velocity = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, player.transform.position.z - transform.position.z).normalized * enemy.magicAttackSpeed;
+        LongRangedAttack newSpell = Instantiate(spell, enemy.hand.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
+
+        newSpell.target = player;
+        newSpell.attackType = (LongRangedAttack.AttackType) (int) enemy.enemyType;
+        newSpell.damage = enemy.damage;
+        newSpell.speed = enemy.magicAttackSpeed;
+        newSpell.size = enemy.attackSize;
+        newSpell.lifeTime = enemy.magicAttackLifeTime;
+
+        newSpell.SeekTarget();
     }
 
     private IEnumerator ChargeAttack()
     {
         yield return new WaitForSeconds(enemy.intervalBetweenLongRangeAttacks);
-        anim.SetLayerWeight(1, 1f);
-        anim.SetBool("Charging", true);
-        yield return new WaitForSeconds(enemy.chargeTime);
-        anim.SetBool("Charging", false);
+
+        if (Vector3.Distance(transform.position, player.transform.position) < 10.5f)
+        {
+            anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
+
+            anim.SetBool("Charging", true);
+            yield return new WaitForSeconds(enemy.chargeTime);
+            anim.SetBool("Charging", false);
+        }
+
         StartCoroutine(ChargeAttack());
     }
 
