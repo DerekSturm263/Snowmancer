@@ -4,7 +4,6 @@ using System.Linq;
 public class LongRangedAttack : MonoBehaviour
 {
     private Rigidbody rb;
-    private ParticleSystem ps;
 
     public GameObject target;
     public Vector3 targetOffset;
@@ -26,10 +25,14 @@ public class LongRangedAttack : MonoBehaviour
     public float damage = 5f;
     public float lifeTime = 10f;
 
+    public GameObject[] trailEffects = new GameObject[4];
+    public GameObject[] hitEffects = new GameObject[4];
+
+    [HideInInspector] public GameObject lightningTarget;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        ps = GetComponentInChildren<ParticleSystem>();
 
         transform.localScale = new Vector3(size / 2f, size / 2f, size / 2f);
 
@@ -51,24 +54,23 @@ public class LongRangedAttack : MonoBehaviour
 
     public void SeekTarget()
     {
-        ParticleSystem.MainModule main = ps.main;
 
         switch (attackType)
         {
             case AttackType.Ice:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 2.5f;
-                main.startColor = Color.cyan;
+                trailEffects[0].SetActive(true);
                 break;
             case AttackType.Fire:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 5f;
-                main.startColor = Color.red;
+                trailEffects[1].SetActive(true);
                 break;
             case AttackType.Electric:
-                transform.position = target.transform.position;
-                main.startColor = Color.yellow;
+                transform.position = target.transform.position + targetOffset / 2.75f;
+                trailEffects[2].SetActive(true);
                 break;
             case AttackType.Wind:
-                main.startColor = Color.white;
+                trailEffects[3].SetActive(true);
                 break;
         }
     }
@@ -82,23 +84,45 @@ public class LongRangedAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Despawn();
+            //Despawn();
 
             switch (attackType)
             {
                 case AttackType.Ice:
+                    hitEffects[0].SetActive(true);
+                    trailEffects[0].SetActive(false);
+                    rb.velocity = Vector3.zero;
                     Freeze(other.gameObject);
                     break;
                 case AttackType.Fire:
+                    hitEffects[1].SetActive(true);
+                    trailEffects[1].SetActive(false);
+                    rb.velocity = Vector3.zero;
                     Burn(other.gameObject);
                     break;
                 case AttackType.Electric:
-                    Shock(other.gameObject);
+                    lightningTarget = other.gameObject;
+                    rb.velocity = Vector3.zero;
+                    Invoke("SetShockTimer", 1.9f);
                     break;
                 case AttackType.Wind:
+                    hitEffects[3].SetActive(true);
+                    trailEffects[3].SetActive(false);
+                    rb.velocity = Vector3.zero;
                     Push(other.gameObject);
                     break;
             }
+        }
+    }
+
+    public void SetShockTimer()
+    {
+        hitEffects[2].SetActive(true);
+        trailEffects[2].SetActive(false);
+        
+        if (Vector3.Distance(lightningTarget.transform.position, transform.position) < 2.5f)
+        {
+            Shock(lightningTarget);
         }
     }
 
