@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private readonly string filePath = "Materials/Enemy/";
     private readonly string filePath2 = "Prefabs/Enemy Weapons/";
-    public Transform hand;
+    [HideInInspector] public Transform hand;
 
     public enum ElementType
     {
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     public enum AttackType
     {
-        Melee, Magic
+        Melee, Magic, Summoner
     }
 
     private Material[] elementMaterials = new Material[8];
@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     public bool randomize = false;
 
     [Header("Enemy Stats")]
+    public float spawnRange;
     public float maxHealth;
     public float health;
     public ElementType enemyType;
@@ -35,10 +36,16 @@ public class Enemy : MonoBehaviour
     public float magicAttackSpeed;
     public float magicAttackLifeTime;
     public bool moveWhileAttacking;
+    public GameObject summonerEnemy;
     public List<GameObject> drops;
+
+    [Space(10)]
+    public GameObject spawnParticles;
 
     private void Awake()
     {
+        hand = GetComponentInChildren<Hand>().transform;
+
         // Get the materials from the Materials folder and assign them spots in the array.
         try
         {

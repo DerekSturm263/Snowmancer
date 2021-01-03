@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class EnemyMovement : Movement
 {
@@ -13,12 +12,18 @@ public class EnemyMovement : Movement
 
     private Vector2 moveDir;
 
+    private Vector3 enemySpawnPos;
+
+    private GameObject particles;
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         player = FindObjectOfType<Player>().gameObject;
 
         if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("ChargeAttack");
+        else if (enemy.enemyAttackType == Enemy.AttackType.Summoner) StartCoroutine("ChargeSummon");
+
         anim.SetBool("Move While Charging", enemy.moveWhileAttacking);
     }
 
@@ -48,6 +53,17 @@ public class EnemyMovement : Movement
 
                     targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
 
+                    transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
+                    transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+                    anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), -Mathf.Abs(targetVector.x), Time.deltaTime * 10f));
+                    anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), -Mathf.Abs(targetVector.y), Time.deltaTime * 10f));
+
+                    break;
+                case Enemy.AttackType.Summoner:
+
+                    targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+                    
                     transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
                     transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
@@ -108,16 +124,40 @@ public class EnemyMovement : Movement
 
     public void ShootSpell()
     {
-        LongRangedAttack newSpell = Instantiate(spell, enemy.hand.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
+        if (enemy.enemyAttackType == Enemy.AttackType.Magic)
+        {
+            LongRangedAttack newSpell = Instantiate(spell, enemy.hand.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
 
-        newSpell.target = player;
-        newSpell.attackType = (LongRangedAttack.AttackType) (int) enemy.enemyType;
-        newSpell.damage = enemy.damage;
-        newSpell.speed = enemy.magicAttackSpeed;
-        newSpell.size = enemy.attackSize;
-        newSpell.lifeTime = enemy.magicAttackLifeTime;
+            newSpell.target = player;
+            newSpell.attackType = (LongRangedAttack.AttackType)(int)enemy.enemyType;
+            newSpell.damage = enemy.damage;
+            newSpell.speed = enemy.magicAttackSpeed;
+            newSpell.size = enemy.attackSize;
+            newSpell.lifeTime = enemy.magicAttackLifeTime;
 
-        newSpell.SeekTarget();
+            newSpell.SeekTarget();
+        }
+        else
+        {
+            FinishSummon(enemy.summonerEnemy, enemySpawnPos);
+        }
+    }
+
+    private void FinishSummon(GameObject enemy, Vector3 pos)
+    {
+        Instantiate(enemy, pos, Quaternion.identity);
+    }
+
+    private Vector3 GetNearbySpot(Vector3 startPos, float range)
+    {
+        Vector3 newPos = startPos + new Vector3(Random.Range(-range, range), 0f, Random.Range(-range, range));
+
+        if (Physics.Linecast(newPos, newPos + Vector3.down * 10f, out RaycastHit hit, ground))
+        {
+            return hit.point;
+        }
+
+        return newPos;
     }
 
     private IEnumerator ChargeAttack()
@@ -134,6 +174,32 @@ public class EnemyMovement : Movement
         }
 
         StartCoroutine(ChargeAttack());
+    }
+
+    private IEnumerator ChargeSummon()
+    {
+        yield return new WaitForSeconds(enemy.intervalBetweenLongRangeAttacks);
+
+        if (Vector3.Distance(transform.position, player.transform.position) < 10.5f)
+        {
+            anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
+
+            anim.SetBool("Charging Summon", true);
+
+            enemySpawnPos = GetNearbySpot(transform.position, enemy.spawnRange);
+            particles = Instantiate(enemy.spawnParticles, enemySpawnPos, Quaternion.identity);
+            Invoke("DestroyParticles", enemy.chargeTime);
+
+            yield return new WaitForSeconds(enemy.chargeTime);
+            anim.SetBool("Charging Summon", false);
+        }
+
+        StartCoroutine(ChargeSummon());
+    }
+
+    private void DestroyParticles()
+    {
+        Destroy(particles);
     }
 
     private IEnumerator DamageFlash()

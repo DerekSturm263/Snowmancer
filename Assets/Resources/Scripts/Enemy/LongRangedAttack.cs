@@ -120,7 +120,7 @@ public class LongRangedAttack : MonoBehaviour
         hitEffects[2].SetActive(true);
         trailEffects[2].SetActive(false);
         
-        if (Vector3.Distance(lightningTarget.transform.position, transform.position) < 2.5f)
+        if (Vector3.Distance(lightningTarget.transform.position, transform.position) < 2f)
         {
             Shock(lightningTarget);
         }
@@ -128,10 +128,15 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Freeze(GameObject hit)
     {
-        hit.GetComponent<Animator>().speed = 0f;
-        hit.GetComponent<PlayerMovement>().iceLeft = 2f;
-        hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Frozen;
-        hit.GetComponent<Player>().health -= 5f;
+        PlayerMovement player = hit.GetComponent<PlayerMovement>();
+
+        if (player.statusEffect == Movement.StatusEffect.None)
+        {
+            hit.GetComponent<Animator>().speed = 0f;
+            player.iceLeft = 2f;
+            player.statusEffect = Movement.StatusEffect.Frozen;
+            hit.GetComponent<Player>().health -= damage;
+        }
 
         ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
         newParticles.transform.localPosition += targetOffset;
@@ -145,9 +150,14 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Shock(GameObject hit)
     {
-        hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Shocked;
-        hit.GetComponent<Player>().health -= 10f;
-        hit.GetComponent<Animator>().SetTrigger("Shocked");
+        PlayerMovement player = hit.GetComponent<PlayerMovement>();
+
+        if (player.statusEffect == Movement.StatusEffect.None)
+        {
+            player.statusEffect = Movement.StatusEffect.Shocked;
+            hit.GetComponent<Player>().health -= damage;
+            hit.GetComponent<Animator>().SetTrigger("Shocked");
+        }
 
         ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
         newParticles.transform.localPosition += targetOffset;
@@ -155,9 +165,14 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Burn(GameObject hit)
     {
-        hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Burnt;
-        hit.GetComponent<PlayerMovement>().timeBurnt = 7.5f;
-        hit.GetComponent<Player>().health -= 5f;
+        PlayerMovement player = hit.GetComponent<PlayerMovement>();
+
+        if (player.statusEffect == Movement.StatusEffect.None)
+        {
+            player.statusEffect = Movement.StatusEffect.Burnt;
+            player.timeBurnt = 7.5f;
+            hit.GetComponent<Player>().health -= damage;
+        }
 
         ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
         newParticles.transform.localPosition += targetOffset;
@@ -171,6 +186,6 @@ public class LongRangedAttack : MonoBehaviour
     public void Push(GameObject hit)
     {
         hit.GetComponent<Rigidbody>().AddForce((hit.transform.position - transform.position).normalized * 100f, ForceMode.Acceleration);
-        hit.GetComponent<Player>().health -= 15f;
+        hit.GetComponent<Player>().health -= damage;
     }
 }
