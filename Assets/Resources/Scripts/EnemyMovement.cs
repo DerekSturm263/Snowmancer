@@ -136,7 +136,8 @@ public class EnemyMovement : Movement
 
     private void FinishSummon(GameObject enemy, Vector3 pos)
     {
-        Instantiate(enemy, pos, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy, pos, Quaternion.identity);
+        newEnemy.SetActive(true);
     }
 
     private Vector3 GetNearbySpot(Vector3 startPos, float range)
@@ -204,6 +205,12 @@ public class EnemyMovement : Movement
     private void DestroyParticles()
     {
         Destroy(particles);
+    }
+
+    private void OnDestroy()
+    {
+        if (particles != null)
+            Destroy(particles);
     }
 
     private IEnumerator DamageFlash()

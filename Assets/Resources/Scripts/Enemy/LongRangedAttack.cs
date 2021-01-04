@@ -49,6 +49,9 @@ public class LongRangedAttack : MonoBehaviour
 
     private void Update()
     {
+        if (origin == null)
+            Destroy(gameObject);
+
         if (!active)
             transform.position = origin.position;
 
