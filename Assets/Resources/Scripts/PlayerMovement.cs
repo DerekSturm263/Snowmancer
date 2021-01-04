@@ -52,13 +52,11 @@ public class PlayerMovement : Movement
         {
             if (moveParticles.isPlaying)
             {
-                Debug.Log("Stop");
                 moveParticles.Stop();
             }
         }
         else if (IsGrounded() && movementVector.magnitude > 0f && !moveParticles.isPlaying)
         {
-            Debug.Log("Play");
             moveParticles.Play();
         }
 
@@ -71,6 +69,7 @@ public class PlayerMovement : Movement
             && statusEffect == StatusEffect.Frozen)
         {
             iceLeft -= 0.1f;
+            GetComponentsInChildren<ParticleSystem>()[1].Play();
         }
 
         if (iceLeft < 0f)

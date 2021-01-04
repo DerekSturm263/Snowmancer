@@ -20270,7 +20270,7 @@ PrefabInstance:
     - target: {fileID: 3211800755981446747, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.21
+      value: -31.72
       objectReference: {fileID: 0}
     - target: {fileID: 3211800755981446747, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
@@ -20280,7 +20280,7 @@ PrefabInstance:
     - target: {fileID: 3211800755981446747, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -29.4
+      value: -19.7
       objectReference: {fileID: 0}
     - target: {fileID: 3211800755981446747, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
@@ -20336,6 +20336,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655393501267125686, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.0013338327
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655393501267125686, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655393501267125686, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.34148055
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655393501267125686, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.5279672
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655393501267125686, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.52759534
+      objectReference: {fileID: 0}
+    - target: {fileID: 3655393501267125686, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.50108266
       objectReference: {fileID: 0}
     - target: {fileID: 5257198572228455311, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
@@ -28476,6 +28506,11 @@ PrefabInstance:
       propertyPath: m_AABB.m_Extent.z
       value: 0.1679883
       objectReference: {fileID: 0}
+    - target: {fileID: -5033274924035982962, guid: 6360359c84f487d49a175d72ede6ba43,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4415232160216470858, guid: 6360359c84f487d49a175d72ede6ba43,
         type: 3}
       propertyPath: m_Layer
@@ -28496,6 +28531,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -2933139716659438605, guid: 6360359c84f487d49a175d72ede6ba43,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2872130700342054256, guid: 6360359c84f487d49a175d72ede6ba43,
         type: 3}
       propertyPath: m_Layer
@@ -28515,6 +28555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 257682520821521101, guid: 6360359c84f487d49a175d72ede6ba43,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6360359c84f487d49a175d72ede6ba43,
         type: 3}
@@ -29217,7 +29262,7 @@ Cloth:
   - {fileID: 0}
   - {fileID: 0}
   m_SphereColliders: []
-  m_SelfCollisionDistance: 0.1
+  m_SelfCollisionDistance: 0.15
   m_SelfCollisionStiffness: 0.5
   m_SelfAndInterCollisionIndices: 00000000020000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f0000002000000025000000260000002b0000002c0000002d0000002e00000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000004000000041000000450000004600000047000000490000004a0000004c0000004f0000005100000054000000580000005a0000005c0000005e0000006000000063000000700000007100000072000000730000007400000075000000760000007700000078000000790000007a0000007b0000008300000084000000860000008700000088000000890000008e0000008f000000900000009100000092000000950000009d0000009e000000a0000000a6000000a7000000a8000000a9000000aa000000
   m_VirtualParticleWeights:

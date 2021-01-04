@@ -16,6 +16,8 @@ public class EnemyMovement : Movement
 
     private GameObject particles;
 
+    private LongRangedAttack currentSpell;
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -34,8 +36,6 @@ public class EnemyMovement : Movement
 
         if (Vector3.Distance(player.transform.position, transform.position) < 20f)
         {
-            targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
-
             switch (enemy.enemyAttackType)
             {
                 case Enemy.AttackType.Melee:
@@ -126,16 +126,7 @@ public class EnemyMovement : Movement
     {
         if (enemy.enemyAttackType == Enemy.AttackType.Magic)
         {
-            LongRangedAttack newSpell = Instantiate(spell, enemy.hand.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
-
-            newSpell.target = player;
-            newSpell.attackType = (LongRangedAttack.AttackType)(int)enemy.enemyType;
-            newSpell.damage = enemy.damage;
-            newSpell.speed = enemy.magicAttackSpeed;
-            newSpell.size = enemy.attackSize;
-            newSpell.lifeTime = enemy.magicAttackLifeTime;
-
-            newSpell.SeekTarget();
+            currentSpell.SeekTarget();
         }
         else
         {
@@ -169,6 +160,19 @@ public class EnemyMovement : Movement
             anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
 
             anim.SetBool("Charging", true);
+
+            currentSpell = Instantiate(spell, enemy.hand.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
+
+            currentSpell.target = player;
+            currentSpell.attackType = (LongRangedAttack.AttackType)(int)enemy.enemyType;
+            currentSpell.damage = enemy.damage;
+            currentSpell.speed = enemy.magicAttackSpeed;
+            currentSpell.size = enemy.attackSize;
+            currentSpell.lifeTime = enemy.magicAttackLifeTime;
+            currentSpell.origin = enemy.hand;
+
+            currentSpell.Activate();
+
             yield return new WaitForSeconds(enemy.chargeTime);
             anim.SetBool("Charging", false);
         }

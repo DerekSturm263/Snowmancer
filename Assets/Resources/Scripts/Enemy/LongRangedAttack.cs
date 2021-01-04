@@ -25,10 +25,18 @@ public class LongRangedAttack : MonoBehaviour
     public float damage = 5f;
     public float lifeTime = 10f;
 
+    public GameObject[] chargeEffects = new GameObject[4];
     public GameObject[] trailEffects = new GameObject[4];
     public GameObject[] hitEffects = new GameObject[4];
 
+    public LayerMask ground;
+
     [HideInInspector] public GameObject lightningTarget;
+
+    private bool hit = false;
+    private bool active = false;
+
+    [HideInInspector] public Transform origin;
 
     private void Awake()
     {
@@ -41,6 +49,9 @@ public class LongRangedAttack : MonoBehaviour
 
     private void Update()
     {
+        if (!active)
+            transform.position = origin.position;
+
         if (attackType != AttackType.Wind)
             return;
 
@@ -52,24 +63,51 @@ public class LongRangedAttack : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Activate()
+    {
+        switch (attackType)
+        {
+            case AttackType.Ice:
+                chargeEffects[0].SetActive(true);
+                break;
+            case AttackType.Fire:
+                chargeEffects[1].SetActive(true);
+                break;
+            case AttackType.Electric:
+                chargeEffects[2].SetActive(true);
+                break;
+            case AttackType.Wind:
+                chargeEffects[3].SetActive(true);
+                break;
+        }
+    }
+
     public void SeekTarget()
     {
+        active = true;
 
         switch (attackType)
         {
             case AttackType.Ice:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 2.5f;
+                chargeEffects[0].SetActive(false);
                 trailEffects[0].SetActive(true);
                 break;
             case AttackType.Fire:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 5f;
+                chargeEffects[1].SetActive(false);
                 trailEffects[1].SetActive(true);
                 break;
             case AttackType.Electric:
-                transform.position = target.transform.position + targetOffset / 2.75f;
-                trailEffects[2].SetActive(true);
+                if (Physics.Linecast(target.transform.position + Vector3.up, target.transform.position + Vector3.down * 10f, out RaycastHit hit, ground))
+                {
+                    transform.position = hit.point;
+                    chargeEffects[2].SetActive(false);
+                    trailEffects[2].SetActive(true);
+                }
                 break;
             case AttackType.Wind:
+                chargeEffects[3].SetActive(false);
                 trailEffects[3].SetActive(true);
                 break;
         }
@@ -84,7 +122,8 @@ public class LongRangedAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            //Despawn();
+            if (hit || !active) return;
+            hit = true;
 
             switch (attackType)
             {
@@ -185,7 +224,12 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Push(GameObject hit)
     {
-        hit.GetComponent<Rigidbody>().AddForce((hit.transform.position - transform.position).normalized * 100f, ForceMode.Acceleration);
+        Vector3 pushVector = (hit.transform.position - transform.position);
+
+        pushVector.y = 0f;
+        pushVector = pushVector.normalized;
+
+        hit.GetComponent<Rigidbody>().AddForce(pushVector * 100f, ForceMode.Impulse); // Not working because of snapping script.
         hit.GetComponent<Player>().health -= damage;
     }
 }
