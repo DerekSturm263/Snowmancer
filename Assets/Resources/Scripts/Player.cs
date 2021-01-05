@@ -29,7 +29,10 @@ public class Player : MonoBehaviour
     public float minSnowballSize;
     public float maxSnowballSize;
     public float chargeTime;
+    public float snowDecreaseSpeed;
+    public float snowCollectSpeed;
     private GameObject currentSnowball;
+    private bool onSnow;
 
     public LayerMask snowballCollision;
     [SerializeField]
@@ -78,6 +81,7 @@ public class Player : MonoBehaviour
                 case State.IDLE:
                     if (Input.GetMouseButton(1)) { currentState = State.AIMING; }
                     if (Input.GetKey(KeyCode.Tab)) { currentState = State.SELECTSPELL; }
+                    if (Input.GetKey(KeyCode.R)) { currentState = State.COLLECTINGSNOW; }
                         break;
 
                 case State.AIMING:
@@ -109,6 +113,7 @@ public class Player : MonoBehaviour
                     if (snowAmount > 0 && currentSnowball != null)
                     {
                         currentSnowball.transform.localScale += new Vector3(0.3f, 0.3f, 0.3f) * (Time.deltaTime);
+                        decreaseSnowAmount(snowDecreaseSpeed * Time.deltaTime);
                     }
                     break;
 
@@ -126,6 +131,16 @@ public class Player : MonoBehaviour
                     break;
 
                 case State.COLLECTINGSNOW:
+                    if (onSnow && snowAmount < maxSnow && Input.GetKey(KeyCode.R) && playerAnimator.GetBool("Grounded"))
+                    {
+                        increaseSnowAmount(snowCollectSpeed * Time.deltaTime);
+                        playerAnimator.SetBool("Gathering Snow", true);
+                    }
+                    else
+                    {
+                        currentState = State.IDLE;
+                        playerAnimator.SetBool("Gathering Snow", false);
+                    }
                     break;
             }
             if (!selectingSpell)
@@ -143,7 +158,14 @@ public class Player : MonoBehaviour
             playerAnimator.SetBool("Release Snowball", true);
     }
 
-
+    private void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == "Snow")
+        {
+            onSnow = true;
+        }
+        else onSnow = false;
+    }
     //Throw
     void ThrowSnowball(Vector3 size, CurrentSpell element)
     {
@@ -245,6 +267,14 @@ public class Player : MonoBehaviour
                 snowball.currentSpell = Snowball.CurrentSpell.air;
                 break;
         }
+    }
+    public void decreaseSnowAmount(float amount)
+    {
+        snowAmount -= amount;
+    }
+    public void increaseSnowAmount(float amount)
+    {
+        snowAmount += amount;
     }
 
     public void TakeDamage(float damage)
