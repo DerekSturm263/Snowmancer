@@ -129,7 +129,6 @@ public class Enemy : MonoBehaviour
                 weaponNum = 7;
         }
 
-        Debug.Log(hand.name);
         Instantiate(weapons[weaponNum], hand);
     }
 

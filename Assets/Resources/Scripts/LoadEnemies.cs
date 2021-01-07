@@ -7,7 +7,14 @@ public class LoadEnemies : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        enemies.ForEach(x => x.SetActive(true));
+        enemies.ForEach(x =>
+        {
+            x.SetActive(true);
+            x.GetComponent<Animator>().enabled = true;
+            x.GetComponent<EnemyMovement>().enabled = true;
+        });
+
+
         gameObject.SetActive(false);
     }
 }
