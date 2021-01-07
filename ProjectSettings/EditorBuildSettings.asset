@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Derek Test Scene.unity
     guid: bf5bc17d7d2ae4849952919e500c89a8
+  - enabled: 1
+    path: Assets/Resources/Scenes/Credits.unity
+    guid: 28341d62621ec354ab212ef223fb9015
   m_configObjects: {}
