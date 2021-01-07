@@ -7,6 +7,7 @@ public class MenuScript : MonoBehaviour
 {
     public Vector2 normalizedMousePosistion;
     public float currentAngle;
+    public int angleOffset;
     public int selection;
     private int prevSelect;
 
@@ -33,7 +34,12 @@ public class MenuScript : MonoBehaviour
 
         mouseBar.transform.rotation = Quaternion.Euler(0, 0, currentAngle + 180);
 
-        selection = (int)currentAngle / 72;
+        if((currentAngle >= 342 && currentAngle <= 360) || (currentAngle >= 0 && currentAngle <= 54)){ selection = 0; }
+        if(currentAngle >= 54  && currentAngle <= 126){ selection = 1; }
+        if(currentAngle >= 126 && currentAngle <= 198){ selection = 2; }
+        if(currentAngle >= 198 && currentAngle <= 270){ selection = 3; }
+        if(currentAngle >= 270 && currentAngle <= 342){ selection = 4; }
+        //selection = (int)currentAngle / 72;
 
         if (selection != prevSelect)
         {
