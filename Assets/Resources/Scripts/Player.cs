@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 using System.Linq;
 
 public class Player : MonoBehaviour
@@ -124,6 +125,12 @@ public class Player : MonoBehaviour
                         currentSnowball.transform.localScale += new Vector3(snowballIncreaseSpeed, snowballIncreaseSpeed, snowballIncreaseSpeed) * (Time.deltaTime);
                         decreaseSnowAmount(snowDecreaseSpeed * Time.deltaTime);
                     }
+
+                    if (currentSpell == CurrentSpell.air)
+                    {
+
+                    }
+
                     break;
 
                 case State.SELECTSPELL:
@@ -168,6 +175,21 @@ public class Player : MonoBehaviour
             updateCD();
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("HealthPotion"))
+        {
+            AddHealth(50);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("ManaPotion"))
+        {
+            AddMana(50);
+            Destroy(other.gameObject);
+        }
+    }
+
     private void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Snow")
