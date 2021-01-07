@@ -1902,6 +1902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalizedMousePosistion: {x: 0, y: 0}
   currentAngle: 0
+  angleOffset: 0
   selection: 0
   menuItems:
   - {fileID: 149792627}
@@ -3090,6 +3091,7 @@ MonoBehaviour:
   health: 100
   maxMana: 50
   mana: 50
+  manaRegenSpeed: 0
   maxSnow: 100
   snowAmount: 100
   aiming: 0
@@ -3098,16 +3100,20 @@ MonoBehaviour:
     type: 3}
   snowballThrowPoint: {fileID: 1036622051}
   cam: {fileID: 1573715459}
+  throwBaseDamage: 0
+  sizeDamageMultiplier: 0
   throwStrength: 2
   maxThrowRange: 40
+  snowballIncreaseSpeed: 0
   minSnowballSize: 0
   maxSnowballSize: 0
-  chargeTime: 0
   snowDecreaseSpeed: 0
   snowCollectSpeed: 0
+  onSnow: 0
   snowballCollision:
     serializedVersion: 2
     m_Bits: 257
+  currentSpell: 0
   vCurrExp: 0
   vLevel: 1
   vExpLeft: 10
@@ -3145,7 +3151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffect: 0
-  cam: {fileID: 0}
   ground:
     serializedVersion: 2
     m_Bits: 256
@@ -4577,6 +4582,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1573715460}
+    - target: {fileID: 2781601043854243199, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781601043854243199, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2941222537065479585, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
       propertyPath: m_RootOrder
