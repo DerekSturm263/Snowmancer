@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     protected Animator anim;
     protected Rigidbody rb;
 
-    public Camera cam;
+    protected Camera cam;
     public LayerMask ground;
 
     protected Vector3 movementVector;
@@ -44,6 +44,7 @@ public class Movement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        cam = Camera.main;
 
         targetPos = transform.position;
 
