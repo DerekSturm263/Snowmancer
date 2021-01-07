@@ -9,6 +9,7 @@ TagManager:
   - Snowball
   - Rune
   - Snow
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -87,14 +87,14 @@ public class EnemyMovement : Movement
     }
 
     // Will be changed to be on the snowball script instead once I can make changes to that file.
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Snowball"))
         {
             TakeDamage(5f);
         }
     }
-
+    */
     private void ShortRangeAttack()
     {
         anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
