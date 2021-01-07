@@ -10,37 +10,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.029929
+      value: -1.403
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.677324
+      value: 0.169
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.252445
+      value: 0.065
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.5165018
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.5106923
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.48756814
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.48445502
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
@@ -50,22 +50,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -86.798004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 189.109
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -99.26401
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3ad6d10cb5e7f334dbe853695392436b,
         type: 3}
       propertyPath: m_Name
-      value: Electric Sword
+      value: Enemy Yellow Sword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ad6d10cb5e7f334dbe853695392436b, type: 3}
