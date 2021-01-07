@@ -98,7 +98,7 @@ public class UIController : MonoBehaviour
     public void SetSnowFill()
     {
         float fillAmount = (float)player.snowAmount / (float)player.maxSnow;
-        snowMeter.fillAmount = fillAmount;
+        snowMeter.fillAmount = fillAmount * 0.383f;
     }
 
     //EXP
