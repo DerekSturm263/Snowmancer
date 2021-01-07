@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 using System.Linq;
 
 public class Player : MonoBehaviour
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     public float health;
     public float maxMana;
     public float mana;
+    public float manaRegenSpeed;
     public float maxSnow;
     public float snowAmount;
     public bool aiming;
@@ -24,20 +26,23 @@ public class Player : MonoBehaviour
     public GameObject snowballPrefab;
     public GameObject snowballThrowPoint;
     public Camera cam;
+    public float throwBaseDamage;
+    public float sizeDamageMultiplier;
     public float throwStrength;
     public float maxThrowRange;
+    public float snowballIncreaseSpeed; //how fast snowball increases in size
     public float minSnowballSize;
     public float maxSnowballSize;
-    public float chargeTime;
     public float snowDecreaseSpeed;
     public float snowCollectSpeed;
     private GameObject currentSnowball;
-    private bool onSnow;
+    private float currentSnowballDamage;
+    public bool onSnow;
 
     public LayerMask snowballCollision;
     [SerializeField]
-    private enum CurrentSpell { none, fire, ice, electric, air }
-    private CurrentSpell currentSpell;
+    public enum CurrentSpell { none, fire, ice, electric, air }
+    public CurrentSpell currentSpell;
 
     [Header("Level Stuff")]
     public float vCurrExp;
@@ -48,6 +53,9 @@ public class Player : MonoBehaviour
 
     public float slomoScale;
     public float slomoSmooth;
+
+    //cd's
+    private float throwCD;
 
     private Animator playerAnimator;
     public UIController uiCont;
@@ -80,16 +88,17 @@ public class Player : MonoBehaviour
             {
                 case State.IDLE:
                     if (Input.GetMouseButton(1)) { currentState = State.AIMING; }
-                    if (Input.GetKey(KeyCode.Tab)) { currentState = State.SELECTSPELL; }
+                    if (Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.E)) { currentState = State.SELECTSPELL; }
                     if (Input.GetKey(KeyCode.R)) { currentState = State.COLLECTINGSNOW; }
                         break;
 
                 case State.AIMING:
                     aiming = true;
-                    if(Input.GetMouseButtonDown(0) && snowAmount > 0 && currentSnowball == null) //Left Down
+                    if(Input.GetMouseButtonDown(0) && snowAmount > 0 && currentSnowball == null && throwCD <= 0 && CheckManaCost()) //Prepare to throw snowball
                     {
                         GameObject ball = Instantiate(snowballPrefab, snowballThrowPoint.transform.position, Quaternion.identity);
                         currentSnowball = ball;
+                        SetSnowballElement(currentSnowball.GetComponent<Snowball>(), currentSpell);
                         currentSnowball.transform.parent = snowballThrowPoint.transform;
                         currentSnowball.GetComponent<Rigidbody>().isKinematic = true;
                         currentState = State.CHARGING;
@@ -98,30 +107,37 @@ public class Player : MonoBehaviour
                     break;
 
                 case State.CHARGING:
+                    playerAnimator.SetLayerWeight(1, 1f);
+                    playerAnimator.SetBool("Release Snowball", false);
+                    playerAnimator.SetFloat("Snowball Size", currentSnowball.transform.localScale.x );
+                    currentSnowballDamage = throwBaseDamage * currentSnowball.transform.lossyScale.x * sizeDamageMultiplier;
+                    Debug.Log(currentSnowballDamage); //Use toCheck damage realtime.
                     if (!Input.GetMouseButton(0) && currentSnowball != null)
                     {
-                        currentSnowball.GetComponent<Rigidbody>().isKinematic = false;
-                        currentSnowball.transform.parent = null;
-                        ThrowSnowball(new Vector3(1, 1, 1), currentSpell);
-                        currentSnowball = null;
-                        currentState = State.AIMING;
+                        playerAnimator.SetBool("Release Snowball", true);
                     }
                     if (currentSnowball == null)
                     {
                         currentState = State.AIMING;
                     }
-                    if (snowAmount > 0 && currentSnowball != null)
+                    if (snowAmount > 0 && currentSnowball != null && currentSnowball.transform.localScale.x < maxSnowballSize)
                     {
-                        currentSnowball.transform.localScale += new Vector3(0.3f, 0.3f, 0.3f) * (Time.deltaTime);
+                        currentSnowball.transform.localScale += new Vector3(snowballIncreaseSpeed, snowballIncreaseSpeed, snowballIncreaseSpeed) * (Time.deltaTime);
                         decreaseSnowAmount(snowDecreaseSpeed * Time.deltaTime);
                     }
+
+                    if (currentSpell == CurrentSpell.air)
+                    {
+
+                    }
+
                     break;
 
                 case State.SELECTSPELL:
                     selectingSpell = true;
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = Mathf.Lerp(Time.timeScale, 0.1f, slomoSmooth * Time.deltaTime);
-                    if (Input.GetKeyUp(KeyCode.Tab))
+                    if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.E))
                     {
                         SetCurrentSpell();
                         selectingSpell = false;
@@ -150,28 +166,54 @@ public class Player : MonoBehaviour
                     Time.timeScale = Mathf.Lerp(Time.timeScale, 1, slomoSmooth * Time.deltaTime);
                 }
             }
-            //Debug.Log(currentState);
+            //passive mana regen
+            if(mana < maxMana)
+            {
+                mana += manaRegenSpeed * Time.deltaTime;
+            }
+            LimitStats();
+            updateCD();
         }
-
-        // When the player releases the throw button, it will set a bool in the animator to play the throw animation.
-        if (Input.GetMouseButtonUp(1))
-            playerAnimator.SetBool("Release Snowball", true);
     }
 
-    private void OnCollisionStay(Collision col)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("HealthPotion"))
+        {
+            AddHealth(50);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("ManaPotion"))
+        {
+            AddMana(50);
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Snow")
         {
             onSnow = true;
         }
-        else onSnow = false;
+    }
+    private void OnTriggerExit(Collider col)
+    {
+        onSnow = true;
     }
     //Throw
-    void ThrowSnowball(Vector3 size, CurrentSpell element)
+    public void AnimationThrowSnowball()
     {
-        //if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Strafing") || !playerAnimator.GetCurrentAnimatorStateInfo(1).IsName("Idle"))
-        //    return; // Right now I'm making it so that you can't throw another snowball if you're still in the animation but that's more for testing purposes and we can tweak the cooldown time later.
+        ThrowSnowball(currentSnowball.transform.localScale, currentSnowballDamage);
+        currentSnowball.GetComponent<Rigidbody>().isKinematic = false;
+        currentSnowball.transform.parent = null;
+        currentSnowball = null;
+        currentState = State.AIMING;
+        playerAnimator.SetFloat("Snowball Size", 0f);
+    }
 
+    void ThrowSnowball(Vector3 size, float damage)
+    {
         RaycastHit hit;
         Ray camRay = cam.ScreenPointToRay(Input.mousePosition);
         Vector3 target;
@@ -191,9 +233,20 @@ public class Player : MonoBehaviour
         Debug.Log(target);
 
         float time = (hitDistance / 100) * throwStrength;
-        SetSnowballElement(snowball, element);
-        rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
+        snowball.damage = damage;
+        switch (snowball.currentSpell)
+        {
+            default:
+                rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
+                break;
+            case Snowball.CurrentSpell.air:
+                rb.useGravity = false;
+                rb.velocity = CalculateAirV(target, snowballThrowPoint.transform.position);
+                mana -= 33f;
+                break;
+        }
         Debug.Log(rb.velocity);
+        throwCD = 0.5f;
         // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.
         // A quick click will immediately play the throw animation, while a long press will begin to play the building animation.
 
@@ -224,7 +277,12 @@ public class Player : MonoBehaviour
 
         return result;
     }
-
+    Vector3 CalculateAirV(Vector3 target, Vector3 origin)
+    {
+        Vector3 dir = (target - origin).normalized;
+        Vector3 v = dir * 50f;
+        return v;
+    }
     //Set current spell based on menuscript spell ID;
     void SetCurrentSpell()
     {
@@ -318,6 +376,52 @@ public class Player : MonoBehaviour
 
     public void AddMana(float mana)
     {
-        mana -= mana;
+        mana += mana;
     }
+
+    private void LimitStats()
+    {
+        if(health < 0) { health = 0; }
+        else if(health > maxHealth) { health = maxHealth; }
+        if(mana < 0) { mana = 0; }
+        else if(mana > maxMana) { mana = maxMana; }
+        if(snowAmount < 0) { snowAmount = 0; }
+        else if (snowAmount > maxSnow) { snowAmount = maxSnow; }
+    }
+
+    private void updateCD()
+    {
+        if(throwCD > 0)
+        {
+            throwCD -= Time.deltaTime;
+        }
+    }
+    private bool CheckManaCost()
+    {
+        bool i = true;
+        switch (currentSpell)
+        {
+            case CurrentSpell.none:
+                i = true;
+                break;
+            case CurrentSpell.ice:
+                if (mana > 33) { i = true; }
+                else i = false;
+                break;
+            case CurrentSpell.fire:
+                if (mana > 33) { i = true; }
+                else i = false;
+                break;
+            case CurrentSpell.electric:
+                if (mana > 33) { i = true; }
+                else i = false;
+                break;
+            case CurrentSpell.air:
+                if (mana > 33) { i = true; }
+                else i = false;
+                break;
+        }
+        return i;
+    }
+
 }

@@ -66,14 +66,14 @@ public class Enemy : MonoBehaviour
         // Get the materials from the Materials folder and assign them spots in the array.
         try
         {
-            weapons[0] = Resources.Load<GameObject>(filePath2 + "Enemy Red Wand");
-            weapons[1] = Resources.Load<GameObject>(filePath2 + "Enemy Blue Wand");
-            weapons[2] = Resources.Load<GameObject>(filePath2 + "Enemy Yellow Wand");
-            weapons[3] = Resources.Load<GameObject>(filePath2 + "Enemy White Wand");
-            weapons[4] = Resources.Load<GameObject>(filePath2 + "Enemy Red Sword");
-            weapons[5] = Resources.Load<GameObject>(filePath2 + "Enemy Blue Sword");
-            weapons[6] = Resources.Load<GameObject>(filePath2 + "Enemy Yellow Sword");
-            weapons[7] = Resources.Load<GameObject>(filePath2 + "Enemy White Sword");
+            weapons[0] = Resources.Load<GameObject>(filePath2 + "Enemy Red Sword");
+            weapons[1] = Resources.Load<GameObject>(filePath2 + "Enemy Blue Sword");
+            weapons[2] = Resources.Load<GameObject>(filePath2 + "Enemy Yellow Sword");
+            weapons[3] = Resources.Load<GameObject>(filePath2 + "Enemy White Sword");
+            weapons[4] = Resources.Load<GameObject>(filePath2 + "Enemy Red Wand");
+            weapons[5] = Resources.Load<GameObject>(filePath2 + "Enemy Blue Wand");
+            weapons[6] = Resources.Load<GameObject>(filePath2 + "Enemy Yellow Wand");
+            weapons[7] = Resources.Load<GameObject>(filePath2 + "Enemy White Wand");
         }
         catch (System.Exception e)
         {
@@ -98,7 +98,37 @@ public class Enemy : MonoBehaviour
         }
 
         // Instantiate the weapon in the hand of the enemy based on the enemy element type and attack type.
-        int weaponNum = (int) enemyType * (int) enemyAttackType;
+        int weaponNum = -1;
+
+        if (enemyType == ElementType.Fire)
+        {
+            if (enemyAttackType == AttackType.Melee)
+                weaponNum = 0;
+            else
+                weaponNum = 4;
+        }
+        else if (enemyType == ElementType.Ice)
+        {
+            if (enemyAttackType == AttackType.Melee)
+                weaponNum = 1;
+            else
+                weaponNum = 5;
+        }
+        else if (enemyType == ElementType.Electric)
+        {
+            if (enemyAttackType == AttackType.Melee)
+                weaponNum = 2;
+            else
+                weaponNum = 6;
+        }
+        else
+        {
+            if (enemyAttackType == AttackType.Melee)
+                weaponNum = 3;
+            else
+                weaponNum = 7;
+        }
+
         Instantiate(weapons[weaponNum], hand);
     }
 
