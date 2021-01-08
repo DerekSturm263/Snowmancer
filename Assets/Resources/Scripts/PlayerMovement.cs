@@ -3,7 +3,7 @@ using System.Linq;
 
 public class PlayerMovement : Movement
 {
-    public static bool useHeadIK;
+    public static bool useHeadAimingIK;
     public Player player;
 
     public static Vector3 playerHeadPos;
@@ -42,7 +42,7 @@ public class PlayerMovement : Movement
             transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
-        useHeadIK = mouseAim;
+        useHeadAimingIK = mouseAim;
 
         #endregion
 

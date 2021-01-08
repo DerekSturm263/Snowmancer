@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     protected Camera cam;
     public LayerMask ground;
 
-    protected Vector3 movementVector;
+    [HideInInspector] public Vector3 movementVector;
     protected bool isRunning;
 
     protected float timeFalling;

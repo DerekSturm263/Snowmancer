@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     private readonly string filePath = "Materials/Enemy/";
     private readonly string filePath2 = "Prefabs/Enemy Weapons/";
     [HideInInspector] public Transform hand;
+    [HideInInspector] public Transform wandTip;
 
     public enum ElementType
     {
@@ -24,7 +25,6 @@ public class Enemy : MonoBehaviour
     public bool randomize = false;
 
     [Header("Enemy Stats")]
-    public float spawnRange;
     public float maxHealth;
     public float health;
     public ElementType enemyType;
@@ -32,15 +32,10 @@ public class Enemy : MonoBehaviour
     public float damage;
     public float chargeTime;
     public float attackSize;
-    public float intervalBetweenLongRangeAttacks;
     public float magicAttackSpeed;
     public float magicAttackLifeTime;
     public bool moveWhileAttacking;
-    public GameObject summonerEnemy;
     public List<GameObject> drops;
-
-    [Space(10)]
-    public GameObject spawnParticles;
 
     private void Awake()
     {
@@ -130,6 +125,7 @@ public class Enemy : MonoBehaviour
         }
 
         Instantiate(weapons[weaponNum], hand);
+        if (enemyAttackType != AttackType.Melee) wandTip = GetComponentInChildren<WandTip>().transform;
     }
 
     private void OnDestroy()
