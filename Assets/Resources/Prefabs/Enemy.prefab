@@ -718,7 +718,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 5257198572228455311}
-  cam: {fileID: 0}
   healthSlider: {fileID: 1992439003502835966}
 --- !u!1 &3396430061653050363
 GameObject:
@@ -2084,7 +2083,7 @@ GameObject:
   - component: {fileID: -5550245175989579430}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2171,10 +2170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffect: 0
-  cam: {fileID: 0}
   ground:
     serializedVersion: 2
     m_Bits: 256
+  movementVector: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0, z: 0}
   groundedDistance: 0
   groundedVelocity: 0
@@ -2182,7 +2181,13 @@ MonoBehaviour:
   materials: []
   materialColors: []
   materialFloats: []
+  snapToGround: 0
   spell: {fileID: 0}
+  followDist: 0
+  distFromPlayer: 0
+  spawnRange: 0
+  spawnParticles: {fileID: 0}
+  enemyToSummon: {fileID: 0}
 --- !u!114 &5257198572228455311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,8 +2201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
+  wandTip: {fileID: 0}
   randomize: 0
-  spawnRange: 0
   maxHealth: 20
   health: 20
   enemyType: 0
@@ -2205,13 +2210,10 @@ MonoBehaviour:
   damage: 5
   chargeTime: 3
   attackSize: 0
-  intervalBetweenLongRangeAttacks: 4
   magicAttackSpeed: 20
   magicAttackLifeTime: 0
   moveWhileAttacking: 0
-  summonerEnemy: {fileID: 0}
   drops: []
-  spawnParticles: {fileID: 0}
 --- !u!114 &-5550245175989579430
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -143,7 +143,6 @@ public class EnemyMovement : Movement
     private IEnumerator ShootSpell()
     {
         LongRangedAttack currentSpell = Instantiate(spell, enemy.wandTip.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
-        Debug.Log("Start spell.");
 
         currentSpell.user = enemy;
         currentSpell.target = player;
@@ -155,7 +154,6 @@ public class EnemyMovement : Movement
         currentSpell.SeekTarget();
         anim.SetBool("Charging", false);
         targetLayerWeight = 0f;
-        Debug.Log("End spell.");
     }
 
     private IEnumerator SummonEnemy()
@@ -201,6 +199,8 @@ public class EnemyMovement : Movement
 
             anim.SetLayerWeight(1, 0f);
             anim.SetLayerWeight(2, 0f);
+
+            this.enabled = false;
         }
     }
 

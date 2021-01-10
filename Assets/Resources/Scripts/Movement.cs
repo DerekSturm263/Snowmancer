@@ -40,8 +40,12 @@ public class Movement : MonoBehaviour
     public List<Color> materialColors = new List<Color>();
     public List<float> materialFloats = new List<float>();
 
+    public bool snapToGround = false;
+
     protected void Awake()
     {
+        this.enabled = true;
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;

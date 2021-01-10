@@ -5,6 +5,7 @@ public class LongRangedAttack : MonoBehaviour
 {
     private Rigidbody rb;
     [HideInInspector] public Enemy user;
+    [HideInInspector] public Boss userBoss;
 
     public GameObject target;
     public Vector3 targetOffset;
@@ -63,12 +64,24 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Initialize()
     {
-        attackType = user.enemyType;
-        damage = user.damage;
-        speed = user.magicAttackSpeed;
-        size = user.attackSize;
-        lifeTime = user.magicAttackLifeTime;
-        origin = user.wandTip;
+        if (user != null)
+        {
+            attackType = user.enemyType;
+            damage = user.damage;
+            speed = user.magicAttackSpeed;
+            size = user.attackSize;
+            lifeTime = user.magicAttackLifeTime;
+            origin = user.wandTip;
+        }
+        else
+        {
+            attackType = userBoss.attackType;
+            damage = userBoss.damage;
+            speed = userBoss.magicAttackSpeed;
+            size = userBoss.attackSize;
+            lifeTime = userBoss.attackLifetime;
+            origin = userBoss.transform;
+        }
 
         transform.localScale = new Vector3(size / 2f, size / 2f, size / 2f);
         chargeEffects[(int)attackType].SetActive(true);
@@ -229,12 +242,8 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Push(GameObject hit)
     {
-        Vector3 pushVector = (hit.transform.position - transform.position);
-
-        pushVector.y = 0f;
-        pushVector = pushVector.normalized;
-
-        hit.GetComponent<Rigidbody>().AddForce(pushVector * 100f, ForceMode.Impulse); // Not working because of snapping script.
+        hit.GetComponent<PlayerMovement>().snapToGround = false;
+        hit.GetComponent<Rigidbody>().velocity = new Vector3(0f, 20f, 0f); // Not working because of snapping script.
         hit.GetComponent<Player>().health -= damage;
     }
 }

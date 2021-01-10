@@ -64,7 +64,7 @@ public class IKController : StateMachineBehaviour
         }
         else
         {
-            anim.SetLookAtPosition(anim.GetComponent<PlayerMovement>().movementVector);
+            //anim.SetLookAtPosition(Vector3.Scale(anim.GetComponent<PlayerMovement>().movementVector, anim.transform.forward));
         }
 
         if (anim.velocity.magnitude < 0.2f)
