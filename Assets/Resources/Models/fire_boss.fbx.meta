@@ -228,7 +228,9 @@ ModelImporter:
       has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
       that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
       has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n"
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\nEvent
+      UseAttack has a time (0.458333) outside the clip's valid range (0.000000..0.416667).
+      It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
