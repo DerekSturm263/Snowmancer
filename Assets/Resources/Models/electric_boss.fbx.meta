@@ -42,7 +42,82 @@ ModelImporter:
   - first:
       74: 2870838689216904967
     second: rig|Strafing Rightward
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Belt Buckle
+    second: {fileID: 2100000, guid: 32db926225e7a264ea99e114c52de2b9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boots.001
+    second: {fileID: 2100000, guid: f17ca053ada522b4787796b2da915adf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Coat Fluff.001
+    second: {fileID: 2100000, guid: 62642ad7b2837ea4196ab3b0af2fa305, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Coat.001
+    second: {fileID: 2100000, guid: 2311ea1852b642946892cdadec6d3f39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye White
+    second: {fileID: 2100000, guid: 7640234e21a9bc540bfd74e8107f1580, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes.001
+    second: {fileID: 2100000, guid: 4adc905d4b5e6554d9b237d507ef98dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire Hat
+    second: {fileID: 2100000, guid: d259891adba41af489b07bab8da60b11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire Hat Rim
+    second: {fileID: 2100000, guid: 1a0679c8e1d43294ab7d83940045ea54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire Lapel
+    second: {fileID: 2100000, guid: 1a0679c8e1d43294ab7d83940045ea54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire Staff Inside
+    second: {fileID: 2100000, guid: d259891adba41af489b07bab8da60b11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gloves.001
+    second: {fileID: 2100000, guid: f17ca053ada522b4787796b2da915adf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mustache.001
+    second: {fileID: 2100000, guid: cd31d0b8a92688f46b64e50500d044c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin.001
+    second: {fileID: 2100000, guid: e47e3a0bca319d04dbc672fc16866a3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Staff
+    second: {fileID: 2100000, guid: ba0e108334dbb12439ac967d34afd99c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Staff Bottom
+    second: {fileID: 2100000, guid: ba0e108334dbb12439ac967d34afd99c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
