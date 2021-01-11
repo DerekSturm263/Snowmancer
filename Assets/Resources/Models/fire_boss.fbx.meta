@@ -58,8 +58,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Fire Hat
+    second: {fileID: 2100000, guid: 0fb1ae539b3fce745ac91d6cb84ffdfe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Fire Hat Rim
     second: {fileID: 2100000, guid: 7d1aa95b136d309419c22dc4dfa904cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire Lapel
+    second: {fileID: 2100000, guid: 79a1b9fc5ba37db4980ed8da25ac59fa, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -85,6 +95,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Staff
     second: {fileID: 2100000, guid: fcf0df21360115d478d3e0208db88636, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Staff Bottom
+    second: {fileID: 2100000, guid: 0fb1ae539b3fce745ac91d6cb84ffdfe, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -218,7 +233,9 @@ ModelImporter:
       has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
       that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
       has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n"
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\nEvent
+      UseAttack has a time (0.458333) outside the clip's valid range (0.000000..0.416667).
+      It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -429,7 +446,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: UseAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 20c6ef0184df0ff4f93ef04810192401,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - HealthPotion
   - ManaPotion
+  - Boss
   layers:
   - Default
   - TransparentFX

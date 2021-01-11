@@ -3,30 +3,34 @@ using System.Collections;
 
 public class EnemyMovement : Movement
 {
+    public static Vector3 playerHeadPosition;
+
     private GameObject player;
     private Enemy enemy;
-
     public GameObject spell;
-
-    public static Vector3 playerHeadPosition;
 
     private Vector2 moveDir;
 
-    private Vector3 enemySpawnPos;
+    public float followDist; // Enemy will not notice the player until they are this far away.
+    public float distFromPlayer; // Enemy will move towards player until they are this far away.
+    [HideInInspector] private bool isTargeting = false; // Enemy will move towards player and attack if true.
 
-    private GameObject particles;
+    public float spawnRange;
 
-    private LongRangedAttack currentSpell;
+    public GameObject spawnParticles;
+    public GameObject enemyToSummon;
+
+    private float targetLayerWeight;
+
+    private Vector3 spawnPosition;
 
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         player = FindObjectOfType<Player>().gameObject;
 
-        if (enemy.enemyAttackType == Enemy.AttackType.Magic) StartCoroutine("ChargeAttack");
-        else if (enemy.enemyAttackType == Enemy.AttackType.Summoner) StartCoroutine("ChargeSummon");
-
         anim.SetBool("Move While Charging", enemy.moveWhileAttacking);
+        spawnPosition = transform.position;
     }
 
     private void Update()
@@ -34,113 +38,141 @@ public class EnemyMovement : Movement
         Vector3 targetVector;
         mouseAim = false;
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 20f)
+        #region Moving
+
+        if (Vector3.Distance(player.transform.position, transform.position) < followDist)
+            isTargeting = true;
+
+        if (isTargeting)
         {
-            switch (enemy.enemyAttackType)
-            {
-                case Enemy.AttackType.Melee:
-
-                    targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
-
-                    Move(targetVector, false);
-                    anim.SetFloat("Speed", 1f);
-
-                    if (Vector3.Distance(transform.position, player.transform.position) < transform.localScale.x * 1.5f)
-                        ShortRangeAttack();
-
-                    break;
-                case Enemy.AttackType.Magic:
-
-                    targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
-
-                    transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
-                    transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-
-                    anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), -Mathf.Abs(targetVector.x), Time.deltaTime * 10f));
-                    anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), -Mathf.Abs(targetVector.y), Time.deltaTime * 10f));
-
-                    break;
-                case Enemy.AttackType.Summoner:
-
-                    targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
-                    
-                    transform.forward = new Vector3(targetVector.x, 0f, targetVector.y);
-                    transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-
-                    anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), -Mathf.Abs(targetVector.x), Time.deltaTime * 10f));
-                    anim.SetFloat("Horizontal", Mathf.Lerp(anim.GetFloat("Horizontal"), -Mathf.Abs(targetVector.y), Time.deltaTime * 10f));
-
-                    break;
-            }
+            if (Vector3.Distance(player.transform.position, transform.position) > distFromPlayer || targetLayerWeight == 1f)
+                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+            else
+                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized * -1f;
         }
         else
         {
-            moveDir = moveDir.normalized;
-            moveDir.x += Time.deltaTime * Random.Range(-0.1f, 0.1f);
-            moveDir.y += Time.deltaTime * Random.Range(-0.1f, 0.1f);
+            if (Vector3.Distance(transform.position, spawnPosition) < 5f)
+            {
+                moveDir.x += Time.deltaTime * Random.Range(-5f, 5f);
+                moveDir.y += Time.deltaTime * Random.Range(-5f, 5f);
+
+                moveDir = moveDir.normalized;
+            }
+            else
+            {
+                moveDir = new Vector2(spawnPosition.x - transform.position.x, spawnPosition.z - transform.position.z).normalized;
+            }
 
             targetVector = moveDir;
-            Move(targetVector, false);
         }
+
+        #endregion
+
+        anim.SetFloat("Speed", 1f);
+        Move(targetVector, false);
+
+        // Attacking
+        if (Vector3.Distance(player.transform.position, transform.position) < distFromPlayer + 0.5f && Vector3.Distance(player.transform.position, transform.position) > distFromPlayer - 0.5f)
+            Attack();
 
         anim.SetBool("Grounded", true);
+        anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, Mathf.Lerp(anim.GetLayerWeight(enemy.moveWhileAttacking ? 1 : 2), targetLayerWeight, Time.deltaTime * 10f));
     }
 
-    // Will be changed to be on the snowball script instead once I can make changes to that file.
-    /*private void OnCollisionEnter(Collision collision)
+    #region Attacking
+
+    private void Attack()
     {
-        if (collision.gameObject.CompareTag("Snowball"))
+        if (anim.GetLayerWeight(enemy.moveWhileAttacking ? 1 : 2) == 1 || anim.GetCurrentAnimatorStateInfo(0).IsName("Dying"))
+            return;
+
+        targetLayerWeight = 1f;
+        switch (enemy.enemyAttackType)
         {
-            TakeDamage(5f);
+            case Enemy.AttackType.Melee:
+                MeleeAttack();
+                break;
+            case Enemy.AttackType.Magic:
+                MagicAttack();
+                break;
+            case Enemy.AttackType.Summoner:
+                SummonAttack();
+                break;
         }
     }
-    */
-    private void ShortRangeAttack()
-    {
-        anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
 
+    private void MeleeAttack()
+    {
         anim.SetTrigger("Short Range Attack");
     }
 
+    private void MagicAttack()
+    {
+        anim.SetBool("Charging", true);
+    }
+
+    private void SummonAttack()
+    {
+        anim.SetBool("Charging Summon", true);
+    }
+
+    #endregion
+
     public void DealDamage()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 1.5f)
+        if (Vector3.Distance(player.transform.position, transform.position) < distFromPlayer + 1f)
             player.GetComponent<Player>().TakeDamage(enemy.damage);
+
+        targetLayerWeight = 0f;
     }
 
-    public void TakeDamage(float damage)
+    public void LongRangeAttack()
     {
-        enemy.health -= damage;
-        StartCoroutine(DamageFlash());
-
-        if (enemy.health <= 0)
+        switch (enemy.enemyAttackType)
         {
-            anim.SetTrigger("Death");
-
-            anim.SetLayerWeight(1, 0f);
-            anim.SetLayerWeight(2, 0f);
+            case Enemy.AttackType.Magic:
+                StartCoroutine(ShootSpell());
+                break;
+            case Enemy.AttackType.Summoner:
+                StartCoroutine(SummonEnemy());
+                break;
         }
     }
 
-    public void ShootSpell()
+    private IEnumerator ShootSpell()
     {
-        if (enemy.enemyAttackType == Enemy.AttackType.Magic)
-        {
-            currentSpell.SeekTarget();
-        }
-        else
-        {
-            FinishSummon(enemy.summonerEnemy, enemySpawnPos);
-        }
+        LongRangedAttack currentSpell = Instantiate(spell, enemy.wandTip.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
+
+        currentSpell.user = enemy;
+        currentSpell.target = player;
+
+        currentSpell.Initialize();
+
+        yield return new WaitForSeconds(enemy.chargeTime);
+
+        currentSpell.SeekTarget();
+        anim.SetBool("Charging", false);
+        targetLayerWeight = 0f;
     }
 
-    private void FinishSummon(GameObject enemy, Vector3 pos)
+    private IEnumerator SummonEnemy()
     {
-        GameObject newEnemy = Instantiate(enemy, pos, Quaternion.identity);
+        Vector3 spawnPos = GetSummonSpot(transform.position, spawnRange);
+
+        GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+        yield return new WaitForSeconds(enemy.chargeTime);
+
+        GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
         newEnemy.SetActive(true);
+        Destroy(summonParticles);
+
+        anim.SetBool("Charging Summon", false);
+        targetLayerWeight = 0f;
     }
 
-    private Vector3 GetNearbySpot(Vector3 startPos, float range)
+    private Vector3 GetSummonSpot(Vector3 startPos, float range)
     {
         Vector3 newPos = startPos + new Vector3(Random.Range(-range, range), 0f, Random.Range(-range, range));
 
@@ -152,65 +184,24 @@ public class EnemyMovement : Movement
         return newPos;
     }
 
-    private IEnumerator ChargeAttack()
-    {
-        yield return new WaitForSeconds(enemy.intervalBetweenLongRangeAttacks);
+    #region Taking Damage
 
-        if (Vector3.Distance(transform.position, player.transform.position) < 10.5f)
+    public void TakeDamage(float damage)
+    {
+        enemy.health -= damage;
+        StartCoroutine(DamageFlash());
+
+        isTargeting = true;
+
+        if (enemy.health <= 0)
         {
-            anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
+            anim.SetTrigger("Death");
 
-            anim.SetBool("Charging", true);
+            anim.SetLayerWeight(1, 0f);
+            anim.SetLayerWeight(2, 0f);
 
-            currentSpell = Instantiate(spell, enemy.hand.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
-
-            currentSpell.target = player;
-            currentSpell.attackType = (LongRangedAttack.AttackType)(int)enemy.enemyType;
-            currentSpell.damage = enemy.damage;
-            currentSpell.speed = enemy.magicAttackSpeed;
-            currentSpell.size = enemy.attackSize;
-            currentSpell.lifeTime = enemy.magicAttackLifeTime;
-            currentSpell.origin = enemy.hand;
-
-            currentSpell.Activate();
-
-            yield return new WaitForSeconds(enemy.chargeTime);
-            anim.SetBool("Charging", false);
+            this.enabled = false;
         }
-
-        StartCoroutine(ChargeAttack());
-    }
-
-    private IEnumerator ChargeSummon()
-    {
-        yield return new WaitForSeconds(enemy.intervalBetweenLongRangeAttacks);
-
-        if (Vector3.Distance(transform.position, player.transform.position) < 10.5f)
-        {
-            anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, 1f);
-
-            anim.SetBool("Charging Summon", true);
-
-            enemySpawnPos = GetNearbySpot(transform.position, enemy.spawnRange);
-            particles = Instantiate(enemy.spawnParticles, enemySpawnPos, Quaternion.identity);
-            Invoke("DestroyParticles", enemy.chargeTime);
-
-            yield return new WaitForSeconds(enemy.chargeTime);
-            anim.SetBool("Charging Summon", false);
-        }
-
-        StartCoroutine(ChargeSummon());
-    }
-
-    private void DestroyParticles()
-    {
-        Destroy(particles);
-    }
-
-    private void OnDestroy()
-    {
-        if (particles != null)
-            Destroy(particles);
     }
 
     private IEnumerator DamageFlash()
@@ -235,4 +226,6 @@ public class EnemyMovement : Movement
             yield return new WaitForEndOfFrame();
         }
     }
+
+    #endregion
 }

@@ -9653,7 +9653,6 @@ GameObject:
   - component: {fileID: 5382409016643455615}
   - component: {fileID: 503171645298458336}
   - component: {fileID: 646261401039942099}
-  - component: {fileID: 2798518955779594188}
   m_Layer: 0
   m_Name: Wind Blast
   m_TagString: Untagged
@@ -14516,19 +14515,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &2798518955779594188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2612777390805704485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 816e02fa236e68f40a1ccf432132293a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 0.5
 --- !u!1 &3118700019672127371
 GameObject:
   m_ObjectHideFlags: 0
@@ -14540,7 +14526,6 @@ GameObject:
   - component: {fileID: 6202285908763731060}
   - component: {fileID: 6259611789003091294}
   - component: {fileID: 1919210246344562408}
-  - component: {fileID: 8625861021525403332}
   m_Layer: 0
   m_Name: Lightning Strike
   m_TagString: Untagged
@@ -19342,19 +19327,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &8625861021525403332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3118700019672127371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 816e02fa236e68f40a1ccf432132293a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 10
 --- !u!1 &3784239611018359940
 GameObject:
   m_ObjectHideFlags: 0
@@ -24192,7 +24164,6 @@ GameObject:
   - component: {fileID: 38787325068806152}
   - component: {fileID: 6168983110785371691}
   - component: {fileID: 1624205275067418111}
-  - component: {fileID: 6158362845763716774}
   m_Layer: 0
   m_Name: Ice Blast
   m_TagString: Untagged
@@ -29055,19 +29026,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &6158362845763716774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4335917654666654406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 816e02fa236e68f40a1ccf432132293a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 0.5
 --- !u!1 &5017238791993444656
 GameObject:
   m_ObjectHideFlags: 0
@@ -39383,7 +39341,7 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0.495, z: 0}
+    m_Position: {x: 0, y: 0.45, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 0, y: 0, z: 0}
     placementMode: 0
@@ -43542,7 +43500,6 @@ GameObject:
   - component: {fileID: 3026402446974128792}
   - component: {fileID: 3832148978732708918}
   - component: {fileID: 2045741924575992296}
-  - component: {fileID: 2395938511229572662}
   m_Layer: 0
   m_Name: Fire Blast
   m_TagString: Untagged
@@ -48405,19 +48362,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &2395938511229572662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7343333914098391680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 816e02fa236e68f40a1ccf432132293a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 0.5
 --- !u!1 &8196076501875955221
 GameObject:
   m_ObjectHideFlags: 0
@@ -58147,6 +58091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874fa030cef53624696f6fbd34efdbed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  user: {fileID: 0}
   target: {fileID: 0}
   targetOffset: {x: 0, y: 1.5, z: 0}
   ice: {fileID: 2100000, guid: a629945ee24ca3a4ba5bbc5a5389526c, type: 2}
@@ -58162,18 +58107,18 @@ MonoBehaviour:
   damage: 5
   lifeTime: 10
   chargeEffects:
-  - {fileID: 5376062872331837684}
   - {fileID: 5017238791993444656}
+  - {fileID: 5376062872331837684}
   - {fileID: 3784239611018359940}
   - {fileID: 1572757455105609335}
   trailEffects:
-  - {fileID: 8196076501875955221}
   - {fileID: 8245580827882603712}
+  - {fileID: 8196076501875955221}
   - {fileID: 7294705059889571787}
   - {fileID: 2118030009370117072}
   hitEffects:
-  - {fileID: 4335917654666654406}
   - {fileID: 7343333914098391680}
+  - {fileID: 4335917654666654406}
   - {fileID: 3118700019672127371}
   - {fileID: 2612777390805704485}
   ground:

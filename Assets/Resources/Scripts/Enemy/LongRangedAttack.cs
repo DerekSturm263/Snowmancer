@@ -4,6 +4,8 @@ using System.Linq;
 public class LongRangedAttack : MonoBehaviour
 {
     private Rigidbody rb;
+    [HideInInspector] public Enemy user;
+    [HideInInspector] public Boss userBoss;
 
     public GameObject target;
     public Vector3 targetOffset;
@@ -14,11 +16,7 @@ public class LongRangedAttack : MonoBehaviour
     public ParticleSystem fireParticles;
     public ParticleSystem frozenParticles;
 
-    public enum AttackType
-    {
-        Fire, Ice, Electric, Wind
-    }
-    public AttackType attackType;
+    public Enemy.ElementType attackType;
 
     public float size = 1f;
     public float speed = 5f;
@@ -42,8 +40,6 @@ public class LongRangedAttack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        transform.localScale = new Vector3(size / 2f, size / 2f, size / 2f);
-
         Invoke("Despawn", lifeTime);
     }
 
@@ -55,63 +51,68 @@ public class LongRangedAttack : MonoBehaviour
         if (!active)
             transform.position = origin.position;
 
-        if (attackType != AttackType.Wind)
+        if (attackType != Enemy.ElementType.Wind)
             return;
 
         rb.velocity = TargetVector(target.transform).normalized * speed * 5f;
     }
 
-    private void Despawn()
+    public void Despawn()
     {
         Destroy(gameObject);
     }
 
-    public void Activate()
+    public void Initialize()
     {
-        switch (attackType)
+        if (user != null)
         {
-            case AttackType.Ice:
-                chargeEffects[0].SetActive(true);
-                break;
-            case AttackType.Fire:
-                chargeEffects[1].SetActive(true);
-                break;
-            case AttackType.Electric:
-                chargeEffects[2].SetActive(true);
-                break;
-            case AttackType.Wind:
-                chargeEffects[3].SetActive(true);
-                break;
+            attackType = user.enemyType;
+            damage = user.damage;
+            speed = user.magicAttackSpeed;
+            size = user.attackSize;
+            lifeTime = user.magicAttackLifeTime;
+            origin = user.wandTip;
         }
+        else
+        {
+            attackType = userBoss.attackType;
+            damage = userBoss.damage;
+            speed = userBoss.magicAttackSpeed;
+            size = userBoss.attackSize;
+            lifeTime = userBoss.attackLifetime;
+            origin = userBoss.transform;
+        }
+
+        transform.localScale = new Vector3(size / 2f, size / 2f, size / 2f);
+        chargeEffects[(int)attackType].SetActive(true);
     }
 
     public void SeekTarget()
     {
         active = true;
 
+        if (attackType != Enemy.ElementType.Electric)
+        {
+            chargeEffects[(int)attackType].SetActive(false);
+            trailEffects[(int)attackType].SetActive(true);
+        }
+
         switch (attackType)
         {
-            case AttackType.Ice:
+            case Enemy.ElementType.Ice:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 2.5f;
-                chargeEffects[0].SetActive(false);
-                trailEffects[0].SetActive(true);
                 break;
-            case AttackType.Fire:
+            case Enemy.ElementType.Fire:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 5f;
-                chargeEffects[1].SetActive(false);
-                trailEffects[1].SetActive(true);
                 break;
-            case AttackType.Electric:
+            case Enemy.ElementType.Electric:
                 if (Physics.Linecast(target.transform.position + Vector3.up, target.transform.position + Vector3.down * 10f, out RaycastHit hit, ground))
                 {
                     transform.position = hit.point;
+                    transform.up = hit.normal;
                     chargeEffects[2].SetActive(false);
                     trailEffects[2].SetActive(true);
                 }
-                break;
-            case AttackType.Wind:
-                chargeEffects[3].SetActive(false);
-                trailEffects[3].SetActive(true);
                 break;
         }
     }
@@ -128,32 +129,46 @@ public class LongRangedAttack : MonoBehaviour
             if (hit || !active) return;
             hit = true;
 
+            if (attackType != Enemy.ElementType.Electric)
+            {
+                hitEffects[(int) attackType].SetActive(true);
+                trailEffects[(int)attackType].SetActive(false);
+
+                Invoke("Despawn", 0.5f);
+            }
+
+            rb.velocity = Vector3.zero;
+
             switch (attackType)
             {
-                case AttackType.Ice:
-                    hitEffects[0].SetActive(true);
-                    trailEffects[0].SetActive(false);
-                    rb.velocity = Vector3.zero;
+                case Enemy.ElementType.Ice:
                     Freeze(other.gameObject);
                     break;
-                case AttackType.Fire:
-                    hitEffects[1].SetActive(true);
-                    trailEffects[1].SetActive(false);
-                    rb.velocity = Vector3.zero;
+                case Enemy.ElementType.Fire:
                     Burn(other.gameObject);
                     break;
-                case AttackType.Electric:
+                case Enemy.ElementType.Electric:
                     lightningTarget = other.gameObject;
-                    rb.velocity = Vector3.zero;
                     Invoke("SetShockTimer", 1.9f);
+                    Invoke("Despawn", 4f);
                     break;
-                case AttackType.Wind:
-                    hitEffects[3].SetActive(true);
-                    trailEffects[3].SetActive(false);
-                    rb.velocity = Vector3.zero;
+                case Enemy.ElementType.Wind:
                     Push(other.gameObject);
                     break;
             }
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        {
+            if (hit || !active) return;
+            hit = true;
+
+            if (attackType != Enemy.ElementType.Electric)
+            {
+                hitEffects[(int)attackType].SetActive(true);
+                trailEffects[(int)attackType].SetActive(false);
+            }
+
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -227,12 +242,8 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Push(GameObject hit)
     {
-        Vector3 pushVector = (hit.transform.position - transform.position);
-
-        pushVector.y = 0f;
-        pushVector = pushVector.normalized;
-
-        hit.GetComponent<Rigidbody>().AddForce(pushVector * 100f, ForceMode.Impulse); // Not working because of snapping script.
+        hit.GetComponent<PlayerMovement>().snapToGround = false;
+        hit.GetComponent<Rigidbody>().velocity = new Vector3(0f, 20f, 0f); // Not working because of snapping script.
         hit.GetComponent<Player>().health -= damage;
     }
 }

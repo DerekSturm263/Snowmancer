@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     protected Camera cam;
     public LayerMask ground;
 
-    protected Vector3 movementVector;
+    [HideInInspector] public Vector3 movementVector;
     protected bool isRunning;
 
     protected float timeFalling;
@@ -40,8 +40,12 @@ public class Movement : MonoBehaviour
     public List<Color> materialColors = new List<Color>();
     public List<float> materialFloats = new List<float>();
 
+    public bool snapToGround = false;
+
     protected void Awake()
     {
+        this.enabled = true;
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         cam = Camera.main;
