@@ -30,6 +30,10 @@ public class BossBehavior : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<Player>().transform;
+        stats.phaseFeatures.Add(10f, () =>
+        {
+
+        });
 
         ChooseSpot();
     }

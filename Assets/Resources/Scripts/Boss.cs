@@ -26,10 +26,7 @@ public class Boss : MonoBehaviour
 
     public Enemy.ElementType attackType;
 
-    [HideInInspector] public uint currentPhase = 1;
-    [HideInInspector] private float damageBetweenPhases = 10f;
-
-    public Dictionary<uint, Action> phaseFeatures = new Dictionary<uint, Action>(); // Keeps track of what phase the boss needs to be on to add a new attack/modify an old one.
+    public Dictionary<float, Action> phaseFeatures = new Dictionary<float, Action>(); // Keeps track of what phase the boss needs to be on to add a new attack/modify an old one.
 
     [HideInInspector] public List<Material> materials = new List<Material>();
 
@@ -50,8 +47,11 @@ public class Boss : MonoBehaviour
 
     public void NextPhase()
     {
-        phaseFeatures[++currentPhase].Invoke();
-        Debug.Log("Next phase.");
+        try
+        {
+            phaseFeatures[maxHealth - health].Invoke();
+        }
+        catch { }
     }
 
     public void TakeDamage(float damage)
@@ -59,7 +59,7 @@ public class Boss : MonoBehaviour
         health -= damage;
         StartCoroutine(DamageFlash());
 
-        float remainingHP = maxHealth - health;
+        NextPhase();
 
         if (health <= 0)
         {
