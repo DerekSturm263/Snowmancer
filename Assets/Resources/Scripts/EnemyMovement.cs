@@ -20,7 +20,7 @@ public class EnemyMovement : Movement
     public GameObject spawnParticles;
     public GameObject enemyToSummon;
 
-    private float targetLayerWeight;
+    [HideInInspector] public float targetLayerWeight;
 
     private Vector3 spawnPosition;
 
@@ -132,7 +132,7 @@ public class EnemyMovement : Movement
         switch (enemy.enemyAttackType)
         {
             case Enemy.AttackType.Magic:
-                StartCoroutine(ShootSpell());
+                ShootSpell();
                 break;
             case Enemy.AttackType.Summoner:
                 StartCoroutine(SummonEnemy());
@@ -140,7 +140,7 @@ public class EnemyMovement : Movement
         }
     }
 
-    private IEnumerator ShootSpell()
+    private void ShootSpell()
     {
         LongRangedAttack currentSpell = Instantiate(spell, enemy.wandTip.transform.position, Quaternion.identity).GetComponent<LongRangedAttack>();
 
@@ -148,12 +148,6 @@ public class EnemyMovement : Movement
         currentSpell.target = player;
 
         currentSpell.Initialize();
-
-        yield return new WaitForSeconds(enemy.chargeTime);
-
-        currentSpell.SeekTarget();
-        anim.SetBool("Charging", false);
-        targetLayerWeight = 0f;
     }
 
     private IEnumerator SummonEnemy()
