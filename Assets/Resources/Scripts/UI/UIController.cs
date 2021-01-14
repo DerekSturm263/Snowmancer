@@ -24,6 +24,10 @@ public class UIController : MonoBehaviour
     public Image expBar;
     public float scaler = 1f;
 
+    public GameObject bossHealth;
+    public Slider bossSlider;
+    public Boss boss;
+
     void Start()
     {
         SetMaxHealth();
@@ -153,5 +157,28 @@ public class UIController : MonoBehaviour
     public bool CheckPaused()
     {
         return isPaused;
+    }
+
+    //Boss Health
+    public void ShowBossHealth()
+    {
+        bossHealth.SetActive(true);
+    }
+
+    public void HideBossHealth()
+    {
+        bossHealth.SetActive(false);
+    }
+
+    public void SetMaxBossHealth()
+    {
+        bossSlider.maxValue = boss.maxHealth;
+        bossSlider.value = bossSlider.maxValue;
+    }
+
+    public void SetBossHealth()
+    {
+        bossSlider.value = Mathf.Lerp(bossSlider.value, boss.health, Time.deltaTime * 10f);
+        bossSlider.GetComponentsInChildren<Image>()[0].color = Color.Lerp(Color.red, Color.green, boss.health / boss.maxHealth);
     }
 }
