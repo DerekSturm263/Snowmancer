@@ -84,7 +84,7 @@ public class BossBehavior : MonoBehaviour
         if (!stats.active)
             return;
 
-        if (Vector3.Distance(stats.player.transform.position, transform.position) < 12.5f)
+        if (Vector3.Distance(stats.player.transform.position, transform.position) < 12.5f && (stats.currentAttack != BossAttacks.fireBossSpellBig1 || stats.currentAttack != BossAttacks.fireBossSpellBig2))
             ChooseSpot();
 
         if (stats.timeSinceLastAttack > 0f)
