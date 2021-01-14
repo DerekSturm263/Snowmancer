@@ -24,6 +24,8 @@ public class EnemyMovement : Movement
 
     private Vector3 spawnPosition;
 
+    private GameObject currentSpawningParticles;
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -155,6 +157,7 @@ public class EnemyMovement : Movement
         Vector3 spawnPos = GetSummonSpot(transform.position, spawnRange);
 
         GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+        currentSpawningParticles = summonParticles;
 
         yield return new WaitForSeconds(enemy.chargeTime);
 
@@ -222,4 +225,10 @@ public class EnemyMovement : Movement
     }
 
     #endregion
+
+    private void OnDestroy()
+    {
+        if (currentSpawningParticles != null)
+            Destroy(currentSpawningParticles);
+    }
 }
