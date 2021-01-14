@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 945015628}
-  personal: {fileID: 21300000, guid: 60a2e252842d6d54faac12040521fbb9, type: 3}
+  personal: {fileID: 21300000, guid: e2ab95e386b80ec4aa703dae230a1131, type: 3}
 --- !u!1 &475249796
 GameObject:
   m_ObjectHideFlags: 0
