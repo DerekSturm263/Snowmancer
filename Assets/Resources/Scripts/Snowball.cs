@@ -44,11 +44,13 @@ public class Snowball : MonoBehaviour
     {
         if (rb.isKinematic == false)
         {
-            if (col.gameObject.CompareTag("Enemy"))
+            switch (currentSpell)
             {
-                Debug.Log("enemy hit");
-                EnemyMovement enemyMovement = col.gameObject.GetComponent<EnemyMovement>();
-                enemyMovement.TakeDamage(damage);
+                case CurrentSpell.fire:
+                    break;
+                default:
+                    CompareEnemyTag(col);
+                    break;
             }
 
             trailParticle.transform.parent = null;
@@ -56,6 +58,20 @@ public class Snowball : MonoBehaviour
 
             Instantiate(breakParticles, col.contacts[0].point, Quaternion.identity);
             Destroy(this.gameObject);
+        }
+    }
+
+    void CompareEnemyTag(Collision col)
+    {
+        if (col.gameObject.CompareTag("Enemy"))
+        {
+            EnemyMovement enemyMovement = col.gameObject.GetComponent<EnemyMovement>();
+            enemyMovement.TakeDamage(damage);
+        }
+        else if (col.gameObject.CompareTag("Boss"))
+        {
+            Boss boss = col.gameObject.GetComponent<Boss>();
+            boss.TakeDamage(damage);
         }
     }
 
