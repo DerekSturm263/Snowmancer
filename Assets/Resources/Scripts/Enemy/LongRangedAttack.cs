@@ -234,16 +234,16 @@ public class LongRangedAttack : MonoBehaviour
             player.iceLeft = 2f;
             player.statusEffect = Movement.StatusEffect.Frozen;
             hit.GetComponent<Player>().health -= damage;
+
+            ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+
+            hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+            {
+                x.SetColor("_Tint", Color.cyan);
+                x.SetFloat("_Smoothness", 0.1f);
+            });
         }
-
-        ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
-
-        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
-        {
-            x.SetColor("_Tint", Color.cyan);
-            x.SetFloat("_Smoothness", 0.1f);
-        });
     }
 
     public void Shock(GameObject hit)
@@ -255,10 +255,10 @@ public class LongRangedAttack : MonoBehaviour
             player.statusEffect = Movement.StatusEffect.Shocked;
             hit.GetComponent<Player>().health -= damage;
             hit.GetComponent<Animator>().SetTrigger("Shocked");
-        }
 
-        ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
+            ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+        }
     }
 
     public void Burn(GameObject hit)
@@ -270,15 +270,15 @@ public class LongRangedAttack : MonoBehaviour
             player.statusEffect = Movement.StatusEffect.Burnt;
             player.timeBurnt = 7.5f;
             hit.GetComponent<Player>().health -= damage;
+
+            ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+
+            hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+            {
+                x.SetFloat("_DamageWeight", 0.75f);
+            });
         }
-
-        ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
-
-        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
-        {
-            x.SetFloat("_DamageWeight", 0.75f);
-        });
     }
 
     public void Push(GameObject hit)
