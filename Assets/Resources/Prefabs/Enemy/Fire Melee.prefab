@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5837953197287768596}
   - component: {fileID: 16124335428828480}
   - component: {fileID: 1158686229436492744}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 7633419496169436125}
   - component: {fileID: 3414664508823702031}
   - component: {fileID: 6970117574416491600}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522282915999697542}
   - component: {fileID: 1992439003502835966}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5879124377172673123}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8593643627542309842}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 2781601043854243199}
   - component: {fileID: 1963601668788239824}
   - component: {fileID: 2002556220330262030}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 636250938368981832}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-spine.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2308658949883317990}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-foot.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4939178344487534464}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-toe.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7527441060300408264}
   - component: {fileID: 6196799373141834228}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Coat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 170690903367566538}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 5183982268990082306}
   - component: {fileID: 2524294403601903410}
   - component: {fileID: 985885110927242786}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnemyHealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6848793777888536649}
   - component: {fileID: 3833514433905830487}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: EnemyHealthBar BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7935651442258301974}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-shin.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -846,7 +846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6913732003989549513}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-shin.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -878,7 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8018583581579802492}
   - component: {fileID: 1156500511967976238}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Belt Buckle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -982,7 +982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052924597225678015}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-thigh.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1013,7 +1013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6898087327386446811}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-shoulder.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8342988127109606339}
   - component: {fileID: 6524956961084759619}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,7 +1152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2716005085196737619}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-thigh.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1183,7 +1183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4292045093622773068}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1213,7 +1213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 689416830602129837}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-shoulder.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1244,7 +1244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4501493218115640224}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-spine.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4781233356125719225}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-toe.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1305,7 +1305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4720319535404737327}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-forearm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7648966922890725519}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-upper_arm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1367,7 +1367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7989313001538108656}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1401,7 +1401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138613574773199542}
   - component: {fileID: 8124830928050718068}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1443,7 +1443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4525414453119663070}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-foot.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1474,7 +1474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5810160574223034834}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1504,7 +1504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 960892131724064825}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-spine.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1535,7 +1535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760862458138668449}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-forearm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1566,7 +1566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5338802904515925570}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DEF-upper_arm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1598,7 +1598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6655791885121317330}
   - component: {fileID: 3655393501267125686}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1709,7 +1709,7 @@ GameObject:
   - component: {fileID: 8707125940993513563}
   - component: {fileID: 5257198572228455311}
   - component: {fileID: -5550245175989579430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire Melee
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1781,7 +1781,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2.29
   m_Direction: 1
   m_Center: {x: 0, y: 1.17, z: 0}

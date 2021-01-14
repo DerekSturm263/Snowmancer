@@ -22,7 +22,12 @@ PrefabInstance:
     - target: {fileID: 729267679395944327, guid: 4a1d2fb26f2ac574587bf8e573f26c82,
         type: 3}
       propertyPath: distFromPlayer
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 729267679395944327, guid: 4a1d2fb26f2ac574587bf8e573f26c82,
+        type: 3}
+      propertyPath: spawnRange
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1013266921674943768, guid: 4a1d2fb26f2ac574587bf8e573f26c82,
         type: 3}

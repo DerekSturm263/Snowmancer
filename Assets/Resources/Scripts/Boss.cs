@@ -35,6 +35,8 @@ public class Boss : MonoBehaviour
 
     [HideInInspector] public Transform wandTip;
 
+    public GameObject runeDrop;
+
     private void Awake()
     {
         player = FindObjectOfType<Player>().gameObject;
@@ -111,5 +113,10 @@ public class Boss : MonoBehaviour
         }
 
         return newPos;
+    }
+
+    public void OnDestroy()
+    {
+        Instantiate(runeDrop);
     }
 }
