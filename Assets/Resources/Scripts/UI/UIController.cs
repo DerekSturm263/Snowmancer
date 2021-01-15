@@ -28,6 +28,9 @@ public class UIController : MonoBehaviour
     public Slider bossSlider;
     public Boss boss;
 
+    public Canvas mainCanvas;
+    public GameObject gameOverCanvas;
+
     void Start()
     {
         SetMaxHealth();
@@ -64,6 +67,11 @@ public class UIController : MonoBehaviour
             {
                 Pause();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameOver();
         }
 
         // Update HUD meters
@@ -179,6 +187,14 @@ public class UIController : MonoBehaviour
     public void SetBossHealth()
     {
         bossSlider.value = Mathf.Lerp(bossSlider.value, boss.health, Time.deltaTime * 10f);
-        bossSlider.GetComponentsInChildren<Image>()[0].color = Color.Lerp(Color.red, Color.green, boss.health / boss.maxHealth);
+        bossSlider.GetComponentsInChildren<Image>()[1].color = Color.Lerp(Color.red, Color.green, boss.health / boss.maxHealth);
     }
+
+    public void GameOver()
+    {
+        mainCanvas.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, Time.deltaTime * 5f);
+        gameOverCanvas.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
 }
