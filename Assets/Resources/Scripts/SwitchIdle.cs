@@ -10,8 +10,12 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
     private int footprintNum;
     private GameObject[] footprints = new GameObject[8];
 
+    public bool isEnemy;
+
     private void Awake()
     {
+        if (isEnemy) return;
+
         anim = GetComponent<Animator>();
 
         // Create footprints.
@@ -32,6 +36,9 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
 
     public void SwitchIdlePose()
     {
+        if (isEnemy)
+            return;
+
         if (anim.GetLayerWeight(1) == 1f)
             return;
 
@@ -51,6 +58,9 @@ public class SwitchIdle : MonoBehaviour // Really sorry for calling it SwitchIdl
 
     private void Update()
     {
+        if (isEnemy)
+            return;
+
         if (anim.GetLayerWeight(1) == 1f)
             anim.SetFloat("Idle Animation", 0f);
 

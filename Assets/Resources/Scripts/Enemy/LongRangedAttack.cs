@@ -4,7 +4,9 @@ using System.Linq;
 public class LongRangedAttack : MonoBehaviour
 {
     private Rigidbody rb;
-    private ParticleSystem ps;
+    [HideInInspector] public Enemy user;
+    [HideInInspector] public Boss userBoss;
+    private MeshRenderer mr;
 
     public GameObject target;
     public Vector3 targetOffset;
@@ -15,60 +17,141 @@ public class LongRangedAttack : MonoBehaviour
     public ParticleSystem fireParticles;
     public ParticleSystem frozenParticles;
 
-    public enum AttackType
-    {
-        Fire, Ice, Electric, Wind
-    }
-    public AttackType attackType;
+    public Enemy.ElementType attackType;
 
     public float size = 1f;
     public float speed = 5f;
     public float damage = 5f;
     public float lifeTime = 10f;
+    public float chargeTime = 2f;
+
+    public GameObject[] chargeEffects = new GameObject[4];
+    public GameObject[] trailEffects = new GameObject[4];
+    public GameObject[] hitEffects = new GameObject[4];
+
+    public LayerMask ground;
+
+    [HideInInspector] public GameObject lightningTarget;
+
+    private bool hit = false;
+    private bool active = false;
+
+    [HideInInspector] public Transform origin;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        ps = GetComponentInChildren<ParticleSystem>();
-
-        transform.localScale = new Vector3(size / 2f, size / 2f, size / 2f);
+        mr = GetComponent<MeshRenderer>();
 
         Invoke("Despawn", lifeTime);
     }
 
     private void Update()
     {
-        if (attackType != AttackType.Wind)
+        if (transform.localScale.x < size)
+            transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime)  /2f;
+
+        if (origin == null)
+            Destroy(gameObject);
+
+        if (!active)
+            transform.position = origin.position;
+
+        if (attackType != Enemy.ElementType.Wind)
             return;
 
         rb.velocity = TargetVector(target.transform).normalized * speed * 5f;
     }
 
-    private void Despawn()
+    public void Despawn()
     {
         Destroy(gameObject);
     }
 
-    public void SeekTarget()
+    public void Initialize()
     {
-        ParticleSystem.MainModule main = ps.main;
+        if (user != null)
+        {
+            attackType = user.enemyType;
+            damage = user.damage;
+            speed = user.magicAttackSpeed;
+            size = user.attackSize;
+            lifeTime = user.magicAttackLifeTime;
+            chargeTime = user.chargeTime;
+            origin = user.wandTip;
+        }
+        else
+        {
+            attackType = userBoss.currentAttack.Type;
+            damage = userBoss.currentAttack.Damage;
+            speed = userBoss.currentAttack.Speed;
+            size = userBoss.currentAttack.Size;
+            lifeTime = userBoss.currentAttack.LifeTime;
+            chargeTime = userBoss.currentAttack.ChargeTime;
+            origin = userBoss.wandTip;
+        }
 
         switch (attackType)
         {
-            case AttackType.Ice:
+            case Enemy.ElementType.Fire:
+                mr.material.SetColor("_BaseColor", new Color(1f, 0.5f, 0f, 0.5f));
+                break;
+
+            case Enemy.ElementType.Electric:
+                mr.material.SetColor("_BaseColor", new Color(1f, 1f, 0f, 0.5f));
+                break;
+
+            case Enemy.ElementType.Ice:
+                mr.material.SetColor("_BaseColor", new Color(0f, 0.5f, 1f, 0.5f));
+                break;
+
+            case Enemy.ElementType.Wind:
+                mr.material.SetColor("_BaseColor", new Color(1f, 1f, 1f, 0.5f));
+                break;
+        }
+
+        chargeEffects[(int) attackType].SetActive(true);
+
+        Invoke("SeekTarget", chargeTime + 0.5f);
+    }
+
+    public void SeekTarget()
+    {
+        if (user != null)
+        {
+            user.GetComponent<Animator>().SetBool("Charging", false);
+            user.GetComponent<EnemyMovement>().targetLayerWeight = 0f;
+        }
+        else
+        {
+            userBoss.GetComponent<Animator>().SetBool("Charging", false);
+            userBoss.timeSinceLastAttack = 0.1f;
+        }
+
+        active = true;
+
+        if (attackType != Enemy.ElementType.Electric)
+        {
+            chargeEffects[(int)attackType].SetActive(false);
+            trailEffects[(int)attackType].SetActive(true);
+        }
+
+        switch (attackType)
+        {
+            case Enemy.ElementType.Ice:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 2.5f;
-                main.startColor = Color.cyan;
                 break;
-            case AttackType.Fire:
+            case Enemy.ElementType.Fire:
                 rb.velocity = TargetVector(target.transform).normalized * speed * 5f;
-                main.startColor = Color.red;
                 break;
-            case AttackType.Electric:
-                transform.position = target.transform.position;
-                main.startColor = Color.yellow;
-                break;
-            case AttackType.Wind:
-                main.startColor = Color.white;
+            case Enemy.ElementType.Electric:
+                if (Physics.Linecast(target.transform.position + Vector3.up, target.transform.position + Vector3.down * 10f, out RaycastHit hit, ground))
+                {
+                    transform.position = hit.point;
+                    transform.up = hit.normal;
+                    chargeEffects[2].SetActive(false);
+                    trailEffects[2].SetActive(true);
+                }
                 break;
         }
     }
@@ -82,71 +165,126 @@ public class LongRangedAttack : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Despawn();
+            if (hit || !active) return;
+            hit = true;
+            mr.enabled = false;
+
+            if (attackType != Enemy.ElementType.Electric)
+            {
+                hitEffects[(int) attackType].SetActive(true);
+                trailEffects[(int)attackType].SetActive(false);
+
+                Invoke("Despawn", 0.5f);
+            }
+
+            rb.velocity = Vector3.zero;
 
             switch (attackType)
             {
-                case AttackType.Ice:
+                case Enemy.ElementType.Ice:
                     Freeze(other.gameObject);
                     break;
-                case AttackType.Fire:
+                case Enemy.ElementType.Fire:
                     Burn(other.gameObject);
                     break;
-                case AttackType.Electric:
-                    Shock(other.gameObject);
+                case Enemy.ElementType.Electric:
+                    lightningTarget = other.gameObject;
+                    Invoke("SetShockTimer", 1.9f);
+                    Invoke("Despawn", 4f);
                     break;
-                case AttackType.Wind:
+                case Enemy.ElementType.Wind:
                     Push(other.gameObject);
                     break;
             }
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground") || other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        {
+            if (hit || !active) return;
+            hit = true;
+            mr.enabled = false;
+
+            if (attackType != Enemy.ElementType.Electric)
+            {
+                hitEffects[(int)attackType].SetActive(true);
+                trailEffects[(int)attackType].SetActive(false);
+            }
+
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    public void SetShockTimer()
+    {
+        hitEffects[2].SetActive(true);
+        trailEffects[2].SetActive(false);
+        
+        if (Vector3.Distance(lightningTarget.transform.position, transform.position) < 2f)
+        {
+            Shock(lightningTarget);
         }
     }
 
     public void Freeze(GameObject hit)
     {
-        hit.GetComponent<Animator>().speed = 0f;
-        hit.GetComponent<PlayerMovement>().iceLeft = 2f;
-        hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Frozen;
-        hit.GetComponent<Player>().health -= 5f;
+        PlayerMovement player = hit.GetComponent<PlayerMovement>();
 
-        ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
-
-        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+        if (player.statusEffect == Movement.StatusEffect.None)
         {
-            x.SetColor("_Tint", Color.cyan);
-            x.SetFloat("_Smoothness", 0.1f);
-        });
+            hit.GetComponent<Animator>().speed = 0f;
+            player.iceLeft = 2f;
+            player.statusEffect = Movement.StatusEffect.Frozen;
+            hit.GetComponent<Player>().health -= damage;
+
+            ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+
+            hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+            {
+                x.SetColor("_Tint", Color.cyan);
+                x.SetFloat("_Smoothness", 0.1f);
+            });
+        }
     }
 
     public void Shock(GameObject hit)
     {
-        hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Shocked;
-        hit.GetComponent<Player>().health -= 10f;
-        hit.GetComponent<Animator>().SetTrigger("Shocked");
+        PlayerMovement player = hit.GetComponent<PlayerMovement>();
 
-        ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
+        if (player.statusEffect == Movement.StatusEffect.None)
+        {
+            player.statusEffect = Movement.StatusEffect.Shocked;
+            hit.GetComponent<Player>().health -= damage;
+            hit.GetComponent<Animator>().SetTrigger("Shocked");
+
+            ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+        }
     }
 
     public void Burn(GameObject hit)
     {
-        hit.GetComponent<PlayerMovement>().statusEffect = Movement.StatusEffect.Burnt;
-        hit.GetComponent<PlayerMovement>().timeBurnt = 7.5f;
-        hit.GetComponent<Player>().health -= 5f;
+        PlayerMovement player = hit.GetComponent<PlayerMovement>();
 
-        ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
-
-        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+        if (player.statusEffect == Movement.StatusEffect.None)
         {
-            x.SetFloat("_DamageWeight", 0.75f);
-        });
+            player.statusEffect = Movement.StatusEffect.Burnt;
+            player.timeBurnt = 7.5f;
+            hit.GetComponent<Player>().health -= damage;
+
+            ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+
+            hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+            {
+                x.SetFloat("_DamageWeight", 0.75f);
+            });
+        }
     }
 
     public void Push(GameObject hit)
     {
-        hit.GetComponent<Rigidbody>().AddForce((hit.transform.position - transform.position).normalized * 100f, ForceMode.Acceleration);
-        hit.GetComponent<Player>().health -= 15f;
+        hit.GetComponent<PlayerMovement>().snapToGround = false;
+        hit.GetComponent<Rigidbody>().velocity = new Vector3(0f, 20f, 0f); // Not working because of snapping script.
+        hit.GetComponent<Player>().health -= damage;
     }
 }

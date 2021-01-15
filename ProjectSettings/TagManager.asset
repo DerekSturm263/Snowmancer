@@ -9,6 +9,10 @@ TagManager:
   - Snowball
   - Rune
   - Snow
+  - Enemy
+  - HealthPotion
+  - ManaPotion
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -21,9 +25,9 @@ TagManager:
   - Ground
   - Player
   - DontCollidePlayer
-  - 
-  - 
-  - 
+  - Detail
+  - Boss
+  - Enemy
   - 
   - 
   - 

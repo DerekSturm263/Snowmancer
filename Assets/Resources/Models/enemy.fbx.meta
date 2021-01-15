@@ -238,7 +238,9 @@ ModelImporter:
       has scale animation that will be discarded.\n\t'DEF-shin.L' has scale animation
       that will be discarded.\n\t'DEF-foot.L' has scale animation that will be discarded.\n\t'DEF-thigh.R'
       has scale animation that will be discarded.\n\t'DEF-shin.R' has scale animation
-      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\n"
+      that will be discarded.\n\t'DEF-foot.R' has scale animation that will be discarded.\nEvent
+      LongRangeAttack has a time (0.708333) outside the clip's valid range (0.000000..0.666667).
+      It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -305,10 +307,26 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.55572313
+        functionName: StartParticles
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: dbf91732576c72b4fb304ba8b85b63ae,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.7679325
         functionName: DealDamage
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 9767b8d5ca27aa046a4fac865a820b57,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.994012
+        functionName: StopParticles
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: dbf91732576c72b4fb304ba8b85b63ae,
           type: 3}
         floatParameter: 0
         intParameter: 0
@@ -341,7 +359,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 1
+        functionName: LongRangeAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -399,15 +424,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.79746836
-        functionName: ShootSpell
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 9767b8d5ca27aa046a4fac865a820b57,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
