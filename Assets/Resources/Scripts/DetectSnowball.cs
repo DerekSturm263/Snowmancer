@@ -14,7 +14,7 @@ public class DetectSnowball : MonoBehaviour
         if (ai.stats.currentAttack == BossAttacks.fireBossSpellBig1 || ai.stats.currentAttack == BossAttacks.fireBossSpellBig2)
             return;
 
-        if (other.CompareTag("Snowball"))
+        if (other.CompareTag("Snowball") && other.attachedRigidbody.velocity.magnitude > 0f)
         {
             ai.stats.attackNum = 0;
 

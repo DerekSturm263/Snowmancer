@@ -1833,8 +1833,8 @@ MonoBehaviour:
   hand: {fileID: 0}
   wandTip: {fileID: 0}
   randomize: 0
-  maxHealth: 20
-  health: 20
+  maxHealth: 40
+  health: 40
   enemyType: 0
   enemyAttackType: 0
   damage: 5

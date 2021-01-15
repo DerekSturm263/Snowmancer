@@ -93,6 +93,9 @@ public class PlayerMovement : Movement
         {
             player.health -= Time.deltaTime * 2.5f;
             timeBurnt -= Time.deltaTime;
+
+            if (player.health <= 0f)
+                anim.SetTrigger("Dead");
         }
 
         if (timeBurnt < 0f)

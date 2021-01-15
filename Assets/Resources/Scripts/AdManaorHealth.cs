@@ -1,24 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AdManaorHealth : MonoBehaviour
 {
-    Player p;
-    void Start()
-    {
-        p = GetComponent<Player>();
-    }
+    public float healAmount;
 
-    private void OnCollisionEnter(Collision collision)
+    public enum PotionType
     {
-        if (collision.collider.tag == "Mana")
+        Health, Mana
+    }
+    public PotionType potionType;
+
+    private void OnTriggerEnter(Collider col)
+    {
+        Debug.Log("AAAAAAAAA");
+
+        if (col.CompareTag("Player"))
         {
-            p.mana += 20;
-        }
-        if (collision.collider.tag == "Health")
-        {
-            p.health += 10;
+            Debug.Log("BBBBBBBBBBBBBB");
+
+            switch (potionType)
+            {
+                case PotionType.Health:
+                    col.GetComponent<Player>().AddHealth(healAmount);
+                    break;
+                case PotionType.Mana:
+                    col.GetComponent<Player>().AddMana(healAmount);
+                    break;
+            }
         }
     }
 }

@@ -94,13 +94,14 @@ public class BossAttacks : MonoBehaviour
 
             GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
 
-            GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Enemy");
+            GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Melee");
 
             GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
             newEnemy.SetActive(true);
             Destroy(summonParticles);
 
             fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
+            boss.timeSinceLastAttack = 0.1f;
         });
         fireBossSummon2.SetAction(() =>
         {
@@ -109,13 +110,14 @@ public class BossAttacks : MonoBehaviour
 
             GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
 
-            GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Enemy");
+            GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Magic");
 
             GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
             newEnemy.SetActive(true);
             Destroy(summonParticles);
 
             fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
+            boss.timeSinceLastAttack = 0.1f;
         });
     }
 }

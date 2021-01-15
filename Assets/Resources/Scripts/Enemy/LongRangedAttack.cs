@@ -233,7 +233,7 @@ public class LongRangedAttack : MonoBehaviour
             hit.GetComponent<Animator>().speed = 0f;
             player.iceLeft = 2f;
             player.statusEffect = Movement.StatusEffect.Frozen;
-            hit.GetComponent<Player>().health -= damage;
+            hit.GetComponent<Player>().TakeDamage(damage);
 
             ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
             newParticles.transform.localPosition += targetOffset;
@@ -253,7 +253,7 @@ public class LongRangedAttack : MonoBehaviour
         if (player.statusEffect == Movement.StatusEffect.None)
         {
             player.statusEffect = Movement.StatusEffect.Shocked;
-            hit.GetComponent<Player>().health -= damage;
+            hit.GetComponent<Player>().TakeDamage(damage);
             hit.GetComponent<Animator>().SetTrigger("Shocked");
 
             ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
@@ -269,7 +269,7 @@ public class LongRangedAttack : MonoBehaviour
         {
             player.statusEffect = Movement.StatusEffect.Burnt;
             player.timeBurnt = 7.5f;
-            hit.GetComponent<Player>().health -= damage;
+            hit.GetComponent<Player>().TakeDamage(damage);
 
             ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
             newParticles.transform.localPosition += targetOffset;

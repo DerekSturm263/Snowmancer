@@ -28,6 +28,7 @@ public class Boss : MonoBehaviour
     public float timeSinceLastAttack = 0.1f;
     public float timeBetweenAttacks;
 
+    private int phaseIndex = 0;
     public Dictionary<int, Action> phaseFeatures = new Dictionary<int, Action>(); // Keeps track of what phase the boss needs to be on to add a new attack/modify an old one.
 
     [HideInInspector] public List<Material> materials = new List<Material>();
@@ -37,6 +38,8 @@ public class Boss : MonoBehaviour
     [HideInInspector] public Transform wandTip;
 
     public GameObject runeDrop;
+
+    public bool newSpot = false;
 
     private void Awake()
     {
@@ -55,33 +58,76 @@ public class Boss : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        ui.SetBossHealth();
+    }
+
     public void TryNewFeature(int key)
     {
         try
         {
             phaseFeatures[key].Invoke();
         }
-        catch { }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
     }
 
     public void TakeDamage(float damage)
     {
-        for (int i = 0; i < damage; i++)
+        if (type == ElementType.Fire)
         {
-            health--;
-            TryNewFeature((int)((maxHealth - health) / maxHealth));
+            if (currentAttack != BossAttacks.fireBossSpellBig1 && currentAttack != BossAttacks.fireBossSpellBig2 && !anim.GetBool("Dazed"))
+                return;
         }
 
-        health -= damage;
-        StartCoroutine(DamageFlash());
-        
-        if (health <= 0)
+        if (!active)
+            return;
+
+        if (type == ElementType.Fire)
+        {
+            if (damage > 25f)
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
+                {
+                    Debug.Log("Dazed");
+                    anim.SetBool("Dazed", true);
+                    Invoke("UnDaze", 4f);
+                    ResetAttack();
+
+                    TryNewFeature(++phaseIndex);
+                }
+            }
+            else
+            {
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
+                    damage /= 2f;
+                else
+                    damage = 0f;
+            }
+        }
+
+        if (damage > 0f)
+        {
+            health -= damage;
+            StartCoroutine(DamageFlash());
+        }
+
+        if (health <= 0f)
         {
             anim.SetTrigger("Death");
             ui.HideBossHealth();
             FindObjectOfType<EnterNextLevel>().active = true;
             this.enabled = false;
         }
+    }
+
+    private void UnDaze()
+    {
+        anim.SetBool("Dazed", false);
+        newSpot = true;
     }
 
     private IEnumerator DamageFlash()
@@ -121,11 +167,25 @@ public class Boss : MonoBehaviour
 
     public void OnDestroy()
     {
-        Instantiate(runeDrop);
+        Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
     }
 
     public void ShowHealth()
     {
         ui.ShowBossHealth();
+        ui.SetMaxBossHealth();
+    }
+
+    public void ResetAttack()
+    {
+        if (currentAttack != null)
+        {
+            try
+            {
+                currentAttack.Spell.Despawn();
+            } catch { }
+
+            currentAttack = null;
+        }
     }
 }

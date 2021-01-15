@@ -36,7 +36,7 @@ public class BossBehavior : MonoBehaviour
         stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
         stats.attacks.Add(() => ChooseSpot());
 
-        stats.phaseFeatures.Add(75, () =>
+        stats.phaseFeatures.Add(1, () =>
         {
             stats.attacks.Clear();
 
@@ -47,7 +47,19 @@ public class BossBehavior : MonoBehaviour
             stats.attacks.Add(() => ChooseSpot());
         });
 
-        stats.phaseFeatures.Add(50, () =>
+        stats.phaseFeatures.Add(2, () =>
+        {
+            stats.attacks.Clear();
+
+            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+            stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
+            stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
+            stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
+            stats.attacks.Add(() => ChooseSpot());
+        });
+
+        stats.phaseFeatures.Add(3, () =>
         {
             stats.attacks.Clear();
 
@@ -59,7 +71,7 @@ public class BossBehavior : MonoBehaviour
             stats.attacks.Add(() => ChooseSpot());
         });
 
-        stats.phaseFeatures.Add(25, () =>
+        stats.phaseFeatures.Add(4, () =>
         {
             stats.attacks.Clear();
 
@@ -72,7 +84,7 @@ public class BossBehavior : MonoBehaviour
             stats.attacks.Add(() => BossAttacks.fireBossSpellBig2.AttackAction.Invoke());
             stats.attacks.Add(() => ChooseSpot());
         });
-                              
+
         ChooseSpot();         
     }
 
@@ -87,23 +99,37 @@ public class BossBehavior : MonoBehaviour
         if (!stats.active)
             return;
 
-        if (Vector3.Distance(stats.player.transform.position, transform.position) < 12.5f && (stats.currentAttack != BossAttacks.fireBossSpellBig1 || stats.currentAttack != BossAttacks.fireBossSpellBig2))
+        if (stats.newSpot)
+        {
+            stats.newSpot = false;
             ChooseSpot();
+            stats.attackNum = 0;
+        }
+
+        if (Vector3.Distance(stats.player.transform.position, transform.position) < 7.5f && !(stats.currentAttack == BossAttacks.fireBossSpellBig1 || stats.currentAttack == BossAttacks.fireBossSpellBig2))
+        {
+            ChooseSpot();
+            stats.ResetAttack();
+        }
 
         if (stats.timeSinceLastAttack > 0f)
             stats.timeSinceLastAttack += Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, targetSpot) > 2.5f)
+        if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
         {
-            targetSpeed = 1f;
-        }
-        else
-        {
-            targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
-            targetSpeed = 0f;
+            if (Vector3.Distance(transform.position, targetSpot) > 2.5f)
+            {
+                targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
+                targetSpeed = 1f;
+            }
+            else
+            {
+                targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+                targetSpeed = 0f;
 
-            if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
-                stats.anim.SetBool("Charging", true);
+                if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                    stats.anim.SetBool("Charging", true);
+            }
         }
 
         transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
@@ -133,6 +159,5 @@ public class BossBehavior : MonoBehaviour
         targetSpot = spots[Random.Range(1, 3)];
 
         stats.timeSinceLastAttack = 0.1f;
-        targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
     }
 }
