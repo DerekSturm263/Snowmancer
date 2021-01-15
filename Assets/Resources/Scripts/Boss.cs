@@ -76,6 +76,7 @@ public class Boss : MonoBehaviour
         if (health <= 0)
         {
             anim.SetTrigger("Death");
+            FindObjectOfType<EnterNextLevel>().active = true;
             this.enabled = false;
         }
     }

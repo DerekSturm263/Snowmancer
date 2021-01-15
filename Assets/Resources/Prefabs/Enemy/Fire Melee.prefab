@@ -1709,6 +1709,7 @@ GameObject:
   - component: {fileID: 8707125940993513563}
   - component: {fileID: 5257198572228455311}
   - component: {fileID: -5550245175989579430}
+  - component: {fileID: -4756485103695856021}
   m_Layer: 13
   m_Name: Fire Melee
   m_TagString: Enemy
@@ -1858,3 +1859,15 @@ MonoBehaviour:
   footprintMesh: {fileID: 0}
   footprintMaterial: {fileID: 0}
   isEnemy: 1
+--- !u!114 &-4756485103695856021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990545070596219588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf91732576c72b4fb304ba8b85b63ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
