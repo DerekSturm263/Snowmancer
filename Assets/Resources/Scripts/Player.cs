@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Rendering.Universal.Internal;
 using System.Linq;
 
@@ -55,12 +56,17 @@ public class Player : MonoBehaviour
     public float slomoSmooth;
 
     //cd's
+    private float heldTimer;
     private float throwCD;
 
     private Animator playerAnimator;
     public UIController uiCont;
     public MenuScript menuScript;
     private CameraController camScript;
+    private GameObject crosshair;
+    private GameObject SB_lock;
+    private GameObject SBdefault;
+    private GameObject SBhand;
 
     [HideInInspector] public List<Material> materials = new List<Material>();
 
@@ -68,6 +74,10 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerAnimator = this.GetComponent<Animator>();
+        crosshair = GameObject.Find("Crosshair");
+        SB_lock = GameObject.Find("SBoriginLock");
+        SBhand = GameObject.Find("DEF-hand.LPlayer");
+        SBdefault = GameObject.Find("SBoriginDefault");
         //menuScript = FindObjectOfType<MenuScript>().GetComponent<MenuScript>();
         foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
@@ -90,17 +100,22 @@ public class Player : MonoBehaviour
                     if (Input.GetMouseButton(1)) { currentState = State.AIMING; }
                     if (Input.GetKey(KeyCode.Tab) || Input.GetKey(KeyCode.E)) { currentState = State.SELECTSPELL; }
                     if (Input.GetKey(KeyCode.R)) { currentState = State.COLLECTINGSNOW; }
-                        break;
+                    heldTimer = 0f;
+                    break;
 
-                case State.AIMING:
+                case State.AIMING:heldTimer = 0f;
+                    playerAnimator.SetBool("Release Snowball", false);
                     aiming = true;
-                    if(Input.GetMouseButtonDown(0) && snowAmount > 0 && currentSnowball == null && throwCD <= 0 && CheckManaCost()) //Prepare to throw snowball
+                    heldTimer = 0f;
+                    if (Input.GetMouseButtonDown(0) && snowAmount > 0 && currentSnowball == null && throwCD <= 0 && CheckManaCost()) //Prepare to throw snowball
                     {
                         GameObject ball = Instantiate(snowballPrefab, snowballThrowPoint.transform.position, Quaternion.identity);
                         currentSnowball = ball;
                         SetSnowballElement(currentSnowball.GetComponent<Snowball>(), currentSpell);
                         currentSnowball.transform.parent = snowballThrowPoint.transform;
                         currentSnowball.GetComponent<Rigidbody>().isKinematic = true;
+                        currentSnowball.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+                        SB_lock.transform.SetParent(SBhand.transform, false);
                         currentState = State.CHARGING;
                     }
                     if (!Input.GetMouseButton(1)) { aiming = false; currentState = State.IDLE; }
@@ -108,37 +123,37 @@ public class Player : MonoBehaviour
 
                 case State.CHARGING:
                     playerAnimator.SetLayerWeight(1, 1f);
-                    playerAnimator.SetBool("Release Snowball", false);
                     playerAnimator.SetFloat("Snowball Size", currentSnowball.transform.localScale.x );
                     currentSnowballDamage = throwBaseDamage * currentSnowball.transform.lossyScale.x * sizeDamageMultiplier;
                     Debug.Log(currentSnowballDamage); //Use toCheck damage realtime.
-                    if (!Input.GetMouseButton(0) && currentSnowball != null)
+                    heldTimer += Time.deltaTime;
+                    if (Input.GetMouseButtonUp(0) && currentSnowball != null && !playerAnimator.GetBool("Release Snowball"))
                     {
                         playerAnimator.SetBool("Release Snowball", true);
+                        if (heldTimer < 0.4f)
+                        {
+                            snowAmount -= 10f; currentSnowballDamage = throwBaseDamage;
+                        }
                     }
                     if (currentSnowball == null)
                     {
                         currentState = State.AIMING;
                     }
-                    if (snowAmount > 0 && currentSnowball != null && currentSnowball.transform.localScale.x < maxSnowballSize)
+                    if (snowAmount > 0 && currentSnowball != null && currentSnowball.transform.localScale.x < maxSnowballSize && heldTimer > 0.4f)
                     {
                         currentSnowball.transform.localScale += new Vector3(snowballIncreaseSpeed, snowballIncreaseSpeed, snowballIncreaseSpeed) * (Time.deltaTime);
                         decreaseSnowAmount(snowDecreaseSpeed * Time.deltaTime);
                     }
-
-                    if (currentSpell == CurrentSpell.air)
-                    {
-
-                    }
-
                     break;
 
                 case State.SELECTSPELL:
                     selectingSpell = true;
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = Mathf.Lerp(Time.timeScale, 0.1f, slomoSmooth * Time.deltaTime);
+                    crosshair.SetActive(false);
                     if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.E))
                     {
+                        crosshair.SetActive(true);
                         SetCurrentSpell();
                         selectingSpell = false;
                         Cursor.lockState = CursorLockMode.Locked;
@@ -204,6 +219,7 @@ public class Player : MonoBehaviour
     //Throw
     public void AnimationThrowSnowball()
     {
+        SB_lock.transform.SetParent(SBdefault.transform, false);
         ThrowSnowball(currentSnowball.transform.localScale, currentSnowballDamage);
         currentSnowball.GetComponent<Rigidbody>().isKinematic = false;
         currentSnowball.transform.parent = null;
@@ -231,7 +247,6 @@ public class Player : MonoBehaviour
         Rigidbody rb = currentSnowball.GetComponent<Rigidbody>();
         Snowball snowball = currentSnowball.GetComponent<Snowball>();
         Debug.Log(target);
-
         float time = (hitDistance / 100) * throwStrength;
         snowball.damage = damage;
         switch (snowball.currentSpell)
@@ -245,8 +260,9 @@ public class Player : MonoBehaviour
                 mana -= 33f;
                 break;
         }
+        snowball.transform.position = SBdefault.transform.position;
         Debug.Log(rb.velocity);
-        throwCD = 0.5f;
+        throwCD = 0.25f;
         // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.
         // A quick click will immediately play the throw animation, while a long press will begin to play the building animation.
 

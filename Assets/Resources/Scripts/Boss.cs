@@ -5,6 +5,10 @@ using System;
 
 public class Boss : MonoBehaviour
 {
+    public LayerMask ground;
+    private UIController ui;
+
+    public GameObject player;
     [HideInInspector] public Animator anim;
 
     public enum ElementType
@@ -17,26 +21,29 @@ public class Boss : MonoBehaviour
     public float health;
     public float spawnRange;
 
-    public float attackChargeTime;
+    [HideInInspector] public int attackNum = 0;
+    public List<Action> attacks = new List<Action>();
+    public BossAttack currentAttack;
 
-    public float damage;
-    public float magicAttackSpeed;
-    public float attackSize;
-    public float attackLifetime;
+    public float timeSinceLastAttack = 0.1f;
+    public float timeBetweenAttacks;
 
-    public Enemy.ElementType attackType;
-
-    [HideInInspector] public uint currentPhase = 1;
-    [HideInInspector] private float damageBetweenPhases = 10f;
-
-    public Dictionary<uint, Action> phaseFeatures = new Dictionary<uint, Action>(); // Keeps track of what phase the boss needs to be on to add a new attack/modify an old one.
+    public Dictionary<int, Action> phaseFeatures = new Dictionary<int, Action>(); // Keeps track of what phase the boss needs to be on to add a new attack/modify an old one.
 
     [HideInInspector] public List<Material> materials = new List<Material>();
 
     [HideInInspector] public bool active = false;
 
+    [HideInInspector] public Transform wandTip;
+
+    public GameObject runeDrop;
+
     private void Awake()
     {
+        player = FindObjectOfType<Player>().gameObject;
+        wandTip = GetComponentInChildren<WandTip>().transform;
+        ui = FindObjectOfType<UIController>();
+
         anim = GetComponent<Animator>();
 
         foreach (SkinnedMeshRenderer mr in GetComponentsInChildren<SkinnedMeshRenderer>())
@@ -48,26 +55,31 @@ public class Boss : MonoBehaviour
         }
     }
 
-    public void NextPhase()
+    public void TryNewFeature(int key)
     {
-        phaseFeatures[++currentPhase].Invoke();
-        Debug.Log("Next phase.");
+        try
+        {
+            phaseFeatures[key].Invoke();
+        }
+        catch { }
     }
 
     public void TakeDamage(float damage)
     {
+        for (int i = 0; i < damage; i++)
+        {
+            health--;
+            TryNewFeature((int)((maxHealth - health) / maxHealth));
+        }
+
         health -= damage;
         StartCoroutine(DamageFlash());
-
-        float remainingHP = maxHealth - health;
-
+        
         if (health <= 0)
         {
             anim.SetTrigger("Death");
-
-            anim.SetLayerWeight(1, 0f);
-            anim.SetLayerWeight(2, 0f);
-
+            ui.HideBossHealth();
+            FindObjectOfType<EnterNextLevel>().active = true;
             this.enabled = false;
         }
     }
@@ -93,5 +105,27 @@ public class Boss : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public Vector3 GetSummonSpot(Vector3 startPos, float range)
+    {
+        Vector3 newPos = startPos + new Vector3(UnityEngine.Random.Range(-range, range), 0f, UnityEngine.Random.Range(-range, range));
+
+        if (Physics.Linecast(newPos, newPos + Vector3.down * 10f, out RaycastHit hit, ground))
+        {
+            return hit.point;
+        }
+
+        return newPos;
+    }
+
+    public void OnDestroy()
+    {
+        Instantiate(runeDrop);
+    }
+
+    public void ShowHealth()
+    {
+        ui.ShowBossHealth();
     }
 }

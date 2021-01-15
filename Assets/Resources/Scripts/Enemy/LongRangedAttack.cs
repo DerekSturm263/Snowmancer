@@ -6,6 +6,7 @@ public class LongRangedAttack : MonoBehaviour
     private Rigidbody rb;
     [HideInInspector] public Enemy user;
     [HideInInspector] public Boss userBoss;
+    private MeshRenderer mr;
 
     public GameObject target;
     public Vector3 targetOffset;
@@ -22,6 +23,7 @@ public class LongRangedAttack : MonoBehaviour
     public float speed = 5f;
     public float damage = 5f;
     public float lifeTime = 10f;
+    public float chargeTime = 2f;
 
     public GameObject[] chargeEffects = new GameObject[4];
     public GameObject[] trailEffects = new GameObject[4];
@@ -39,12 +41,16 @@ public class LongRangedAttack : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mr = GetComponent<MeshRenderer>();
 
         Invoke("Despawn", lifeTime);
     }
 
     private void Update()
     {
+        if (transform.localScale.x < size)
+            transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime)  /2f;
+
         if (origin == null)
             Destroy(gameObject);
 
@@ -71,24 +77,57 @@ public class LongRangedAttack : MonoBehaviour
             speed = user.magicAttackSpeed;
             size = user.attackSize;
             lifeTime = user.magicAttackLifeTime;
+            chargeTime = user.chargeTime;
             origin = user.wandTip;
         }
         else
         {
-            attackType = userBoss.attackType;
-            damage = userBoss.damage;
-            speed = userBoss.magicAttackSpeed;
-            size = userBoss.attackSize;
-            lifeTime = userBoss.attackLifetime;
-            origin = userBoss.transform;
+            attackType = userBoss.currentAttack.Type;
+            damage = userBoss.currentAttack.Damage;
+            speed = userBoss.currentAttack.Speed;
+            size = userBoss.currentAttack.Size;
+            lifeTime = userBoss.currentAttack.LifeTime;
+            chargeTime = userBoss.currentAttack.ChargeTime;
+            origin = userBoss.wandTip;
         }
 
-        transform.localScale = new Vector3(size / 2f, size / 2f, size / 2f);
-        chargeEffects[(int)attackType].SetActive(true);
+        switch (attackType)
+        {
+            case Enemy.ElementType.Fire:
+                mr.material.SetColor("_BaseColor", new Color(1f, 0.5f, 0f, 0.5f));
+                break;
+
+            case Enemy.ElementType.Electric:
+                mr.material.SetColor("_BaseColor", new Color(1f, 1f, 0f, 0.5f));
+                break;
+
+            case Enemy.ElementType.Ice:
+                mr.material.SetColor("_BaseColor", new Color(0f, 0.5f, 1f, 0.5f));
+                break;
+
+            case Enemy.ElementType.Wind:
+                mr.material.SetColor("_BaseColor", new Color(1f, 1f, 1f, 0.5f));
+                break;
+        }
+
+        chargeEffects[(int) attackType].SetActive(true);
+
+        Invoke("SeekTarget", chargeTime + 0.5f);
     }
 
     public void SeekTarget()
     {
+        if (user != null)
+        {
+            user.GetComponent<Animator>().SetBool("Charging", false);
+            user.GetComponent<EnemyMovement>().targetLayerWeight = 0f;
+        }
+        else
+        {
+            userBoss.GetComponent<Animator>().SetBool("Charging", false);
+            userBoss.timeSinceLastAttack = 0.1f;
+        }
+
         active = true;
 
         if (attackType != Enemy.ElementType.Electric)
@@ -128,6 +167,7 @@ public class LongRangedAttack : MonoBehaviour
         {
             if (hit || !active) return;
             hit = true;
+            mr.enabled = false;
 
             if (attackType != Enemy.ElementType.Electric)
             {
@@ -161,6 +201,7 @@ public class LongRangedAttack : MonoBehaviour
         {
             if (hit || !active) return;
             hit = true;
+            mr.enabled = false;
 
             if (attackType != Enemy.ElementType.Electric)
             {
@@ -193,16 +234,16 @@ public class LongRangedAttack : MonoBehaviour
             player.iceLeft = 2f;
             player.statusEffect = Movement.StatusEffect.Frozen;
             hit.GetComponent<Player>().health -= damage;
+
+            ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+
+            hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+            {
+                x.SetColor("_Tint", Color.cyan);
+                x.SetFloat("_Smoothness", 0.1f);
+            });
         }
-
-        ParticleSystem newParticles = Instantiate(frozenParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
-
-        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
-        {
-            x.SetColor("_Tint", Color.cyan);
-            x.SetFloat("_Smoothness", 0.1f);
-        });
     }
 
     public void Shock(GameObject hit)
@@ -214,10 +255,10 @@ public class LongRangedAttack : MonoBehaviour
             player.statusEffect = Movement.StatusEffect.Shocked;
             hit.GetComponent<Player>().health -= damage;
             hit.GetComponent<Animator>().SetTrigger("Shocked");
-        }
 
-        ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
+            ParticleSystem newParticles = Instantiate(shockedParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+        }
     }
 
     public void Burn(GameObject hit)
@@ -229,15 +270,15 @@ public class LongRangedAttack : MonoBehaviour
             player.statusEffect = Movement.StatusEffect.Burnt;
             player.timeBurnt = 7.5f;
             hit.GetComponent<Player>().health -= damage;
+
+            ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
+            newParticles.transform.localPosition += targetOffset;
+
+            hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
+            {
+                x.SetFloat("_DamageWeight", 0.75f);
+            });
         }
-
-        ParticleSystem newParticles = Instantiate(fireParticles, hit.transform);
-        newParticles.transform.localPosition += targetOffset;
-
-        hit.GetComponent<PlayerMovement>().materials.ToList().ForEach(x =>
-        {
-            x.SetFloat("_DamageWeight", 0.75f);
-        });
     }
 
     public void Push(GameObject hit)
