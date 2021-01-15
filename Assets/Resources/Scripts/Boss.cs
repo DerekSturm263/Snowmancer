@@ -6,6 +6,7 @@ using System;
 public class Boss : MonoBehaviour
 {
     public LayerMask ground;
+    private UIController ui;
 
     public GameObject player;
     [HideInInspector] public Animator anim;
@@ -41,6 +42,7 @@ public class Boss : MonoBehaviour
     {
         player = FindObjectOfType<Player>().gameObject;
         wandTip = GetComponentInChildren<WandTip>().transform;
+        ui = FindObjectOfType<UIController>();
 
         anim = GetComponent<Animator>();
 
@@ -76,6 +78,7 @@ public class Boss : MonoBehaviour
         if (health <= 0)
         {
             anim.SetTrigger("Death");
+            ui.HideBossHealth();
             FindObjectOfType<EnterNextLevel>().active = true;
             this.enabled = false;
         }
@@ -119,5 +122,10 @@ public class Boss : MonoBehaviour
     public void OnDestroy()
     {
         Instantiate(runeDrop);
+    }
+
+    public void ShowHealth()
+    {
+        ui.ShowBossHealth();
     }
 }

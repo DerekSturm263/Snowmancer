@@ -21,8 +21,13 @@ public class DetectSnowball : MonoBehaviour
             if (ai.stats.currentAttack != null)
                 ai.stats.currentAttack.Spell.Despawn();
 
+            if (!ai.stats.active)
+            {
+                ai.stats.active = true;
+                ai.stats.ShowHealth();
+            }
+
             ai.stats.currentAttack = null;
-            ai.stats.active = true;
             ai.stats.anim.SetBool("Charging", false);
 
             ai.ChooseSpot();

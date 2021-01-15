@@ -79,7 +79,10 @@ public class BossBehavior : MonoBehaviour
     private void Update()
     {
         if (!stats.active && Vector3.Distance(stats.player.transform.position, transform.position) < 30f)
+        {
             stats.active = true;
+            stats.ShowHealth();
+        }
 
         if (!stats.active)
             return;
