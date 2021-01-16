@@ -29,63 +29,93 @@ public class BossBehavior : MonoBehaviour
 
     private void Awake()
     {
-        BossAttacks.Initialize(stats);
-
-        stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
-        stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
-        stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
-        stats.attacks.Add(() => ChooseSpot());
-
-        stats.phaseFeatures.Add(1, () =>
+        switch (stats.type)
         {
-            stats.attacks.Clear();
+            case Boss.ElementType.Fire:
 
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
-            stats.attacks.Add(() => ChooseSpot());
-        });
+                BossAttacks.fireBoss = stats;
+                BossAttacks.Initialize(stats);
 
-        stats.phaseFeatures.Add(2, () =>
-        {
-            stats.attacks.Clear();
+                stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
+                stats.attacks.Add(() => ChooseSpot());
 
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
-            stats.attacks.Add(() => ChooseSpot());
-        });
+                stats.phaseFeatures.Add(1, () =>
+                {
+                    stats.attacks.Clear();
 
-        stats.phaseFeatures.Add(3, () =>
-        {
-            stats.attacks.Clear();
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
+                    stats.attacks.Add(() => ChooseSpot());
+                });
 
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellBig2.AttackAction.Invoke());
-            stats.attacks.Add(() => ChooseSpot());
-        });
+                stats.phaseFeatures.Add(2, () =>
+                {
+                    stats.attacks.Clear();
 
-        stats.phaseFeatures.Add(4, () =>
-        {
-            stats.attacks.Clear();
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellBig1.AttackAction.Invoke());
+                    stats.attacks.Add(() => ChooseSpot());
+                });
 
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
-            stats.attacks.Add(() => BossAttacks.fireBossSpellBig2.AttackAction.Invoke());
-            stats.attacks.Add(() => ChooseSpot());
-        });
+                stats.phaseFeatures.Add(3, () =>
+                {
+                    stats.attacks.Clear();
 
-        ChooseSpot();         
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellBig2.AttackAction.Invoke());
+                    stats.attacks.Add(() => ChooseSpot());
+                });
+
+                stats.phaseFeatures.Add(4, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSummon2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellSmall2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.fireBossSpellBig2.AttackAction.Invoke());
+                    stats.attacks.Add(() => ChooseSpot());
+                });
+
+                ChooseSpot();
+                break;
+
+            case Boss.ElementType.Electric:
+
+                BossAttacks.fireBoss = stats;
+                BossAttacks.Initialize(stats);
+
+                stats.attacks.Add(() => BossAttacks.electricBossSpell.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossStomp1.AttackAction.Invoke());
+
+                break;
+
+            case Boss.ElementType.Wind:
+
+                BossAttacks.windBoss = stats;
+
+                break;
+
+            case Boss.ElementType.All:
+
+                BossAttacks.finalBoss = stats;
+
+                break;
+        }
     }
 
     private void Update()
@@ -99,38 +129,41 @@ public class BossBehavior : MonoBehaviour
         if (!stats.active)
             return;
 
-        if (stats.newSpot)
+        if (stats.type == Boss.ElementType.Fire)
         {
-            stats.newSpot = false;
-            ChooseSpot();
-            stats.attackNum = 0;
-        }
+            if (stats.newSpot)
+            {
+                stats.newSpot = false;
+                ChooseSpot();
+                stats.attackNum = 0;
+            }
 
-        if (Vector3.Distance(stats.player.transform.position, transform.position) < 7.5f && !(stats.currentAttack == BossAttacks.fireBossSpellBig1 || stats.currentAttack == BossAttacks.fireBossSpellBig2))
-        {
-            ChooseSpot();
-            stats.ResetAttack();
+            if (Vector3.Distance(stats.player.transform.position, transform.position) < 7.5f && !(stats.currentAttack == BossAttacks.fireBossSpellBig1 || stats.currentAttack == BossAttacks.fireBossSpellBig2))
+            {
+                ChooseSpot();
+                stats.ResetAttack();
+            }
+
+            if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
+            {
+                if (Vector3.Distance(transform.position, targetSpot) > 2.5f)
+                {
+                    targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
+                    targetSpeed = 1f;
+                }
+                else
+                {
+                    targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+                    targetSpeed = 0f;
+
+                    if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                        stats.anim.SetBool("Charging", true);
+                }
+            }
         }
 
         if (stats.timeSinceLastAttack > 0f)
             stats.timeSinceLastAttack += Time.deltaTime;
-
-        if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
-        {
-            if (Vector3.Distance(transform.position, targetSpot) > 2.5f)
-            {
-                targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
-                targetSpeed = 1f;
-            }
-            else
-            {
-                targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
-                targetSpeed = 0f;
-
-                if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
-                    stats.anim.SetBool("Charging", true);
-            }
-        }
 
         transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
 

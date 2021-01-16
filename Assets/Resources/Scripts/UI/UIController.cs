@@ -33,6 +33,7 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+        Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
         SetMaxMana();
     }
@@ -58,7 +59,7 @@ public class UIController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameOverCanvas.activeSelf)
         {
             if (isPaused)
             {
@@ -69,10 +70,8 @@ public class UIController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GameOver();
-        }
+        if (Input.GetKeyDown(KeyCode.F11))
+            Application.Quit();
 
         // Update HUD meters
         SetSnowFill();
@@ -192,9 +191,27 @@ public class UIController : MonoBehaviour
 
     public void GameOver()
     {
-        mainCanvas.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0f, 1f, Time.deltaTime * 5f);
+        // Wasn't fading properly so I changed it to just make the alpha 0. Consider using animations for this instead.
+        mainCanvas.GetComponent<CanvasGroup>().alpha = 0f;
         gameOverCanvas.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+
+        CameraController camCont = player.cam.GetComponentInParent<CameraController>();
+        camCont.CameraFollowObj = camCont.follow2;
+        camCont.CamOffset.x = 0f;
+        camCont.CamOffset.y = 0f;
+
+        StartCoroutine(SlowDown());
     }
 
+    private IEnumerator SlowDown()
+    {
+        for (float i = 0f; i < 1.5f; i += Time.deltaTime)
+        {
+            CameraController.isActive = false;
+            Shader.SetGlobalFloat("_BlacknessLerp", i / 1f);
+            Time.timeScale = 1.5f - i;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

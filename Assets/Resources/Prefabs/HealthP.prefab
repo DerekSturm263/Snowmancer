@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8214933533298168797}
   - component: {fileID: 2599796033275866289}
   - component: {fileID: 8001003042969373951}
-  - component: {fileID: -2223767790306379485}
   m_Layer: 0
   m_Name: HealthP
   m_TagString: HealthPotion
@@ -4792,20 +4791,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-2223767790306379485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997842393775955616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93fa6111f47e1d449923e7abdd1b5c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healAmount: 20
-  potionType: 0
 --- !u!1001 &8855959994510388810
 PrefabInstance:
   m_ObjectHideFlags: 0

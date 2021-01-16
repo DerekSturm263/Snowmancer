@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8139003631575187648}
   - component: {fileID: 1496793402152709369}
   - component: {fileID: 2961678856957099232}
-  - component: {fileID: -6942844405375937117}
   m_Layer: 0
   m_Name: Mana
   m_TagString: ManaPotion
@@ -4792,20 +4791,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-6942844405375937117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2417299499763289173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93fa6111f47e1d449923e7abdd1b5c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healAmount: 20
-  potionType: 1
 --- !u!1001 &5036692581156375392
 PrefabInstance:
   m_ObjectHideFlags: 0

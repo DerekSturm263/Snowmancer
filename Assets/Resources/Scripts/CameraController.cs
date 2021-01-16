@@ -33,6 +33,10 @@ public class CameraController : MonoBehaviour
     private float tempSens;
     private float savedCamDist;
     private Player playerScript;
+    public GameObject follow2;
+
+    public static bool isActive = true;
+
     void Start()
     {
         Vector3 rot = transform.localRotation.eulerAngles;
@@ -52,6 +56,9 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isActive)
+            return;
+
         //rotation
         if (!playerScript.selectingSpell) //if selecting spell, don't rotate
         {

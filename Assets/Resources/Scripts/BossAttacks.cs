@@ -30,94 +30,204 @@ public class BossAttacks : MonoBehaviour
 
     #endregion
 
+    #region Electric Boss Attacks
+
+    // Element Type, Charge Time, Damage, Size, Speed, Lifetime
+    public static BossAttack electricBossSpell = new BossAttack(Enemy.ElementType.Electric, 2f, 10f, 0.5f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
+    
+    public static BossAttack electricBossStomp1 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 10f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp2 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 10f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp3 = new BossAttack(Enemy.ElementType.Electric, 3f, 25f, 1f, 7.5f, 10f, BossAttack.BossUser.Electric_Boss);
+
+    public static BossAttack electricBossSummon = new BossAttack(Enemy.ElementType.Electric, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
+
+    #endregion
+
+    #region Wind Boss Attacks
+
+    // Element Type, Charge Time, Damage, Size, Speed, Lifetime
+    public static BossAttack windBossSpell1 = new BossAttack(Enemy.ElementType.Wind, 2f, 15f, 0.5f, 1.5f, 10f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windBossSpell2 = new BossAttack(Enemy.ElementType.Wind, 1f, 15f, 0.75f, 2f, 7.5f, BossAttack.BossUser.Wind_Boss);
+
+    public static BossAttack windSummon1_1 = new BossAttack(Enemy.ElementType.Wind, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windSummon1_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windSummon2_1 = new BossAttack(Enemy.ElementType.Wind, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windSummon2_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
+
+    #endregion
+
+    #region Final Boss Attacks
+
+    // Element Type, Charge Time, Damage, Size, Speed, Lifetime
+    public static BossAttack finalBossSpell1_1 = new BossAttack(Enemy.ElementType.Ice, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell1_2 = new BossAttack(Enemy.ElementType.Ice, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell2_1 = new BossAttack(Enemy.ElementType.Fire, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell2_2 = new BossAttack(Enemy.ElementType.Fire, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell3_1 = new BossAttack(Enemy.ElementType.Electric, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell3_2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell4_1 = new BossAttack(Enemy.ElementType.Wind, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell4_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
+
+    public static BossAttack finalBossSummon1 = new BossAttack(Enemy.ElementType.Ice, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSummon2 = new BossAttack(Enemy.ElementType.Fire, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSummon3 = new BossAttack(Enemy.ElementType.Electric, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSummon4 = new BossAttack(Enemy.ElementType.Wind, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+
+    public static BossAttack finalBossSmash1_1 = new BossAttack(Enemy.ElementType.Ice, 3f, 40f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash1_2 = new BossAttack(Enemy.ElementType.Ice, 2f, 60f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash2_1 = new BossAttack(Enemy.ElementType.Fire, 3f, 40f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash2_2 = new BossAttack(Enemy.ElementType.Fire, 2f, 60f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash3_1 = new BossAttack(Enemy.ElementType.Electric, 3f, 40f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash3_2 = new BossAttack(Enemy.ElementType.Electric, 2f, 60f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash4_1 = new BossAttack(Enemy.ElementType.Wind, 3f, 40f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSmash4_2 = new BossAttack(Enemy.ElementType.Wind, 2f, 60f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
+
+    #endregion
+
     public static void Initialize(Boss boss)
     {
-        fireBossAttacks.ForEach(x =>
+        if (boss == fireBoss)
         {
-            x.SetUser(boss);
-        });
+            fireBossAttacks.ForEach(x =>
+            {
+                x.SetUser(boss);
+            });
 
+            #region Attacks
 
+            fireBossSpellSmall1.SetAction(() =>
+            {
+                boss.currentAttack = fireBossSpellSmall1;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
 
-        fireBossSpellSmall1.SetAction(() =>
+                currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                fireBossSpellSmall1.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            fireBossSpellSmall2.SetAction(() =>
+            {
+                boss.currentAttack = fireBossSpellSmall2;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                fireBossSpellSmall2.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+
+            fireBossSpellBig1.SetAction(() =>
+            {
+                boss.currentAttack = fireBossSpellBig1;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                fireBossSpellBig1.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            fireBossSpellBig2.SetAction(() =>
+            {
+                boss.currentAttack = fireBossSpellBig2;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                fireBossSpellBig2.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+
+            fireBossSummon1.SetAction(() =>
+            {
+                boss.currentAttack = fireBossSummon1;
+                Vector3 spawnPos = fireBossSummon1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, fireBossSpellSmall1.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Melee");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+            fireBossSummon2.SetAction(() =>
+            {
+                boss.currentAttack = fireBossSummon2;
+                Vector3 spawnPos = fireBossSummon2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, fireBossSpellSmall2.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Magic");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+
+            #endregion
+        }
+        else if (boss == electricBoss)
         {
-            boss.currentAttack = fireBossSpellSmall1;
-            LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+            electricBossAttacks.ForEach(x =>
+            {
+                x.SetUser(boss);
+            });
 
-            currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
-            currentSpell.target = FindObjectOfType<Player>().gameObject;
-            fireBossSpellSmall1.Spell = currentSpell;
+            #region Attacks
 
-            currentSpell.Initialize();
-        });
-        fireBossSpellSmall2.SetAction(() =>
+            electricBossSpell.SetAction(() =>
+            {
+                boss.currentAttack = electricBossSpell;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = electricBossSpell.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                electricBossSpell.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            electricBossStomp1.SetAction(() =>
+            {
+
+            });
+            electricBossStomp2.SetAction(() =>
+            {
+
+            });
+            electricBossStomp3.SetAction(() =>
+            {
+
+            });
+            electricBossSummon.SetAction(() =>
+            {
+
+            });
+
+            #endregion
+        }
+        else if (boss == windBoss)
         {
-            boss.currentAttack = fireBossSpellSmall2;
-            LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
-
-            currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
-            currentSpell.target = FindObjectOfType<Player>().gameObject;
-            fireBossSpellSmall2.Spell = currentSpell;
-
-            currentSpell.Initialize();
-        });
-
-
-        fireBossSpellBig1.SetAction(() =>
+            windBossAttacks.ForEach(x =>
+            {
+                x.SetUser(boss);
+            });
+        }
+        else
         {
-            boss.currentAttack = fireBossSpellBig1;
-            LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
-
-            currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
-            currentSpell.target = FindObjectOfType<Player>().gameObject;
-            fireBossSpellBig1.Spell = currentSpell;
-
-            currentSpell.Initialize();
-        });
-        fireBossSpellBig2.SetAction(() =>
-        {
-            boss.currentAttack = fireBossSpellBig2;
-            LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
-
-            currentSpell.userBoss = fireBossSpellSmall1.UserBoss;
-            currentSpell.target = currentSpell.userBoss.player;
-            fireBossSpellBig2.Spell = currentSpell;
-
-            currentSpell.Initialize();
-        });
-
-
-        fireBossSummon1.SetAction(() =>
-        {
-            boss.currentAttack = fireBossSummon1;
-            Vector3 spawnPos = fireBossSummon1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, fireBossSpellSmall1.UserBoss.spawnRange);
-
-            GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
-            GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Melee");
-
-            GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
-            newEnemy.SetActive(true);
-            Destroy(summonParticles);
-
-            fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
-            boss.timeSinceLastAttack = 0.1f;
-        });
-        fireBossSummon2.SetAction(() =>
-        {
-            boss.currentAttack = fireBossSummon2;
-            Vector3 spawnPos = fireBossSummon2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, fireBossSpellSmall2.UserBoss.spawnRange);
-
-            GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
-            GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Magic");
-
-            GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
-            newEnemy.SetActive(true);
-            Destroy(summonParticles);
-
-            fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
-            boss.timeSinceLastAttack = 0.1f;
-        });
+            finalBossAttacks.ForEach(x =>
+            {
+                x.SetUser(boss);
+            });
+        }
     }
 }
