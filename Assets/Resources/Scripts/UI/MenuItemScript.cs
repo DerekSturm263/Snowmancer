@@ -9,7 +9,7 @@ public class MenuItemScript : MonoBehaviour
     public Color hoverColor;
     public Image background;
 
-    public Text nameDisplay;
+    public TMPro.TMP_Text nameDisplay;
     public string runeName;
     public Image currentSpell;
     public Sprite icon;

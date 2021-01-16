@@ -167,9 +167,10 @@ public class UIController : MonoBehaviour
     }
 
     //Boss Health
-    public void ShowBossHealth()
+    public void ShowBossHealth(string name)
     {
         bossHealth.SetActive(true);
+        bossHealth.GetComponentInChildren<TMPro.TMP_Text>().text = name;
     }
 
     public void HideBossHealth()

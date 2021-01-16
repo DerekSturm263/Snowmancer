@@ -8,6 +8,7 @@ public class Boss : MonoBehaviour
     public LayerMask ground;
     private UIController ui;
 
+    public string name;
     public GameObject player;
     [HideInInspector] public Animator anim;
 
@@ -172,7 +173,7 @@ public class Boss : MonoBehaviour
 
     public void ShowHealth()
     {
-        ui.ShowBossHealth();
+        ui.ShowBossHealth(name);
         ui.SetMaxBossHealth();
     }
 
