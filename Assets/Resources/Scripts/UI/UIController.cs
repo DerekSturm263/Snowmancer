@@ -1,11 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class UIController : MonoBehaviour
 {
+    private DepthOfField dof;
+
     public Player player;
 
     public Slider healthSlider;
@@ -31,11 +34,15 @@ public class UIController : MonoBehaviour
     public Canvas mainCanvas;
     public GameObject gameOverCanvas;
 
+    public float defaultFocusLength;
+    public float pausedFocusLength;
+
     void Start()
     {
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
         SetMaxMana();
+        Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
     }
 
     void Update()
@@ -50,12 +57,16 @@ public class UIController : MonoBehaviour
                 menuItemSc = menuItems[spellID].GetComponent<MenuItemScript>();
                 Cursor.lockState = CursorLockMode.Confined;
 
+                dof.focusDistance.value = pausedFocusLength;
+
             }
             else if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.E))
             {
                 menuItemSc.SetCurrentSpell();
                 spellSelector.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
+
+                dof.focusDistance.value = defaultFocusLength;
             }
         }
 
@@ -132,6 +143,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        dof.focusDistance.value = defaultFocusLength;
     }
 
     void Pause()
@@ -141,6 +153,7 @@ public class UIController : MonoBehaviour
         isPaused = true;
         spellSelector.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
+        dof.focusDistance.value = pausedFocusLength;
     }
 
     public void LoadScene(string sceneToLoad)
