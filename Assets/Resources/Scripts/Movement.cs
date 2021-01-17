@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
 
     protected bool mouseAim;
 
-    [SerializeField] private Vector3 targetPos;
+    [SerializeField] public Vector3 targetPos;
 
     public float groundedDistance;
     public float groundedVelocity;
