@@ -28,10 +28,13 @@ public class EnemyMovement : Movement
 
     public GameObject hitEffect;
 
+    private GameObject healthPotion;
+
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         player = FindObjectOfType<Player>().gameObject;
+        healthPotion = Resources.Load<GameObject>("Prefabs/HealthP");
 
         anim.SetBool("Move While Charging", enemy.moveWhileAttacking);
         spawnPosition = transform.position;
@@ -234,6 +237,14 @@ public class EnemyMovement : Movement
 
     private void OnDestroy()
     {
+        if (player.GetComponent<Player>().health / player.GetComponent<Player>().maxHealth < 0.25f)
+        {
+            if (Random.Range(0, 6) > 3)
+            {
+                Instantiate(healthPotion, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+            }
+        }
+
         if (currentSpawningParticles != null)
             Destroy(currentSpawningParticles);
     }
