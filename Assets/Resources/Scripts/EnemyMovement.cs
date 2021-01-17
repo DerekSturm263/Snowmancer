@@ -42,6 +42,9 @@ public class EnemyMovement : Movement
 
         #region Moving
 
+        if (Vector3.Distance(player.transform.position, transform.position) > followDist * 5f)
+            isTargeting = false;
+
         if (Vector3.Distance(player.transform.position, transform.position) < followDist)
             isTargeting = true;
 
