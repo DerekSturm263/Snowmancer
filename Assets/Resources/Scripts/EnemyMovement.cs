@@ -132,9 +132,11 @@ public class EnemyMovement : Movement
     public void DealDamage()
     {
         if (Vector3.Distance(player.transform.position, transform.position) < distFromPlayer + 1f)
+        {
             player.GetComponent<Player>().TakeDamage(enemy.damage);
+            Instantiate(hitEffect, Vector3.Lerp(player.transform.position, transform.position, 0.3f) + new Vector3(0f, 2.125f, 0f), Quaternion.identity);
+        }
 
-        Instantiate(hitEffect, Vector3.Lerp(player.transform.position, transform.position, 0.3f) + new Vector3(0f, 2.125f, 0f), Quaternion.identity);
         targetLayerWeight = 0f;
     }
 
