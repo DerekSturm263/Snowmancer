@@ -1818,6 +1818,8 @@ MonoBehaviour:
   spawnParticles: {fileID: 0}
   enemyToSummon: {fileID: 0}
   targetLayerWeight: 0
+  hitEffect: {fileID: 1274039403663575174, guid: b4cb78400991452429eafc550e41bf19,
+    type: 3}
 --- !u!114 &5257198572228455311
 MonoBehaviour:
   m_ObjectHideFlags: 0

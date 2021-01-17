@@ -420,6 +420,12 @@ PrefabInstance:
       propertyPath: attackRange
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8707125940993513563, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
+        type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 1274039403663575174, guid: b4cb78400991452429eafc550e41bf19,
+        type: 3}
     - target: {fileID: 8750946661492117674, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
       propertyPath: m_Layer

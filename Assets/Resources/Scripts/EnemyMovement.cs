@@ -13,7 +13,7 @@ public class EnemyMovement : Movement
 
     public float followDist; // Enemy will not notice the player until they are this far away.
     public float distFromPlayer; // Enemy will move towards player until they are this far away.
-    [HideInInspector] private bool isTargeting = false; // Enemy will move towards player and attack if true.
+    private bool isTargeting = false; // Enemy will move towards player and attack if true.
 
     public float spawnRange;
 
@@ -25,6 +25,8 @@ public class EnemyMovement : Movement
     private Vector3 spawnPosition;
 
     private GameObject currentSpawningParticles;
+
+    public GameObject hitEffect;
 
     private void Start()
     {
@@ -42,11 +44,11 @@ public class EnemyMovement : Movement
 
         #region Moving
 
-        if (Vector3.Distance(player.transform.position, transform.position) > followDist * 5f)
-            isTargeting = false;
-
         if (Vector3.Distance(player.transform.position, transform.position) < followDist)
             isTargeting = true;
+
+        if (Vector3.Distance(player.transform.position, transform.position) > followDist * 1.5f)
+            isTargeting = false;
 
         if (isTargeting)
         {
@@ -129,6 +131,7 @@ public class EnemyMovement : Movement
         if (Vector3.Distance(player.transform.position, transform.position) < distFromPlayer + 1f)
             player.GetComponent<Player>().TakeDamage(enemy.damage);
 
+        Instantiate(hitEffect, Vector3.Lerp(player.transform.position, transform.position, 0.3f) + new Vector3(0f, 2.125f, 0f), Quaternion.identity);
         targetLayerWeight = 0f;
     }
 
