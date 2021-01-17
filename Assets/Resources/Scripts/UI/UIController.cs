@@ -89,7 +89,7 @@ public class UIController : MonoBehaviour
             Application.Quit();
 
         if (Input.GetKeyDown(KeyCode.T))
-            GiveTip("Test");
+            GiveTip("Is he a good guy? Bad guy deffinitely a bad guy!!", 4);
 
         // Update HUD meters
         SetSnowFill();
@@ -236,10 +236,16 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void GiveTip(string setTipText)
+    public void GiveTip(string setTipText, float displayTime)
     {
-        racoonTip.SetActive(false);
+        
         racoonTip.SetActive(true);
         tipText.text = setTipText;
+        Invoke("ExitTip", displayTime);
+    }
+
+    private void ExitTip()
+    {
+        racoonTip.GetComponent<Animator>().SetTrigger("Exit");
     }
 }
