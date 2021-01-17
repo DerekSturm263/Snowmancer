@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class UIController : MonoBehaviour
 
     public float defaultFocusLength;
     public float pausedFocusLength;
+
+    public GameObject racoonTip;
+    public TMP_Text tipText;
 
     void Start()
     {
@@ -83,6 +87,9 @@ public class UIController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F11))
             Application.Quit();
+
+        if (Input.GetKeyDown(KeyCode.T))
+            GiveTip("Test");
 
         // Update HUD meters
         SetSnowFill();
@@ -227,5 +234,12 @@ public class UIController : MonoBehaviour
             Time.timeScale = 1.5f - i;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void GiveTip(string setTipText)
+    {
+        racoonTip.SetActive(false);
+        racoonTip.SetActive(true);
+        tipText.text = setTipText;
     }
 }
