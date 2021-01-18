@@ -11,6 +11,7 @@ public class Boss : MonoBehaviour
     public string name;
     public GameObject player;
     [HideInInspector] public Animator anim;
+    [HideInInspector] public Rigidbody rb;
 
     public enum ElementType
     {
@@ -47,6 +48,7 @@ public class Boss : MonoBehaviour
         player = FindObjectOfType<Player>().gameObject;
         wandTip = GetComponentInChildren<WandTip>().transform;
         ui = FindObjectOfType<UIController>();
+        rb = GetComponent<Rigidbody>();
 
         anim = GetComponent<Animator>();
 
@@ -107,6 +109,21 @@ public class Boss : MonoBehaviour
                     damage /= 2f;
                 else
                     damage = 0f;
+            }
+        }
+        else if (type == ElementType.Wind)
+        {
+            if (damage > 25f && anim.GetBool("Charging")) // Make bigger once we add leveling up.
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+                {
+                    damage *= 2f;
+                    anim.SetBool("Dazed", true);
+                    Invoke("UnDaze", 6f);
+                    ResetAttack();
+
+                    TryNewFeature(++phaseIndex);
+                }
             }
         }
 

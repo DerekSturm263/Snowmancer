@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
                         currentSnowball.transform.parent = snowballThrowPoint.transform;
                         currentSnowball.GetComponent<Rigidbody>().isKinematic = true;
                         currentSnowball.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-                        SB_lock.transform.SetParent(SBhand.transform, false);
+                        //SB_lock.transform.SetParent(SBhand.transform, false);
                         currentState = State.CHARGING;
                     }
                     if (!Input.GetMouseButton(1)) { aiming = false; currentState = State.IDLE; }
@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
     //Throw
     public void AnimationThrowSnowball()
     {
-        SB_lock.transform.SetParent(SBdefault.transform, false);
+        //SB_lock.transform.SetParent(SBdefault.transform, false);
         ThrowSnowball(currentSnowball.transform.localScale, currentSnowballDamage);
         currentSnowball.GetComponent<Rigidbody>().isKinematic = false;
         currentSnowball.transform.parent = null;
@@ -260,7 +260,7 @@ public class Player : MonoBehaviour
                 mana -= 33f;
                 break;
         }
-        snowball.transform.position = SBdefault.transform.position;
+        //snowball.transform.position = SBdefault.transform.position;
         Debug.Log(rb.velocity);
         throwCD = 0.25f;
         // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.

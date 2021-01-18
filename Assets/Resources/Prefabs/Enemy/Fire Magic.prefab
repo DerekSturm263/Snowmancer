@@ -265,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 5257198572228455311, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
       propertyPath: attackSize
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5257198572228455311, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
@@ -280,7 +280,7 @@ PrefabInstance:
     - target: {fileID: 5257198572228455311, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}
       propertyPath: moveWhileAttacking
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5257198572228455311, guid: 0fe2b8bd1859dec43ae56c0f13c9c528,
         type: 3}

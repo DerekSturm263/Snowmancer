@@ -95,7 +95,7 @@ public class BossBehavior : MonoBehaviour
 
             case Boss.ElementType.Electric:
 
-                BossAttacks.fireBoss = stats;
+                BossAttacks.electricBoss = stats;
                 BossAttacks.Initialize(stats);
 
                 stats.attacks.Add(() => BossAttacks.electricBossSpell.AttackAction.Invoke());
@@ -107,12 +107,59 @@ public class BossBehavior : MonoBehaviour
             case Boss.ElementType.Wind:
 
                 BossAttacks.windBoss = stats;
+                BossAttacks.Initialize(stats);
 
+                stats.attacks.Add(() => BossAttacks.windBossSpell1.AttackAction.Invoke());
+
+                stats.phaseFeatures.Add(2, () =>
+                {
+                    stats.attacks.Clear();
+                    
+                    stats.attacks.Add(() => BossAttacks.windSummon1_1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon1_1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell1.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(3, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.windSummon2_1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon2_1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell1.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(4, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.windSummon1_2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon2_2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell2.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(6, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.windBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon1_2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon2_2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon1_2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.windSummon2_2.AttackAction.Invoke());
+                });
+
+                AerialWander();
                 break;
 
             case Boss.ElementType.All:
 
                 BossAttacks.finalBoss = stats;
+                BossAttacks.Initialize(stats);
 
                 break;
         }
@@ -124,6 +171,9 @@ public class BossBehavior : MonoBehaviour
         {
             stats.active = true;
             stats.ShowHealth();
+
+            if (stats.type == Boss.ElementType.Wind)
+                stats.anim.SetTrigger("Start");
         }
 
         if (!stats.active)
@@ -160,12 +210,37 @@ public class BossBehavior : MonoBehaviour
                         stats.anim.SetBool("Charging", true);
                 }
             }
-        }
 
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+        }
+        else if (stats.type == Boss.ElementType.Wind)
+        {
+            if (stats.newSpot)
+            {
+                stats.newSpot = false;
+                AerialWander();
+                stats.attackNum = 0;
+            }
+
+            if (Vector3.Distance(transform.position, targetSpot) > 5f)
+            {
+                targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
+                targetSpeed = 1f;
+            }
+            else
+            {
+                targetSpeed = 0f;
+                //targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+
+                if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                    stats.anim.SetBool("Charging", true);
+            }
+
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + 180f, targetRotation.eulerAngles.z);
+        }
+        
         if (stats.timeSinceLastAttack > 0f)
             stats.timeSinceLastAttack += Time.deltaTime;
-
-        transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
 
         stats.anim.SetFloat("Vertical", targetSpeed);
     }
@@ -192,5 +267,18 @@ public class BossBehavior : MonoBehaviour
         targetSpot = spots[Random.Range(1, 3)];
 
         stats.timeSinceLastAttack = 0.1f;
+    }
+
+    public void AerialWander()
+    {
+        stats.anim.SetBool("Charging", false);
+        targetSpot = spots[spots.IndexOf(targetSpot) + 1];
+        stats.timeSinceLastAttack = 0.1f;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+            stats.anim.SetBool("Grounded", true);
     }
 }

@@ -221,6 +221,98 @@ public class BossAttacks : MonoBehaviour
             {
                 x.SetUser(boss);
             });
+
+            #region Attacks
+
+            windBossSpell1.SetAction(() =>
+            {
+                boss.currentAttack = windBossSpell1;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = windBossSpell1.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                windBossSpell1.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            windBossSpell2.SetAction(() =>
+            {
+                boss.currentAttack = windBossSpell2;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = windBossSpell2.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                windBossSpell2.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            windSummon1_1.SetAction(() =>
+            {
+                boss.currentAttack = windSummon1_1;
+                Vector3 spawnPos = windSummon1_1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon1_1.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Melee");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                windSummon1_1.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+            windSummon1_2.SetAction(() =>
+            {
+                boss.currentAttack = windSummon1_2;
+                Vector3 spawnPos = windSummon1_2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon1_2.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Melee");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                windSummon1_2.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+            windSummon2_1.SetAction(() =>
+            {
+                boss.currentAttack = windSummon2_1;
+                Vector3 spawnPos = windSummon2_1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon2_1.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Magic");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                windSummon2_1.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+            windSummon2_2.SetAction(() =>
+            {
+                boss.currentAttack = windSummon2_2;
+                Vector3 spawnPos = windSummon2_2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon2_2.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Magic");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                windSummon2_2.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+
+
+            #endregion
         }
         else
         {

@@ -112,15 +112,16 @@ public class LongRangedAttack : MonoBehaviour
 
         chargeEffects[(int) attackType].SetActive(true);
 
-        Invoke("SeekTarget", chargeTime + 0.5f);
+        Invoke("SeekTarget", chargeTime);
     }
 
     public void SeekTarget()
     {
+        mr.enabled = false;
+
         if (user != null)
         {
             user.GetComponent<Animator>().SetBool("Charging", false);
-            user.GetComponent<EnemyMovement>().targetLayerWeight = 0f;
         }
         else
         {
@@ -135,6 +136,9 @@ public class LongRangedAttack : MonoBehaviour
             chargeEffects[(int)attackType].SetActive(false);
             trailEffects[(int)attackType].SetActive(true);
         }
+        var main = trailEffects[(int)attackType].GetComponent<ParticleSystem>().main;
+        main.startSize = size * 2f;
+
 
         switch (attackType)
         {

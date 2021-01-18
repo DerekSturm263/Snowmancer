@@ -239,11 +239,14 @@ public class EnemyMovement : Movement
 
     private void OnDestroy()
     {
-        if (player.GetComponent<Player>().health / player.GetComponent<Player>().maxHealth < 0.25f)
+        if (player != null)
         {
-            if (Random.Range(0, 6) > 3)
+            if (player.GetComponent<Player>().health / player.GetComponent<Player>().maxHealth < 0.25f)
             {
-                Instantiate(healthPotion, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+                if (Random.Range(0, 6) > 3)
+                {
+                    Instantiate(healthPotion, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+                }
             }
         }
 
