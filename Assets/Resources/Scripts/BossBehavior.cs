@@ -225,12 +225,14 @@ public class BossBehavior : MonoBehaviour
             if (Vector3.Distance(transform.position, targetSpot) > 5f)
             {
                 targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
-                targetSpeed = 1f;
+                stats.anim.SetFloat("Vertical", 1f);
             }
             else
             {
-                targetSpeed = 0f;
-                //targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+                transform.position = Vector3.Lerp(transform.position, targetSpot, Time.deltaTime);
+
+                targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+                stats.anim.SetFloat("Vertical", 0f);
 
                 if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
                     stats.anim.SetBool("Charging", true);
@@ -242,7 +244,6 @@ public class BossBehavior : MonoBehaviour
         if (stats.timeSinceLastAttack > 0f)
             stats.timeSinceLastAttack += Time.deltaTime;
 
-        stats.anim.SetFloat("Vertical", targetSpeed);
     }
 
     public void UseAttack()
