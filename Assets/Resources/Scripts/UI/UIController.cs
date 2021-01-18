@@ -51,7 +51,7 @@ public class UIController : MonoBehaviour
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
         SetMaxMana();
-        //////Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
+        Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
     }
 
     void Update()
@@ -155,7 +155,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
-        //////dof.focusDistance.value = defaultFocusLength;
+        dof.focusDistance.value = defaultFocusLength;
     }
 
     void Pause()
@@ -165,7 +165,7 @@ public class UIController : MonoBehaviour
         isPaused = true;
         spellSelector.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
-        //////dof.focusDistance.value = pausedFocusLength;
+        dof.focusDistance.value = pausedFocusLength;
     }
 
     public void LoadScene(string sceneToLoad)
