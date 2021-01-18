@@ -182,19 +182,14 @@ public class EnemyMovement : Movement
 
     private Vector3 GetSummonSpot(Vector3 startPos, float range)
     {
-        bool recalculate = true;
-        while (recalculate)
+        Vector3 newPos = startPos + new Vector3(Random.Range(-range, range), 0f, Random.Range(-range, range));
+        
+        if (Physics.Linecast(newPos, newPos + Vector3.down * 10f, out RaycastHit hit, ground))
         {
-            Vector3 newPos = startPos + new Vector3(Random.Range(-range, range), 0f, Random.Range(-range, range));
-
-            if (Physics.Linecast(newPos, newPos + Vector3.down * 10f, out RaycastHit hit, ground))
-            {
-                return hit.point;
-            }
+            return hit.point;
         }
 
-
-        return startPos;
+        return newPos;
     }
 
     #region Taking Damage
