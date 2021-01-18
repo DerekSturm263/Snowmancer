@@ -3,7 +3,7 @@
 [ExecuteInEditMode]
 public class FindGround : MonoBehaviour
 {
-    public Vector3 offset = new Vector3(0f, 9f, 0f);
+    public Vector3 offset = new Vector3(0f, 0.25f, 0f);
 
     private void Start()
     {
