@@ -93,15 +93,11 @@ public class UIController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F11))
             Application.Quit();
 
-        if (Input.GetKeyDown(KeyCode.T))
-            GiveTip("Is he a good guy? Bad guy deffinitely a bad guy!!", 4);
-
         // Update HUD meters
         SetSnowFill();
         SetHealth();
         SetMana();
         FillExp();
-
     }
 
     //Health

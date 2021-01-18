@@ -3,6 +3,8 @@ using System.Linq;
 
 public class LongRangedAttack : MonoBehaviour
 {
+    private GameObject player;
+
     private Rigidbody rb;
     [HideInInspector] public Enemy user;
     [HideInInspector] public Boss userBoss;
@@ -31,8 +33,6 @@ public class LongRangedAttack : MonoBehaviour
 
     public LayerMask ground;
 
-    [HideInInspector] public GameObject lightningTarget;
-
     private bool hit = false;
     private bool active = false;
 
@@ -42,6 +42,7 @@ public class LongRangedAttack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mr = GetComponent<MeshRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
         Invoke("Despawn", lifeTime);
     }
@@ -49,7 +50,7 @@ public class LongRangedAttack : MonoBehaviour
     private void Update()
     {
         if (transform.localScale.x < size)
-            transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime)  /2f;
+            transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime) / 2f;
 
         if (origin == null)
             Destroy(gameObject);
@@ -151,11 +152,12 @@ public class LongRangedAttack : MonoBehaviour
             case Enemy.ElementType.Electric:
                 if (Physics.Linecast(target.transform.position + Vector3.up, target.transform.position + Vector3.down * 10f, out RaycastHit hit, ground))
                 {
-                    transform.position = hit.point;
+                    transform.position = hit.point - new Vector3(0f, 0.4f, 0f);
                     transform.up = hit.normal;
                     chargeEffects[2].SetActive(false);
                     trailEffects[2].SetActive(true);
                 }
+                Invoke("SetShockTimer", 1.9f);
                 break;
         }
     }
@@ -191,11 +193,6 @@ public class LongRangedAttack : MonoBehaviour
                 case Enemy.ElementType.Fire:
                     Burn(other.gameObject);
                     break;
-                case Enemy.ElementType.Electric:
-                    lightningTarget = other.gameObject;
-                    Invoke("SetShockTimer", 1.9f);
-                    Invoke("Despawn", 4f);
-                    break;
                 case Enemy.ElementType.Wind:
                     Push(other.gameObject);
                     break;
@@ -222,9 +219,9 @@ public class LongRangedAttack : MonoBehaviour
         hitEffects[2].SetActive(true);
         trailEffects[2].SetActive(false);
         
-        if (Vector3.Distance(lightningTarget.transform.position, transform.position) < 2f)
+        if (Vector3.Distance(player.transform.position, transform.position) < 2f)
         {
-            Shock(lightningTarget);
+            Shock(player);
         }
     }
 

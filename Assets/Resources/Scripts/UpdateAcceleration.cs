@@ -5,7 +5,6 @@ public class UpdateAcceleration : MonoBehaviour
 {
     private Cloth cloth;
     private VisualEffect wind;
-    private Skybox mainSkybox;
 
     private void Awake()
     {
@@ -15,6 +14,9 @@ public class UpdateAcceleration : MonoBehaviour
 
     private void Update()
     {
+        if (wind == null)
+            return;
+
         Vector3 windDir = wind.GetVector3("Wind");
 
         cloth.externalAcceleration = windDir;
