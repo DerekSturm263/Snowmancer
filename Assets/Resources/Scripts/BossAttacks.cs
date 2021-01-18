@@ -46,12 +46,12 @@ public class BossAttacks : MonoBehaviour
     #region Wind Boss Attacks
 
     // Element Type, Charge Time, Damage, Size, Speed, Lifetime
-    public static BossAttack windBossSpell1 = new BossAttack(Enemy.ElementType.Wind, 2f, 15f, 0.5f, 1.5f, 10f, BossAttack.BossUser.Wind_Boss);
-    public static BossAttack windBossSpell2 = new BossAttack(Enemy.ElementType.Wind, 1f, 15f, 0.75f, 2f, 7.5f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windBossSpell1 = new BossAttack(Enemy.ElementType.Wind, 3f, 15f, 0.5f, 1.5f, 5f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windBossSpell2 = new BossAttack(Enemy.ElementType.Wind, 2f, 20f, 0.75f, 2f, 7.5f, BossAttack.BossUser.Wind_Boss);
 
-    public static BossAttack windSummon1_1 = new BossAttack(Enemy.ElementType.Wind, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windSummon1_1 = new BossAttack(Enemy.ElementType.Wind, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
     public static BossAttack windSummon1_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
-    public static BossAttack windSummon2_1 = new BossAttack(Enemy.ElementType.Wind, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
+    public static BossAttack windSummon2_1 = new BossAttack(Enemy.ElementType.Wind, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
     public static BossAttack windSummon2_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Wind_Boss);
 
     #endregion

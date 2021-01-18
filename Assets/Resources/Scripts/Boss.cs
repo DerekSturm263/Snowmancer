@@ -135,6 +135,11 @@ public class Boss : MonoBehaviour
 
         if (health <= 0f)
         {
+            try
+            {
+                anim.SetBool("Dead", true);
+            } catch { }
+
             anim.SetTrigger("Death");
             ui.HideBossHealth();
             FindObjectOfType<EnterNextLevel>().active = true;
