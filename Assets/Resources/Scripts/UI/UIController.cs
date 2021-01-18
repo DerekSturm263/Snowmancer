@@ -41,6 +41,11 @@ public class UIController : MonoBehaviour
     public GameObject racoonTip;
     public TMP_Text tipText;
 
+    public GameObject settingsMenu;
+    public GameObject graphicSettingsMenu;
+    public GameObject soundSettingsMenu;
+    public GameObject gameplaySettingsMenu;
+
     void Start()
     {
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
@@ -178,7 +183,36 @@ public class UIController : MonoBehaviour
 
     public void OpenSettings()
     {
-        Debug.Log("Settings open");
+        settingsMenu.SetActive(true);
+        graphicsMenu();
+        //Debug.Log("Settings open");
+    }
+
+    public void graphicsMenu()
+    {
+        soundSettingsMenu.SetActive(false);
+        gameplaySettingsMenu.SetActive(false);
+        graphicSettingsMenu.SetActive(true);
+    }
+
+    public void audioMenu()
+    {
+        graphicSettingsMenu.SetActive(false);
+        gameplaySettingsMenu.SetActive(false);
+        soundSettingsMenu.SetActive(true);
+    }
+
+    public void gameplayMenu()
+    {
+        graphicSettingsMenu.SetActive(false);
+        soundSettingsMenu.SetActive(false);
+        gameplaySettingsMenu.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        // Something to apply settings here
+        settingsMenu.SetActive(false);
     }
 
     public bool CheckPaused()
