@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -11783,7 +11783,7 @@ MonoBehaviour:
   materials: []
   active: 0
   wandTip: {fileID: 0}
-  runeDrop: {fileID: 0}
+  runeDrop: {fileID: 330782234571453083, guid: 26ae821667ea9204d88f76689659a53e, type: 3}
   newSpot: 0
 --- !u!136 &1286848290
 CapsuleCollider:

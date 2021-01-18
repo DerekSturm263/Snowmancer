@@ -226,7 +226,11 @@ public class Boss : MonoBehaviour
 
     public void OnDestroy()
     {
-        Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+        if (runeDrop != null)
+            Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+
+        if (type == ElementType.Wind)
+            GameObject.FindGameObjectsWithTag("Boss")[0].SetActive(true);
     }
 
     public void ShowHealth()
