@@ -39,8 +39,9 @@ public class BossAttacks : MonoBehaviour
     public static BossAttack electricBossSpell4 = new BossAttack(Enemy.ElementType.Electric, 0.25f, 20f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
 
     public static BossAttack electricBossStomp1 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
-    public static BossAttack electricBossStomp2 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
-    public static BossAttack electricBossStomp3 = new BossAttack(Enemy.ElementType.Electric, 3f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp2 = new BossAttack(Enemy.ElementType.Electric, 3f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp3 = new BossAttack(Enemy.ElementType.Electric, 2f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp4 = new BossAttack(Enemy.ElementType.Electric, 1f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
 
     public static BossAttack electricBossSummon1 = new BossAttack(Enemy.ElementType.Electric, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossSummon2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
@@ -237,14 +238,22 @@ public class BossAttacks : MonoBehaviour
             electricBossStomp1.SetAction(() =>
             {
                 boss.currentAttack = electricBossStomp1;
+                boss.GetComponent<BossBehavior>().Invoke("ReleaseStomp", electricBossStomp1.ChargeTime);
             });
             electricBossStomp2.SetAction(() =>
             {
                 boss.currentAttack = electricBossStomp2;
+                boss.GetComponent<BossBehavior>().Invoke("ReleaseStomp", electricBossStomp2.ChargeTime);
             });
             electricBossStomp3.SetAction(() =>
             {
                 boss.currentAttack = electricBossStomp3;
+                boss.GetComponent<BossBehavior>().Invoke("ReleaseStomp", electricBossStomp3.ChargeTime);
+            });
+            electricBossStomp4.SetAction(() =>
+            {
+                boss.currentAttack = electricBossStomp4;
+                boss.GetComponent<BossBehavior>().Invoke("ReleaseStomp", electricBossStomp4.ChargeTime);
             });
 
             electricBossSummon1.SetAction(() =>
@@ -260,7 +269,7 @@ public class BossAttacks : MonoBehaviour
                 newEnemy.SetActive(true);
                 Destroy(summonParticles);
 
-                electricBossSummon1.UserBoss.anim.SetBool("Charging", false);
+                electricBossSummon1.UserBoss.anim.SetBool("Charging Spell", false);
                 boss.timeSinceLastAttack = 0.1f;
             });
             electricBossSummon2.SetAction(() =>
@@ -276,7 +285,7 @@ public class BossAttacks : MonoBehaviour
                 newEnemy.SetActive(true);
                 Destroy(summonParticles);
 
-                electricBossSummon2.UserBoss.anim.SetBool("Charging", false);
+                electricBossSummon2.UserBoss.anim.SetBool("Charging Spell", false);
                 boss.timeSinceLastAttack = 0.1f;
             });
 

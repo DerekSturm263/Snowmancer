@@ -9,8 +9,11 @@ public class BossBehavior : MonoBehaviour
     private Vector3 targetSpot = Vector3.zero;
 
     private float targetSpeed = 0f;
+    public float followDist;
 
     private Quaternion targetRotation;
+
+    private GameObject shockWave;
 
     class Vec3Comparer : Comparer<Vector3>
     {
@@ -29,6 +32,8 @@ public class BossBehavior : MonoBehaviour
 
     private void Awake()
     {
+        shockWave = Resources.Load<GameObject>("Prefabs/Shockwave");
+
         switch (stats.type)
         {
             case Boss.ElementType.Fire:
@@ -98,9 +103,8 @@ public class BossBehavior : MonoBehaviour
                 BossAttacks.electricBoss = stats;
                 BossAttacks.Initialize(stats);
 
-                stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
-                stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
-                stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
                 stats.attacks.Add(() => BossAttacks.electricBossStomp1.AttackAction.Invoke());
 
                 break;
@@ -216,23 +220,45 @@ public class BossBehavior : MonoBehaviour
         }
         else if (stats.type == Boss.ElementType.Electric)
         {
+            targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+
+            if (Vector3.Distance(transform.position, stats.player.transform.position) > followDist + 1f)
+            {
+                stats.anim.SetFloat("Vertical", 1f);
+            }
+            else if (Vector3.Distance(transform.position, stats.player.transform.position) < followDist - 1f)
+            {
+                stats.anim.SetFloat("Vertical", -1f);
+            }
+            else
+            {
+                stats.anim.SetFloat("Vertical", 0f);
+            }
+
             if (!stats.anim.GetBool("Charging Spell") && !stats.anim.GetBool("Charging Stomp") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
             {
-                System.Action nextAttack = stats.attacks[stats.attackNum + 1];
-
-                Debug.Log(BossAttacks.electricBossStomp1.AttackAction);
-                Debug.Log(stats.attacks[stats.attackNum + 1]);
-
-                if (nextAttack != BossAttacks.electricBossStomp1.AttackAction ||
-                    nextAttack != BossAttacks.electricBossStomp2.AttackAction ||
-                    nextAttack != BossAttacks.electricBossStomp3.AttackAction)
+                try
                 {
-                    stats.anim.SetBool("Charging Spell", true);
-                }
-                else
-                {
-                    stats.anim.SetBool("Charging Stomp", true);
-                }
+                    System.Action nextAttack = stats.attacks[stats.attackNum + 1];
+
+                    if (nextAttack != BossAttacks.electricBossStomp1.AttackAction ||
+                        nextAttack != BossAttacks.electricBossStomp2.AttackAction ||
+                        nextAttack != BossAttacks.electricBossStomp3.AttackAction ||
+                        nextAttack != BossAttacks.electricBossStomp4.AttackAction)
+                    {
+                        stats.anim.SetBool("Charging Spell", true);
+                    }
+                    else
+                    {
+                        stats.anim.SetBool("Charging Stomp", true);
+                    }
+                } catch { }
+            }
+
+            if (CheckHit.deadIcicles.Count == 0)
+            {
+                CheckHit.icicles.ForEach(x => x.Regrow());
             }
         }
         else if (stats.type == Boss.ElementType.Wind)
@@ -244,28 +270,34 @@ public class BossBehavior : MonoBehaviour
                 stats.attackNum = 0;
             }
 
-            if (Vector3.Distance(transform.position, targetSpot) > 5f)
+            if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
             {
-                targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
-                stats.anim.SetFloat("Vertical", 1f);
+                if (Vector3.Distance(transform.position, targetSpot) > 5f)
+                {
+                    targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
+                    stats.anim.SetFloat("Vertical", 1f);
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(transform.position, targetSpot, Time.deltaTime);
+
+                    targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+                    stats.anim.SetFloat("Vertical", 0f);
+
+                    if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                        stats.anim.SetBool("Charging", true);
+                }
+
+                transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + 180f, targetRotation.eulerAngles.z);
             }
-            else
-            {
-                transform.position = Vector3.Lerp(transform.position, targetSpot, Time.deltaTime);
+        }
+        else
+        {
 
-                targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
-                stats.anim.SetFloat("Vertical", 0f);
-
-                if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
-                    stats.anim.SetBool("Charging", true);
-            }
-
-            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + 180f, targetRotation.eulerAngles.z);
         }
         
         if (stats.timeSinceLastAttack > 0f)
             stats.timeSinceLastAttack += Time.deltaTime;
-
     }
 
     public void UseAttack()
@@ -303,5 +335,29 @@ public class BossBehavior : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
             stats.anim.SetBool("Grounded", true);
+    }
+
+    public void Stomp()
+    {
+        Instantiate(shockWave, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+
+        foreach (CheckHit icicle in CheckHit.icicles)
+        {
+            if (icicle.isActive == true)
+            {
+                icicle.anim.SetTrigger("Hit");
+            }
+        }
+    }
+
+    public void Smash()
+    {
+
+    }
+
+    public void ReleaseStomp()
+    {
+        stats.anim.SetBool("Charging Stomp", false);
+        stats.timeSinceLastAttack = 0.1f;
     }
 }

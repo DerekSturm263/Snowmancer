@@ -111,10 +111,6 @@ public class Boss : MonoBehaviour
                     damage = 0f;
             }
         }
-        else if (type == ElementType.Electric)
-        {
-
-        }
         else if (type == ElementType.Wind)
         {
             if (damage > 25f && anim.GetBool("Charging")) // Make bigger once we add leveling up.
@@ -130,6 +126,10 @@ public class Boss : MonoBehaviour
                 }
             }
         }
+        else
+        {
+
+        }
 
         if (damage > 0f)
         {
@@ -143,6 +143,38 @@ public class Boss : MonoBehaviour
             {
                 anim.SetBool("Dead", true);
             } catch { }
+
+            anim.SetTrigger("Death");
+            ui.HideBossHealth();
+            FindObjectOfType<EnterNextLevel>().active = true;
+            this.enabled = false;
+        }
+    }
+
+    public void TakeIcicleDamage(float damage)
+    {
+        if (!active)
+            return;
+
+        anim.SetBool("Dazed", true);
+        Invoke("UnDaze", 6f);
+        ResetAttack();
+
+        TryNewFeature(++phaseIndex);
+
+        if (damage > 0f)
+        {
+            health -= damage;
+            StartCoroutine(DamageFlash());
+        }
+
+        if (health <= 0f)
+        {
+            try
+            {
+                anim.SetBool("Dead", true);
+            }
+            catch { }
 
             anim.SetTrigger("Death");
             ui.HideBossHealth();
