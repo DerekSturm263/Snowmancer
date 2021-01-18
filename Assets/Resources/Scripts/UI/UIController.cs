@@ -41,12 +41,17 @@ public class UIController : MonoBehaviour
     public GameObject racoonTip;
     public TMP_Text tipText;
 
+    public GameObject settingsMenu;
+    public GameObject graphicSettingsMenu;
+    public GameObject soundSettingsMenu;
+    public GameObject gameplaySettingsMenu;
+
     void Start()
     {
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
         SetMaxMana();
-        Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
+        //////Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
     }
 
     void Update()
@@ -150,7 +155,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
-        dof.focusDistance.value = defaultFocusLength;
+        //////dof.focusDistance.value = defaultFocusLength;
     }
 
     void Pause()
@@ -160,7 +165,7 @@ public class UIController : MonoBehaviour
         isPaused = true;
         spellSelector.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
-        dof.focusDistance.value = pausedFocusLength;
+        //////dof.focusDistance.value = pausedFocusLength;
     }
 
     public void LoadScene(string sceneToLoad)
@@ -178,7 +183,36 @@ public class UIController : MonoBehaviour
 
     public void OpenSettings()
     {
-        Debug.Log("Settings open");
+        settingsMenu.SetActive(true);
+        graphicsMenu();
+        //Debug.Log("Settings open");
+    }
+
+    public void graphicsMenu()
+    {
+        soundSettingsMenu.SetActive(false);
+        gameplaySettingsMenu.SetActive(false);
+        graphicSettingsMenu.SetActive(true);
+    }
+
+    public void audioMenu()
+    {
+        graphicSettingsMenu.SetActive(false);
+        gameplaySettingsMenu.SetActive(false);
+        soundSettingsMenu.SetActive(true);
+    }
+
+    public void gameplayMenu()
+    {
+        graphicSettingsMenu.SetActive(false);
+        soundSettingsMenu.SetActive(false);
+        gameplaySettingsMenu.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        // Something to apply settings here
+        settingsMenu.SetActive(false);
     }
 
     public bool CheckPaused()
