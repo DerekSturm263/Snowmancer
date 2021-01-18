@@ -98,7 +98,9 @@ public class BossBehavior : MonoBehaviour
                 BossAttacks.electricBoss = stats;
                 BossAttacks.Initialize(stats);
 
-                stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
                 stats.attacks.Add(() => BossAttacks.electricBossStomp1.AttackAction.Invoke());
 
                 break;
@@ -217,6 +219,9 @@ public class BossBehavior : MonoBehaviour
             if (!stats.anim.GetBool("Charging Spell") && !stats.anim.GetBool("Charging Stomp") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
             {
                 System.Action nextAttack = stats.attacks[stats.attackNum + 1];
+
+                Debug.Log(BossAttacks.electricBossStomp1.AttackAction);
+                Debug.Log(stats.attacks[stats.attackNum + 1]);
 
                 if (nextAttack != BossAttacks.electricBossStomp1.AttackAction ||
                     nextAttack != BossAttacks.electricBossStomp2.AttackAction ||

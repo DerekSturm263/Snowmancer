@@ -10884,7 +10884,7 @@ MonoBehaviour:
   spawnRange: 10
   attackNum: 0
   timeSinceLastAttack: 0.1
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 0.25
   materials: []
   active: 0
   wandTip: {fileID: 0}

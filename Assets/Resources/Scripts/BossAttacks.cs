@@ -35,12 +35,14 @@ public class BossAttacks : MonoBehaviour
     // Element Type, Charge Time, Damage, Size, Speed, Lifetime
     public static BossAttack electricBossSpell1 = new BossAttack(Enemy.ElementType.Electric, 2f, 10f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossSpell2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 20f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
-    
+    public static BossAttack electricBossSpell3 = new BossAttack(Enemy.ElementType.Electric, 0.75f, 20f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossSpell4 = new BossAttack(Enemy.ElementType.Electric, 0.25f, 20f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
+
     public static BossAttack electricBossStomp1 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossStomp2 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossStomp3 = new BossAttack(Enemy.ElementType.Electric, 3f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
 
-    public static BossAttack electricBossSummon = new BossAttack(Enemy.ElementType.Electric, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossSummon1 = new BossAttack(Enemy.ElementType.Electric, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossSummon2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
 
     #endregion
@@ -198,21 +200,84 @@ public class BossAttacks : MonoBehaviour
 
                 currentSpell.Initialize();
             });
+            electricBossSpell2.SetAction(() =>
+            {
+                boss.currentAttack = electricBossSpell2;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = electricBossSpell2.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                electricBossSpell2.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            electricBossSpell3.SetAction(() =>
+            {
+                boss.currentAttack = electricBossSpell3;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = electricBossSpell3.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                electricBossSpell3.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+            electricBossSpell4.SetAction(() =>
+            {
+                boss.currentAttack = electricBossSpell4;
+                LongRangedAttack currentSpell = Instantiate(spell, boss.gameObject.transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+                currentSpell.userBoss = electricBossSpell4.UserBoss;
+                currentSpell.target = currentSpell.userBoss.player;
+                electricBossSpell4.Spell = currentSpell;
+
+                currentSpell.Initialize();
+            });
+
             electricBossStomp1.SetAction(() =>
             {
-
+                boss.currentAttack = electricBossStomp1;
             });
             electricBossStomp2.SetAction(() =>
             {
-
+                boss.currentAttack = electricBossStomp2;
             });
             electricBossStomp3.SetAction(() =>
             {
-
+                boss.currentAttack = electricBossStomp3;
             });
-            electricBossSummon.SetAction(() =>
-            {
 
+            electricBossSummon1.SetAction(() =>
+            {
+                boss.currentAttack = electricBossSummon1;
+                Vector3 spawnPos = electricBossSummon1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, electricBossSummon1.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Electric Magic");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                electricBossSummon1.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
+            });
+            electricBossSummon2.SetAction(() =>
+            {
+                boss.currentAttack = electricBossSummon2;
+                Vector3 spawnPos = electricBossSummon2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, electricBossSummon2.UserBoss.spawnRange);
+
+                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
+
+                GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Electric Melee");
+
+                GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+                newEnemy.SetActive(true);
+                Destroy(summonParticles);
+
+                electricBossSummon2.UserBoss.anim.SetBool("Charging", false);
+                boss.timeSinceLastAttack = 0.1f;
             });
 
             #endregion
