@@ -126,7 +126,21 @@ public class LongRangedAttack : MonoBehaviour
         }
         else
         {
-            userBoss.GetComponent<Animator>().SetBool("Charging", false);
+            if (userBoss.type != Boss.ElementType.Electric)
+            {
+                userBoss.GetComponent<Animator>().SetBool("Charging", false);
+            }
+            else
+            {
+                if (userBoss.currentAttack.LifeTime == 1f)
+                {
+                    userBoss.GetComponent<Animator>().SetBool("Charging Stomp", false);
+                }
+                else
+                {
+                    userBoss.GetComponent<Animator>().SetBool("Charging Spell", false);
+                }
+            }
             userBoss.timeSinceLastAttack = 0.1f;
         }
 

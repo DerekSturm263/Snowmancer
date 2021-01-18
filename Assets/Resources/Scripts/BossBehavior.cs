@@ -98,8 +98,7 @@ public class BossBehavior : MonoBehaviour
                 BossAttacks.electricBoss = stats;
                 BossAttacks.Initialize(stats);
 
-                stats.attacks.Add(() => BossAttacks.electricBossSpell.AttackAction.Invoke());
-                stats.attacks.Add(() => BossAttacks.electricBossSpell.AttackAction.Invoke());
+                stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
                 stats.attacks.Add(() => BossAttacks.electricBossStomp1.AttackAction.Invoke());
 
                 break;
@@ -212,6 +211,24 @@ public class BossBehavior : MonoBehaviour
             }
 
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+        }
+        else if (stats.type == Boss.ElementType.Electric)
+        {
+            if (!stats.anim.GetBool("Charging Spell") && !stats.anim.GetBool("Charging Stomp") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+            {
+                System.Action nextAttack = stats.attacks[stats.attackNum + 1];
+
+                if (nextAttack != BossAttacks.electricBossStomp1.AttackAction ||
+                    nextAttack != BossAttacks.electricBossStomp2.AttackAction ||
+                    nextAttack != BossAttacks.electricBossStomp3.AttackAction)
+                {
+                    stats.anim.SetBool("Charging Spell", true);
+                }
+                else
+                {
+                    stats.anim.SetBool("Charging Stomp", true);
+                }
+            }
         }
         else if (stats.type == Boss.ElementType.Wind)
         {

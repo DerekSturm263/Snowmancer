@@ -111,6 +111,10 @@ public class Boss : MonoBehaviour
                     damage = 0f;
             }
         }
+        else if (type == ElementType.Electric)
+        {
+
+        }
         else if (type == ElementType.Wind)
         {
             if (damage > 25f && anim.GetBool("Charging")) // Make bigger once we add leveling up.
