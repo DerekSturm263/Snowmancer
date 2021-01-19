@@ -72,7 +72,7 @@ public class UIController : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.Tab) || Input.GetKeyUp(KeyCode.E))
             {
                 menuItemSc.SetCurrentSpell();
-                spellSelector.SetActive(false);
+                spellSelector.GetComponent<Animator>().SetTrigger("CloseSelect");
                 Cursor.lockState = CursorLockMode.Locked;
 
                 dof.focusDistance.value = defaultFocusLength;
@@ -93,7 +93,7 @@ public class UIController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F11))
             Application.Quit();
 
-       
+
         // Update HUD meters
         SetSnowFill();
         SetHealth();
