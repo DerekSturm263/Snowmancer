@@ -351,7 +351,7 @@ public class BossBehavior : MonoBehaviour
         }
         else
         {
-
+            targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
         }
         
         if (stats.timeSinceLastAttack > 0f)
