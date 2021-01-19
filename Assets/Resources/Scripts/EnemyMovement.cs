@@ -42,7 +42,7 @@ public class EnemyMovement : Movement
 
     private void Update()
     {
-        Vector3 targetVector;
+        Quaternion targetRotation = Quaternion.identity;
         mouseAim = false;
 
         #region Moving
@@ -55,32 +55,42 @@ public class EnemyMovement : Movement
 
         if (isTargeting)
         {
-            if (Vector3.Distance(player.transform.position, transform.position) > distFromPlayer || targetLayerWeight == 1f)
-                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized;
+            targetRotation = Quaternion.LookRotation(player.transform.position - transform.position, Vector3.up);
+
+            if (Vector3.Distance(player.transform.position, transform.position) > distFromPlayer + 0.5f)
+            {
+                anim.SetFloat("Speed", 1f);
+            }
+            else if (Vector3.Distance(player.transform.position, transform.position) < distFromPlayer - 0.5f)
+            {
+                anim.SetFloat("Speed", -1f);
+            }
             else
-                targetVector = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.z - transform.position.z).normalized * -1f;
+            {
+                anim.SetFloat("Speed", 0f);
+            }
         }
         else
         {
             if (Vector3.Distance(transform.position, spawnPosition) < 5f)
             {
-                moveDir.x += Time.deltaTime * Random.Range(-5f, 5f);
-                moveDir.y += Time.deltaTime * Random.Range(-5f, 5f);
+                moveDir.x += Time.deltaTime * Random.Range(-15f, 15f);
+                moveDir.y += Time.deltaTime * Random.Range(-15f, 15f);
 
                 moveDir = moveDir.normalized;
+                targetRotation = Quaternion.LookRotation(new Vector3(moveDir.x, 0f, moveDir.y), Vector3.up);
             }
             else
             {
-                moveDir = new Vector2(spawnPosition.x - transform.position.x, spawnPosition.z - transform.position.z).normalized;
+                targetRotation = Quaternion.LookRotation(new Vector3(spawnPosition.x - transform.position.x, 0f, spawnPosition.z - transform.position.z), Vector3.up);
             }
 
-            targetVector = moveDir;
+            anim.SetFloat("Speed", 1f);
         }
 
-        #endregion
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z), Time.deltaTime * 2.5f);
 
-        anim.SetFloat("Speed", 1f);
-        Move(targetVector, false);
+        #endregion
 
         // Attacking
         if (Vector3.Distance(player.transform.position, transform.position) < distFromPlayer + 0.5f && Vector3.Distance(player.transform.position, transform.position) > distFromPlayer - 0.5f)
