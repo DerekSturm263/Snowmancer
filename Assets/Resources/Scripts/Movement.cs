@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
     public List<Color> materialColors = new List<Color>();
     public List<float> materialFloats = new List<float>();
 
-    public bool snapToGround = false;
+    [HideInInspector] public bool snapToGround = true;
 
     protected void Awake()
     {
@@ -157,7 +157,7 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            if (animState.IsName("Grounded") || animState.IsName("Strafing") && rb.velocity.y > 0.1f && !animState.IsName("Landing"))
+            if (animState.IsName("Grounded") || animState.IsName("Strafing") && rb.velocity.y > 0.1f && !animState.IsName("Landing") && !snapToGround)
                 transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * (hit.distance * 20f) * (hit.distance * 20f));
         }
     }
@@ -165,7 +165,7 @@ public class Movement : MonoBehaviour
     protected bool IsGrounded()
     {
         bool grounded = Physics.BoxCast(transform.position + new Vector3(0f, 0.5f, 0f), new Vector3(0.1f, 0.1f, 0.1f), Vector3.down, Quaternion.identity, 0.7f, ground);
-        
+
         if (grounded)
             anim.ResetTrigger("Hit Wall");
 

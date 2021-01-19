@@ -298,8 +298,6 @@ public class LongRangedAttack : MonoBehaviour
 
     public void Push(GameObject hit)
     {
-        hit.GetComponent<PlayerMovement>().snapToGround = false;
-        hit.GetComponent<Rigidbody>().velocity = new Vector3(0f, 20f, 0f); // Not working because of snapping script.
         hit.GetComponent<Player>().TakeDamage(damage);
     }
 }
