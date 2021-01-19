@@ -7,6 +7,8 @@ public class MenuItemScript : MonoBehaviour
 {
     public Color baseColor;
     public Color hoverColor;
+    public Color lockedBaseColor;
+    public Color lockedHoverColor;
     public Image background;
 
     public TMPro.TMP_Text nameDisplay;
@@ -14,24 +16,49 @@ public class MenuItemScript : MonoBehaviour
     public Image currentSpell;
     public Sprite icon;
 
+    public bool isLocked = true;
+
     void Start()
     {
-        background.color = baseColor;
+        if (isLocked)
+        {
+            background.color = lockedBaseColor;
+        }
+        else
+        {
+            background.color = baseColor;
+        }
     }
     
     public void Select()
     {
-        nameDisplay.text = runeName;
-        background.color = hoverColor;
+        if (!isLocked)
+        {
+            nameDisplay.text = runeName;
+            background.color = hoverColor;
+        } else
+        {
+            nameDisplay.text = "LOCKED";
+            background.color = lockedHoverColor;
+        }
     }
 
     public void Deselect()
     {
-        background.color = baseColor;
+        if (isLocked)
+        {
+            background.color = lockedBaseColor;
+        }
+        else
+        {
+            background.color = baseColor;
+        }
     }
 
     public void SetCurrentSpell()
     {
-        currentSpell.sprite = icon;
+        if(!isLocked)
+            currentSpell.sprite = icon;
     }
+    
 }

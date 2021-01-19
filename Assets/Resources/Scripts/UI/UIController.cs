@@ -51,7 +51,7 @@ public class UIController : MonoBehaviour
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
         SetMaxMana();
-        Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
+       Camera.main.GetComponent<Volume>().profile.TryGet(out dof);
     }
 
     void Update()
@@ -93,6 +93,7 @@ public class UIController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F11))
             Application.Quit();
 
+       
         // Update HUD meters
         SetSnowFill();
         SetHealth();

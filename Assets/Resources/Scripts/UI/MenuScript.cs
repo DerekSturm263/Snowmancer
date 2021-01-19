@@ -22,7 +22,7 @@ public class MenuScript : MonoBehaviour
 
     void Start()
     {
-        
+        menuItems[0].GetComponent<MenuItemScript>().isLocked = false;
     }
     
     void Update()
