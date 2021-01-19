@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class BossBehavior : MonoBehaviour
 {
@@ -106,6 +107,66 @@ public class BossBehavior : MonoBehaviour
                 stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
                 stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
                 stats.attacks.Add(() => BossAttacks.electricBossStomp1.AttackAction.Invoke());
+
+                stats.phaseFeatures.Add(1, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSummon1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossStomp2.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(2, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossStomp2.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(3, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSummon1.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossStomp3.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(4, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell3.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell3.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossStomp3.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(5, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell3.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell3.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell3.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSummon2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossStomp4.AttackAction.Invoke());
+                });
+
+                stats.phaseFeatures.Add(6, () =>
+                {
+                    stats.attacks.Clear();
+
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSpell4.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossSummon2.AttackAction.Invoke());
+                    stats.attacks.Add(() => BossAttacks.electricBossStomp4.AttackAction.Invoke());
+                });
 
                 break;
 
@@ -223,37 +284,34 @@ public class BossBehavior : MonoBehaviour
             targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
 
-            if (Vector3.Distance(transform.position, stats.player.transform.position) > followDist + 1f)
+            if (Vector3.Distance(transform.position, stats.player.transform.position) > followDist + 5.5f)
             {
                 stats.anim.SetFloat("Vertical", 1f);
             }
-            else if (Vector3.Distance(transform.position, stats.player.transform.position) < followDist - 1f)
+            else if (Vector3.Distance(transform.position, stats.player.transform.position) < followDist + 4.5f)
             {
-                stats.anim.SetFloat("Vertical", -1f);
+                stats.anim.SetFloat("Vertical", -2.5f + Vector3.Distance(transform.position, stats.player.transform.position) * 0.2f);
             }
             else
             {
                 stats.anim.SetFloat("Vertical", 0f);
             }
 
-            if (!stats.anim.GetBool("Charging Spell") && !stats.anim.GetBool("Charging Stomp") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+            if (!stats.anim.GetBool("Charging Spell") && !stats.anim.GetBool("Charging Stomp") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks && !stats.anim.GetBool("Dazed"))
             {
-                try
-                {
-                    System.Action nextAttack = stats.attacks[stats.attackNum + 1];
+                string chargeType = "Charging Spell";
 
-                    if (nextAttack != BossAttacks.electricBossStomp1.AttackAction ||
-                        nextAttack != BossAttacks.electricBossStomp2.AttackAction ||
-                        nextAttack != BossAttacks.electricBossStomp3.AttackAction ||
-                        nextAttack != BossAttacks.electricBossStomp4.AttackAction)
-                    {
-                        stats.anim.SetBool("Charging Spell", true);
-                    }
-                    else
-                    {
-                        stats.anim.SetBool("Charging Stomp", true);
-                    }
-                } catch { }
+                if (stats.attackNum == stats.attacks.Count - 1)
+                {
+                    chargeType = "Charging Stomp";
+                    stats.anim.SetLayerWeight(1, 0f);
+                }
+                else
+                {
+                    stats.anim.SetLayerWeight(1, 1f);
+                }
+
+                stats.anim.SetBool(chargeType, true);
             }
 
             if (CheckHit.deadIcicles.Count == 0)
@@ -341,9 +399,13 @@ public class BossBehavior : MonoBehaviour
     {
         Instantiate(shockWave, transform.position, Quaternion.Euler(-90f, 0f, 0f));
 
-        foreach (CheckHit icicle in CheckHit.icicles)
+        List<CheckHit> shuffledIcicles = CheckHit.icicles;
+
+        foreach (CheckHit icicle in shuffledIcicles)
         {
-            if (icicle.isActive == true)
+            int random = Random.Range(-1, 1);
+
+            if (icicle.isActive == true && random >= 0)
             {
                 icicle.anim.SetTrigger("Hit");
             }

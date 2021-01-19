@@ -157,6 +157,9 @@ public class Boss : MonoBehaviour
             return;
 
         anim.SetBool("Dazed", true);
+        anim.SetBool("Charging Spell", false);
+        anim.SetBool("Charging Stomp", false);
+        anim.SetLayerWeight(1, 0f);
         Invoke("UnDaze", 6f);
         ResetAttack();
 
@@ -187,6 +190,9 @@ public class Boss : MonoBehaviour
     {
         anim.SetBool("Dazed", false);
         newSpot = true;
+
+        if (type == ElementType.Electric)
+            timeSinceLastAttack = 0.1f;
     }
 
     private IEnumerator DamageFlash()

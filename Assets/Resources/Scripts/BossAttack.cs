@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BossAttack
 {
+    public static bool isCharge;
+
     public Boss UserBoss;
 
     public enum BossUser

@@ -38,10 +38,10 @@ public class BossAttacks : MonoBehaviour
     public static BossAttack electricBossSpell3 = new BossAttack(Enemy.ElementType.Electric, 0.75f, 20f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossSpell4 = new BossAttack(Enemy.ElementType.Electric, 0.25f, 20f, 1f, 0f, 10f, BossAttack.BossUser.Electric_Boss);
 
-    public static BossAttack electricBossStomp1 = new BossAttack(Enemy.ElementType.Electric, 4f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
-    public static BossAttack electricBossStomp2 = new BossAttack(Enemy.ElementType.Electric, 3f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
-    public static BossAttack electricBossStomp3 = new BossAttack(Enemy.ElementType.Electric, 2f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
-    public static BossAttack electricBossStomp4 = new BossAttack(Enemy.ElementType.Electric, 1f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp1 = new BossAttack(Enemy.ElementType.Electric, 2f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp2 = new BossAttack(Enemy.ElementType.Electric, 1f, 20f, 1f, 5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp3 = new BossAttack(Enemy.ElementType.Electric, 0.5f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
+    public static BossAttack electricBossStomp4 = new BossAttack(Enemy.ElementType.Electric, 0.25f, 25f, 1f, 7.5f, 1f, BossAttack.BossUser.Electric_Boss);
 
     public static BossAttack electricBossSummon1 = new BossAttack(Enemy.ElementType.Electric, 2.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);
     public static BossAttack electricBossSummon2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Electric_Boss);

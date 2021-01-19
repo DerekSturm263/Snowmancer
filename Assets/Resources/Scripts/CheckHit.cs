@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class CheckHit : MonoBehaviour
@@ -23,9 +22,9 @@ public class CheckHit : MonoBehaviour
 
     private void Update()
     {
-        if (transform.localScale.magnitude < 4.2f)
+        if (transform.lossyScale.magnitude < 8.4f)
         {
-            transform.localScale += new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
+            //transform.localScale = Vector3.Lerp(transform.lossyScale, new Vector3(2f, 2f, 4f), Time.deltaTime);
         }
     }
 
@@ -35,7 +34,8 @@ public class CheckHit : MonoBehaviour
         isActive = true;
 
         transform.position = startPos;
-        transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        //transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<Rigidbody>().useGravity = false;
