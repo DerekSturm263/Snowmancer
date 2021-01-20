@@ -20,7 +20,7 @@ public class CollectRune : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             uiCont.spellSelector.GetComponent<MenuScript>().menuItems[(int) runeType].GetComponent<MenuItemScript>().isLocked = false;
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

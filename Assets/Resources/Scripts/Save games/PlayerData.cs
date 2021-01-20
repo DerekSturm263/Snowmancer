@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class PlayerData
 {
@@ -15,10 +16,15 @@ public class PlayerData
     public float snowAmount;
     public bool aiming;
     public bool selectingSpell;
+    public float vCurrExp;
+    public float vLevel;
+    public float vExpLeft;
     public Player.CurrentSpell currentSpell;
     public float[] targetPos;
     public float[] postition;
-   
+
+
+
 
     public PlayerData(Player player)
     {
@@ -32,7 +38,9 @@ public class PlayerData
         aiming = player.aiming;
         selectingSpell = player.selectingSpell;
         currentSpell = player.currentSpell;
-       
+        vCurrExp = player.vCurrExp;
+        vExpLeft = player.vExpLeft;
+        vLevel = player.vLevel;
 
         //player Postition
         targetPos = new float[3];
@@ -44,6 +52,7 @@ public class PlayerData
         postition[0] = player.transform.position.x;
         postition[1] = player.transform.position.y;
         postition[2] = player.transform.position.z;
+
 
     }
 

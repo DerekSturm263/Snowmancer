@@ -352,6 +352,9 @@ public class BossBehavior : MonoBehaviour
         else
         {
             targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + 180f, targetRotation.eulerAngles.z);
+
+            stats.anim.SetFloat("Vertical", 1f);
         }
         
         if (stats.timeSinceLastAttack > 0f)
