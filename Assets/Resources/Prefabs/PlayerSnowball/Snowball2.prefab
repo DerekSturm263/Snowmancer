@@ -140,10 +140,12 @@ MonoBehaviour:
     type: 3}
   airTrailParticles: {fileID: 2556172504158846677, guid: 31bb6f8e54d953e44b41a8a1901184a7,
     type: 3}
-  shockedParticles: {fileID: 3920235567074269659, guid: df7bf84a39b3c1449927c8bd20fac34b,
+  shockedParticles: {fileID: 3920235567074269659, guid: 3803e4d8c1415774798385034804eae4,
     type: 3}
   fireParticles: {fileID: 4345756482132357682, guid: 6b6e187f2a4edb2449a2e8d39b605c21,
     type: 3}
-  frozenParticles: {fileID: 9177410878595528242, guid: fde960ffa0c18734084c75f5f82255a3,
+  frozenParticles: {fileID: 9177410878595528242, guid: 78cc441f99c7b454298baba3c031422e,
     type: 3}
   targetOffset: {x: 0, y: 0, z: 0}
+  shockBall: {fileID: 6114536688055141666, guid: ad2d9278ab4b54540babe13aee36596e,
+    type: 3}
