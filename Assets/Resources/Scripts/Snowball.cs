@@ -26,6 +26,7 @@ public class Snowball : MonoBehaviour
     public ParticleSystem fireParticles;
     public ParticleSystem frozenParticles;
     public Vector3 targetOffset;
+    public GameObject shockBall;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -94,15 +95,11 @@ public class Snowball : MonoBehaviour
 
                 case CurrentSpell.electric:
                     CompareEnemyTag(col);
-                    RaycastHit[] enemies = Physics.SphereCastAll(this.transform.position,8.5f,new Vector3(1,1,1),0);
-                    foreach(RaycastHit Castenemy in enemies)
+                    if(enemy != null)
                     {
-                        EnemyMovement enemyScript = Castenemy.transform.GetComponent<EnemyMovement>();
-                        enemyScript.shockTime = 2.5f;
-                        enemy.TakeDamage(damage);
+                        Instantiate(shockBall, enemy.transform.position, Quaternion.identity);
                     }
-
-                    ParticleSystem newParticles = Instantiate(shockedParticles, enemy.transform);
+                    ParticleSystem newParticles = Instantiate(shockedParticles, col.transform);
                     newParticles.transform.localPosition += targetOffset;
                     break;
 

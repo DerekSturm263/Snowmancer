@@ -158,10 +158,12 @@ public class EnemyMovement : Movement
         if (statusEffect == StatusEffect.Shocked)
         {
             shockTime -= Time.deltaTime;
+            anim.SetBool("Shocked", true);
         }
 
         if (shockTime < 0f)
         {
+            anim.SetBool("Shocked", false);
             shockTime = 0f;
             statusEffect = StatusEffect.None;
         }
@@ -186,7 +188,7 @@ public class EnemyMovement : Movement
         {
             shockTime = 2;
             statusEffect = StatusEffect.Shocked;
-            TakeDamage(25);
+            TakeDamage(20);
         }
     }
     #region Attacking

@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
                 break;
             case Snowball.CurrentSpell.electric:
                 rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
-                mana -= 40f;
+                mana -= 83f;
                 break;
         }
         snowball.transform.position = SBdefault.transform.position;
