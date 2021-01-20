@@ -77,7 +77,7 @@ public class Snowball : MonoBehaviour
                 case CurrentSpell.ice:
                     CompareEnemyTag(col);
 
-                    if (enemy.statusEffect == Movement.StatusEffect.None)
+                    if (enemy != null &&enemy.statusEffect == Movement.StatusEffect.None)
                     {
                         enemy.iceLeft = 4.5f;
                         enemy.statusEffect = Movement.StatusEffect.Frozen;
