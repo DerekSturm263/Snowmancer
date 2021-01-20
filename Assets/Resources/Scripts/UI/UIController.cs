@@ -4,10 +4,20 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.VFX;
 using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    public static bool useFullscreen = true;
+    public static bool useParticles = true;
+    public static bool usePostProcessing = true;
+    public static bool useAntiAliasing = true;
+    public static bool useHints = true;
+
+    public static float musicVolume = 1f;
+    public static float sfxVolume = 1f;
+
     private DepthOfField dof;
 
     public Player player;
@@ -154,6 +164,9 @@ public class UIController : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         dof.focusDistance.value = defaultFocusLength;
+
+        if (settingsMenu.activeSelf)
+            CloseSettings();
     }
 
     void Pause()
@@ -279,5 +292,61 @@ public class UIController : MonoBehaviour
     private void ExitTip()
     {
         racoonTip.GetComponent<Animator>().SetTrigger("Exit");
+    }
+
+    public void ToggleFullscreen()
+    {
+        useFullscreen = !useFullscreen;
+        Screen.fullScreen = useFullscreen;
+    }
+
+    public void ToggleParticles()
+    {
+        useParticles = !useParticles;
+        FindObjectOfType<VisualEffect>().enabled = useParticles;
+    }
+
+    public void TogglePostProcessing()
+    {
+        usePostProcessing = !usePostProcessing;
+
+        Volume v = FindObjectOfType<Camera>().GetComponent<Volume>();
+        v.enabled = usePostProcessing;
+    }
+
+    public void ToggleFancySky()
+    {
+        useAntiAliasing = !useAntiAliasing;
+
+        if (useAntiAliasing)
+        {
+            QualitySettings.antiAliasing = 4;
+        }
+        else
+        {
+            QualitySettings.antiAliasing = 0;
+        }
+    }
+
+    public void AdjustMusicVolume(float newVal)
+    {
+        musicVolume = newVal;
+    }
+
+    public void AdjustSFXVolume(float newVal)
+    {
+        sfxVolume = newVal;
+    }
+    
+    public void ToggleTips()
+    {
+        useHints = !useHints;
+    }
+
+    public void ResetSaveData()
+    {
+        SavingLoadingTitle.resetSave = true;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Title");
     }
 }

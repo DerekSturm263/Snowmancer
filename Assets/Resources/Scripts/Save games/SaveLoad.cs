@@ -27,13 +27,14 @@ public class SaveLoad : MonoBehaviour
         SaveSystem.SaveCamera(camera.transform.position);
         SaveSystem.SaveScene(SceneManager.GetActiveScene().name);
         SaveSystem.SaveElementData(CollectRune.unlockedSpells);
+        SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, new float[2] { UIController.musicVolume, UIController.sfxVolume });
     }
 
     public void LoadPlayer(bool loadCoords = true)
     {
         PlayerData data = SaveSystem.LoadPLayer();
         CollectRune.unlockedSpells = SaveSystem.LoadElementData();
-
+        
         Debug.Log("Loading...");
 
         //player Info

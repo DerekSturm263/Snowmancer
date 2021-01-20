@@ -14,7 +14,7 @@ public class RaccoonTip : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && UIController.useHints)
         {
             uiCont.GiveTip(dialogue, timer);
             gameObject.SetActive(false);

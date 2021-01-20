@@ -16,6 +16,9 @@ public static class SaveSystem
     public static string elementDataPath = Application.persistentDataPath + "/element.savedata";
     public static FileStream elementStream;
 
+    public static string settingsDataPath = Application.persistentDataPath + "/settings.savedata";
+    public static FileStream settingsStream;
+
     public static void SavePlayer(Player SaveLoad)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -59,6 +62,67 @@ public static class SaveSystem
         elementStream.Close();
     }
 
+    public static void SaveSettingsData(bool[] boolValues, float[] floatValues)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        settingsStream = new FileStream(settingsDataPath, FileMode.Create);
+
+        ElementData data = new ElementData();
+
+        formatter.Serialize(settingsStream, data);
+        settingsStream.Close();
+    }
+
+    public static bool[] SettingsBools()
+    {
+        if (File.Exists(settingsDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(settingsDataPath, FileMode.Open);
+
+            SettingsData data = formatter.Deserialize(stream) as SettingsData;
+            stream.Close();
+
+            bool[] boolValues = new bool[5];
+
+            boolValues[0] = data.isFullscreen;
+            boolValues[1] = data.useParticles;
+            boolValues[2] = data.usePostProcessing;
+            boolValues[3] = data.hasAntiAliasing;
+            boolValues[4] = data.useHints;
+
+            return boolValues;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + PlayerPath);
+            return null;
+        }
+    }
+
+    public static float[] SettingsFloats()
+    {
+        if (File.Exists(settingsDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(settingsDataPath, FileMode.Open);
+
+            SettingsData data = formatter.Deserialize(stream) as SettingsData;
+            stream.Close();
+
+            float[] floatValues = new float[2];
+
+            floatValues[0] = data.musicVolume;
+            floatValues[1] = data.sfxVolume;
+
+            return floatValues;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + PlayerPath);
+            return null;
+        }
+    }
 
     public static bool[] LoadElementData()
     {
