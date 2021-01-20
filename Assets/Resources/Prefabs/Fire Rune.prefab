@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8256430483440819432}
   - component: {fileID: 7152458040610780839}
   - component: {fileID: 1403788350518106083}
+  - component: {fileID: -2053133337753895013}
   m_Layer: 0
   m_Name: Fire Rune
   m_TagString: Untagged
@@ -169,3 +170,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runeType: 1
+--- !u!114 &-2053133337753895013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2987880542314356958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02406fe4e2c9604cbcf1713e9f2ae4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: It looks like a new type of snowball. Maybe we can use this in the next
+    area...
+  timer: 7.5
