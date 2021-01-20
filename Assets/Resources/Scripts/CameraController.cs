@@ -37,8 +37,11 @@ public class CameraController : MonoBehaviour
 
     public static bool isActive = true;
 
+    [HideInInspector] public GameObject defaultFollowOb;
+
     void Start()
     {
+        defaultFollowOb = CameraFollowObj;
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;

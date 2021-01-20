@@ -322,16 +322,16 @@ public class Player : MonoBehaviour
                 currentSpell = CurrentSpell.none;
                 break;
             case 1:
-                currentSpell = CurrentSpell.ice;
+                currentSpell = !menuScript.menuItems[1].GetComponent<MenuItemScript>().isLocked ? CurrentSpell.ice : CurrentSpell.none;
                 break;
             case 2:
-                currentSpell = CurrentSpell.fire;
+                currentSpell = !menuScript.menuItems[2].GetComponent<MenuItemScript>().isLocked ? CurrentSpell.fire : CurrentSpell.none;
                 break;
             case 3:
-                currentSpell = CurrentSpell.electric;
+                currentSpell = !menuScript.menuItems[3].GetComponent<MenuItemScript>().isLocked ? CurrentSpell.electric : CurrentSpell.none;
                 break;
             case 4:
-                currentSpell = CurrentSpell.air;
+                currentSpell = !menuScript.menuItems[4].GetComponent<MenuItemScript>().isLocked ? CurrentSpell.air : CurrentSpell.none;
                 break;
         }
     }

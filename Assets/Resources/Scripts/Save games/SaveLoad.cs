@@ -6,6 +6,7 @@ public class SaveLoad : MonoBehaviour
 {
     public GameObject camera;
     public Player player;
+    public GameObject gameoverCanvas;
 
     public static bool isSave()
     {
@@ -28,6 +29,22 @@ public class SaveLoad : MonoBehaviour
         SaveSystem.SaveScene(SceneManager.GetActiveScene().name);
         SaveSystem.SaveElementData(CollectRune.unlockedSpells);
         SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, new float[2] { UIController.musicVolume, UIController.sfxVolume });
+    }
+
+    public void Retry()
+    {
+        CameraController camCont = player.cam.GetComponentInParent<CameraController>();
+        FindObjectOfType<UIController>().GetComponent<CanvasGroup>().alpha = 0f;
+
+        camCont.CameraFollowObj = camCont.defaultFollowOb;
+        camCont.CamOffset.x = 0.7f;
+        camCont.CamOffset.y = 1.4f;
+
+        CameraController.isActive = true;
+        Shader.SetGlobalFloat("_BlacknessLerp", 0f);
+        Cursor.lockState = CursorLockMode.Locked;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoadPlayer(bool loadCoords = true)

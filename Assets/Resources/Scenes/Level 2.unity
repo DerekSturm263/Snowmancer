@@ -37115,7 +37115,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1283712694}
-        m_MethodName: LoadPlayer
+        m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -55786,7 +55786,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2063524623}
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
@@ -66329,6 +66329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 605954437}
   player: {fileID: 420413275}
+  gameoverCanvas: {fileID: 1682749339}
 --- !u!4 &1283712695
 Transform:
   m_ObjectHideFlags: 0
@@ -85877,7 +85878,7 @@ RectTransform:
   m_Children:
   - {fileID: 669769591}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
