@@ -263,6 +263,7 @@ public class BossBehavior : MonoBehaviour
 
             stats.active = true;
             stats.ShowHealth();
+            MusicPlayer.Play("bossTheme");
 
             if (stats.type == Boss.ElementType.Wind)
                 stats.anim.SetTrigger("Start");

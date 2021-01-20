@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIController : MonoBehaviour
 {
@@ -55,6 +56,37 @@ public class UIController : MonoBehaviour
     public GameObject graphicSettingsMenu;
     public GameObject soundSettingsMenu;
     public GameObject gameplaySettingsMenu;
+
+    public Toggle[] toggles = new Toggle[5];
+    public Slider[] sliders = new Slider[2];
+
+    private void Awake()
+    {
+        float[] sliderValues = SaveSystem.SettingsFloats();
+        bool[] boolValues = SaveSystem.SettingsBools();
+        toggles[0].isOn = boolValues[0];
+        toggles[1].isOn = boolValues[1];
+        toggles[2].isOn = boolValues[2];
+        toggles[3].isOn = boolValues[3];
+        toggles[4].isOn = boolValues[4];
+
+        sliders[0].value = sliderValues[0];
+        sliders[1].value = sliderValues[1];
+
+
+        FindObjectOfType<VisualEffect>().enabled = useParticles;
+        if (useAntiAliasing)
+        {
+            QualitySettings.antiAliasing = 4;
+        }
+        else
+        {
+            QualitySettings.antiAliasing = 0;
+        }
+        Screen.fullScreen = useFullscreen;
+        Volume v = FindObjectOfType<Camera>().GetComponent<Volume>();
+        v.enabled = usePostProcessing;
+    }
 
     void Start()
     {
@@ -328,14 +360,16 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void AdjustMusicVolume(float newVal)
+    public void AdjustMusicVolume()
     {
-        musicVolume = newVal;
+        //musicVolume = sliders[0].value;
+        //MusicPlayer.ChangeVolume(musicVolume);
     }
 
-    public void AdjustSFXVolume(float newVal)
+    public void AdjustSFXVolume()
     {
-        sfxVolume = newVal;
+        //sfxVolume = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
+        //SoundPlayer.ChangeVolume(sfxVolume);
     }
     
     public void ToggleTips()

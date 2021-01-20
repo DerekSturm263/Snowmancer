@@ -1396,62 +1396,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40294239}
   m_CullTransparentMesh: 0
---- !u!1 &40592380
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 40592382}
-  - component: {fileID: 40592381}
-  m_Layer: 0
-  m_Name: Audio
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &40592381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40592380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d51c7abed05282e46946f093e059758a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: Snowing
-    clip: {fileID: 8300000, guid: cfc8f534b47866644a3dfb989b0165cc, type: 3}
-    volume: 1
-    pitch: 0
-    loop: 1
-    source: {fileID: 0}
-  - name: Song
-    clip: {fileID: 8300000, guid: bc709ab8bab48ef4d9889fe3d44b5f27, type: 3}
-    volume: 0.1
-    pitch: 0
-    loop: 1
-    source: {fileID: 0}
---- !u!4 &40592382
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40592380}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 285.89902, y: -188.25238, z: 133.08682}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &45454461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22409,7 +22353,7 @@ PrefabInstance:
     - target: {fileID: 2987880542314356954, guid: d76178e2a8c70b543a205bd907360c34,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2987880542314356954, guid: d76178e2a8c70b543a205bd907360c34,
         type: 3}
@@ -29324,7 +29268,7 @@ Transform:
   - {fileID: 1285254233}
   - {fileID: 1968856004}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &605954439
 MonoBehaviour:
@@ -29361,6 +29305,7 @@ MonoBehaviour:
   aimFOV: 40
   aimSens: 0
   follow2: {fileID: 420413282}
+  defaultFollowOb: {fileID: 0}
 --- !u!1001 &607192534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55483,7 +55428,7 @@ PrefabInstance:
     - target: {fileID: 6198210159692873676, guid: ba437c31609d7ea418e6aaedb77b2550,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6198210159692873676, guid: ba437c31609d7ea418e6aaedb77b2550,
         type: 3}
@@ -57073,7 +57018,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1065401454
 GameObject:
@@ -72282,6 +72227,50 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1427360780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427360782}
+  - component: {fileID: 1427360781}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1427360781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427360780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da36e72bf96fb8c489aaaa7931723f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTheme: {fileID: 8300000, guid: 5746f2de515e4564a8a3b54c987f4ea7, type: 3}
+--- !u!4 &1427360782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427360780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -163.4042, y: 60.70153, z: -250.30019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1427725381
 GameObject:
   m_ObjectHideFlags: 0
@@ -85878,7 +85867,7 @@ RectTransform:
   m_Children:
   - {fileID: 669769591}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -96802,7 +96791,7 @@ PrefabInstance:
     - target: {fileID: 5546491725550016144, guid: b5500a7987a977645b0600859591e9cd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5546491725550016144, guid: b5500a7987a977645b0600859591e9cd,
         type: 3}
@@ -98713,7 +98702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevelStartPos: {x: 396.98, y: 513.084, z: 870.985}
   nextLevelCamStartPos: {x: 400, y: 516.434, z: 871.2}
-  active: 0
+  active: 1
   nextLevel: Level 3 and 4
   camHolder: {fileID: 605954437}
 --- !u!65 &1937631918
@@ -109422,6 +109411,15 @@ MonoBehaviour:
   graphicSettingsMenu: {fileID: 999282267}
   soundSettingsMenu: {fileID: 1008391156}
   gameplaySettingsMenu: {fileID: 399065765}
+  toggles:
+  - {fileID: 1124455799}
+  - {fileID: 1409163152}
+  - {fileID: 338541953}
+  - {fileID: 59249815}
+  - {fileID: 1855761873}
+  sliders:
+  - {fileID: 1552710898}
+  - {fileID: 2067065871}
 --- !u!114 &2063524624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109501,7 +109499,7 @@ RectTransform:
   - {fileID: 632247182}
   - {fileID: 14670751}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
