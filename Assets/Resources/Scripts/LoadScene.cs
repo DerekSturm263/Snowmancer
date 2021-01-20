@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    public void SwitchScene(string SceneToLoad)
+    public void SwitchScene()
     {
-        SceneManager.LoadScene(SceneToLoad);
+        SceneManager.LoadScene(SaveSystem.LoadScene());
     }
 
     public void QuitGame()

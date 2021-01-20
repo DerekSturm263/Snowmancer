@@ -29,9 +29,8 @@ public class SaveLoad : MonoBehaviour
         SaveSystem.SaveElementData(CollectRune.unlockedSpells);
     }
 
-    public void LoadPlayer()
+    public void LoadPlayer(bool loadCoords = true)
     {
-        camera.transform.position = SaveSystem.LoadCamera();
         PlayerData data = SaveSystem.LoadPLayer();
         CollectRune.unlockedSpells = SaveSystem.LoadElementData();
 
@@ -51,16 +50,21 @@ public class SaveLoad : MonoBehaviour
         player.vExpLeft = data.vExpLeft;
         player.vCurrExp = data.vCurrExp;
 
-        Vector3 targetPos;
-        targetPos.x = data.targetPos[0];
-        targetPos.y = data.targetPos[1];
-        targetPos.z = data.targetPos[2];
-        player.GetComponent<PlayerMovement>().targetPos = targetPos;
+        if (loadCoords)
+        {
+            camera.transform.position = SaveSystem.LoadCamera();
 
-        Vector3 postition;
-        postition.x = data.postition[0];
-        postition.y = data.postition[1];
-        postition.z = data.postition[2];
-        player.transform.position = postition;
+            Vector3 targetPos;
+            targetPos.x = data.targetPos[0];
+            targetPos.y = data.targetPos[1];
+            targetPos.z = data.targetPos[2];
+            player.GetComponent<PlayerMovement>().targetPos = targetPos;
+
+            Vector3 postition;
+            postition.x = data.postition[0];
+            postition.y = data.postition[1];
+            postition.z = data.postition[2];
+            player.transform.position = postition;
+        }
     }
 }

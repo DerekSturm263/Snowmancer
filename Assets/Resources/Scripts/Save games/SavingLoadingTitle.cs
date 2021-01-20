@@ -33,15 +33,13 @@ public class SavingLoadingTitle : MonoBehaviour
         {
             try
             {
-                if (!SaveLoad.isSave())
-                {
-                    SaveSystem.SavePlayer(startPlayerStats);
-                    SaveSystem.SaveCamera(startCam.transform.position);
-                    SaveSystem.SaveScene(startScene);
-                    SaveSystem.SaveElementData(elementStartData);
+                SaveSystem.SavePlayer(startPlayerStats);
+                SaveSystem.SaveCamera(startCam.transform.position);
+                SaveSystem.SaveScene(startScene);
+                SaveSystem.SaveElementData(elementStartData);
 
-                    Debug.Log("Succesfully saved data to " + Application.persistentDataPath);
-                }
+                Debug.Log(SaveSystem.LoadScene());
+                Debug.Log("Succesfully saved data to " + Application.persistentDataPath);
             }
             catch (System.Exception E)
             {

@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class LevelData
 {
     public string scene;

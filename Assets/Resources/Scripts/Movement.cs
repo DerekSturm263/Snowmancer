@@ -42,8 +42,13 @@ public class Movement : MonoBehaviour
 
     [HideInInspector] public bool snapToGround = true;
 
+    public bool isActive = true;
+
     protected void Awake()
     {
+        if (!isActive)
+            return;
+
         this.enabled = true;
 
         anim = GetComponent<Animator>();

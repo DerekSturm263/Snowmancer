@@ -5336,7 +5336,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1997133379}
         m_MethodName: SwitchScene
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6890,6 +6890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107470005}
   - component: {fileID: 2107470004}
+  - component: {fileID: 2107470006}
   m_Layer: 0
   m_Name: PlayerDummy
   m_TagString: Untagged
@@ -6953,9 +6954,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107470003}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -92.73216, y: 332.44138, z: -162.16165}
+  m_LocalPosition: {x: -228.5, y: -47.5, z: -267.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107470006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107470003}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c770ca57982ed854c913e514da174f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffect: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  movementVector: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  groundedDistance: 0
+  groundedVelocity: 0
+  iceLeft: 0
+  materials: []
+  materialColors: []
+  materialFloats: []
+  snapToGround: 1
+  isActive: 0
+  player: {fileID: 0}
+  jumpParticles: {fileID: 0}
+  landParticles: {fileID: 0}
+  moveParticles: {fileID: 0}
+  timeBurnt: 0

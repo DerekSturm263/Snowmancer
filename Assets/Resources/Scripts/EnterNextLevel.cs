@@ -3,15 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class EnterNextLevel : MonoBehaviour
 {
+    public Vector3 nextLevelStartPos;
+    public Vector3 nextLevelCamStartPos;
+
     public bool active = false;
     public string nextLevel;
     private Player player;
+    public GameObject camHolder;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && active)
         {
-            SaveSystem.SavePlayer(other.gameObject.GetComponent<Player>());
+            player = other.gameObject.GetComponent<Player>();
+
+            player.transform.position = nextLevelStartPos;
+            camHolder.transform.position = nextLevelCamStartPos;
+
+            SaveSystem.SavePlayer(player);
             SaveSystem.SaveElementData(CollectRune.unlockedSpells);
 
             SceneManager.LoadScene(nextLevel);
