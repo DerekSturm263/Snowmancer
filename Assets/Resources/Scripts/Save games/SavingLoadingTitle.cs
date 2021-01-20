@@ -5,6 +5,7 @@ public class SavingLoadingTitle : MonoBehaviour
     public string startScene;
     public Player startPlayerStats;
     public GameObject startCam;
+    public bool[] elementStartData = new bool[5];
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class SavingLoadingTitle : MonoBehaviour
                 SaveSystem.SavePlayer(startPlayerStats);
                 SaveSystem.SaveCamera(startCam.transform.position);
                 SaveSystem.SaveScene(startScene);
+                SaveSystem.SaveElementData(elementStartData);
 
                 Debug.Log("Succesfully saved data to " + Application.persistentDataPath);
             }
@@ -27,7 +29,7 @@ public class SavingLoadingTitle : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             try
             {
@@ -36,6 +38,7 @@ public class SavingLoadingTitle : MonoBehaviour
                     SaveSystem.SavePlayer(startPlayerStats);
                     SaveSystem.SaveCamera(startCam.transform.position);
                     SaveSystem.SaveScene(startScene);
+                    SaveSystem.SaveElementData(elementStartData);
 
                     Debug.Log("Succesfully saved data to " + Application.persistentDataPath);
                 }

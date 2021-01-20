@@ -11,7 +11,9 @@ public class EnterNextLevel : MonoBehaviour
     {
         if (other.CompareTag("Player") && active)
         {
-            SaveSystem.SavePlayer(player);
+            SaveSystem.SavePlayer(other.gameObject.GetComponent<Player>());
+            SaveSystem.SaveElementData(CollectRune.unlockedSpells);
+
             SceneManager.LoadScene(nextLevel);
         }
     }

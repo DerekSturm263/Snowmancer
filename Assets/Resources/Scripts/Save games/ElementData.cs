@@ -1,4 +1,5 @@
-﻿public class ElementData
+﻿[System.Serializable]
+public class ElementData
 {
     public bool[] isLocked;
 

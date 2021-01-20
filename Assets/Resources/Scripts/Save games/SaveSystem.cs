@@ -13,6 +13,8 @@ public static class SaveSystem
     public static string ScenePath = Application.persistentDataPath + "/scene.savedata";
     public static FileStream sceneStream;
 
+    public static string elementDataPath = Application.persistentDataPath + "/element.savedata";
+    public static FileStream elementStream;
 
     public static void SavePlayer(Player SaveLoad)
     {
@@ -46,7 +48,37 @@ public static class SaveSystem
         cameraStream.Close();
     }
 
+    public static void SaveElementData(bool[] unlocks)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        elementStream = new FileStream(elementDataPath, FileMode.Create);
 
+        ElementData data = new ElementData(unlocks);
+
+        formatter.Serialize(elementStream, data);
+        elementStream.Close();
+    }
+
+
+    public static bool[] LoadElementData()
+    {
+        if (File.Exists(elementDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(elementDataPath, FileMode.Open);
+
+            ElementData data = formatter.Deserialize(stream) as ElementData;
+            stream.Close();
+
+            bool[] newUnlocks = data.isLocked;
+            return newUnlocks;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + PlayerPath);
+            return null;
+        }
+    }
 
     public static PlayerData LoadPLayer()
     {

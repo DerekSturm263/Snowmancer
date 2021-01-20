@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6419,6 +6419,7 @@ MonoBehaviour:
   startScene: Level 1
   startPlayerStats: {fileID: 2107470004}
   startCam: {fileID: 1102957868}
+  elementStartData: 0100000000
 --- !u!1 &1827191033
 GameObject:
   m_ObjectHideFlags: 0

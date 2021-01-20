@@ -24,12 +24,15 @@ public class SaveLoad : MonoBehaviour
 
         SaveSystem.SavePlayer(player);
         SaveSystem.SaveCamera(camera.transform.position);
+        SaveSystem.SaveScene(SceneManager.GetActiveScene().name);
+        SaveSystem.SaveElementData(CollectRune.unlockedSpells);
     }
 
     public void LoadPlayer()
     {
         camera.transform.position = SaveSystem.LoadCamera();
         PlayerData data = SaveSystem.LoadPLayer();
+        CollectRune.unlockedSpells = SaveSystem.LoadElementData();
 
         Debug.Log("Loading...");
 
