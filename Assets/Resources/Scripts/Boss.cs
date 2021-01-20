@@ -43,6 +43,8 @@ public class Boss : MonoBehaviour
 
     public bool newSpot = false;
 
+    public bool hasGivenBadGuyText = false;
+
     private void Awake()
     {
         player = FindObjectOfType<Player>().gameObject;

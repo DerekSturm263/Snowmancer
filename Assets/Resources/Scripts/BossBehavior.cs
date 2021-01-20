@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.Linq;
 
 public class BossBehavior : MonoBehaviour
 {
@@ -257,7 +255,12 @@ public class BossBehavior : MonoBehaviour
         float vertical = stats.anim.GetFloat("Vertical");
 
         if (!stats.active && distFromPlayer < distToStart) // 30f for Fire, Wind, Final. 40f for Electric
-        {
+        {   
+            if (stats.type == Boss.ElementType.Fire)
+            {
+                stats.player.GetComponent<Player>().uiCont.GiveTip("Whoa! Who's THIS guy? Is he a good guy?", 3f);
+            }
+
             stats.active = true;
             stats.ShowHealth();
 
@@ -288,12 +291,12 @@ public class BossBehavior : MonoBehaviour
                 if (distFromTarget > 2.5f)
                 {
                     targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
-                    targetSpeed = 1f;
+                    stats.anim.SetFloat("Vertical", 1f);
                 }
                 else
                 {
                     targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
-                    targetSpeed = 0f;
+                    stats.anim.SetFloat("Vertical", 0f);
 
                     if (vertical < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
                         stats.anim.SetBool("Charging", true);
