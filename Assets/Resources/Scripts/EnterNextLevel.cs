@@ -22,7 +22,7 @@ public class EnterNextLevel : MonoBehaviour
 
             SaveSystem.SavePlayer(player);
             SaveSystem.SaveElementData(CollectRune.unlockedSpells);
-            SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints}, new float[2] { UIController.musicVolume, UIController.sfxVolume })
+            SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, new float[2] { UIController.musicVolume, UIController.sfxVolume });
 
             SceneManager.LoadScene(nextLevel);
         }

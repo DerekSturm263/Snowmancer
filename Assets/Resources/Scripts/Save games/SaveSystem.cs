@@ -67,7 +67,7 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
         settingsStream = new FileStream(settingsDataPath, FileMode.Create);
 
-        ElementData data = new ElementData();
+        SettingsData data = new SettingsData(boolValues, floatValues);
 
         formatter.Serialize(settingsStream, data);
         settingsStream.Close();
