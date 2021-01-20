@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1108157479767521655, guid: 26ae821667ea9204d88f76689659a53e,
+        type: 3}
+      propertyPath: dialogue
+      value: The wind spell! I wonder what this one does?
+      objectReference: {fileID: 0}
     - target: {fileID: 330782234571453081, guid: 26ae821667ea9204d88f76689659a53e,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

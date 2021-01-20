@@ -126,6 +126,12 @@ public class LongRangedAttack : MonoBehaviour
         }
         else
         {
+            if (userBoss.type == Boss.ElementType.Fire && !userBoss.hasGivenBadGuyText)
+            {
+                player.GetComponent<Player>().uiCont.GiveTip("Bad guy! Definitely a bad guy!", 2f);
+                userBoss.hasGivenBadGuyText = true;
+            }
+
             if (userBoss.type == Boss.ElementType.All)
             {
                 userBoss.GetComponent<Animator>().SetBool("Charging Spell", false);
