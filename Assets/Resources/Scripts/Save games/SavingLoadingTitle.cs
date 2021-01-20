@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SavingLoadingTitle : MonoBehaviour
 {
     public string scene;
-    public GameObject camera;
+   // public GameObject camera;
     private Player player;
 
 
@@ -21,7 +21,7 @@ public class SavingLoadingTitle : MonoBehaviour
             if (!SaveLoad.isSave())
             {
                 SaveSystem.SavePlayer(player);
-                SaveSystem.SaveCamera(camera.transform.position);
+                //SaveSystem.SaveCamera(camera.transform.position);
                 SaveSystem.SaveScene(scene);
                 Debug.Log("Saved Data");
             }

@@ -37,16 +37,16 @@ public static class SaveSystem
         sceneStream.Close();
     }
 
-    public static void SaveCamera(Vector3 pos)
-    {
-        BinaryFormatter formatter = new BinaryFormatter();
-        cameraStream = new FileStream(CameraPath, FileMode.Create);
+    //public static void SaveCamera(Vector3 pos)
+    //{
+    //    BinaryFormatter formatter = new BinaryFormatter();
+    //    cameraStream = new FileStream(CameraPath, FileMode.Create);
 
-        CamData data = new CamData(pos);
+    //    CamData data = new CamData(pos);
 
-        formatter.Serialize(cameraStream, data);
-        cameraStream.Close();
-    }
+    //    formatter.Serialize(cameraStream, data);
+    //    cameraStream.Close();
+    //}
 
 
 
@@ -69,24 +69,24 @@ public static class SaveSystem
         }
     }
 
-    public static Vector3 LoadCamera()
-    {
-        if (File.Exists(CameraPath))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(CameraPath, FileMode.Open);
+    //public static Vector3 LoadCamera()
+    //{
+    //    if (File.Exists(CameraPath))
+    //    {
+    //        BinaryFormatter formatter = new BinaryFormatter();
+    //        FileStream stream = new FileStream(CameraPath, FileMode.Open);
 
-            CamData data = formatter.Deserialize(stream) as CamData;
-            stream.Close();
+    //        CamData data = formatter.Deserialize(stream) as CamData;
+    //        stream.Close();
 
-            return data.pos;
-        }
-        else
-        {
-            Debug.LogError("Save file not found in " + CameraPath);
-            return null;
-        }
-    }
+    //        return data.pos;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Save file not found in " + CameraPath);
+    //        return null;
+    //    }
+    //}
 
     public static string LoadScene()
     {

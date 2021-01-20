@@ -25,7 +25,7 @@ public class SaveLoad : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level 1" || SceneManager.GetActiveScene().name == "Level 2" || SceneManager.GetActiveScene().name == "Level 3 and 4")
         {
             SaveSystem.LoadPLayer();
-            SaveSystem.LoadCamera();
+           // SaveSystem.LoadCamera();
         }
 
     }
@@ -34,14 +34,14 @@ public class SaveLoad : MonoBehaviour
     {
         Debug.Log("saved!");
         SaveSystem.SavePlayer(player);
-        SaveSystem.SaveCamera(camera.transform.position);
+       // SaveSystem.SaveCamera(camera.transform.position);
 
     }
 
     public void LoadPlayer()
     {
-        CamData camData = new CamData();
-        camData.camPos = SaveSystem.LoadCamera();
+      //  CamData camData = new CamData();
+       // camData.camPos = SaveSystem.LoadCamera();
         PlayerData data = SaveSystem.LoadPLayer();
         Debug.Log("loading...");
 
@@ -59,11 +59,11 @@ public class SaveLoad : MonoBehaviour
         player.vExpLeft = data.vExpLeft;
         player.vCurrExp = data.vCurrExp;
 
-        //camera Info
-        Vector3 camPos;
-        camPos.x = camData.camPos[0];
-        camPos.y = camData.camPos[1];
-        camPos.z = camData.camPos[2];
+        ////camera Info
+        //Vector3 camPos;
+        //camPos.x = camData.camPos[0];
+        //camPos.y = camData.camPos[1];
+        //camPos.z = camData.camPos[2];
 
         //Player postition
         Vector3 targetPos;
