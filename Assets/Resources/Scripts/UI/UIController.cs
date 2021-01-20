@@ -274,7 +274,7 @@ public class UIController : MonoBehaviour
     {
         for (float i = 0f; i < 1.5f; i += Time.deltaTime)
         {
-            CameraController.isActive = false;
+            // CameraController.isActive = false;
             Shader.SetGlobalFloat("_BlacknessLerp", i / 1f);
             Time.timeScale = 1.5f - i;
             yield return new WaitForEndOfFrame();
