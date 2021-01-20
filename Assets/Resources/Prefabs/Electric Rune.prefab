@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 1403788350518106083, guid: d76178e2a8c70b543a205bd907360c34,
         type: 3}
       propertyPath: runeType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2987880542314356954, guid: d76178e2a8c70b543a205bd907360c34,
         type: 3}
@@ -102,7 +102,8 @@ PrefabInstance:
       propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2053133337753895013, guid: d76178e2a8c70b543a205bd907360c34, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d76178e2a8c70b543a205bd907360c34, type: 3}
 --- !u!1 &330782234571453083 stripped
 GameObject:

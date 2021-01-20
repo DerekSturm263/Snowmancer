@@ -7,7 +7,7 @@ public class CollectRune : MonoBehaviour
 
     public enum RuneType
     {
-        Ice, Fire, Electric, Wind
+        None, Ice, Fire, Electric, Wind
     }
     public RuneType runeType;
 

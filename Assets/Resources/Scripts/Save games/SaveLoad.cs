@@ -15,6 +15,7 @@ public class SaveLoad : MonoBehaviour
     private void Awake()
     {
         LoadPlayer();
+        SavePlayer();
     }
 
     //Save/load system stuff
