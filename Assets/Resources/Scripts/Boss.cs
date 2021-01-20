@@ -246,7 +246,7 @@ public class Boss : MonoBehaviour
 
         if (type == ElementType.Wind)
         {
-            GameObject finalBoss = GameObject.FindGameObjectsWithTag("Boss")[0];
+            GameObject finalBoss = GameObject.Find("Final Boss");
 
             finalBoss.SetActive(true);
             ui.boss = finalBoss.GetComponent<Boss>();

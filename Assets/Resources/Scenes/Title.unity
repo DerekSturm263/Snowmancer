@@ -6420,10 +6420,10 @@ MonoBehaviour:
   startPlayerStats: {fileID: 2107470004}
   startCam: {fileID: 1102957868}
   elementStartData: 0100000000
-  defaultBoolValues: 0000000000
+  defaultBoolValues: 0101010101
   defaultFloatValues:
-  - 0
-  - 0
+  - 1
+  - 1
 --- !u!1 &1827191033
 GameObject:
   m_ObjectHideFlags: 0
