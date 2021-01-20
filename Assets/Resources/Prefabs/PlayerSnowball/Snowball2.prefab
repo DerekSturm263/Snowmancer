@@ -128,6 +128,7 @@ MonoBehaviour:
     type: 3}
   breakable: 0
   damage: 0
+  burnDamage: 8
   trailParticle: {fileID: 0}
   defaultTrailParticles: {fileID: 733729290166628214, guid: 3b0c9288b6bcaf64f859bf2d30a270f6,
     type: 3}
@@ -139,3 +140,10 @@ MonoBehaviour:
     type: 3}
   airTrailParticles: {fileID: 2556172504158846677, guid: 31bb6f8e54d953e44b41a8a1901184a7,
     type: 3}
+  shockedParticles: {fileID: 3920235567074269659, guid: df7bf84a39b3c1449927c8bd20fac34b,
+    type: 3}
+  fireParticles: {fileID: 4345756482132357682, guid: 6b6e187f2a4edb2449a2e8d39b605c21,
+    type: 3}
+  frozenParticles: {fileID: 9177410878595528242, guid: fde960ffa0c18734084c75f5f82255a3,
+    type: 3}
+  targetOffset: {x: 0, y: 0, z: 0}

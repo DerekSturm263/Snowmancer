@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class EnemyMovement : Movement
 {
@@ -29,6 +30,9 @@ public class EnemyMovement : Movement
     public GameObject hitEffect;
 
     private GameObject healthPotion;
+
+    public float timeBurnt;
+    public float burnDamage;
 
     private void Start()
     {
@@ -98,6 +102,68 @@ public class EnemyMovement : Movement
 
         anim.SetBool("Grounded", true);
         anim.SetLayerWeight(enemy.moveWhileAttacking ? 1 : 2, Mathf.Lerp(anim.GetLayerWeight(enemy.moveWhileAttacking ? 1 : 2), targetLayerWeight, Time.deltaTime * 10f));
+
+        #region Fire Damage
+        if (statusEffect == StatusEffect.Burnt)
+        {
+            enemy.health -= Time.deltaTime * 2.5f;
+            timeBurnt -= Time.deltaTime;
+
+            if (enemy.health <= 0f)
+                anim.SetTrigger("Dead");
+        }
+
+        if (timeBurnt < 0f)
+        {
+            timeBurnt = 0f;
+            statusEffect = StatusEffect.None;
+
+            materials.ToList().ForEach(x =>
+            {
+                x.SetFloat("_DamageWeight", 0f);
+            });
+        }
+        #endregion
+
+        #region Freeze Time
+
+        if (statusEffect == StatusEffect.Frozen)
+        {
+            iceLeft -= Time.deltaTime;
+            anim.speed = 0.01f;
+        }
+        else
+        {
+            anim.speed = 1;
+        }
+
+        if (iceLeft < 0f)
+        {
+            anim.speed = 0.25f;
+            iceLeft = 0f;
+            statusEffect = StatusEffect.None;
+
+            for (int i = 0; i < materials.Count; i++)
+            {
+                materials[i].SetColor("_Tint", materialColors[i]);
+                materials[i].SetFloat("_Smoothness", materialFloats[i]);
+            }
+        }
+
+        #endregion
+
+
+        if (enemy.health <= 0)
+        {
+            iceLeft = 0;
+            statusEffect = StatusEffect.None;
+            anim.SetTrigger("Death");
+
+            anim.SetLayerWeight(1, 0f);
+            anim.SetLayerWeight(2, 0f);
+
+            this.enabled = false;
+        }
     }
 
     #region Attacking
@@ -213,6 +279,9 @@ public class EnemyMovement : Movement
 
         if (enemy.health <= 0)
         {
+            iceLeft = 0;
+            anim.speed = 1; 
+            statusEffect = StatusEffect.None;
             anim.SetTrigger("Death");
 
             anim.SetLayerWeight(1, 0f);

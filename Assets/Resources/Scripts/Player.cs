@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
                         currentSnowball.transform.parent = snowballThrowPoint.transform;
                         currentSnowball.GetComponent<Rigidbody>().isKinematic = true;
                         currentSnowball.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-                        //SB_lock.transform.SetParent(SBhand.transform, false);
+                        SB_lock.transform.SetParent(SBhand.transform, false);
                         currentState = State.CHARGING;
                     }
                     if (!Input.GetMouseButton(1)) { aiming = false; currentState = State.IDLE; }
@@ -219,7 +219,7 @@ public class Player : MonoBehaviour
     //Throw
     public void AnimationThrowSnowball()
     {
-        //SB_lock.transform.SetParent(SBdefault.transform, false);
+        SB_lock.transform.SetParent(SBdefault.transform, false);
         ThrowSnowball(currentSnowball.transform.localScale, currentSnowballDamage);
         currentSnowball.GetComponent<Rigidbody>().isKinematic = false;
         currentSnowball.transform.parent = null;
@@ -257,10 +257,24 @@ public class Player : MonoBehaviour
             case Snowball.CurrentSpell.air:
                 rb.useGravity = false;
                 rb.velocity = CalculateAirV(target, snowballThrowPoint.transform.position);
-                mana -= 33f;
+                mana -= 20f;
+                break;
+
+            case Snowball.CurrentSpell.fire:
+                rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
+                mana -= 25f;
+                break;
+
+            case Snowball.CurrentSpell.ice:
+                rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
+                mana -= 30f;
+                break;
+            case Snowball.CurrentSpell.electric:
+                rb.velocity = CalculateV(target, snowballThrowPoint.transform.position, time);
+                mana -= 40f;
                 break;
         }
-        //snowball.transform.position = SBdefault.transform.position;
+        snowball.transform.position = SBdefault.transform.position;
         Debug.Log(rb.velocity);
         throwCD = 0.25f;
         // I'm hard setting this right now, but when make the snowballs grow bigger, we will set this to be the size of the current snowball.
