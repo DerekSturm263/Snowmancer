@@ -26,6 +26,10 @@ public class BossBehavior : MonoBehaviour
 
     private Material tattooMaterial;
 
+    private bool summonEnemy = true;
+
+    public GameObject spawnParticles;
+
     class Vec3Comparer : Comparer<Vector3>
     {
         Transform transform;
@@ -373,20 +377,21 @@ public class BossBehavior : MonoBehaviour
             if (anim.IsName("Strafing") || anim.IsName("Charging Smash Transition") || anim.IsName("Charging Smash") || anim.IsName("Running") || anim.IsName("Charging Spell Transition") || anim.IsName("Charging Spell"))
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + 180f, targetRotation.eulerAngles.z);
 
-            if (distFromPlayer > 25f)
-            {
-                if (!stats.anim.GetBool("Charging Smash") || !stats.anim.GetBool("Charging Spell"))
-                    stats.anim.SetBool("Charging Spell", true);
-            }
-            else if (distFromPlayer > 5f)
+            if (distFromPlayer > 5f)
             {
                 stats.anim.SetFloat("Vertical", 1f);
+
+                if (!stats.anim.GetBool("Charging Smash") && !stats.anim.GetBool("Charging Spell") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                {
+                    summonEnemy = !summonEnemy;
+                    stats.anim.SetBool("Charging Spell", true);
+                }
             }
             else
             {
                 stats.anim.SetFloat("Vertical", 0f);
 
-                if (!stats.anim.GetBool("Charging Smash") || !stats.anim.GetBool("Charging Spell"))
+                if (!stats.anim.GetBool("Charging Smash") && !stats.anim.GetBool("Charging Spell") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
                 {
                     bossElementType = Random.Range(0, 4);
 
@@ -471,12 +476,14 @@ public class BossBehavior : MonoBehaviour
 
     public void Smash()
     {
+        Debug.Log("E");
         Invoke("ReleaseSmash", chargeTime);
     }
 
     public void ReleaseSmash()
     {
         stats.anim.SetBool("Charging Smash", false);
+        stats.timeSinceLastAttack = 0.1f;
     }
     
     public void CheckForHit()
@@ -499,40 +506,82 @@ public class BossBehavior : MonoBehaviour
 
     public void UseSpellAttack()
     {
-        LongRangedAttack currentSpell = Instantiate(spell, transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
-
-        if (stats.health / stats.maxHealth > 0.5f)
-            stats.currentAttack = BossAttacks.finalBossSpell1_1;
-        else
-            stats.currentAttack = BossAttacks.finalBossSpell1_2;
-
-        currentSpell.userBoss = stats;
-        currentSpell.target = currentSpell.userBoss.player;
-        currentSpell.attackType = (Enemy.ElementType) Random.Range(0, 4);
-
-        switch ((int) currentSpell.attackType)
+        if (!summonEnemy)
         {
-            case 0:
-                tattooMaterial.SetColor("_Tint", Color.red);
-                break;
-            case 1:
-                tattooMaterial.SetColor("_Tint", Color.cyan);
-                break;
-            case 2:
-                tattooMaterial.SetColor("_Tint", Color.yellow);
-                break;
-            case 3:
-                tattooMaterial.SetColor("_Tint", Color.white);
-                break;
-        }
+            LongRangedAttack currentSpell = Instantiate(spell, transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
 
-        currentSpell.Initialize(true);
-        Invoke("ReleaseSpellAttack", stats.currentAttack.ChargeTime - 1f);
+            if (stats.health / stats.maxHealth > 0.5f)
+                stats.currentAttack = BossAttacks.finalBossSpell1_1;
+            else
+                stats.currentAttack = BossAttacks.finalBossSpell1_2;
+
+            currentSpell.userBoss = stats;
+            currentSpell.target = currentSpell.userBoss.player;
+            currentSpell.attackType = (Enemy.ElementType) Random.Range(0, 4);
+
+            switch ((int) currentSpell.attackType)
+            {
+                case 0:
+                    tattooMaterial.SetColor("_Tint", Color.red);
+                    break;
+                case 1:
+                    tattooMaterial.SetColor("_Tint", Color.cyan);
+                    break;
+                case 2:
+                    tattooMaterial.SetColor("_Tint", Color.yellow);
+                    break;
+                case 3:
+                    tattooMaterial.SetColor("_Tint", Color.white);
+                    break;
+            }
+
+            currentSpell.Initialize(true);
+        }
+        else
+        {
+            Vector3 spawnPos = stats.GetSummonSpot(transform.position, stats.spawnRange);
+
+            GameObject enemyToSummon = null;
+            switch (Random.Range(0, 8))
+            {
+                case 0:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Melee");
+                    break;
+                case 1:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Magic");
+                    break;
+                case 2:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Ice Melee");
+                    break;
+                case 3:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Ice Magic");
+                    break;
+                case 4:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Electric Melee");
+                    break;
+                case 5:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Electric Magic");
+                    break;
+                case 6:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Melee");
+                    break;
+                case 7:
+                    enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Magic");
+                    break;
+            }
+
+            GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
+            newEnemy.SetActive(true);
+
+            ReleaseSpellAttack();
+        }
     }
 
     public void ReleaseSpellAttack()
     {
         stats.anim.SetBool("Charging Spell", false);
+        stats.timeSinceLastAttack = 0.1f;
+        Debug.Log("Reset");
     }
 
     public void ReleaseStomp()

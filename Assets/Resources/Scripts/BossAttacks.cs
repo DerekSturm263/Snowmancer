@@ -151,13 +151,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = fireBossSummon1;
                 Vector3 spawnPos = fireBossSummon1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, fireBossSpellSmall1.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Melee");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -167,13 +164,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = fireBossSummon2;
                 Vector3 spawnPos = fireBossSummon2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, fireBossSpellSmall2.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Fire Magic");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 fireBossSummon1.UserBoss.anim.SetBool("Charging", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -261,13 +255,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = electricBossSummon1;
                 Vector3 spawnPos = electricBossSummon1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, electricBossSummon1.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Electric Magic");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 electricBossSummon1.UserBoss.anim.SetBool("Charging Spell", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -277,13 +268,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = electricBossSummon2;
                 Vector3 spawnPos = electricBossSummon2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, electricBossSummon2.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Electric Melee");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 electricBossSummon2.UserBoss.anim.SetBool("Charging Spell", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -327,13 +315,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = windSummon1_1;
                 Vector3 spawnPos = windSummon1_1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon1_1.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Melee");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 windSummon1_1.UserBoss.anim.SetBool("Charging", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -343,13 +328,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = windSummon1_2;
                 Vector3 spawnPos = windSummon1_2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon1_2.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Melee");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 windSummon1_2.UserBoss.anim.SetBool("Charging", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -359,13 +341,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = windSummon2_1;
                 Vector3 spawnPos = windSummon2_1.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon2_1.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Magic");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 windSummon2_1.UserBoss.anim.SetBool("Charging", false);
                 boss.timeSinceLastAttack = 0.1f;
@@ -375,13 +354,10 @@ public class BossAttacks : MonoBehaviour
                 boss.currentAttack = windSummon2_2;
                 Vector3 spawnPos = windSummon2_2.UserBoss.GetSummonSpot(boss.gameObject.transform.position, windSummon2_2.UserBoss.spawnRange);
 
-                GameObject summonParticles = Instantiate(spawnParticles, spawnPos, Quaternion.identity);
-
                 GameObject enemyToSummon = Resources.Load<GameObject>("Prefabs/Enemy/Wind Magic");
 
                 GameObject newEnemy = Instantiate(enemyToSummon, spawnPos, Quaternion.identity);
                 newEnemy.SetActive(true);
-                Destroy(summonParticles);
 
                 windSummon2_2.UserBoss.anim.SetBool("Charging", false);
                 boss.timeSinceLastAttack = 0.1f;
