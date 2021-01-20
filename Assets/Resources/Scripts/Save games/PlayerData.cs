@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-[System.Serializable]
+﻿[System.Serializable]
 public class PlayerData
 {
     //player
@@ -23,9 +18,6 @@ public class PlayerData
     public float[] targetPos;
     public float[] postition;
 
-
-
-
     public PlayerData(Player player)
     {
         //player
@@ -44,16 +36,14 @@ public class PlayerData
 
         //player Postition
         targetPos = new float[3];
-        targetPos[0] = player.transform.position.x;
-        targetPos[1] = player.transform.position.y;
-        targetPos[2] = player.transform.position.z;
+        PlayerMovement pm = player.GetComponent<PlayerMovement>();
+        targetPos[0] = pm.targetPos.x;
+        targetPos[1] = pm.targetPos.y;
+        targetPos[2] = pm.targetPos.z;
 
         postition = new float[3];
         postition[0] = player.transform.position.x;
         postition[1] = player.transform.position.y;
         postition[2] = player.transform.position.z;
-
-
     }
-
 }

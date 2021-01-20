@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class CamData
 {
-    public Vector3 camPos;
+    public float[] camPos;
 
-
-    public CamData(float pos)
+    public CamData(Vector3 position)
     {
-        
-      //  camPos[0] = pos.x;
-      //  camPos[1] = pos.y;
-      //  camPos[2] = pos.z;
+        camPos = new float[3];
+
+        camPos[0] = position.x;
+        camPos[1] = position.y;
+        camPos[2] = position.z;
     }
 }

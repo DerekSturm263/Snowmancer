@@ -1,39 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class SavingLoadingTitle : MonoBehaviour
 {
-    public string scene;
-   // public GameObject camera;
-    private Player player;
-
+    public string startScene;
+    public Player startPlayerStats;
+    public GameObject startCam;
 
     private void Awake()
     {
-        player = GetComponent<Player>();
         try
         {
-
-            Debug.Log(Application.persistentDataPath);
-
             if (!SaveLoad.isSave())
             {
-                SaveSystem.SavePlayer(player);
-                //SaveSystem.SaveCamera(camera.transform.position);
-                SaveSystem.SaveScene(scene);
-                Debug.Log("Saved Data");
+                SaveSystem.SavePlayer(startPlayerStats);
+                SaveSystem.SaveCamera(startCam.transform.position);
+                SaveSystem.SaveScene(startScene);
+
+                Debug.Log("Succesfully saved data to " + Application.persistentDataPath);
             }
-        }catch(System.Exception E)
+        }
+        catch(System.Exception E)
         {
             Debug.LogError(E);
         }
-
-       
-
-
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            try
+            {
+                if (!SaveLoad.isSave())
+                {
+                    SaveSystem.SavePlayer(startPlayerStats);
+                    SaveSystem.SaveCamera(startCam.transform.position);
+                    SaveSystem.SaveScene(startScene);
 
+                    Debug.Log("Succesfully saved data to " + Application.persistentDataPath);
+                }
+            }
+            catch (System.Exception E)
+            {
+                Debug.LogError(E);
+            }
+        }
+    }
 }

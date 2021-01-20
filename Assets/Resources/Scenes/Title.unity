@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5200,7 +5200,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72.2
+  m_fontSize: 80
   m_fontSizeBase: 44.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5569,7 +5569,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72.2
+  m_fontSize: 80
   m_fontSizeBase: 69.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5740,7 +5740,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1102957870}
-  - component: {fileID: 1102957869}
   m_Layer: 0
   m_Name: CameraDummy
   m_TagString: Untagged
@@ -5748,41 +5747,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1102957869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102957868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e712555e2bc3d4b8dacf47b8851ff3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CamMoveSpeed: 120
-  CameraFollowObj: {fileID: 0}
-  clampAngle: 80
-  minDist: -8
-  maxDist: -4
-  inputSensitivity: 150
-  scrollSensitivity: 1
-  scrollSmooth: 7
-  collideSmooth: 15
-  collideDistance: 0.1
-  camCollideWith:
-    serializedVersion: 2
-    m_Bits: 0
-  CameraObj: {fileID: 0}
-  PlayerObj: {fileID: 0}
-  OffsetCenter: {fileID: 0}
-  CamOffset: {x: 0, y: 0, z: 0}
-  camDistance: 0
-  mouseX: 0
-  mouseY: 0
-  aimFOV: 0
-  aimSens: 0
-  follow2: {fileID: 0}
 --- !u!4 &1102957870
 Transform:
   m_ObjectHideFlags: 0
@@ -5790,13 +5754,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102957868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2340603, y: 0.4929446, z: -16.659485}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -225.3, y: -44.545, z: -267.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1248938171
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,7 +6323,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72.2
+  m_fontSize: 80
   m_fontSizeBase: 49.4
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6418,9 +6382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1821298007}
-  - component: {fileID: 1821298006}
   - component: {fileID: 1821298008}
-  - component: {fileID: 1821298009}
   m_Layer: 0
   m_Name: SavingSystem
   m_TagString: Untagged
@@ -6428,18 +6390,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1821298006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821298005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8af2c2b4b69a774ebeb6aeb14369d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1821298007
 Transform:
   m_ObjectHideFlags: 0
@@ -6466,55 +6416,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2a6636b8b85134392ebf3d14da1c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Level 1
---- !u!114 &1821298009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821298005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b3640519b7310408af4cc022485091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 100
-  maxMana: 100
-  mana: 100
-  manaRegenSpeed: 10
-  maxSnow: 100
-  snowAmount: 100
-  aiming: 0
-  selectingSpell: 0
-  snowballPrefab: {fileID: 8333230694888619470, guid: b5500a7987a977645b0600859591e9cd,
-    type: 3}
-  snowballThrowPoint: {fileID: 0}
-  cam: {fileID: 0}
-  throwBaseDamage: 18
-  sizeDamageMultiplier: 1.6
-  throwStrength: 2
-  maxThrowRange: 40
-  snowballIncreaseSpeed: 0.35
-  minSnowballSize: 0.3
-  maxSnowballSize: 1
-  snowDecreaseSpeed: 15
-  snowCollectSpeed: 30
-  onSnow: 1
-  snowballCollision:
-    serializedVersion: 2
-    m_Bits: 257
-  currentSpell: 0
-  vCurrExp: 0
-  vLevel: 1
-  vExpLeft: 10
-  vExpMod: 1.1
-  slomoScale: 0.1
-  slomoSmooth: 20
-  uiCont: {fileID: 0}
-  menuScript: {fileID: 0}
-  materials: []
+  startScene: Level 1
+  startPlayerStats: {fileID: 2107470004}
+  startCam: {fileID: 1102957868}
 --- !u!1 &1827191033
 GameObject:
   m_ObjectHideFlags: 0
@@ -6975,3 +6879,82 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 10, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!1 &2107470003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2107470005}
+  - component: {fileID: 2107470004}
+  m_Layer: 0
+  m_Name: PlayerDummy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2107470004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107470003}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b3640519b7310408af4cc022485091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
+  maxMana: 100
+  mana: 100
+  manaRegenSpeed: 10
+  maxSnow: 100
+  snowAmount: 100
+  aiming: 0
+  selectingSpell: 0
+  snowballPrefab: {fileID: 8333230694888619470, guid: b5500a7987a977645b0600859591e9cd,
+    type: 3}
+  snowballThrowPoint: {fileID: 0}
+  cam: {fileID: 0}
+  throwBaseDamage: 18
+  sizeDamageMultiplier: 1.6
+  throwStrength: 2
+  maxThrowRange: 40
+  snowballIncreaseSpeed: 0.35
+  minSnowballSize: 0.3
+  maxSnowballSize: 1
+  snowDecreaseSpeed: 15
+  snowCollectSpeed: 30
+  onSnow: 1
+  snowballCollision:
+    serializedVersion: 2
+    m_Bits: 257
+  currentSpell: 0
+  vCurrExp: 0
+  vLevel: 1
+  vExpLeft: 10
+  vExpMod: 1.1
+  slomoScale: 0.1
+  slomoSmooth: 20
+  uiCont: {fileID: 0}
+  menuScript: {fileID: 0}
+  materials: []
+--- !u!4 &2107470005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107470003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -92.73216, y: 332.44138, z: -162.16165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

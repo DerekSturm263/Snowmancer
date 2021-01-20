@@ -48,6 +48,7 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+        isPaused = false;
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
         SetMaxMana();
