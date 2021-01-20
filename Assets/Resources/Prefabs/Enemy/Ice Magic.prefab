@@ -35,7 +35,7 @@ PrefabInstance:
     - target: {fileID: 959274857048805036, guid: 4acf659a392dd74448481e25fce0086d,
         type: 3}
       propertyPath: magicAttackSpeed
-      value: 0.75
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 959274857048805036, guid: 4acf659a392dd74448481e25fce0086d,
         type: 3}

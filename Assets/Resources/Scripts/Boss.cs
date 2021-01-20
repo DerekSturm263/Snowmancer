@@ -132,6 +132,10 @@ public class Boss : MonoBehaviour
             {
                 damage = 0f;
             }
+            else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stuck"))
+            {
+                damage *= 1.5f;
+            }
         }
 
         if (damage > 0f)
