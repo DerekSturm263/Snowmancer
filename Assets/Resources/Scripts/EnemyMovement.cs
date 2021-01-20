@@ -33,6 +33,7 @@ public class EnemyMovement : Movement
 
     public float timeBurnt;
     public float burnDamage;
+    public float shockTime;
 
     private void Start()
     {
@@ -153,6 +154,19 @@ public class EnemyMovement : Movement
         #endregion
 
 
+        #region Shock Time
+        if (statusEffect == StatusEffect.Shocked)
+        {
+            shockTime -= Time.deltaTime;
+        }
+
+        if (shockTime < 0f)
+        {
+            shockTime = 0f;
+            statusEffect = StatusEffect.None;
+        }
+
+        #endregion
         if (enemy.health <= 0)
         {
             iceLeft = 0;
@@ -166,6 +180,15 @@ public class EnemyMovement : Movement
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ShockBall"))
+        {
+            shockTime = 2;
+            statusEffect = StatusEffect.Shocked;
+            TakeDamage(25);
+        }
+    }
     #region Attacking
 
     private void Attack()

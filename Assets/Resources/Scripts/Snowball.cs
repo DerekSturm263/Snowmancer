@@ -64,8 +64,8 @@ public class Snowball : MonoBehaviour
                         enemy.timeBurnt = 7.5f;
                         enemy.burnDamage = burnDamage;
 
-                        ParticleSystem newParticles = Instantiate(fireParticles, col.transform);
-                        newParticles.transform.localPosition += targetOffset;
+                        ParticleSystem newParticles3 = Instantiate(fireParticles, col.transform);
+                        newParticles3.transform.localPosition += targetOffset;
 
                         enemy.materials.ToList().ForEach(x =>
                         {
@@ -81,8 +81,8 @@ public class Snowball : MonoBehaviour
                         enemy.iceLeft = 4.5f;
                         enemy.statusEffect = Movement.StatusEffect.Frozen;
 
-                        ParticleSystem newParticles = Instantiate(frozenParticles, col.transform);
-                        newParticles.transform.localPosition += targetOffset;
+                        ParticleSystem newParticles2 = Instantiate(frozenParticles, col.transform);
+                        newParticles2.transform.localPosition += targetOffset;
 
                         enemy.materials.ToList().ForEach(x =>
                         {
@@ -92,10 +92,25 @@ public class Snowball : MonoBehaviour
                     }
                     break;
 
+                case CurrentSpell.electric:
+                    CompareEnemyTag(col);
+                    RaycastHit[] enemies = Physics.SphereCastAll(this.transform.position,8.5f,new Vector3(1,1,1),0);
+                    foreach(RaycastHit Castenemy in enemies)
+                    {
+                        EnemyMovement enemyScript = Castenemy.transform.GetComponent<EnemyMovement>();
+                        enemyScript.shockTime = 2.5f;
+                        enemy.TakeDamage(damage);
+                    }
+
+                    ParticleSystem newParticles = Instantiate(shockedParticles, enemy.transform);
+                    newParticles.transform.localPosition += targetOffset;
+                    break;
+
                 default:
                     CompareEnemyTag(col);
                     break;
             }
+
 
             trailParticle.transform.parent = null;
             trailParticle.Stop();

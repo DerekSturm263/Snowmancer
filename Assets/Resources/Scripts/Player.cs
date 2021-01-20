@@ -399,14 +399,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddHealth(float health)
+    public void AddHealth(float healthToAdd)
     {
-        health += health;
+        health += healthToAdd;
     }
 
-    public void AddMana(float mana)
+    public void AddMana(float manaToAdd)
     {
-        mana += mana;
+        mana += manaToAdd;
     }
 
     private void LimitStats()
