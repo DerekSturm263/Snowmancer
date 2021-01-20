@@ -98702,7 +98702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevelStartPos: {x: 396.98, y: 513.084, z: 870.985}
   nextLevelCamStartPos: {x: 400, y: 516.434, z: 871.2}
-  active: 1
+  active: 0
   nextLevel: Level 3 and 4
   camHolder: {fileID: 605954437}
 --- !u!65 &1937631918
