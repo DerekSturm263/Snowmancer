@@ -15,7 +15,10 @@ public class CollectRune : MonoBehaviour
     {
         uiCont = FindObjectOfType<UIController>();
 
-        uiCont.spellSelector.GetComponent<MenuScript>().menuItems[(int) runeType].GetComponent<MenuItemScript>().isLocked = !unlockedSpells[(int) runeType];
+        MenuScript spellSelector = uiCont.spellSelector.GetComponent<MenuScript>();
+        MenuItemScript rune = spellSelector.menuItems[(int) runeType].GetComponent<MenuItemScript>();
+        rune.isLocked = !unlockedSpells[(int) runeType];
+
         gameObject.SetActive(!unlockedSpells[(int) runeType]);
     }
 

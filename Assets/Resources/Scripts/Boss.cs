@@ -245,7 +245,12 @@ public class Boss : MonoBehaviour
             Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
 
         if (type == ElementType.Wind)
-            GameObject.FindGameObjectsWithTag("Boss")[0].SetActive(true);
+        {
+            GameObject finalBoss = GameObject.FindGameObjectsWithTag("Boss")[0];
+
+            finalBoss.SetActive(true);
+            ui.boss = finalBoss.GetComponent<Boss>();
+        }
     }
 
     public void ShowHealth()
