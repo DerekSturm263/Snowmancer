@@ -15,8 +15,9 @@ public class BossBehavior : MonoBehaviour
     private Quaternion targetRotation;
 
     private GameObject shockWave;
+    private GameObject smashParticles;
 
-    private float chargeTime = 4f;
+    private float chargeTime = 2.5f;
 
     public GameObject spell;
 
@@ -49,6 +50,7 @@ public class BossBehavior : MonoBehaviour
     {
         tattooMaterial = GetComponentInChildren<SkinnedMeshRenderer>().materials[3];
         shockWave = Resources.Load<GameObject>("Prefabs/Shockwave");
+        smashParticles = Resources.Load<GameObject>("Prefabs/Smash Hit");
 
         switch (stats.type)
         {
@@ -391,7 +393,7 @@ public class BossBehavior : MonoBehaviour
             {
                 stats.anim.SetFloat("Vertical", 0f);
 
-                if (!stats.anim.GetBool("Charging Smash") && !stats.anim.GetBool("Charging Spell") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                if (!stats.anim.GetBool("Charging Smash") && !stats.anim.GetBool("Charging Spell"))
                 {
                     bossElementType = Random.Range(0, 4);
 
@@ -488,6 +490,8 @@ public class BossBehavior : MonoBehaviour
     
     public void CheckForHit()
     {
+        Instantiate(smashParticles, transform.position + transform.forward * 2.5f - new Vector3(0f, 1f, 0f), Quaternion.Euler(-90f, 0f, 0f));
+
         if (Vector3.Distance(stats.player.transform.position, transform.position) < 5f && Vector3.Dot(transform.position, stats.player.transform.position) > 0.5f)
         {
             stats.player.GetComponent<Player>().TakeDamage(75f);
@@ -502,6 +506,9 @@ public class BossBehavior : MonoBehaviour
     public void UnDaze()
     {
         stats.anim.SetBool("Dazed", false);
+
+        if (chargeTime > 0.5f)
+            chargeTime -= 0.25f;
     }
 
     public void UseSpellAttack()
