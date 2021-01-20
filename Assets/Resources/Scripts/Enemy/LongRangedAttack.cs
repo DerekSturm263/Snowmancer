@@ -69,7 +69,7 @@ public class LongRangedAttack : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Initialize()
+    public void Initialize(bool overrideAttackType = false)
     {
         if (user != null)
         {
@@ -83,7 +83,7 @@ public class LongRangedAttack : MonoBehaviour
         }
         else
         {
-            attackType = userBoss.currentAttack.Type;
+            if (!overrideAttackType) attackType = userBoss.currentAttack.Type;
             damage = userBoss.currentAttack.Damage;
             speed = userBoss.currentAttack.Speed;
             size = userBoss.currentAttack.Size;

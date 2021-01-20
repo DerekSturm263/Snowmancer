@@ -64,14 +64,14 @@ public class BossAttacks : MonoBehaviour
     #region Final Boss Attacks
 
     // Element Type, Charge Time, Damage, Size, Speed, Lifetime
-    public static BossAttack finalBossSpell1_1 = new BossAttack(Enemy.ElementType.Ice, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell1_2 = new BossAttack(Enemy.ElementType.Ice, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell2_1 = new BossAttack(Enemy.ElementType.Fire, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell2_2 = new BossAttack(Enemy.ElementType.Fire, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell3_1 = new BossAttack(Enemy.ElementType.Electric, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell3_2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell4_1 = new BossAttack(Enemy.ElementType.Wind, 2.5f, 20f, 0.75f, 2f, 10f, BossAttack.BossUser.Final_Boss);
-    public static BossAttack finalBossSpell4_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 25f, 1.5f, 2.5f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell1_1 = new BossAttack(Enemy.ElementType.Ice, 2.5f, 35f, 1.25f, 1.5f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell1_2 = new BossAttack(Enemy.ElementType.Ice, 1.5f, 50f, 1.75f, 2f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell2_1 = new BossAttack(Enemy.ElementType.Fire, 2.5f, 20f, 0.75f, 1.5f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell2_2 = new BossAttack(Enemy.ElementType.Fire, 1.5f, 25f, 1.5f, 2f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell3_1 = new BossAttack(Enemy.ElementType.Electric, 2.5f, 20f, 0.75f, 1.5f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell3_2 = new BossAttack(Enemy.ElementType.Electric, 1.5f, 25f, 1.5f, 2f, 7.5f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell4_1 = new BossAttack(Enemy.ElementType.Wind, 2.5f, 20f, 0.75f, 1.5f, 10f, BossAttack.BossUser.Final_Boss);
+    public static BossAttack finalBossSpell4_2 = new BossAttack(Enemy.ElementType.Wind, 1.5f, 25f, 1.5f, 2f, 7.5f, BossAttack.BossUser.Final_Boss);
 
     public static BossAttack finalBossSummon1 = new BossAttack(Enemy.ElementType.Ice, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);
     public static BossAttack finalBossSummon2 = new BossAttack(Enemy.ElementType.Fire, 2f, 0f, 0f, 0f, 0f, BossAttack.BossUser.Final_Boss);

@@ -128,7 +128,10 @@ public class Boss : MonoBehaviour
         }
         else
         {
-
+            if (anim.GetLayerWeight(1) == 1f)
+            {
+                damage = 0f;
+            }
         }
 
         if (damage > 0f)

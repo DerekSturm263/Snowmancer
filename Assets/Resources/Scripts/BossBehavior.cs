@@ -16,6 +16,16 @@ public class BossBehavior : MonoBehaviour
 
     private GameObject shockWave;
 
+    private float chargeTime = 4f;
+
+    public GameObject spell;
+
+    public float distToStart = 30f;
+
+    public int bossElementType;
+
+    private Material tattooMaterial;
+
     class Vec3Comparer : Comparer<Vector3>
     {
         Transform transform;
@@ -33,6 +43,7 @@ public class BossBehavior : MonoBehaviour
 
     private void Awake()
     {
+        tattooMaterial = GetComponentInChildren<SkinnedMeshRenderer>().materials[3];
         shockWave = Resources.Load<GameObject>("Prefabs/Shockwave");
 
         switch (stats.type)
@@ -233,7 +244,13 @@ public class BossBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (!stats.active && Vector3.Distance(stats.player.transform.position, transform.position) < 30f)
+        float distFromTarget = Vector3.Distance(transform.position, targetSpot);
+        float distFromPlayer = Vector3.Distance(stats.player.transform.position, transform.position);
+
+        AnimatorStateInfo anim = stats.anim.GetCurrentAnimatorStateInfo(0);
+        float vertical = stats.anim.GetFloat("Vertical");
+
+        if (!stats.active && distFromPlayer < distToStart) // 30f for Fire, Wind, Final. 40f for Electric
         {
             stats.active = true;
             stats.ShowHealth();
@@ -254,15 +271,15 @@ public class BossBehavior : MonoBehaviour
                 stats.attackNum = 0;
             }
 
-            if (Vector3.Distance(stats.player.transform.position, transform.position) < 7.5f && !(stats.currentAttack == BossAttacks.fireBossSpellBig1 || stats.currentAttack == BossAttacks.fireBossSpellBig2))
+            if (distFromPlayer < 7.5f && !(stats.currentAttack == BossAttacks.fireBossSpellBig1 || stats.currentAttack == BossAttacks.fireBossSpellBig2))
             {
                 ChooseSpot();
                 stats.ResetAttack();
             }
 
-            if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
+            if (!anim.IsName("Dazed"))
             {
-                if (Vector3.Distance(transform.position, targetSpot) > 2.5f)
+                if (distFromTarget > 2.5f)
                 {
                     targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
                     targetSpeed = 1f;
@@ -272,7 +289,7 @@ public class BossBehavior : MonoBehaviour
                     targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
                     targetSpeed = 0f;
 
-                    if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                    if (vertical < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
                         stats.anim.SetBool("Charging", true);
                 }
             }
@@ -284,13 +301,13 @@ public class BossBehavior : MonoBehaviour
             targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
 
-            if (Vector3.Distance(transform.position, stats.player.transform.position) > followDist + 5.5f)
+            if (distFromPlayer > followDist + 5.5f)
             {
                 stats.anim.SetFloat("Vertical", 1f);
             }
-            else if (Vector3.Distance(transform.position, stats.player.transform.position) < followDist + 4.5f)
+            else if (distFromPlayer < followDist + 4.5f)
             {
-                stats.anim.SetFloat("Vertical", -2.5f + Vector3.Distance(transform.position, stats.player.transform.position) * 0.2f);
+                stats.anim.SetFloat("Vertical", -2.5f + distFromPlayer * 0.2f);
             }
             else
             {
@@ -328,9 +345,9 @@ public class BossBehavior : MonoBehaviour
                 stats.attackNum = 0;
             }
 
-            if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Dazed"))
+            if (!anim.IsName("Dazed"))
             {
-                if (Vector3.Distance(transform.position, targetSpot) > 5f)
+                if (distFromTarget > 5f)
                 {
                     targetRotation = Quaternion.LookRotation(transform.position - targetSpot, Vector3.up);
                     stats.anim.SetFloat("Vertical", 1f);
@@ -342,7 +359,7 @@ public class BossBehavior : MonoBehaviour
                     targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
                     stats.anim.SetFloat("Vertical", 0f);
 
-                    if (stats.anim.GetFloat("Vertical") < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
+                    if (vertical < 0.1f && !stats.anim.GetBool("Charging") && stats.timeSinceLastAttack >= stats.timeBetweenAttacks)
                         stats.anim.SetBool("Charging", true);
                 }
 
@@ -352,9 +369,46 @@ public class BossBehavior : MonoBehaviour
         else
         {
             targetRotation = Quaternion.LookRotation(transform.position - stats.player.transform.position, Vector3.up);
+            
+            if (anim.IsName("Strafing") || anim.IsName("Charging Smash Transition") || anim.IsName("Charging Smash") || anim.IsName("Running") || anim.IsName("Charging Spell Transition") || anim.IsName("Charging Spell"))
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y + 180f, targetRotation.eulerAngles.z);
 
-            stats.anim.SetFloat("Vertical", 1f);
+            if (distFromPlayer > 25f)
+            {
+                if (!stats.anim.GetBool("Charging Smash") || !stats.anim.GetBool("Charging Spell"))
+                    stats.anim.SetBool("Charging Spell", true);
+            }
+            else if (distFromPlayer > 5f)
+            {
+                stats.anim.SetFloat("Vertical", 1f);
+            }
+            else
+            {
+                stats.anim.SetFloat("Vertical", 0f);
+
+                if (!stats.anim.GetBool("Charging Smash") || !stats.anim.GetBool("Charging Spell"))
+                {
+                    bossElementType = Random.Range(0, 4);
+
+                    switch (bossElementType)
+                    {
+                        case 0:
+                            tattooMaterial.SetColor("_Tint", Color.red);
+                            break;
+                        case 1:
+                            tattooMaterial.SetColor("_Tint", Color.cyan);
+                            break;
+                        case 2:
+                            tattooMaterial.SetColor("_Tint", Color.yellow);
+                            break;
+                        case 3:
+                            tattooMaterial.SetColor("_Tint", Color.white);
+                            break;
+                    }
+
+                    stats.anim.SetBool("Charging Smash", true);
+                }
+            }
         }
         
         if (stats.timeSinceLastAttack > 0f)
@@ -417,12 +471,81 @@ public class BossBehavior : MonoBehaviour
 
     public void Smash()
     {
+        Invoke("ReleaseSmash", chargeTime);
+    }
 
+    public void ReleaseSmash()
+    {
+        stats.anim.SetBool("Charging Smash", false);
+    }
+    
+    public void CheckForHit()
+    {
+        if (Vector3.Distance(stats.player.transform.position, transform.position) < 5f && Vector3.Dot(transform.position, stats.player.transform.position) > 0.5f)
+        {
+            stats.player.GetComponent<Player>().TakeDamage(75f);
+        }
+        else
+        {
+            stats.anim.SetBool("Dazed", true);
+            Invoke("UnDaze", 5f);
+        }
+    }
+
+    public void UnDaze()
+    {
+        stats.anim.SetBool("Dazed", false);
+    }
+
+    public void UseSpellAttack()
+    {
+        LongRangedAttack currentSpell = Instantiate(spell, transform.position + new Vector3(0f, 2.5f, 0f), Quaternion.identity).GetComponent<LongRangedAttack>();
+
+        if (stats.health / stats.maxHealth > 0.5f)
+            stats.currentAttack = BossAttacks.finalBossSpell1_1;
+        else
+            stats.currentAttack = BossAttacks.finalBossSpell1_2;
+
+        currentSpell.userBoss = stats;
+        currentSpell.target = currentSpell.userBoss.player;
+        currentSpell.attackType = (Enemy.ElementType) Random.Range(0, 4);
+
+        switch ((int) currentSpell.attackType)
+        {
+            case 0:
+                tattooMaterial.SetColor("_Tint", Color.red);
+                break;
+            case 1:
+                tattooMaterial.SetColor("_Tint", Color.cyan);
+                break;
+            case 2:
+                tattooMaterial.SetColor("_Tint", Color.yellow);
+                break;
+            case 3:
+                tattooMaterial.SetColor("_Tint", Color.white);
+                break;
+        }
+
+        currentSpell.Initialize(true);
+        Invoke("ReleaseSpellAttack", stats.currentAttack.ChargeTime - 1f);
+    }
+
+    public void ReleaseSpellAttack()
+    {
+        stats.anim.SetBool("Charging Spell", false);
     }
 
     public void ReleaseStomp()
     {
         stats.anim.SetBool("Charging Stomp", false);
-        stats.timeSinceLastAttack = 0.1f;
+    }
+
+    public void SwatSnowball()
+    {
+        if (!stats.anim.GetCurrentAnimatorStateInfo(0).IsName("Stuck"))
+        {
+            stats.anim.SetLayerWeight(1, 1f);
+            stats.anim.SetTrigger("Swat Snowball");
+        }
     }
 }
