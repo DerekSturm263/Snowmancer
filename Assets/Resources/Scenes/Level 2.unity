@@ -31173,6 +31173,7 @@ MonoBehaviour:
   materialColors: []
   materialFloats: []
   snapToGround: 0
+  isActive: 1
   player: {fileID: 692515581}
   jumpParticles: {fileID: 1880624988}
   landParticles: {fileID: 1323323435}
@@ -58116,8 +58117,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   rb: {fileID: 0}
   type: 1
-  maxHealth: 2000
-  health: 2000
+  maxHealth: 600
+  health: 600
   spawnRange: 10
   attackNum: 0
   timeSinceLastAttack: 0.1
