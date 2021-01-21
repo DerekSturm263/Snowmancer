@@ -192,6 +192,35 @@ public class Player : MonoBehaviour
             LimitStats();
             updateCD();
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            godMode = !godMode;
+        }
+
+        if (godMode)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                FindObjectOfType<EnterNextLevel>().nextLevel = "Level 1";
+                FindObjectOfType<EnterNextLevel>().LoadLevel(this);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                FindObjectOfType<EnterNextLevel>().nextLevel = "Level 2";
+                FindObjectOfType<EnterNextLevel>().LoadLevel(this);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                FindObjectOfType<EnterNextLevel>().nextLevel = "Level 3 and 4";
+                FindObjectOfType<EnterNextLevel>().LoadLevel(this);
+            }
+
+            health = maxHealth;
+            mana = maxMana;
+            snowAmount = maxSnow;
+            throwBaseDamage = 180;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
