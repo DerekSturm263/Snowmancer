@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Rendering.Universal.Internal;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public class Player : MonoBehaviour
     private GameObject SBhand;
 
     [HideInInspector] public List<Material> materials = new List<Material>();
+
+    public static bool godMode = false;
 
     // Start is called before the first frame update
     void Start()

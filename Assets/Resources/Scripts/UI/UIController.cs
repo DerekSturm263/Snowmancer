@@ -74,7 +74,11 @@ public class UIController : MonoBehaviour
         sliders[1].value = sliderValues[1];
 
 
-        FindObjectOfType<VisualEffect>().enabled = useParticles;
+        try
+        {
+            FindObjectOfType<VisualEffect>().enabled = useParticles;
+        } catch { }
+
         if (useAntiAliasing)
         {
             QualitySettings.antiAliasing = 4;
@@ -83,6 +87,7 @@ public class UIController : MonoBehaviour
         {
             QualitySettings.antiAliasing = 0;
         }
+
         Screen.fullScreen = useFullscreen;
         Volume v = FindObjectOfType<Camera>().GetComponent<Volume>();
         v.enabled = usePostProcessing;

@@ -45,6 +45,8 @@ public class Boss : MonoBehaviour
 
     public bool hasGivenBadGuyText = false;
 
+    public GameObject finalBoss;
+
     private void Awake()
     {
         player = FindObjectOfType<Player>().gameObject;
@@ -246,8 +248,6 @@ public class Boss : MonoBehaviour
 
         if (type == ElementType.Wind)
         {
-            GameObject finalBoss = GameObject.Find("Final Boss");
-
             finalBoss.SetActive(true);
             ui.boss = finalBoss.GetComponent<Boss>();
         }
