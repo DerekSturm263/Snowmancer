@@ -62,12 +62,6 @@ public class SaveLoad : MonoBehaviour
         finalSpawned = bossData.isFinalSpawned;
         finalAlive = bossData.isFireAlive;
 
-        Debug.Log("BEFORE DEATH FIRE: " + fireAlive);
-        Debug.Log("BEFORE DEATH ELECTRIC: " + electricAlive);
-        Debug.Log("BEFORE DEATH WIND: " + windAlive);
-        Debug.Log("BEFORE DEATH FINAL SPAWN: " + finalSpawned);
-        Debug.Log("BEFORE DEATH FINAL ALIVE: " + finalAlive);
-
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 1":
@@ -94,6 +88,7 @@ public class SaveLoad : MonoBehaviour
         ui.toggles[4].isOn = boolValues[4];
 
         ui.musicSlider.value = musicValue;
+        MusicPlayer.ChangeVolume(musicValue);
 
         Debug.Log("Loaded Save Data succesfully!");
 

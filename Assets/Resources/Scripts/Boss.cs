@@ -150,14 +150,40 @@ public class Boss : MonoBehaviour
 
         if (health <= 0f)
         {
+            switch (type)
+            {
+                case ElementType.Fire:
+                    SaveLoad.fireAlive = false;
+                    break;
+                case ElementType.Electric:
+                    SaveLoad.electricAlive = false;
+                    break;
+                case ElementType.Wind:
+                    SaveLoad.windAlive = false;
+                    SaveLoad.finalSpawned = true;
+                    finalBoss.SetActive(true);
+                    ui.boss = finalBoss.GetComponent<Boss>();
+                    break;
+                case ElementType.All:
+                    SaveLoad.finalAlive = false;
+                    break;
+            }
+
+            if (runeDrop != null)
+                Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+
             try
             {
                 anim.SetBool("Dead", true);
-            } catch { }
+            }
+            catch { }
 
             anim.SetTrigger("Death");
             ui.HideBossHealth();
             FindObjectOfType<EnterNextLevel>().active = true;
+
+            MusicPlayer.Play("mainTheme");
+
             this.enabled = false;
         }
     }
@@ -203,20 +229,14 @@ public class Boss : MonoBehaviour
                     break;
             }
 
-            Debug.Log("AFTER DEATH: " + SaveLoad.fireAlive);
-            Debug.Log("AFTER DEATH: " + SaveLoad.electricAlive);
-            Debug.Log("AFTER DEATH: " + SaveLoad.windAlive);
-            Debug.Log("AFTER DEATH: " + SaveLoad.finalSpawned);
-            Debug.Log("AFTER DEATH: " + SaveLoad.finalAlive);
+            if (runeDrop != null)
+                Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
 
             try
             {
                 anim.SetBool("Dead", true);
             }
             catch { }
-
-            if (runeDrop != null)
-                Instantiate(runeDrop, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
 
             anim.SetTrigger("Death");
             ui.HideBossHealth();

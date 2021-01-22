@@ -64,6 +64,8 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+
         try
         {
             FindObjectOfType<VisualEffect>().enabled = useParticles;
@@ -189,6 +191,7 @@ public class UIController : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         dof.focusDistance.value = defaultFocusLength;
+        Cursor.visible = true;
 
         if (settingsMenu.activeSelf)
             CloseSettings();
@@ -205,6 +208,7 @@ public class UIController : MonoBehaviour
         spellSelector.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         dof.focusDistance.value = pausedFocusLength;
+        Cursor.visible = false;
     }
 
     public void LoadScene(string sceneToLoad)
