@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BossData : MonoBehaviour
+﻿[System.Serializable]
+public class BossData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isFireAlive;
+    public bool isElectricAlive;
+    public bool isWindAlive;
+    public bool isFinalSpawned;
+    public bool isFinalAlive;
 
-    // Update is called once per frame
-    void Update()
+    public BossData(bool fire, bool electric, bool wind, bool finalSpawn, bool final)
     {
-        
+        isFireAlive = fire;
+        isElectricAlive = electric;
+        isWindAlive = wind;
+        isFinalSpawned = finalSpawn;
+        isFinalAlive = final;
     }
 }

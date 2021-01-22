@@ -25,8 +25,14 @@ public class EnterNextLevel : MonoBehaviour
 
         SaveSystem.SavePlayer(p);
         SaveSystem.SaveElementData(CollectRune.unlockedSpells);
-        SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, new float[2] { UIController.musicVolume, UIController.sfxVolume });
+        SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, UIController.musicVolume);
         SaveSystem.SaveCamera(camHolder.transform.position);
+        SaveSystem.SaveBossData(SaveLoad.fireAlive, SaveLoad.electricAlive, SaveLoad.windAlive, SaveLoad.finalSpawned, SaveLoad.finalAlive);
+
+        if (nextLevel == "Credits")
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
 
         SceneManager.LoadScene(nextLevel);
     }

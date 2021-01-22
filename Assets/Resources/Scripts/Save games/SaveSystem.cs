@@ -19,6 +19,9 @@ public static class SaveSystem
     public static string settingsDataPath = Application.persistentDataPath + "/settings.savedata";
     public static FileStream settingsStream;
 
+    public static string bossDataPath = Application.persistentDataPath + "/boss.savedata";
+    public static FileStream bossStream;
+
     public static void SavePlayer(Player SaveLoad)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -62,15 +65,26 @@ public static class SaveSystem
         elementStream.Close();
     }
 
-    public static void SaveSettingsData(bool[] boolValues, float[] floatValues)
+    public static void SaveSettingsData(bool[] boolValues, float musicVal)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         settingsStream = new FileStream(settingsDataPath, FileMode.Create);
 
-        SettingsData data = new SettingsData(boolValues, floatValues);
+        SettingsData data = new SettingsData(boolValues, musicVal);
 
         formatter.Serialize(settingsStream, data);
         settingsStream.Close();
+    }
+
+    public static void SaveBossData(bool fire, bool electric, bool wind, bool finalSpawn, bool final)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        bossStream = new FileStream(bossDataPath, FileMode.Create);
+
+        BossData data = new BossData(fire, electric, wind, finalSpawn, final);
+
+        formatter.Serialize(bossStream, data);
+        bossStream.Close();
     }
 
     public static bool[] SettingsBools()
@@ -100,7 +114,7 @@ public static class SaveSystem
         }
     }
 
-    public static float[] SettingsFloats()
+    public static float SettingsFloats()
     {
         if (File.Exists(settingsDataPath))
         {
@@ -110,17 +124,12 @@ public static class SaveSystem
             SettingsData data = formatter.Deserialize(stream) as SettingsData;
             stream.Close();
 
-            float[] floatValues = new float[2];
-
-            floatValues[0] = data.musicVolume;
-            floatValues[1] = data.sfxVolume;
-
-            return floatValues;
+            return data.musicVolume;
         }
         else
         {
             Debug.LogError("Save file not found in " + PlayerPath);
-            return null;
+            return 0f;
         }
     }
 
@@ -203,6 +212,42 @@ public static class SaveSystem
         {
             Debug.LogError("Save file not found in " + PlayerPath);
             return null;
+        }
+    }
+
+    public static BossData LoadBoss()
+    {
+        if (File.Exists(bossDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(bossDataPath, FileMode.Open);
+
+            BossData data = formatter.Deserialize(stream) as BossData;
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + bossDataPath);
+            return null;
+        }
+    }
+
+    public static void DeleteSaveData()
+    {
+        try
+        {
+            File.Delete(PlayerPath);
+            File.Delete(CameraPath);
+            File.Delete(ScenePath);
+            File.Delete(elementDataPath);
+            File.Delete(settingsDataPath);
+            File.Delete(bossDataPath);
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
         }
     }
 }

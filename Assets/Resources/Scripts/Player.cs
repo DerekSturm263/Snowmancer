@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public List<Material> materials = new List<Material>();
 
-    public static bool godMode = false;
+    public static bool isInGodMode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -195,31 +195,20 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            godMode = !godMode;
+            isInGodMode = !isInGodMode;
         }
 
-        if (godMode)
+        if (isInGodMode)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                FindObjectOfType<EnterNextLevel>().nextLevel = "Level 1";
-                FindObjectOfType<EnterNextLevel>().LoadLevel(this);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                FindObjectOfType<EnterNextLevel>().nextLevel = "Level 2";
-                FindObjectOfType<EnterNextLevel>().LoadLevel(this);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                FindObjectOfType<EnterNextLevel>().nextLevel = "Level 3 and 4";
-                FindObjectOfType<EnterNextLevel>().LoadLevel(this);
-            }
-
             health = maxHealth;
             mana = maxMana;
             snowAmount = maxSnow;
-            throwBaseDamage = 180;
+
+            throwBaseDamage = 180f;
+        }
+        else
+        {
+            throwBaseDamage = 18f;
         }
     }
 
@@ -405,6 +394,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             playerAnimator.SetTrigger("Death");
+            MusicPlayer.Play("mainThemeSlow");
         }
     }
 

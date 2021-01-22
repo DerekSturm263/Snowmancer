@@ -8,6 +8,8 @@ public class SaveLoad : MonoBehaviour
     public Player player;
     public GameObject gameoverCanvas;
 
+    public static bool fireAlive, electricAlive, windAlive, finalSpawned, finalAlive;
+
     public static bool isSave()
     {
         return File.Exists(Application.persistentDataPath + "/player.savedata");
@@ -28,7 +30,8 @@ public class SaveLoad : MonoBehaviour
         SaveSystem.SaveCamera(camera.transform.position);
         SaveSystem.SaveScene(SceneManager.GetActiveScene().name);
         SaveSystem.SaveElementData(CollectRune.unlockedSpells);
-        SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, new float[2] { UIController.musicVolume, UIController.sfxVolume });
+        SaveSystem.SaveSettingsData(new bool[5] { UIController.useFullscreen, UIController.useParticles, UIController.usePostProcessing, UIController.useAntiAliasing, UIController.useHints }, UIController.musicVolume );
+        SaveSystem.SaveBossData(fireAlive, electricAlive, windAlive, finalSpawned, finalAlive);
     }
 
     public void Retry()
@@ -51,8 +54,48 @@ public class SaveLoad : MonoBehaviour
     {
         PlayerData data = SaveSystem.LoadPLayer();
         CollectRune.unlockedSpells = SaveSystem.LoadElementData();
-        
-        Debug.Log("Loading...");
+        BossData bossData = SaveSystem.LoadBoss();
+
+        fireAlive = bossData.isFireAlive;
+        electricAlive = bossData.isElectricAlive;
+        windAlive = bossData.isWindAlive;
+        finalSpawned = bossData.isFinalSpawned;
+        finalAlive = bossData.isFireAlive;
+
+        Debug.Log("BEFORE DEATH FIRE: " + fireAlive);
+        Debug.Log("BEFORE DEATH ELECTRIC: " + electricAlive);
+        Debug.Log("BEFORE DEATH WIND: " + windAlive);
+        Debug.Log("BEFORE DEATH FINAL SPAWN: " + finalSpawned);
+        Debug.Log("BEFORE DEATH FINAL ALIVE: " + finalAlive);
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Level 1":
+                FindObjectOfType<Boss>().gameObject.SetActive(bossData.isFireAlive);
+                break;
+            case "Level 2":
+                FindObjectOfType<Boss>().gameObject.SetActive(bossData.isElectricAlive);
+                break;
+            case "Level 3 and 4":
+                FindObjectsOfType<Boss>()[0].gameObject.SetActive(bossData.isWindAlive);
+                FindObjectsOfType<Boss>()[1].gameObject.SetActive(bossData.isFinalAlive && bossData.isFinalSpawned);
+                break;
+        }
+
+        bool[] boolValues = SaveSystem.SettingsBools();
+        float musicValue = SaveSystem.SettingsFloats();
+
+        UIController ui = FindObjectOfType<UIController>();
+
+        ui.toggles[0].isOn = boolValues[0];
+        ui.toggles[1].isOn = boolValues[1];
+        ui.toggles[2].isOn = boolValues[2];
+        ui.toggles[3].isOn = boolValues[3];
+        ui.toggles[4].isOn = boolValues[4];
+
+        ui.musicSlider.value = musicValue;
+
+        Debug.Log("Loaded Save Data succesfully!");
 
         //player Info
         player.maxHealth = data.maxHealth;

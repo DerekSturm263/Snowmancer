@@ -9,11 +9,10 @@ public class SettingsData
     public bool hasAntiAliasing;
 
     public float musicVolume;
-    public float sfxVolume;
 
     public bool useHints;
 
-    public SettingsData(bool[] boolValues, float[] floatValues)
+    public SettingsData(bool[] boolValues, float musicVal)
     {
         isFullscreen = boolValues[0];
         useParticles = boolValues[1];
@@ -21,7 +20,6 @@ public class SettingsData
         hasAntiAliasing = boolValues[3];
         useHints = boolValues[4];
 
-        musicVolume = floatValues[0];
-        sfxVolume = floatValues[1];
+        musicVolume = musicVal;
     }
 }

@@ -58,26 +58,17 @@ public class UIController : MonoBehaviour
     public GameObject gameplaySettingsMenu;
 
     public Toggle[] toggles = new Toggle[5];
-    public Slider[] sliders = new Slider[2];
+    public Slider musicSlider;
 
-    private void Awake()
+    public GameObject levelSelect;
+
+    void Start()
     {
-        float[] sliderValues = SaveSystem.SettingsFloats();
-        bool[] boolValues = SaveSystem.SettingsBools();
-        toggles[0].isOn = boolValues[0];
-        toggles[1].isOn = boolValues[1];
-        toggles[2].isOn = boolValues[2];
-        toggles[3].isOn = boolValues[3];
-        toggles[4].isOn = boolValues[4];
-
-        sliders[0].value = sliderValues[0];
-        sliders[1].value = sliderValues[1];
-
-
         try
         {
             FindObjectOfType<VisualEffect>().enabled = useParticles;
-        } catch { }
+        }
+        catch { }
 
         if (useAntiAliasing)
         {
@@ -91,10 +82,7 @@ public class UIController : MonoBehaviour
         Screen.fullScreen = useFullscreen;
         Volume v = FindObjectOfType<Camera>().GetComponent<Volume>();
         v.enabled = usePostProcessing;
-    }
 
-    void Start()
-    {
         isPaused = false;
         Shader.SetGlobalFloat("_BlacknessLerp", 0f);
         SetMaxHealth();
@@ -204,6 +192,9 @@ public class UIController : MonoBehaviour
 
         if (settingsMenu.activeSelf)
             CloseSettings();
+
+        if (levelSelect.activeSelf)
+            CloseLevelSelect();
     }
 
     void Pause()
@@ -261,6 +252,16 @@ public class UIController : MonoBehaviour
     {
         // Something to apply settings here
         settingsMenu.SetActive(false);
+    }
+
+    public void OpenLevelSelect()
+    {
+        levelSelect.SetActive(true);
+    }
+
+    public void CloseLevelSelect()
+    {
+        levelSelect.SetActive(false);
     }
 
     public bool CheckPaused()
@@ -367,15 +368,10 @@ public class UIController : MonoBehaviour
 
     public void AdjustMusicVolume()
     {
-        //musicVolume = sliders[0].value;
-        //MusicPlayer.ChangeVolume(musicVolume);
+        musicVolume = musicSlider.value;
+        MusicPlayer.ChangeVolume(musicVolume);
     }
 
-    public void AdjustSFXVolume()
-    {
-        //sfxVolume = EventSystem.current.currentSelectedGameObject.GetComponent<Slider>().value;
-        //SoundPlayer.ChangeVolume(sfxVolume);
-    }
     
     public void ToggleTips()
     {
@@ -384,8 +380,40 @@ public class UIController : MonoBehaviour
 
     public void ResetSaveData()
     {
-        SavingLoadingTitle.resetSave = true;
+        SavingLoadingTitle.deleteSave = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Title");
+    }
+
+    public void SkipLevel(string levelName)
+    {
+        EnterNextLevel e = FindObjectOfType<EnterNextLevel>();
+
+        if (levelName == "Level 1")
+        {
+            e.nextLevelStartPos = new Vector3(-228.5f, -47.5f, -267.8f);
+            e.nextLevelCamStartPos = new Vector3(-225.5f, -44.545f, -267.8f);
+        }
+        else if (levelName == "Level 2")
+        {
+            e.nextLevelStartPos = new Vector3(-201.8f, -77.05f, -223.6f);
+            e.nextLevelCamStartPos = new Vector3(-198.66f, -74.1f, -223.62f);
+        }
+        else if (levelName == "Level 3")
+        {
+            levelName = "Level 3 and 4";
+            e.nextLevelStartPos = new Vector3(397f, 513.1f, 871f);
+            e.nextLevelCamStartPos = new Vector3(400.2f, 516f, 871f);
+        }
+        else if (levelName == "Level 4")
+        {
+            levelName = "Level 3 and 4";
+            e.nextLevelStartPos = new Vector3(-323.8f, 506.39f, 789.4f);
+            e.nextLevelCamStartPos = new Vector3(-320.6f, 509.35f, 789.4f);
+        }
+
+        Resume();
+        e.nextLevel = levelName;
+        e.LoadLevel(player);
     }
 }
